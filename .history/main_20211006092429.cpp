@@ -59,7 +59,7 @@ void createuser()
             <<"Enter your password -\n";
         cin >> pass;
         ofstream outfile;
-        outfile.open("Users.dat"\);
+        outfile.open("Users.dat",ios::in|ios::out);
         pos=outfile.tellp();
         outfile.seekp(pos,ios::cur);
 
@@ -116,7 +116,6 @@ void loginuser()
             cout << "-----------------------------------------------------\n"
                 <<"Wrong username or password\n"
                 <<"Please try again\n";
-                loginuser();
         }
 }
 }

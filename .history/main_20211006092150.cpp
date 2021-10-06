@@ -59,7 +59,7 @@ void createuser()
             <<"Enter your password -\n";
         cin >> pass;
         ofstream outfile;
-        outfile.open("Users.dat"\);
+        outfile.open("Users.dat",ios::in|ios::out);
         pos=outfile.tellp();
         outfile.seekp(pos,ios::cur);
 
@@ -93,11 +93,9 @@ void loginuser()
     file.close();
 
     string name, pass;
-    cout << "-----------------------------------------------------\n"
-        << "Enter Username-\n";
+    cout << "Username-\n";
     cin >> name;
-    cout << "-----------------------------------------------------\n"
-        << "Enter Password-\n ";
+    cout<< " Password-\n ";
     cin >> pass;
 
     for (auto elem: users)
@@ -111,12 +109,8 @@ void loginuser()
                  << ": " <<get<2>(elem) << ": "
                  << ((get<3>(elem)==1)?"Active":"Deleted")
                  << endl;
-        }
-        else{
-            cout << "-----------------------------------------------------\n"
-                <<"Wrong username or password\n"
-                <<"Please try again\n";
-                loginuser();
+
+
         }
 }
 }
