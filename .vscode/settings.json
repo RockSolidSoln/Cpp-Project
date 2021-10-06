@@ -1,9 +1,15 @@
 {
+    "C_Cpp.errorSquiggles": "Disabled",
     "files.associations": {
-        "xstring": "cpp",
+        "*.html": "html",
+        "array": "cpp",
+        "*.tcc": "cpp",
+        "memory": "cpp",
+        "istream": "cpp",
+        "ranges": "cpp",
+        "functional": "cpp",
         "tuple": "cpp",
-        "iosfwd": "cpp",
-        "vector": "cpp",
-        "iostream": "cpp"
+        "utility": "cpp",
+        "iosfwd": "cpp"
     }
 }
