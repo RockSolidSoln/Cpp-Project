@@ -40,8 +40,6 @@ int main()
                  << ": " <<get<2>(elem) << ": "
                  << ((get<3>(elem)==1)?"Active":"Deleted")
                  << endl;
-
-
         }     
 
 
