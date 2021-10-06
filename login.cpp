@@ -5,6 +5,28 @@
 
 using namespace std;
 
+class Users {
+public:
+    string user;
+    string pass;
+    int status;
+    int type;
+};
+
+bool checkUser(vector<Users> &users, string name, string pass){
+    bool found = false;
+    for (auto elem: users)
+    {
+        if (name == elem.user &&
+            pass == elem.pass &&
+            elem.status == 1)
+        {
+            found  = true;
+            break;
+        }
+    }
+return found;
+}
 int main()
 {
 
