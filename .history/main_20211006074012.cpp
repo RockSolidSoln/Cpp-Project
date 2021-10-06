@@ -39,7 +39,6 @@ void getchoice()
     
 }
 
-
 void createuser()
 {
     ifstream inputFile;
@@ -92,7 +91,7 @@ void loginuser()
     string name, pass;
     cout << " Username-\n";
     cin >> name;
-    cout<< " Password-\n ";
+    cout<< " Password-\n "
     cin >> pass;
 
     for (auto elem: users)
@@ -111,7 +110,6 @@ void loginuser()
         }
 }
 }
-]
 int main()
 {
     getchoice();

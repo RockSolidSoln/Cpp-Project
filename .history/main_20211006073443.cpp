@@ -39,13 +39,11 @@ void getchoice()
     
 }
 
-
 void createuser()
 {
     ifstream inputFile;
     inputFile.open("Users.dat");
     string user,pass;
-    int status,power;
     if (!inputFile.is_open()){
         cout << " File not found\n";
         exit(-1);
@@ -60,9 +58,8 @@ void createuser()
         cin >> pass;
         ofstream outfile;
         outfile.open("Users.dat");
-        status=1;
-        power=0;
-        outfile << user << " " << power << " " << pass << " " << status<<endl;
+
+        outfile << user << \ << pass << " 1"<<endl;
 
         outfile.close();
 
@@ -90,9 +87,7 @@ void loginuser()
     file.close();
 
     string name, pass;
-    cout << " Username-\n";
     cin >> name;
-    cout<< " Password-\n ";
     cin >> pass;
 
     for (auto elem: users)
@@ -111,7 +106,6 @@ void loginuser()
         }
 }
 }
-]
 int main()
 {
     getchoice();
