@@ -10,7 +10,7 @@ void createuser();
 void loginuser();
 
 void getchoice()
-{   //try
+{   
     int ch;
     cout << "-----------------------------------------------------\n"
         << "|         Hello and Welcome to Our System           |\n"
