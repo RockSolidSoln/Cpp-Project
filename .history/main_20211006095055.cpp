@@ -59,7 +59,7 @@ void createuser()
             <<"Enter your password -\n";
         cin >> pass;
         ofstream outfile;
-        outfile.open("Users.dat",ios::out|ios::ate|ios::app);
+        outfile.open("Users.dat",ios::outios::ate,ios::app);
         // pos=outfile.tellp();
         // outfile.seekp(pos,ios::cur);
 
