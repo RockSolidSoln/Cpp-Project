@@ -39,6 +39,7 @@ void getchoice()
     
 }
 
+
 void createuser()
 {
     ifstream inputFile;
@@ -110,6 +111,7 @@ void loginuser()
         }
 }
 }
+]
 int main()
 {
     getchoice();
