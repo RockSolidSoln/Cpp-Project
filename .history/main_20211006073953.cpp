@@ -91,7 +91,6 @@ void loginuser()
     string name, pass;
     cout << " Username-\n";
     cin >> name;
-    cout<< " Password-\n ";
     cin >> pass;
 
     for (auto elem: users)

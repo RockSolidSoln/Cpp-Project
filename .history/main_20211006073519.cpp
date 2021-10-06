@@ -59,9 +59,8 @@ void createuser()
         cin >> pass;
         ofstream outfile;
         outfile.open("Users.dat");
-        status=1;
-        power=0;
-        outfile << user << " " << power << " " << pass << " " << status<<endl;
+
+        outfile << user << " " <<  << pass << " " << status<<endl;
 
         outfile.close();
 
@@ -89,9 +88,7 @@ void loginuser()
     file.close();
 
     string name, pass;
-    cout << " Username-\n";
     cin >> name;
-    cout<< " Password-\n ";
     cin >> pass;
 
     for (auto elem: users)
