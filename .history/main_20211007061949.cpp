@@ -6,14 +6,13 @@
 #include <string>
 using namespace std;
 
-// start of functions defination
 void createuser();
 void loginuser();
 void deleteuser();
-void changepass();
 
-void getchoice() //This functions takes the input from the user and calls different functions
-{   
+
+void getchoice()
+{   //try
     int ch;
     cout << "-----------------------------------------------------\n"
         << "|         Hello and Welcome to Our System           |\n"
@@ -37,29 +36,16 @@ void getchoice() //This functions takes the input from the user and calls differ
                     break;
         case(4) :  deleteuser();
                      break;
-        case(5) :  changepass();
-                     break;
+        case(5) : break;
 
         // default:
     }
+    
 }
+void checkadmin(string) {
 
- checkadmin(string name,string pass,int status) //this functions checks if the given data is of admin or not
- {
-        string adminu,adminp;
-    cout<<"-----------------------------------------------------------\n"
-        <<"ALERT: *Only Admin have the authority for such actions*\n"
-        <<"Please enter the username-\n";
-    cin>>adminu;
-    cout<<"Please enter the password-\n";
-    cin>>adminp;
-    if(adminu==name && adminp==pass && status==1)
-    return true;
-    else 
-    return false;
 }
-
-void createuser() // this function creates new users
+void createuser()
 {
     ifstream file;
     file.open("Users.dat");
@@ -71,10 +57,17 @@ void createuser() // this function creates new users
         file >>get<3>(userdata);
         users.push_back(userdata);
     }
+    string adminu,adminp;
+    cout<<"-----------------------------------------------------------\n"
+        <<"ALERT: *Only Admin have the authority to create a username*\n"
+        <<"Please enter the username-\n";
+    cin>>adminu;
+    cout<<"Please enter the password-\n";
+    cin>>adminp;
 
      for (auto elem: users)
-    {   
-        if(checkadmin(get<0>(elem),get<2>(elem),get<1>(elem))==true)
+    {  
+        if(adminu==get<0>(elem) && adminp==get<2>(elem) && get<1>(elem)==1)
         {   
             string user,pass;
             int status,power;
@@ -98,8 +91,6 @@ void createuser() // this function creates new users
                 outfile << user << " " << power << " " << pass << " " << status<<endl;
                 outfile.close();
                 file.close();
-                cout<<"Username and password created successfully."<<endl;
-                break;
             }
         }
         else
@@ -111,10 +102,11 @@ void createuser() // this function creates new users
     }
 }
 
-void loginuser() // this function helps user s and admin to login in the system
+void loginuser()
 {
     vector<tuple<string,int,string,int>> users;
     tuple<string,int,string,int> userdata;
+
     ifstream file;
     file.open("Users.dat");
     while (file>>get<0>(userdata))
@@ -122,7 +114,9 @@ void loginuser() // this function helps user s and admin to login in the system
         file >>get<1>(userdata);
         file >>get<2>(userdata);
         file >>get<3>(userdata);
+
         users.push_back(userdata);
+
     }
 
     file.close();
@@ -156,61 +150,7 @@ void loginuser() // this function helps user s and admin to login in the system
         }
 }
 }
-void changepass() // this function changes the password of the user
-{
-    vector<tuple<string,int,string,int>> users;
-    tuple<string,int,string,int> userdata;
-    ifstream file;
-    file.open("users.dat");
-        while (file>>get<0>(userdata))
-    {
-        file >>get<1>(userdata);
-        file >>get<2>(userdata);
-        file >>get<3>(userdata);
-
-        users.push_back(userdata);
-    }
-        string newpass1,newpass2,oldpass,user;           
-        cout <<"Enter username" <<endl;
-        cin >> user;
-        cout << "Enter your old password to continue..." << endl;
-        cin >> oldpass;       
-        for (auto elem: users)
-    {
-        if (oldpass == get<2>(elem) && user == get<0>(elem))
-       {    
-            cout << "Please enter the new password"
-                    << endl;
-            cin >> newpass1;
-            cout << "Please re-enter your new password"
-                    << endl;
-            cin >> newpass2;
-            if(newpass1==newpass2)
-            {
-            cout << "Password changed you may procced to login"<< endl;
-            ofstream outfile;
-            outfile.open("users.dat" , ios::out);
-                get<2>(elem) = newpass1; 
-                outfile<<get<0>(elem)<<" "
-                        <<get<1>(elem)<<" "
-                        <<get<2>(elem)<<" "
-                        <<get<3>(elem)<<" "
-                        << endl;
-                users.push_back(elem);
-                outfile.close();
-           }
-       }
-        else
-        {
-            cout << "--------------------------------------------------------" << endl;
-            cout <<"Either the username or the password you entered is incorrect," 
-                << "please try again"<< endl;
-                changepass();
-        }
-       file.close();
-    }
-}
-void deleteuser() // this function delets a user from the database
+void deleteuser()
 {
     vector<tuple<string,int,string,int>> users;
     tuple<string,int,string,int> userdata;
@@ -225,17 +165,20 @@ void deleteuser() // this function delets a user from the database
         users.push_back(userdata);
     }
     file.close();
-  
+    string name, pass;
+    cout << "-----------------------------------------------------\n"
+        << "Enter the Username to delete-\n";
+    cin >> name;
+    cout << "-----------------------------------------------------\n"
+        << "Enter Password to confirm deletion-\n";
+    cin >> pass;
+
      for (auto elem: users)
     {   
-        if (checkadmin(get<0>(elem),get<2>(elem),get<1>(elem))==true)
-             {  string name, pass;
-                cout << "-----------------------------------------------------\n"
-                    << "Enter the Username to delete-\n";
-                cin >> name;
-                cout << "-----------------------------------------------------\n"
-                    << "Enter Password to confirm deletion-\n";
-                cin >> pass;
+        if (name == get<0>(elem) &&
+             pass == get<2>(elem) &&
+             get<3>(elem)==1)
+             {  
                 cout << get<0>(elem) << ": "
                  << ((get<1>(elem)==1)?"admin":"user")
                  << ": " <<get<2>(elem) << ": "
@@ -264,6 +207,7 @@ void deleteuser() // this function delets a user from the database
         }
     }
 }
+
 int main()
 {
     getchoice();

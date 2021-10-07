@@ -10,7 +10,8 @@ using namespace std;
 void createuser();
 void loginuser();
 void deleteuser();
-void changepass();
+
+// end of functions defination
 
 void getchoice() //This functions takes the input from the user and calls different functions
 {   
@@ -37,8 +38,7 @@ void getchoice() //This functions takes the input from the user and calls differ
                     break;
         case(4) :  deleteuser();
                      break;
-        case(5) :  changepass();
-                     break;
+        case(5) : break;
 
         // default:
     }
@@ -122,6 +122,7 @@ void loginuser() // this function helps user s and admin to login in the system
         file >>get<1>(userdata);
         file >>get<2>(userdata);
         file >>get<3>(userdata);
+
         users.push_back(userdata);
     }
 
@@ -156,60 +157,6 @@ void loginuser() // this function helps user s and admin to login in the system
         }
 }
 }
-void changepass() // this function changes the password of the user
-{
-    vector<tuple<string,int,string,int>> users;
-    tuple<string,int,string,int> userdata;
-    ifstream file;
-    file.open("users.dat");
-        while (file>>get<0>(userdata))
-    {
-        file >>get<1>(userdata);
-        file >>get<2>(userdata);
-        file >>get<3>(userdata);
-
-        users.push_back(userdata);
-    }
-        string newpass1,newpass2,oldpass,user;           
-        cout <<"Enter username" <<endl;
-        cin >> user;
-        cout << "Enter your old password to continue..." << endl;
-        cin >> oldpass;       
-        for (auto elem: users)
-    {
-        if (oldpass == get<2>(elem) && user == get<0>(elem))
-       {    
-            cout << "Please enter the new password"
-                    << endl;
-            cin >> newpass1;
-            cout << "Please re-enter your new password"
-                    << endl;
-            cin >> newpass2;
-            if(newpass1==newpass2)
-            {
-            cout << "Password changed you may procced to login"<< endl;
-            ofstream outfile;
-            outfile.open("users.dat" , ios::out);
-                get<2>(elem) = newpass1; 
-                outfile<<get<0>(elem)<<" "
-                        <<get<1>(elem)<<" "
-                        <<get<2>(elem)<<" "
-                        <<get<3>(elem)<<" "
-                        << endl;
-                users.push_back(elem);
-                outfile.close();
-           }
-       }
-        else
-        {
-            cout << "--------------------------------------------------------" << endl;
-            cout <<"Either the username or the password you entered is incorrect," 
-                << "please try again"<< endl;
-                changepass();
-        }
-       file.close();
-    }
-}
 void deleteuser() // this function delets a user from the database
 {
     vector<tuple<string,int,string,int>> users;
@@ -225,17 +172,20 @@ void deleteuser() // this function delets a user from the database
         users.push_back(userdata);
     }
     file.close();
-  
+    string name, pass;
+    cout << "-----------------------------------------------------\n"
+        << "Enter the Username to delete-\n";
+    cin >> name;
+    cout << "-----------------------------------------------------\n"
+        << "Enter Password to confirm deletion-\n";
+    cin >> pass;
+
      for (auto elem: users)
     {   
-        if (checkadmin(get<0>(elem),get<2>(elem),get<1>(elem))==true)
-             {  string name, pass;
-                cout << "-----------------------------------------------------\n"
-                    << "Enter the Username to delete-\n";
-                cin >> name;
-                cout << "-----------------------------------------------------\n"
-                    << "Enter Password to confirm deletion-\n";
-                cin >> pass;
+        if (name == get<0>(elem) &&
+             pass == get<2>(elem) &&
+             get<3>(elem)==1)
+             {  
                 cout << get<0>(elem) << ": "
                  << ((get<1>(elem)==1)?"admin":"user")
                  << ": " <<get<2>(elem) << ": "
@@ -264,7 +214,8 @@ void deleteuser() // this function delets a user from the database
         }
     }
 }
-int main()
+
+int main() //main function
 {
     getchoice();
     return 0;
