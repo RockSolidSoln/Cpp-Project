@@ -43,6 +43,8 @@ void getchoice()
     
 }
 
+void readfile(vector<tuple<string,int,string,int>> users)
+
 void createuser()
 {
     ifstream file;
@@ -160,6 +162,7 @@ void deleteuser()
         file >>get<1>(userdata);
         file >>get<2>(userdata);
         file >>get<3>(userdata);
+
         users.push_back(userdata);
     }
     file.close();

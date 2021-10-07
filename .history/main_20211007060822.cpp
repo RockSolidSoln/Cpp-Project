@@ -14,8 +14,7 @@ void deleteuser();
 void getchoice()
 {   //try
     int ch;
-    cout << "-----------------------------------------------------\n"
-        << "|         Hello and Welcome to Our System           |\n"
+    cout << "-----------------------------------------------------\n"<< "|         Hello and Welcome to Our System           |\n"
         << "-----------------------------------------------------\n"
         << "| Please Enter from the choice given below          |\n"
         << "| Enter 1 to Create a New User Account              |\n"
@@ -43,17 +42,22 @@ void getchoice()
     
 }
 
+
 void createuser()
 {
     ifstream file;
     file.open("Users.dat");
     vector<tuple<string,int,string,int>> users;
     tuple<string,int,string,int> userdata;
-     while (file>>get<0>(userdata)){
+
+     while (file>>get<0>(userdata))
+    {
         file >>get<1>(userdata);
         file >>get<2>(userdata);
         file >>get<3>(userdata);
+
         users.push_back(userdata);
+
     }
     string adminu,adminp;
     cout<<"-----------------------------------------------------------\n"
@@ -84,9 +88,13 @@ void createuser()
                 cin >> pass;
                 ofstream outfile;
                 outfile.open("Users.dat",ios::out|ios::ate|ios::app);
+                // pos=outfile.tellp();
+                // outfile.seekp(pos,ios::cur);
+
                 status=1;
                 power=0;
                 outfile << user << " " << power << " " << pass << " " << status<<endl;
+
                 outfile.close();
                 file.close();
             }
@@ -160,6 +168,7 @@ void deleteuser()
         file >>get<1>(userdata);
         file >>get<2>(userdata);
         file >>get<3>(userdata);
+
         users.push_back(userdata);
     }
     file.close();

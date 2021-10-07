@@ -43,6 +43,7 @@ void getchoice()
     
 }
 
+
 void createuser()
 {
     ifstream file;
@@ -84,9 +85,10 @@ void createuser()
                 cin >> pass;
                 ofstream outfile;
                 outfile.open("Users.dat",ios::out|ios::ate|ios::app);
-                status=1;
+                   status=1;
                 power=0;
                 outfile << user << " " << power << " " << pass << " " << status<<endl;
+
                 outfile.close();
                 file.close();
             }
@@ -160,6 +162,7 @@ void deleteuser()
         file >>get<1>(userdata);
         file >>get<2>(userdata);
         file >>get<3>(userdata);
+
         users.push_back(userdata);
     }
     file.close();

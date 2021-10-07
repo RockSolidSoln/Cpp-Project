@@ -43,21 +43,26 @@ void getchoice()
     
 }
 
+
 void createuser()
 {
     ifstream file;
     file.open("Users.dat");
     vector<tuple<string,int,string,int>> users;
     tuple<string,int,string,int> userdata;
-     while (file>>get<0>(userdata)){
+
+     while (file>>get<0>(userdata))
+    {
         file >>get<1>(userdata);
         file >>get<2>(userdata);
         file >>get<3>(userdata);
+
         users.push_back(userdata);
+
     }
     string adminu,adminp;
     cout<<"-----------------------------------------------------------\n"
-        <<"ALERT: *Only Admin have the authority to create a username*\n"
+        <<"ALERT:Only Admin have the authority to create a usernamn\n"
         <<"Please enter the username-\n";
     cin>>adminu;
     cout<<"Please enter the password-\n";
@@ -84,9 +89,13 @@ void createuser()
                 cin >> pass;
                 ofstream outfile;
                 outfile.open("Users.dat",ios::out|ios::ate|ios::app);
+                // pos=outfile.tellp();
+                // outfile.seekp(pos,ios::cur);
+
                 status=1;
                 power=0;
                 outfile << user << " " << power << " " << pass << " " << status<<endl;
+
                 outfile.close();
                 file.close();
             }
@@ -160,6 +169,7 @@ void deleteuser()
         file >>get<1>(userdata);
         file >>get<2>(userdata);
         file >>get<3>(userdata);
+
         users.push_back(userdata);
     }
     file.close();

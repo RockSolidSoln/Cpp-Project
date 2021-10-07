@@ -62,15 +62,12 @@ void createuser()
     cin>>adminu;
     cout<<"Please enter the password-\n";
     cin>>adminp;
-
      for (auto elem: users)
     {  
-        if(adminu==get<0>(elem) && adminp==get<2>(elem) && get<1>(elem)==1)
-        {   
+        if(adminu==get<0>(elem) && adminp==get<2>(elem) && get<1>(elem)==1){   
             string user,pass;
             int status,power;
-            if (!file.is_open())
-            {
+            if (!file.is_open()){
                 cout << " File not found\n";
                 exit(-1);
             }
@@ -160,6 +157,7 @@ void deleteuser()
         file >>get<1>(userdata);
         file >>get<2>(userdata);
         file >>get<3>(userdata);
+
         users.push_back(userdata);
     }
     file.close();

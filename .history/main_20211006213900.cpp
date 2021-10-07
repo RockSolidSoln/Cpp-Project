@@ -43,61 +43,38 @@ void getchoice()
     
 }
 
+
 void createuser()
 {
-    ifstream file;
-    file.open("Users.dat");
-    vector<tuple<string,int,string,int>> users;
-    tuple<string,int,string,int> userdata;
-     while (file>>get<0>(userdata)){
-        file >>get<1>(userdata);
-        file >>get<2>(userdata);
-        file >>get<3>(userdata);
-        users.push_back(userdata);
+    ifstream inputFile;
+    inputFile.open("Users.dat");
+    string user,pass;
+    int status,power;
+    if (!inputFile.is_open()){
+        cout << " File not found\n";
+        exit(-1);
     }
-    string adminu,adminp;
-    cout<<"-----------------------------------------------------------\n"
-        <<"ALERT: *Only Admin have the authority to create a username*\n"
-        <<"Please enter the username-\n";
-    cin>>adminu;
-    cout<<"Please enter the password-\n";
-    cin>>adminp;
+    else
+    {   int pos;
+        cout << "-----------------------------------------------------\n"
+            <<"Enter a unique user name -\n";
+        cin >> user;
+        cout << "-----------------------------------------------------\n"
+            <<"Enter your password -\n";
+        cin >> pass;
+        ofstream outfile;
+        outfile.open("Users.dat",ios::out|ios::ate|ios::app);
+        // pos=outfile.tellp();
+        // outfile.seekp(pos,ios::cur);
 
-     for (auto elem: users)
-    {  
-        if(adminu==get<0>(elem) && adminp==get<2>(elem) && get<1>(elem)==1)
-        {   
-            string user,pass;
-            int status,power;
-            if (!file.is_open())
-            {
-                cout << " File not found\n";
-                exit(-1);
-            }
-            else
-            {   int pos;
-                cout << "-----------------------------------------------------\n"
-                    <<"Enter a unique user name -\n";
-                cin >> user;
-                cout << "-----------------------------------------------------\n"
-                    <<"Enter your password -\n";
-                cin >> pass;
-                ofstream outfile;
-                outfile.open("Users.dat",ios::out|ios::ate|ios::app);
-                status=1;
-                power=0;
-                outfile << user << " " << power << " " << pass << " " << status<<endl;
-                outfile.close();
-                file.close();
-            }
-        }
-        else
-        {
-            cout << "-----------------------------------------------------\n"
-                <<"Please enter the correct admin username or password\n";
-                createuser();
-        }
+        status=1;
+        power=0;
+        outfile << user << " " << power << " " << pass << " " << status<<endl;
+
+        outfile.close();
+
     }
+    inputFile.close();
 }
 
 void loginuser()
@@ -160,6 +137,7 @@ void deleteuser()
         file >>get<1>(userdata);
         file >>get<2>(userdata);
         file >>get<3>(userdata);
+
         users.push_back(userdata);
     }
     file.close();
@@ -182,14 +160,16 @@ void deleteuser()
                  << ": " <<get<2>(elem) << ": "
                  << ((get<3>(elem)==1)?"Deleted":"Active")
                  << endl;
+                 
                 ofstream outfile;
                 outfile.open("Users.dat",ios::out);
                 
                 get<3>(elem)=0;
+                if(get<1)
                 outfile << get<0>(elem) << " " 
                         << get<1>(elem) << " " 
                         << get<2>(elem) << " " 
-                        << get<3>(elem) <<endl;
+                        << get<3>(elem) << endl;
                 users.push_back(elem);
                 outfile.close();
 

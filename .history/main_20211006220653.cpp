@@ -43,33 +43,38 @@ void getchoice()
     
 }
 
+
 void createuser()
 {
-    ifstream file;
-    file.open("Users.dat");
+    ifstream inputFile;
+    inputFile.open("Users.dat");
     vector<tuple<string,int,string,int>> users;
     tuple<string,int,string,int> userdata;
-     while (file>>get<0>(userdata)){
+
+     while (file>>get<0>(userdata))
+    {
         file >>get<1>(userdata);
         file >>get<2>(userdata);
         file >>get<3>(userdata);
+
         users.push_back(userdata);
+
     }
     string adminu,adminp;
     cout<<"-----------------------------------------------------------\n"
-        <<"ALERT: *Only Admin have the authority to create a username*\n"
+        <<"only Admin have the authority to create a usernamn\n"
         <<"Please enter the username-\n";
-    cin>>adminu;
+    cin>>adminu
     cout<<"Please enter the password-\n";
     cin>>adminp;
 
      for (auto elem: users)
     {  
-        if(adminu==get<0>(elem) && adminp==get<2>(elem) && get<1>(elem)==1)
+        if(adminu==get<0>elem && adminp==get<2> && get<1>(elem)==1)
         {   
             string user,pass;
             int status,power;
-            if (!file.is_open())
+            if (!inputFile.is_open())
             {
                 cout << " File not found\n";
                 exit(-1);
@@ -84,18 +89,20 @@ void createuser()
                 cin >> pass;
                 ofstream outfile;
                 outfile.open("Users.dat",ios::out|ios::ate|ios::app);
+                // pos=outfile.tellp();
+                // outfile.seekp(pos,ios::cur);
+
                 status=1;
                 power=0;
                 outfile << user << " " << power << " " << pass << " " << status<<endl;
+
                 outfile.close();
-                file.close();
+                inputFile.close();
             }
         }
         else
         {
-            cout << "-----------------------------------------------------\n"
-                <<"Please enter the correct admin username or password\n";
-                createuser();
+            cout<<"Please enter the correct admin username or password\"
         }
     }
 }
@@ -160,6 +167,7 @@ void deleteuser()
         file >>get<1>(userdata);
         file >>get<2>(userdata);
         file >>get<3>(userdata);
+
         users.push_back(userdata);
     }
     file.close();
