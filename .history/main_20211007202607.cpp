@@ -197,15 +197,6 @@ void changepass() // this function changes the password of the user
             {
             cout << "Password changed you may procced to login"<< endl;
                 get<2>(elem) = newpass1;
-            ofstream outfile;
-            outfile.open("users.dat" , ios::out);
-            outfile<<get<0>(elem)<<" "
-                <<get<1>(elem)<<" "
-                <<get<2>(elem)<<" "
-                <<get<3>(elem)<<" "
-                << endl;
-            users.push_back(elem);
-            outfile.close();
                 break;
            }
            else
@@ -222,6 +213,14 @@ void changepass() // this function changes the password of the user
         }
        file.close();
     }
+    ofstream outfile;
+    outfile.open("users.dat" , ios::out);
+    outfile<<get<0>(userdata)<<" "
+        <<get<1>(userdata)<<" "
+        <<get<2>(userdata)<<" "
+        <<get<3>(userdata)<<" "
+        << endl;
+    outfile.close();
 }
 void deleteuser() // this function delets a user from the database
 {
@@ -257,13 +256,13 @@ void deleteuser() // this function delets a user from the database
                 
                 get<3>(elem)=0;
                 ofstream outfile;
-                outfile.open("Users.dat",ios::out);
-                outfile << get<0>(elem) << " " 
-                        << get<1>(elem) << " " 
-                        << get<2>(elem) << " " 
-                        << get<3>(elem) <<endl;
-                users.push_back(elem);
-                outfile.close();
+        outfile.open("Users.dat",ios::out);
+        outfile << get<0>(userdata) << " " 
+                        << get<1>(userdata) << " " 
+                        << get<2>(userdata) << " " 
+                        << get<3>(userdata) <<endl;
+        users.push_back(userdata);
+        outfile.close();
 
                 cout << "---------------------------------------------------\n"
                     <<"Account deletion was successful." << endl;

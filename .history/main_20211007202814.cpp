@@ -204,7 +204,7 @@ void changepass() // this function changes the password of the user
                 <<get<2>(elem)<<" "
                 <<get<3>(elem)<<" "
                 << endl;
-            users.push_back(elem);
+            
             outfile.close();
                 break;
            }

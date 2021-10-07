@@ -197,15 +197,6 @@ void changepass() // this function changes the password of the user
             {
             cout << "Password changed you may procced to login"<< endl;
                 get<2>(elem) = newpass1;
-            ofstream outfile;
-            outfile.open("users.dat" , ios::out);
-            outfile<<get<0>(elem)<<" "
-                <<get<1>(elem)<<" "
-                <<get<2>(elem)<<" "
-                <<get<3>(elem)<<" "
-                << endl;
-            users.push_back(elem);
-            outfile.close();
                 break;
            }
            else
@@ -222,6 +213,7 @@ void changepass() // this function changes the password of the user
         }
        file.close();
     }
+    
 }
 void deleteuser() // this function delets a user from the database
 {

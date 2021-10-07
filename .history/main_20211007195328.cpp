@@ -11,7 +11,6 @@ void createuser();
 void loginuser();
 void deleteuser();
 void changepass();
-void datafilereader();
 
 void getchoice() //This functions takes the input from the user and calls different functions
 {   
@@ -147,14 +146,6 @@ void loginuser() // this function helps user s and admin to login in the system
                  << ": " <<get<2>(elem) << ": "
                  << ((get<3>(elem)==1)?"Active":"Deleted")
                  << endl;
-            if(get<1>(elem)==1)
-            {
-                cout<<"Welcome admin- "<<get<0>(elem)<<endl;
-                datafilereader();
-            }
-            else{
-                cout<<"Id- "<<get<0>(elem)<< " is not an admin "<<endl;
-            }
                  break;
         }
         else{
@@ -176,6 +167,7 @@ void changepass() // this function changes the password of the user
         file >>get<1>(userdata);
         file >>get<2>(userdata);
         file >>get<3>(userdata);
+
         users.push_back(userdata);
     }
         string newpass1,newpass2,oldpass,user;           
@@ -196,21 +188,16 @@ void changepass() // this function changes the password of the user
             if(newpass1==newpass2)
             {
             cout << "Password changed you may procced to login"<< endl;
-                get<2>(elem) = newpass1;
             ofstream outfile;
             outfile.open("users.dat" , ios::out);
-            outfile<<get<0>(elem)<<" "
-                <<get<1>(elem)<<" "
-                <<get<2>(elem)<<" "
-                <<get<3>(elem)<<" "
-                << endl;
-            users.push_back(elem);
-            outfile.close();
-                break;
-           }
-           else
-           {  
-               cout <<"You entered incorrect password"<< endl;
+                get<2>(elem) = newpass1; 
+                outfile<<get<0>(elem)<<" "
+                        <<get<1>(elem)<<" "
+                        <<get<2>(elem)<<" "
+                        <<get<3>(elem)<<" "
+                        << endl;
+                users.push_back(elem);
+                outfile.close();
            }
        }
         else
@@ -254,10 +241,10 @@ void deleteuser() // this function delets a user from the database
                  << ": " <<get<2>(elem) << ": "
                  << ((get<3>(elem)==1)?"Deleted":"Active")
                  << endl;
-                
-                get<3>(elem)=0;
                 ofstream outfile;
                 outfile.open("Users.dat",ios::out);
+                
+                get<3>(elem)=0;
                 outfile << get<0>(elem) << " " 
                         << get<1>(elem) << " " 
                         << get<2>(elem) << " " 
@@ -279,7 +266,7 @@ void deleteuser() // this function delets a user from the database
 }
 void datafilereader()
 {
-    
+    chec
 }
 int main()
 {

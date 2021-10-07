@@ -197,14 +197,13 @@ void changepass() // this function changes the password of the user
             {
             cout << "Password changed you may procced to login"<< endl;
                 get<2>(elem) = newpass1;
-            ofstream outfile;
+                ofstream outfile;
             outfile.open("users.dat" , ios::out);
-            outfile<<get<0>(elem)<<" "
-                <<get<1>(elem)<<" "
-                <<get<2>(elem)<<" "
-                <<get<3>(elem)<<" "
+            outfile<<get<0>(userdata)<<" "
+                <<get<1>(userdata)<<" "
+                <<get<2>(userdata)<<" "
+                <<get<3>(userdata)<<" "
                 << endl;
-            users.push_back(elem);
             outfile.close();
                 break;
            }
