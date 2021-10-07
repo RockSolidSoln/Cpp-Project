@@ -122,6 +122,7 @@ void loginuser() // this function helps user s and admin to login in the system
         file >>get<1>(userdata);
         file >>get<2>(userdata);
         file >>get<3>(userdata);
+
         users.push_back(userdata);
     }
 
@@ -171,17 +172,20 @@ void deleteuser() // this function delets a user from the database
         users.push_back(userdata);
     }
     file.close();
-  
+    string name, pass;
+    cout << "-----------------------------------------------------\n"
+        << "Enter the Username to delete-\n";
+    cin >> name;
+    cout << "-----------------------------------------------------\n"
+        << "Enter Password to confirm deletion-\n";
+    cin >> pass;
+
      for (auto elem: users)
     {   
-        if (checkadmin(get<0>(elem),get<2>(elem),get<1>(elem))==true)
-             {  string name, pass;
-                cout << "-----------------------------------------------------\n"
-                    << "Enter the Username to delete-\n";
-                cin >> name;
-                cout << "-----------------------------------------------------\n"
-                    << "Enter Password to confirm deletion-\n";
-                cin >> pass;
+        if (name == get<0>(elem) &&
+             pass == get<2>(elem) &&
+             get<3>(elem)==1)
+             {  
                 cout << get<0>(elem) << ": "
                  << ((get<1>(elem)==1)?"admin":"user")
                  << ": " <<get<2>(elem) << ": "

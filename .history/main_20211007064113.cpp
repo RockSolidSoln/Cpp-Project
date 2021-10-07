@@ -174,7 +174,7 @@ void deleteuser() // this function delets a user from the database
   
      for (auto elem: users)
     {   
-        if (checkadmin(get<0>(elem),get<2>(elem),get<1>(elem))==true)
+        if (checkadmin(get<0>(elem),get<2>(elem),get<1>(elem))==true)1231
              {  string name, pass;
                 cout << "-----------------------------------------------------\n"
                     << "Enter the Username to delete-\n";

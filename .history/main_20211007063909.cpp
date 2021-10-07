@@ -171,17 +171,18 @@ void deleteuser() // this function delets a user from the database
         users.push_back(userdata);
     }
     file.close();
-  
+    string name, pass;
+    cout << "-----------------------------------------------------\n"
+        << "Enter the Username to delete-\n";
+    cin >> name;
+    cout << "-----------------------------------------------------\n"
+        << "Enter Password to confirm deletion-\n";
+    cin >> pass;
+
      for (auto elem: users)
     {   
-        if (checkadmin(get<0>(elem),get<2>(elem),get<1>(elem))==true)
-             {  string name, pass;
-                cout << "-----------------------------------------------------\n"
-                    << "Enter the Username to delete-\n";
-                cin >> name;
-                cout << "-----------------------------------------------------\n"
-                    << "Enter Password to confirm deletion-\n";
-                cin >> pass;
+        if (
+             {  
                 cout << get<0>(elem) << ": "
                  << ((get<1>(elem)==1)?"admin":"user")
                  << ": " <<get<2>(elem) << ": "

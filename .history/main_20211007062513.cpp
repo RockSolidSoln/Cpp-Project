@@ -6,15 +6,13 @@
 #include <string>
 using namespace std;
 
-// start of functions defination
 void createuser();
 void loginuser();
 void deleteuser();
 
-// end of functions defination
 
-void getchoice() //This functions takes the input from the user and calls different functions
-{   
+void getchoice()
+{   //try
     int ch;
     cout << "-----------------------------------------------------\n"
         << "|         Hello and Welcome to Our System           |\n"
@@ -42,24 +40,22 @@ void getchoice() //This functions takes the input from the user and calls differ
 
         // default:
     }
+    
 }
-
- checkadmin(string name,string pass,int status) //this functions checks if the given data is of admin or not
- {
+ checkadmin(string name,pass,int status) {
         string adminu,adminp;
     cout<<"-----------------------------------------------------------\n"
-        <<"ALERT: *Only Admin have the authority for such actions*\n"
+        <<"ALERT: *Only Admin have the authority to create a username*\n"
         <<"Please enter the username-\n";
     cin>>adminu;
     cout<<"Please enter the password-\n";
     cin>>adminp;
-    if(adminu==name && adminp==pass && status==1)
+    if(adminu==name && adminp==pass) && status==1)
     return true;
     else 
     return false;
 }
-
-void createuser() // this function creates new users
+void createuser()
 {
     ifstream file;
     file.open("Users.dat");
@@ -73,8 +69,7 @@ void createuser() // this function creates new users
     }
 
      for (auto elem: users)
-    {   
-        if(checkadmin(get<0>(elem),get<2>(elem),get<1>(elem))==true)
+        if()
         {   
             string user,pass;
             int status,power;
@@ -98,8 +93,6 @@ void createuser() // this function creates new users
                 outfile << user << " " << power << " " << pass << " " << status<<endl;
                 outfile.close();
                 file.close();
-                cout<<"Username and password created successfully."<<endl;
-                break;
             }
         }
         else
@@ -111,10 +104,11 @@ void createuser() // this function creates new users
     }
 }
 
-void loginuser() // this function helps user s and admin to login in the system
+void loginuser()
 {
     vector<tuple<string,int,string,int>> users;
     tuple<string,int,string,int> userdata;
+
     ifstream file;
     file.open("Users.dat");
     while (file>>get<0>(userdata))
@@ -122,7 +116,9 @@ void loginuser() // this function helps user s and admin to login in the system
         file >>get<1>(userdata);
         file >>get<2>(userdata);
         file >>get<3>(userdata);
+
         users.push_back(userdata);
+
     }
 
     file.close();
@@ -156,7 +152,7 @@ void loginuser() // this function helps user s and admin to login in the system
         }
 }
 }
-void deleteuser() // this function delets a user from the database
+void deleteuser()
 {
     vector<tuple<string,int,string,int>> users;
     tuple<string,int,string,int> userdata;
@@ -171,17 +167,20 @@ void deleteuser() // this function delets a user from the database
         users.push_back(userdata);
     }
     file.close();
-  
+    string name, pass;
+    cout << "-----------------------------------------------------\n"
+        << "Enter the Username to delete-\n";
+    cin >> name;
+    cout << "-----------------------------------------------------\n"
+        << "Enter Password to confirm deletion-\n";
+    cin >> pass;
+
      for (auto elem: users)
     {   
-        if (checkadmin(get<0>(elem),get<2>(elem),get<1>(elem))==true)
-             {  string name, pass;
-                cout << "-----------------------------------------------------\n"
-                    << "Enter the Username to delete-\n";
-                cin >> name;
-                cout << "-----------------------------------------------------\n"
-                    << "Enter Password to confirm deletion-\n";
-                cin >> pass;
+        if (name == get<0>(elem) &&
+             pass == get<2>(elem) &&
+             get<3>(elem)==1)
+             {  
                 cout << get<0>(elem) << ": "
                  << ((get<1>(elem)==1)?"admin":"user")
                  << ": " <<get<2>(elem) << ": "
@@ -211,7 +210,7 @@ void deleteuser() // this function delets a user from the database
     }
 }
 
-int main() //main function
+int main()
 {
     getchoice();
     return 0;
