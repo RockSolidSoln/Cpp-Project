@@ -65,6 +65,9 @@ void createuser()
         cin >> pass;
         ofstream outfile;
         outfile.open("Users.dat",ios::out|ios::ate|ios::app);
+        // pos=outfile.tellp();
+        // outfile.seekp(pos,ios::cur);
+
         status=1;
         power=0;
         outfile << user << " " << power << " " << pass << " " << status<<endl;
@@ -182,6 +185,7 @@ void deleteuser()
         }
     }
 }
+
 int main()
 {
     getchoice();
