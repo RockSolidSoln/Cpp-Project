@@ -6,6 +6,7 @@
 #include <string>
 using namespace std;
 
+
 // start of functions defination
 void createuser();
 void loginuser();
@@ -124,6 +125,7 @@ void loginuser() // this function helps user s and admin to login in the system
         file >>get<2>(userdata);
         file >>get<3>(userdata);
         users.push_back(userdata);
+
     }
 
     file.close();
@@ -142,7 +144,9 @@ void loginuser() // this function helps user s and admin to login in the system
              pass == get<2>(elem) &&
              get<3>(elem)==1)
         {
+
             cout << get<0>(elem) << ": "
+
                  << ((get<1>(elem)==1)?"admin":"user")
                  << ": " <<get<2>(elem) << ": "
                  << ((get<3>(elem)==1)?"Active":"Deleted")
@@ -165,6 +169,7 @@ void loginuser() // this function helps user s and admin to login in the system
         }
 }
 }
+
 void changepass() // this function changes the password of the user
 {
     vector<tuple<string,int,string,int>> users;
