@@ -1,55 +1,42 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include <iomanip>
-
+#include <vector>
 using namespace std;
 
 int main()
 {
-    ifstream inFile;
-    inFile.open("sample.txt");
+    vector<string> data;
+    string str;
+    cout<<"enter the file name ";
+    cin >> str;
 
-    if (!inFile) {
-        cout << "Unable to open file";
-        exit(1); // terminate with error
-    }
+    ifstream infile;
+    infile.open(str+".dat");
 
-    int col, row;
-   cout <<"Enter number of columns"; 
-   cin>>col;
-   string titles[col];
-   cout<<"\nEnter column titles";
-   for (int z=0; z<col; z++)
-        cin>>titles[z];
-   cout<<"\nEnter number of rows ";
-   cin>>row;
-   //table row 0 = titles[][col]
-   int table[row+1][col];
-    for (int i=1; i<=row; i++)
+    if(infile.fail())
     {
-        cout<<"\nEnter row "<<i;
-        for (int j=0; j<col; j++)
-            {
-                cin>>table[i][j];
-            }
+        cout << "your file didn't work. ";
     }
 
-    inFile.close();
-
-    cout<<endl<<col<<endl;
-    cout<<row<<endl;
-    for (int z=0; z<col; z++)
-        cout<<titles[z]<<" ";
-    for (int i=1; i<=row; i++)
+    else{
+      string s;
+      while(infile>>s)
     {
-        cout<<"\nEnter row "<<i<<endl;
-        for (int j=0; j<col; j++)
-            {
-                cout<<table[i][j]<<" ";
-            }
+        data.push_back(s);
+        cout<<s<<endl;
     }
-       cout<<endl;
+    }
 
-   return 0;
+
+string newfilename;
+cout << " enter the new file name "<< endl;
+cin >>newfilename;
+
+ofstream file(newfilename+".dat",ios::app);
+    for (int i=0; i<data.size(); i++)
+         file << data[i] << endl;
+       
+
 }
+
