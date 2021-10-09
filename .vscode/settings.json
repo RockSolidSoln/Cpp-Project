@@ -10,6 +10,9 @@
         "functional": "cpp",
         "tuple": "cpp",
         "utility": "cpp",
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "iostream": "cpp",
+        "string": "cpp",
+        "ostream": "cpp"
     }
 }

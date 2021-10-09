@@ -1,0 +1,1 @@
+checkadmin(username,password,s);
