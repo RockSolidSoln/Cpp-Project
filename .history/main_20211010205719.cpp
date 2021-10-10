@@ -14,7 +14,7 @@ void login();
 void logout();
 void changepass(string);
 void deleteuser();
-vector<tuple<string,int,string,int>> loadfile();
+vector<tuple<string,int,string,int>> loadfile(string);
 void viewfunc();
 
 //------------------------------------main function-------------------------------------------
@@ -260,7 +260,7 @@ void deleteuser()
     outfile.close();
 }
 // -----------------------------This function loads the file------------------------------------
- vector<tuple<string,int,string,int>> loadfile()
+ vector<tuple> loadfile()
 {   
     vector<tuple<string,int,string,int>> users;
     tuple<string,int,string,int> userdata;

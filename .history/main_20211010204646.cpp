@@ -14,7 +14,7 @@ void login();
 void logout();
 void changepass(string);
 void deleteuser();
-vector<tuple<string,int,string,int>> loadfile();
+vector<tuple<string,int,string,int>> loadfile(string);
 void viewfunc();
 
 //------------------------------------main function-------------------------------------------
@@ -105,7 +105,8 @@ void getchoice(string name,int status)
  int checkadmin(string name,string pass)
  {      
     vector<tuple<string,int,string,int>> users;
-    users = loadfile();
+    string filename ="Users";
+    users = loadfile(filename);
      for (int i=0;i<users.size();i++)
     {   
         if(get<0>(users[i])==name && get<2>(users[i])==pass && get<1>(users[i])==1)
@@ -130,11 +131,11 @@ void createuser()
     cout << "-----------------------------------------------------\n"
         <<"Enter 1 to create new admin, 0 for reguler user-\n";
     int status;
-    cin>>status;
+    cin>>
     ofstream outfile;
     outfile.open("Users.dat",ios::out|ios::ate|ios::app);
-    int activity=1;
-    outfile << user << " " << status << " " << pass << " " << activity <<endl;
+    int power=1;
+    outfile << user << " " << power << " " << pass << " " << status<<endl;
     outfile.close();
     cout<<"Username and password created successfully.\n"<<endl;
 }
@@ -183,7 +184,8 @@ void logout()
 void changepass(string username) 
 {
     vector<tuple<string,int,string,int>> users;
-    users=loadfile();
+    string filename="Users";
+    users=loadfile(filename);
         string newpass1,newpass2,oldpass;           
         cout << "Enter your old password to continue..." << endl;
         cin >> oldpass;       
@@ -224,7 +226,8 @@ void changepass(string username)
 void deleteuser() 
 {
     vector<tuple<string,int,string,int>> users;
-    users=loadfile();
+    string filename="Users";
+    users=loadfile(filename);
     string name, pass;
                 cout << "-----------------------------------------------------\n"
                     << "Enter the Username to delete-\n";
@@ -260,12 +263,12 @@ void deleteuser()
     outfile.close();
 }
 // -----------------------------This function loads the file------------------------------------
- vector<tuple<string,int,string,int>> loadfile()
+ vector<tuple<string,int,string,int>> loadfile(string filename)
 {   
     vector<tuple<string,int,string,int>> users;
     tuple<string,int,string,int> userdata;
     ifstream file;
-    file.open("Users.dat");
+    file.open(filename+".dat");
     while (file>>get<0>(userdata))
     {
         file >>get<1>(userdata);

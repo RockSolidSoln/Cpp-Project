@@ -14,7 +14,7 @@ void login();
 void logout();
 void changepass(string);
 void deleteuser();
-vector<tuple<string,int,string,int>> loadfile();
+vector<tuple<string,int,string,int>> loadfile(string);
 void viewfunc();
 
 //------------------------------------main function-------------------------------------------
@@ -105,7 +105,7 @@ void getchoice(string name,int status)
  int checkadmin(string name,string pass)
  {      
     vector<tuple<string,int,string,int>> users;
-    users = loadfile();
+    users = loadfile(filename);
      for (int i=0;i<users.size();i++)
     {   
         if(get<0>(users[i])==name && get<2>(users[i])==pass && get<1>(users[i])==1)
