@@ -1,1 +1,0 @@
-checkadmin(username,password,s);
