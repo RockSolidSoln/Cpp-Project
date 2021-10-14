@@ -22,6 +22,7 @@ void savefile();
 void savereport();
 void saveHTMLreport();
 void logrecord();
+
 void viewfunc();
 
 

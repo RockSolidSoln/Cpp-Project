@@ -7,7 +7,6 @@
 using namespace std;
 
 typedef  vector<tuple<string,int,string,int>> vec;
-typedef vector<tuple<int,int,int,int,int>> vec1;
 // -------------------------start of functions defination-------------------------------------
 void getchoice(string,int);
 int checkadmin(string,string);
@@ -17,13 +16,7 @@ void logout();
 void changepass(string);
 void deleteuser();
 vec loadfile();
-vec1 databaseloadfile();
-void savefile();
-void savereport();
-void saveHTMLreport();
-void logrecord();
 void viewfunc();
-
 
 //------------------------------------main function-------------------------------------------
 int main()
@@ -281,43 +274,22 @@ vec loadfile()
     file.close();
     return users;
 }
-// -----------------------------This function loads the student database file------------------------------------
-vec1 databaseloadfile()
+// -----------------------------This function loads the file------------------------------------
+vec loadfile()
 {   
-    vec1 data;
-    tuple<int,int,int,int,int> stdata;
+    vec users;
+    tuple<string,int,string,int> userdata;
     ifstream file;
-    file.open("StudentDataBase.dat");
-    while (file >> get<0>(stdata))
+    file.open("Users.dat");
+    while (file>>get<0>(userdata))
     {
-        file >> get<1>(stdata);
-        file >> get<2>(stdata);
-        file >> get<3>(stdata);
-        file >> get<4>(stdata);
-        users.push_back(stdata);
+        file >>get<1>(userdata);
+        file >>get<2>(userdata);
+        file >>get<3>(userdata);
+        users.push_back(userdata);
     }
     file.close();
-    return data;
-}
-// --------------------This function saves the new file-------------------------------
-void savefile()
-{
-
-}
-// --------------------This function saves the report of the user choices in a file-------------------------
-void savereport()
-{
-
-}
-// -----------------This function saves the report in HTML of the user choices in a file---------------------
-void saveHTMLreport()
-{
-
-}
-// -------------------------This function saves the user activity in a file-------------------------------
-void logrecord()
-{
-
+    return users;
 }
 // --------------------This function shows different functions for user to perform-------------------------
 void viewfunc()

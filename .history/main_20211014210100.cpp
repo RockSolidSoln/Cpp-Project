@@ -18,12 +18,7 @@ void changepass(string);
 void deleteuser();
 vec loadfile();
 vec1 databaseloadfile();
-void savefile();
-void savereport();
-void saveHTMLreport();
-void logrecord();
 void viewfunc();
-
 
 //------------------------------------main function-------------------------------------------
 int main()
@@ -311,11 +306,6 @@ void savereport()
 }
 // -----------------This function saves the report in HTML of the user choices in a file---------------------
 void saveHTMLreport()
-{
-
-}
-// -------------------------This function saves the user activity in a file-------------------------------
-void logrecord()
 {
 
 }

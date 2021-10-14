@@ -20,8 +20,8 @@ vec loadfile();
 vec1 databaseloadfile();
 void savefile();
 void savereport();
-void saveHTMLreport();
-void logrecord();
+void savereport
+
 void viewfunc();
 
 

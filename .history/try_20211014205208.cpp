@@ -6,7 +6,6 @@
 #include <string>
 using namespace std;
 
-vector <string> record;
 int main()
 {
     

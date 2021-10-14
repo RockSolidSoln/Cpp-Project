@@ -9,5 +9,5 @@ using namespace std;
 vector <string> record;
 int main()
 {
-    
+
 }

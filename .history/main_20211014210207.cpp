@@ -18,12 +18,7 @@ void changepass(string);
 void deleteuser();
 vec loadfile();
 vec1 databaseloadfile();
-void savefile();
-void savereport();
-void saveHTMLreport();
-void logrecord();
 void viewfunc();
-
 
 //------------------------------------main function-------------------------------------------
 int main()

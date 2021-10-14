@@ -18,12 +18,7 @@ void changepass(string);
 void deleteuser();
 vec loadfile();
 vec1 databaseloadfile();
-void savefile();
-void savereport();
-void saveHTMLreport();
-void logrecord();
 void viewfunc();
-
 
 //------------------------------------main function-------------------------------------------
 int main()
@@ -299,25 +294,9 @@ vec1 databaseloadfile()
     file.close();
     return data;
 }
-// --------------------This function saves the new file-------------------------------
 void savefile()
 {
-
-}
-// --------------------This function saves the report of the user choices in a file-------------------------
-void savereport()
-{
-
-}
-// -----------------This function saves the report in HTML of the user choices in a file---------------------
-void saveHTMLreport()
-{
-
-}
-// -------------------------This function saves the user activity in a file-------------------------------
-void logrecord()
-{
-
+    
 }
 // --------------------This function shows different functions for user to perform-------------------------
 void viewfunc()

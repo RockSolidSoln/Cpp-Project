@@ -6,8 +6,8 @@
 #include <string>
 using namespace std;
 
-vector <string> record;
+vector <string>
 int main()
 {
-    
+
 }

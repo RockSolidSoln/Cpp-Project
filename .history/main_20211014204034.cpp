@@ -6,8 +6,6 @@
 #include <string>
 using namespace std;
 
-typedef  vector<tuple<string,int,string,int>> vec;
-typedef vector<tuple<int,int,int,int,int>> vec1;
 // -------------------------start of functions defination-------------------------------------
 void getchoice(string,int);
 int checkadmin(string,string);
@@ -16,14 +14,8 @@ void login();
 void logout();
 void changepass(string);
 void deleteuser();
-vec loadfile();
-vec1 databaseloadfile();
-void savefile();
-void savereport();
-void saveHTMLreport();
-void logrecord();
+vector<tuple<string,int,string,int>> loadfile();
 void viewfunc();
-
 
 //------------------------------------main function-------------------------------------------
 int main()
@@ -73,7 +65,7 @@ void getchoice(string name,int status)
     }
     else
     {   
-        if(status==0)
+        if(status==2)
         {   
             int ch;
             cout << "---------------------------------------------------------\n"
@@ -112,16 +104,20 @@ void getchoice(string name,int status)
 //---------------------------This functions checks if the user is admin or not-----------------------
  int checkadmin(string name,string pass)
  {      
-    vec users;
+    vector<tuple<string,int,string,int>> users;
     users = loadfile();
      for (int i=0;i<users.size();i++)
     {   
         if(get<0>(users[i])==name && get<2>(users[i])==pass && get<1>(users[i])==1)
             return 1;
-        else if(get<0>(users[i])==name && get<2>(users[i])==pass && get<1>(users[i])==0)   
+        else
+        { if(get<0>(users[i])==name && get<2>(users[i])==pass && get<1>(users[i]))
             return 0;
+            
+            else 
+            return 2;
+        }
     }
-    return 2;
  }
 //----------------------------This functions creates the new user---------------------------------
 void createuser() 
@@ -187,7 +183,7 @@ void logout()
 //----------------------------This functions changes the password-------------------------------------
 void changepass(string username) 
 {
-    vec users;
+    vector<tuple<string,int,string,int>> users;
     users=loadfile();
         string newpass1,newpass2,oldpass;           
         cout << "Enter your old password to continue..." << endl;
@@ -228,7 +224,7 @@ void changepass(string username)
 //----------------------------This functions deletes the new user ---------------------------------
 void deleteuser() 
 {
-    vec users;
+    vector<tuple<string,int,string,int>> users;
     users=loadfile();
     string name, pass;
                 cout << "-----------------------------------------------------\n"
@@ -265,9 +261,9 @@ void deleteuser()
     outfile.close();
 }
 // -----------------------------This function loads the file------------------------------------
-vec loadfile()
+ vector<tuple<string,int,string,int>> loadfile()
 {   
-    vec users;
+    vector<tuple<string,int,string,int>> users;
     tuple<string,int,string,int> userdata;
     ifstream file;
     file.open("Users.dat");
@@ -280,44 +276,6 @@ vec loadfile()
     }
     file.close();
     return users;
-}
-// -----------------------------This function loads the student database file------------------------------------
-vec1 databaseloadfile()
-{   
-    vec1 data;
-    tuple<int,int,int,int,int> stdata;
-    ifstream file;
-    file.open("StudentDataBase.dat");
-    while (file >> get<0>(stdata))
-    {
-        file >> get<1>(stdata);
-        file >> get<2>(stdata);
-        file >> get<3>(stdata);
-        file >> get<4>(stdata);
-        users.push_back(stdata);
-    }
-    file.close();
-    return data;
-}
-// --------------------This function saves the new file-------------------------------
-void savefile()
-{
-
-}
-// --------------------This function saves the report of the user choices in a file-------------------------
-void savereport()
-{
-
-}
-// -----------------This function saves the report in HTML of the user choices in a file---------------------
-void saveHTMLreport()
-{
-
-}
-// -------------------------This function saves the user activity in a file-------------------------------
-void logrecord()
-{
-
 }
 // --------------------This function shows different functions for user to perform-------------------------
 void viewfunc()
