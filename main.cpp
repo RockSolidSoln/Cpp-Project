@@ -571,7 +571,6 @@ void findcorrelation(int ch,int &col,float &colmean,double &colsum,double &colsq
 void loadcorr(int ch){
     int row = -1;
     int col = -1;
-    int rc;
     float rowmean,colmean;
     double rowsum,colsum,rowsqsum,colsqsum,corr;
     findcorrelation(ch,col,colmean,colsum,colsqsum,corr);
