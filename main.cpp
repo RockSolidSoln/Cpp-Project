@@ -712,4 +712,3 @@ void finddistinct()
         }
     }
 }
-//testing
