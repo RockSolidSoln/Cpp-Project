@@ -491,7 +491,6 @@ void findrowstdv(int ch,int &row,float &rowmean,double &rowsum,double rowsqsum,d
     rowstdv=0;
     findrowvar(ch,row,rowmean,rowsum,rowsqsum,rowvar);
     rowstdv= sqrt(rowvar);
-    if(ch==6);
     cout << "The standard veviation of row " << row << " is " << rowstdv << endl;
 }
 
@@ -500,7 +499,6 @@ void findcolstdv(int ch,int &col,float &colmean,double &colsum,double colsqsum,d
     colstdv = 0;
     findcolvar(ch,col,colmean,colsum,colsqsum,colvar);
     colstdv = sqrt(colvar);
-    if(ch==6);
     cout << "The standard veviation of column " << col << " is " << colstdv << endl;
 }
 
