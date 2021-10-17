@@ -1,4 +1,4 @@
-// ----------------------------------------start of the program---------------------------------------------
+// -------------------------start of the program---------------------------------------------
 #include <iostream>
 #include <iomanip>
 #include <fstream>
@@ -9,33 +9,28 @@
 using namespace std;
 
 
-// -------------------------type definiations used in the function-------------------------------------------
+// -------------------------type definiations used in the function-------------------------------------
 typedef  vector<tuple<string,int,string,int>> vec;
 typedef vector<array<int,5>> vec1;
 
-// ----------------------------------start of functions defination-------------------------------------------
-void getchoice();
-void adminmenu();
-void usermenu();
+// -------------------------start of functions defination-------------------------------------
+void getchoice(string,int);
 int checkadmin(string,string);
 void createuser();
 void login();
 void logout();
-void changepass();
+void changepass(string);
 void deleteuser();
 vec loadfile();
 vec1 databaseloadfile();
 void savefile();
 void savereport();
 void saveHTMLreport();
-void logrecord(string);
+void logrecord();
 void viewfunc();
 
-//----------------------------------------Global variables-----------------------------------------------------
-int status=0;
-string username,password;
 
-//------------------------------------------main function------------------------------------------------------
+//------------------------------------main function-------------------------------------------
 int main()
 {   
     login();
@@ -44,14 +39,76 @@ int main()
 
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------
 //----------------------This functions takes the input from the user and calls different functions---------------
-void getchoice() 
+void getchoice(string name,int status) 
 {   
     if(status==1)
-        adminmenu();
+    {
+        int ch;
+
+        cout << "---------------------------------------------------------\n"
+            << "       Hello admin "<<name<<"                             \n"
+            << "----------------------------------------------------------\n"
+            << "| Please Enter from the choice given below               |\n"
+            << "| Enter 1 to Create a New User Account                   |\n"
+            << "| Enter 2 to Logout from your User Account               |\n"
+            << "| Enter 3 to Login as a User Account to view function    |\n"
+            << "| Enter 3 to Delete any User Account                     |\n"
+            << "| Enter 4 To Change your Password                        |\n"
+            << "| Enter O To Exit                                        |\n"
+            << "----------------------------------------------------------\n";
+        cin >> ch;
+        switch(ch)
+        {
+            case(1) : createuser();
+                        break;
+            case(2) :  logout();
+                        break;
+            case(3) : viewfunc();
+                        break;
+            case(4) :  deleteuser();
+                        break;
+            case(5) :  changepass(name);
+                        break;
+            case(0) : exit(0);
+                        break;
+            
+            default: cout<<"Wrong choice\n"
+                         <<"Please try again\n";
+                         login();
+                     break;
+        }
+    }
     else
     {   
         if(status==0)
-        usermenu();
+        {   
+            int ch;
+            cout << "---------------------------------------------------------\n"
+                << "        Hello user "<<name<<"                            \n"
+                << "---------------------------------------------------------\n"
+                << "| Please Enter from the choice given below               |\n"
+                << "| Enter 1 to view all the function                       |\n"
+                << "| Enter 2 to Logout from your User Account               |\n"
+                << "| Enter 3 To Change your Password                        |\n"
+                << "| Enter O To Exit                                        |\n"
+                << "---------------------------------------------------------\n";
+            cin >> ch;
+            switch(ch)
+            {   case(1) : viewfunc(); 
+                            break;
+                case(2) : logout();
+                            break;
+                case(3) : changepass(name);
+                            break;
+                case(0) : exit(0);
+                            break;
+
+                default: cout<<"Wrong choice\n"
+                            <<"Please try again\n";
+                            login();
+                            break;
+            }
+        }
         else
         {
         cout<<"Either username or password was wrong\n";
@@ -61,82 +118,7 @@ void getchoice()
 }
 
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------
-//----------------------------------This function shows the menu for the admin----------------------------------
-void adminmenu()
-{
-    int ch;
-    cout << "---------------------------------------------------------\n"
-        << "       Hello admin "<<username<<"                         \n"
-        << "----------------------------------------------------------\n"
-        << "| Please Enter from the choice given below               |\n"
-        << "| Enter 1 to Create a New User Account                   |\n"
-        << "| Enter 2 to Logout from your User Account               |\n"
-        << "| Enter 3 to Login as a User Account to view function    |\n"
-        << "| Enter 4 to Delete any User Account                     |\n"
-        << "| Enter 5 To Change your Password                        |\n"
-        << "| Enter O To Exit                                        |\n"
-        << "----------------------------------------------------------\n";
-    cin >> ch;
-    string str=username+" just choose menu option ";
-    logrecord(str);
-    switch(ch)
-    {
-        case(1) : createuser();
-                    break;
-        case(2) :  logout();
-                    break;
-        case(3) : viewfunc();
-                    break;
-        case(4) :  deleteuser();
-                    break;
-        case(5) :  changepass();
-                    break;
-        case(0) : exit(0);
-                    break;
-        
-        default: cout<<"Wrong choice\n"
-                        <<"Please try again\n";
-                        login();
-                    break;
-    }
-}
-
-//---------------------------------------------Ahmad Ayaan------------------------------------------------------
-//--------------------------This function shows the menu for a regular user-------------------------------------
-void usermenu()
-{
-    int ch;
-    cout << "---------------------------------------------------------\n"
-        << "        Hello user "<< username<<"                        \n"
-        << "---------------------------------------------------------\n"
-        << "| Please Enter from the choice given below               |\n"
-        << "| Enter 1 to view all the function                       |\n"
-        << "| Enter 2 to Logout from your User Account               |\n"
-        << "| Enter 3 To Change your Password                        |\n"
-        << "| Enter O To Exit                                        |\n"
-        << "---------------------------------------------------------\n";
-    cin >> ch;
-    string str=username+" just choose menu option ";
-    logrecord(str);
-    switch(ch)
-    {   case(1) : viewfunc(); 
-                    break;
-        case(2) : logout();
-                    break;
-        case(3) : changepass();
-                    break;
-        case(0) : exit(0);
-                    break;
-
-        default: cout<<"Wrong choice\n"
-                    <<"Please try again\n";
-                    login();
-                    break;
-     }
-}
-
-//---------------------------------------------Ahmad Ayaan------------------------------------------------------
-//---------------------------This functions checks if the user is admin or not----------------------------------
+//---------------------------This functions checks if the user is admin or not-----------------------
  int checkadmin(string name,string pass)
  {      
     vec users;
@@ -151,11 +133,10 @@ void usermenu()
     return 2;
  }
 
-//---------------------------------------------Ahmad Ayaan------------------------------------------------------
-//----------------------------This functions creates the new user-----------------------------------------------
+ //---------------------------------------------Ahmad Ayaan------------------------------------------------------
+//----------------------------This functions creates the new user---------------------------------
 void createuser() 
-{   
-    string user,pass;
+{   string user,pass;
     cout << "-----------------------------------------------------\n"
         <<"Enter a unique user name -\n";
     cin >> user;
@@ -164,23 +145,21 @@ void createuser()
     cin >> pass;
     cout << "-----------------------------------------------------\n"
         <<"Enter 1 to create new admin, 0 for reguler user-\n";
-    int s;
-    cin>>s;
-    string str=username+" just created another user as "+user;
-    logrecord(str);
+    int status;
+    cin>>status;
     ofstream outfile;
     outfile.open("Users.dat",ios::out|ios::ate|ios::app);
     int activity=1;
-    outfile << user << " " << s << " " << pass << " " << activity <<endl;
+    outfile << user << " " << status << " " << pass << " " << activity <<endl;
     outfile.close();
     cout<<"Username and password created successfully.\n"<<endl;
-    adminmenu();
 }
 
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------
 //----------------------------This functions login the user into the system---------------------------------
 void login()
 {   
+    string username,password;
     int n,s;
     cout<<"---------------------------------------------------\n"
         <<"|      Hello and Welcome to Our System            |\n"
@@ -191,15 +170,13 @@ void login()
     cin>>n;
     if(n==1)
     { 
-        cout<<"-----------------------------------------------------------\n"
-            <<"Please enter the username-\n";
+            cout<<"-----------------------------------------------------------\n"
+                <<"Please enter the username-\n";
         cin>>username;
         cout<<"Please enter the password-\n";
         cin>>password;
-        status=checkadmin(username,password);
-        string str=username+" just login ";
-        logrecord(str);
-        getchoice();
+        s=checkadmin(username,password);
+        getchoice(username,s);
     }
     else
     {
@@ -218,22 +195,21 @@ void login()
 //----------------------------This functions logout the user from the system---------------------------------
 void logout()
 {   
-    string str=username+" logged out from the system ";
-    logrecord(str);
     system("cls");
     cout<<"Logout was successful.\n";
+    main();
 }
 
 //---------------------------------------------Salah Fayeq------------------------------------------------------
 //----------------------------This functions changes the password-------------------------------------
-void changepass() 
+void changepass(string username) 
 {
     vec users;
     users=loadfile();
-    string newpass1,newpass2,oldpass;           
-    cout << "Enter your old password to continue..." << endl;
-    cin >> oldpass;       
-    for (int i=0;i<users.size();i++)
+        string newpass1,newpass2,oldpass;           
+        cout << "Enter your old password to continue..." << endl;
+        cin >> oldpass;       
+        for (int i=0;i<users.size();i++)
     {
         if (oldpass == get<2>(users[i]) && username==get<0>(users[i]))
        {    
@@ -247,22 +223,24 @@ void changepass()
             {
                 get<2>(users[i])=newpass1;
                 cout << "Password changed you may procced to login"<< endl;
+                break;
            }
-            string str=username+" just changed his password ";
-            logrecord(str);
+           else
+           {  
+               cout <<"You entered incorrect password"<< endl;
+           }
        }
     }
-    ofstream outfile;
-    outfile.open("Users.dat" , ios::out);
-    for (int i=0;i<users.size();i++)
+            ofstream outfile;
+            outfile.open("users.dat" , ios::out);
+            for (int i=0;i<users.size();i++)
     { 
         outfile << get<0>(users[i]) << " " 
                 << get<1>(users[i]) << " " 
                 << get<2>(users[i]) << " " 
                 << get<3>(users[i]) <<endl;
     }
-    outfile.close();
-    login();
+            outfile.close();
 }
 
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------
@@ -287,7 +265,10 @@ void deleteuser()
                     << ": " <<get<2>(users[i]) << ": "
                     << ((get<3>(users[i])==1)?"Deleted":"Active")
                     << endl;
+                
                 get<3>(users[i])=0;
+                cout << "---------------------------------------------------\n"
+                    <<"Account deletion was successful." << endl;
                     break;
              }       
     }
@@ -301,11 +282,6 @@ void deleteuser()
                 << get<3>(users[i]) <<endl;
     }
     outfile.close();
-    cout << "---------------------------------------------------\n"
-                    <<"Account deletion was successful.\n" << endl;
-    string str=username+" deleted an user";
-    logrecord(str);
-    adminmenu();
 }
 
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------
@@ -399,16 +375,13 @@ void saveHTMLreport()
 
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------
 // -------------------------This function saves the user activity in a file-------------------------------
-void logrecord(string str)
+void logrecord()
 {
-    ofstream outfile;
-    outfile.open("Activity.dat",ios::out|ios::app);
-    outfile << "--> " << str << endl;
-    outfile.close();
+
 }
 
 //---------------------------------------------Salah Fayeq------------------------------------------------------
-// --------------------This function shows different functions for user to perform------------------------------
+// --------------------This function shows different functions for user to perform-------------------------
 void viewfunc()
 {
     // blank for now
