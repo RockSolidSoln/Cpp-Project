@@ -5,7 +5,7 @@
 #include <tuple>
 #include <sstream>
 #include <vector>
-#include <cmath>
+#include <string>
 using namespace std;
 
 //----------------------------------------Global variables-----------------------------------------------------
@@ -33,19 +33,9 @@ void savereport();
 void saveHTMLreport();
 void logrecord(string);
 void viewfunc();
-void loadmean(int);
-void findrowmean(int, int, float ,double ,double);
-void findcolmean(int, int, float ,double ,double);
-void loadvar(int);
-void findrowvar(int ,int ,float ,double ,double ,double);
-void findcolvar(int ,int ,float ,double ,double ,double);
-void loadstdv(int);
-void findrowstdv(int ,int ,float ,double ,double ,double, double);
-void findcolstdv(int ,int ,float ,double ,double ,double, double);
-void loadcorr(int);
-void findcolsum12(int ,int ,double);
-void findcorrelation(int ,int ,float ,double ,double ,double);
-void finddistinct();
+void loadmean(int ch)
+void findrowmean(int ch,int &row,float &rowmean,double &rowsum,double &rowsqsum)
+void findcolmean(int ch,int &col,float &colmean,double &colsum,double &colsqsum)void loadvar(int ch)
 
 
 //------------------------------------------main function------------------------------------------------------
@@ -440,11 +430,11 @@ cout <<"--------------------------------------------------------\n"
     cin>>ch;
     switch(ch)
     {
-         case(1)    : //findMin()
+         case(1)    : findMin()
                          break;
-         case(2)    : //findMax()
+         case(2)    : findMax()
                          break;
-         case(3)    : //findMed()                
+         case(3)    : findMed()                
                          break;
          case(4)    : loadmean(ch);
                          break;
@@ -562,7 +552,7 @@ void loadvar(int ch)
 void findrowvar(int ch,int &row,float &rowmean,double &rowsum,double rowsqsum,double &rowvar)
 {
     rowvar = 0;
-    // findrowmean(ch,row,rowmean,rowsum,rowsqsum);
+    findrowmean(ch,row,rowmean,rowsum,rowsqsum);
     rowvar = ((rowsqsum)-((rowsum*rowsum)/4))/3;
     if(ch==5)
     cout << "The variance of column " << row << " is " << rowvar << endl;
@@ -573,7 +563,7 @@ void findrowvar(int ch,int &row,float &rowmean,double &rowsum,double rowsqsum,do
 void findcolvar(int ch,int &col,float &colmean,double &colsum,double colsqsum,double &colvar)
 {
     colvar = 0;
-    // findcolmean(ch,col,colmean,colsum,colsqsum);
+    findcolmean(ch,col,colmean,colsum,colsqsum);
     colvar = ((colsqsum)-((colsum*colsum)/100))/99;
     if(ch==5)
     cout << "The variance of column " << col << " is " << colvar << endl;

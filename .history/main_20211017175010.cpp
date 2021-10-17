@@ -40,7 +40,6 @@ void loadvar(int);
 void findrowvar(int ,int ,float ,double ,double ,double);
 void findcolvar(int ,int ,float ,double ,double ,double);
 void loadstdv(int);
-void findrowstdv(int ,int ,float ,double ,double ,double, double);
 void findcolstdv(int ,int ,float ,double ,double ,double, double);
 void loadcorr(int);
 void findcolsum12(int ,int ,double);
@@ -562,7 +561,7 @@ void loadvar(int ch)
 void findrowvar(int ch,int &row,float &rowmean,double &rowsum,double rowsqsum,double &rowvar)
 {
     rowvar = 0;
-    // findrowmean(ch,row,rowmean,rowsum,rowsqsum);
+    findrowmean(ch,row,rowmean,rowsum,rowsqsum);
     rowvar = ((rowsqsum)-((rowsum*rowsum)/4))/3;
     if(ch==5)
     cout << "The variance of column " << row << " is " << rowvar << endl;

@@ -40,7 +40,14 @@ void loadvar(int);
 void findrowvar(int ,int ,float ,double ,double ,double);
 void findcolvar(int ,int ,float ,double ,double ,double);
 void loadstdv(int);
-void findrowstdv(int ,int ,float ,double ,double ,double, double);
+void findstdrowv(int ,int ,float ,double ,double ,double, double);
+//------------------------------------------main function------------------------------------------------------
+int main()
+{   
+    login();
+    return 0;
+}
+
 void findcolstdv(int ,int ,float ,double ,double ,double, double);
 void loadcorr(int);
 void findcolsum12(int ,int ,double);

@@ -17,43 +17,36 @@ typedef  vector<tuple<string,int,string,int>> vec;
 typedef vector<array<int,5>> vec1;
 
 // ----------------------------------Start of functions defination-------------------------------------------
-void getchoice();
-void adminmenu();
-void usermenu();
-int checkadmin(string,string);
-void createuser();
-void login();
-void logout();
-void changepass();
-void deleteuser();
-vec loadfile();
-vec1 databaseloadfile();
-void savefile();
-void savereport();
-void saveHTMLreport();
-void logrecord(string);
-void viewfunc();
-void loadmean(int);
-void findrowmean(int, int, float ,double ,double);
-void findcolmean(int, int, float ,double ,double);
-void loadvar(int);
-void findrowvar(int ,int ,float ,double ,double ,double);
-void findcolvar(int ,int ,float ,double ,double ,double);
-void loadstdv(int);
-void findrowstdv(int ,int ,float ,double ,double ,double, double);
-void findcolstdv(int ,int ,float ,double ,double ,double, double);
-void loadcorr(int);
-void findcolsum12(int ,int ,double);
-void findcorrelation(int ,int ,float ,double ,double ,double);
-void finddistinct();
+// void getchoice();
+// void adminmenu();
+// void usermenu();
+// int checkadmin(string,string);
+// void createuser();
+// void login();
+// void logout();
+// void changepass();
+// void deleteuser();
+// vec loadfile();
+// vec1 databaseloadfile();
+// void savefile();
+// void savereport();
+// void saveHTMLreport();
+// void logrecord(string);
+// void viewfunc();
+// void loadmean(int);
+// void findrowmean(int, int, float ,double ,double);
+// void findcolmean(int, int, float ,double ,double);
+// void loadvar(int);
+// void findrowvar(int ,int ,float ,double ,double ,double);
+// void findcolvar(int ,int ,float ,double ,double ,double);
+// void loadstdv(int);
+// void findstdrowv(int ,int ,float ,double ,double ,double, double);
+// void findcolstdv(int ,int ,float ,double ,double ,double, double);
+// void loadcorr(int);
+// void findcolsum12(int ,int ,double);
+// void findcorrelation(int ,int ,float ,double ,double ,double);
+// void finddistinct();
 
-
-//------------------------------------------main function------------------------------------------------------
-int main()
-{   
-    login();
-    return 0;
-}
 
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------
 //----------------------------This functions login the user into the system-------------------------------------
@@ -711,4 +704,13 @@ void finddistinct()
             cout << "---------------+---------------" << endl;
         }
     }
+}
+
+
+
+//------------------------------------------main function------------------------------------------------------
+int main()
+{   
+    login();
+    return 0;
 }

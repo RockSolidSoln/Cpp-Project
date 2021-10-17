@@ -5,7 +5,7 @@
 #include <tuple>
 #include <sstream>
 #include <vector>
-#include <cmath>
+#include <string>
 using namespace std;
 
 //----------------------------------------Global variables-----------------------------------------------------
@@ -33,19 +33,6 @@ void savereport();
 void saveHTMLreport();
 void logrecord(string);
 void viewfunc();
-void loadmean(int);
-void findrowmean(int, int, float ,double ,double);
-void findcolmean(int, int, float ,double ,double);
-void loadvar(int);
-void findrowvar(int ,int ,float ,double ,double ,double);
-void findcolvar(int ,int ,float ,double ,double ,double);
-void loadstdv(int);
-void findrowstdv(int ,int ,float ,double ,double ,double, double);
-void findcolstdv(int ,int ,float ,double ,double ,double, double);
-void loadcorr(int);
-void findcolsum12(int ,int ,double);
-void findcorrelation(int ,int ,float ,double ,double ,double);
-void finddistinct();
 
 
 //------------------------------------------main function------------------------------------------------------
@@ -388,7 +375,7 @@ vec1 array1()
 }
 
 //---------------------------------------------omar------------------------------------------------------
-// -------------------------------This function saves the new file----------------------------------------
+// --------------------This function saves the new file-------------------------------
 void savefile()
 {       
 
@@ -440,11 +427,11 @@ cout <<"--------------------------------------------------------\n"
     cin>>ch;
     switch(ch)
     {
-         case(1)    : //findMin()
+         case(1)    : findMin()
                          break;
-         case(2)    : //findMax()
+         case(2)    : findMax()
                          break;
-         case(3)    : //findMed()                
+         case(3)    : findMed()                
                          break;
          case(4)    : loadmean(ch);
                          break;
@@ -460,29 +447,8 @@ cout <<"--------------------------------------------------------\n"
 }
 
 //---------------------------------------------Liew ------------------------------------------------------
-//------------------------------This functions loads the mean function-----------------------------------------
-void loadmean(int ch)
-{
-    int row = -1;
-    int col = -1;
-    int rc;
-    float rowmean,colmean;
-    double rowsum,colsum,rowsqsum,colsqsum;
-    cout << endl << "Enter 1 to find mean of a row or 2 to find mean of a column:" << endl;
-    cin >> rc;
-    if (rc==1)
-    {
-        findrowmean(ch,row,rowmean,rowsum,rowsqsum);
-    } else if(rc==2)
-    {
-        findcolmean(ch,col,colmean,colsum,colsqsum);
-    }
-}
-
-//---------------------------------------------Liew ------------------------------------------------------
 //------------------------------This functions finds the mean of the row-----------------------------------------
-void findrowmean(int ch,int &row,float &rowmean,double &rowsum,double &rowsqsum)
-{
+void findrowmean(int ch,int &row,float &rowmean,double &rowsum,double &rowsqsum){
     rowsum = 0;
     rowsqsum = 0;
     rowmean = 0;
@@ -508,8 +474,7 @@ void findrowmean(int ch,int &row,float &rowmean,double &rowsum,double &rowsqsum)
 
 //---------------------------------------------Liew ------------------------------------------------------
 //------------------------------This functions finds the mean of the cloumn-----------------------------------------
-void findcolmean(int ch,int &col,float &colmean,double &colsum,double &colsqsum)
-{
+void findcolmean(int ch,int &col,float &colmean,double &colsum,double &colsqsum){
     colsum = 0;
     colsqsum = 0;
     colmean = 0;
@@ -540,6 +505,45 @@ void findcolmean(int ch,int &col,float &colmean,double &colsum,double &colsqsum)
 }
 
 //---------------------------------------------Liew ------------------------------------------------------
+//------------------------------This functions loads the mean function-----------------------------------------
+void loadmean(int ch){
+    int row = -1;
+    int col = -1;
+    int rc;
+    float rowmean,colmean;
+    double rowsum,colsum,rowsqsum,colsqsum;
+    cout << endl << "Enter 1 to find mean of a row or 2 to find mean of a column:" << endl;
+    cin >> rc;
+    if (rc==1){
+        findrowmean(ch,row,rowmean,rowsum,rowsqsum);
+    } else if(rc==2){
+        findcolmean(ch,col,colmean,colsum,colsqsum);
+    }
+}
+
+//---------------------------------------------Liew ------------------------------------------------------
+//--------------------------This functions finds the variance of the row-----------------------------------
+void findrowvar(int ch,int &row,float &rowmean,double &rowsum,double rowsqsum,double &rowvar)
+{
+    rowvar = 0;
+    findrowmean(ch,row,rowmean,rowsum,rowsqsum);
+    rowvar = ((rowsqsum)-((rowsum*rowsum)/4))/3;
+    if(ch==5)
+    cout << "The variance of column " << row << " is " << rowvar << endl;
+}
+
+//---------------------------------------------Liew ------------------------------------------------------
+//---------------------------This functions finds the variance of the column-----------------------------------
+void findcolvar(int ch,int &col,float &colmean,double &colsum,double colsqsum,double &colvar)
+{
+    colvar = 0;
+    findcolmean(ch,col,colmean,colsum,colsqsum);
+    colvar = ((colsqsum)-((colsum*colsum)/100))/99;
+    if(ch==5)
+    cout << "The variance of column " << col << " is " << colvar << endl;
+}
+
+//---------------------------------------------Liew ------------------------------------------------------
 //------------------------------This function loads the variance function------------------------------------
 void loadvar(int ch)
 {
@@ -558,49 +562,9 @@ void loadvar(int ch)
 }
 
 //---------------------------------------------Liew ------------------------------------------------------
-//--------------------------This functions finds the variance of the row-----------------------------------
-void findrowvar(int ch,int &row,float &rowmean,double &rowsum,double rowsqsum,double &rowvar)
-{
-    rowvar = 0;
-    // findrowmean(ch,row,rowmean,rowsum,rowsqsum);
-    rowvar = ((rowsqsum)-((rowsum*rowsum)/4))/3;
-    if(ch==5)
-    cout << "The variance of column " << row << " is " << rowvar << endl;
-}
-
-//---------------------------------------------Liew ------------------------------------------------------
-//---------------------------This functions finds the variance of the column-----------------------------------
-void findcolvar(int ch,int &col,float &colmean,double &colsum,double colsqsum,double &colvar)
-{
-    colvar = 0;
-    // findcolmean(ch,col,colmean,colsum,colsqsum);
-    colvar = ((colsqsum)-((colsum*colsum)/100))/99;
-    if(ch==5)
-    cout << "The variance of column " << col << " is " << colvar << endl;
-}
-
-//---------------------------------------------Liew ------------------------------------------------------
-//------------------------This functions loads the standard deviation function----------------------------------
-void loadstdv(int ch)
-{
-    int row = -1;
-    int col = -1;
-    int rc;
-    float rowmean,colmean;
-    double rowsum,colsum,rowsqsum,colsqsum,rowvar,colvar,rowstdv,colstdv;
-    cout << endl << "Enter 1 to find standard deviation of a row or 2 to find standard deviation of a column:" << endl;
-    cin >> rc;
-    if (rc==1){
-        findrowstdv(ch,row,rowmean,rowsum,rowsqsum,rowvar,rowstdv);
-    } else if(rc==2){
-        findcolstdv(ch,col,colmean,colsum,colsqsum,colvar,colstdv);
-    }
-}
-
-//---------------------------------------------Liew ------------------------------------------------------
-//------------------------This functions finds the standard deviation of row----------------------------------
-void findrowstdv(int ch,int &row,float &rowmean,double &rowsum,double rowsqsum,double &rowvar,double &rowstdv)
-{
+//------------------------------This functions finds the mean of the row-----------------------------------------
+//to find the standard deviation of row
+void findrowstdv(int ch,int &row,float &rowmean,double &rowsum,double rowsqsum,double &rowvar,double &rowstdv){
     rowstdv=0;
     findrowvar(ch,row,rowmean,rowsum,rowsqsum,rowvar);
     rowstdv= sqrt(rowvar);
@@ -618,18 +582,26 @@ void findcolstdv(int ch,int &col,float &colmean,double &colsum,double colsqsum,d
 }
 
 //---------------------------------------------Liew ------------------------------------------------------
-//-------------------------This function loads the find correlation function--------------------------------
-void loadcorr(int ch)
+//------------------------This functions finds standard deviation function----------------------------------
+void loadstdv(int ch)
 {
     int row = -1;
     int col = -1;
+    int rc;
     float rowmean,colmean;
-    double rowsum,colsum,rowsqsum,colsqsum,corr;
-    findcorrelation(ch,col,colmean,colsum,colsqsum,corr);
+    double rowsum,colsum,rowsqsum,colsqsum,rowvar,colvar,rowstdv,colstdv;
+    cout << endl << "Enter 1 to find standard deviation of a row or 2 to find standard deviation of a column:" << endl;
+    cin >> rc;
+    if (rc==1){
+        findrowstdv(ch,row,rowmean,rowsum,rowsqsum,rowvar,rowstdv);
+    } else if(rc==2){
+        findcolstdv(ch,col,colmean,colsum,colsqsum,colvar,colstdv);
+    }
 }
 
 //---------------------------------------------Liew ------------------------------------------------------
 //---------------------This functions finds multiples of 2 element in a same row----------------------------
+//to find multiples of 2 element in a same row 
 void findcolsum12(int col,int col2,double &colsum12)
 {
     vec1 ar;
@@ -680,6 +652,17 @@ void findcorrelation(int ch,int &col,float &colmean,double &colsum,double &colsq
 }
 
 //---------------------------------------------Liew ------------------------------------------------------
+//-------------------------This function loads the find correlation function--------------------------------
+void loadcorr(int ch)
+{
+    int row = -1;
+    int col = -1;
+    float rowmean,colmean;
+    double rowsum,colsum,rowsqsum,colsqsum,corr;
+    findcorrelation(ch,col,colmean,colsum,colsqsum,corr);
+}
+
+//---------------------------------------------Liew ------------------------------------------------------
 //------------------------------This functions finds distinct member-----------------------------------------
 void finddistinct()
 {
@@ -711,4 +694,5 @@ void finddistinct()
             cout << "---------------+---------------" << endl;
         }
     }
+
 }

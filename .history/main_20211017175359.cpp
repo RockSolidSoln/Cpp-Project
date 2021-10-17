@@ -40,6 +40,7 @@ void loadvar(int);
 void findrowvar(int ,int ,float ,double ,double ,double);
 void findcolvar(int ,int ,float ,double ,double ,double);
 void loadstdv(int);
+void findstdrowv(int ,int ,float ,double ,double ,double, double);
 void findrowstdv(int ,int ,float ,double ,double ,double, double);
 void findcolstdv(int ,int ,float ,double ,double ,double, double);
 void loadcorr(int);

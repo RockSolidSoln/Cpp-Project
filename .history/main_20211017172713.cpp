@@ -5,18 +5,15 @@
 #include <tuple>
 #include <sstream>
 #include <vector>
-#include <cmath>
+#include <string>
 using namespace std;
 
-//----------------------------------------Global variables-----------------------------------------------------
-int status=0;
-string username,password;
 
 // -------------------------type definiations used in the function-------------------------------------------
 typedef  vector<tuple<string,int,string,int>> vec;
 typedef vector<array<int,5>> vec1;
 
-// ----------------------------------Start of functions defination-------------------------------------------
+// ----------------------------------start of functions defination-------------------------------------------
 void getchoice();
 void adminmenu();
 void usermenu();
@@ -33,20 +30,10 @@ void savereport();
 void saveHTMLreport();
 void logrecord(string);
 void viewfunc();
-void loadmean(int);
-void findrowmean(int, int, float ,double ,double);
-void findcolmean(int, int, float ,double ,double);
-void loadvar(int);
-void findrowvar(int ,int ,float ,double ,double ,double);
-void findcolvar(int ,int ,float ,double ,double ,double);
-void loadstdv(int);
-void findrowstdv(int ,int ,float ,double ,double ,double, double);
-void findcolstdv(int ,int ,float ,double ,double ,double, double);
-void loadcorr(int);
-void findcolsum12(int ,int ,double);
-void findcorrelation(int ,int ,float ,double ,double ,double);
-void finddistinct();
 
+//----------------------------------------Global variables-----------------------------------------------------
+int status=0;
+string username,password;
 
 //------------------------------------------main function------------------------------------------------------
 int main()
@@ -54,59 +41,6 @@ int main()
     login();
     return 0;
 }
-
-//---------------------------------------------Ahmad Ayaan------------------------------------------------------
-//----------------------------This functions login the user into the system-------------------------------------
-void login()
-{   
-    int n,s;
-    cout<<"---------------------------------------------------\n"
-        <<"|      Hello and Welcome to Our System            |\n"
-        <<"---------------------------------------------------\n"
-        <<"|ENTER 1 TO LOGIN                                 |\n"
-        <<"|ENTER 0 TO EXIT                                  |\n"
-        <<"---------------------------------------------------\n";
-    cin>>n;
-    if(n==1)
-    { 
-        cout<<"-----------------------------------------------------------\n"
-            <<"Please enter the username-\n";
-        cin>>username;
-        cout<<"Please enter the password-\n";
-        cin>>password;
-        status=checkadmin(username,password);
-        string str=username+" just login ";
-        logrecord(str);
-        getchoice();
-    }
-    else
-    {
-        if(n==0)
-            exit(0);
-        else
-        {
-            cout<<"Wrong choice\n"
-                <<"Please enter from given choices only\n";
-            login();
-        }
-    }
-}
-
-//---------------------------------------------Ahmad Ayaan------------------------------------------------------
-//---------------------------This functions checks if the user is admin or not----------------------------------
- int checkadmin(string name,string pass)
- {      
-    vec users;
-    users = loadfile();
-     for (int i=0;i<users.size();i++)
-    {   
-        if(get<0>(users[i])==name && get<2>(users[i])==pass && get<1>(users[i])==1)
-            return 1;
-        else if(get<0>(users[i])==name && get<2>(users[i])==pass && get<1>(users[i])==0)   
-            return 0;
-    }
-    return 2;
- }
 
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------
 //----------------------This functions takes the input from the user and calls different functions---------------
@@ -163,6 +97,7 @@ void adminmenu()
         default: cout<<"Wrong choice\n"
                         <<"Please try again\n";
                         login();
+                    break;
     }
 }
 
@@ -196,8 +131,25 @@ void usermenu()
         default: cout<<"Wrong choice\n"
                     <<"Please try again\n";
                     login();
-    }
+                    break;
+     }
 }
+
+//---------------------------------------------Ahmad Ayaan------------------------------------------------------
+//---------------------------This functions checks if the user is admin or not----------------------------------
+ int checkadmin(string name,string pass)
+ {      
+    vec users;
+    users = loadfile();
+     for (int i=0;i<users.size();i++)
+    {   
+        if(get<0>(users[i])==name && get<2>(users[i])==pass && get<1>(users[i])==1)
+            return 1;
+        else if(get<0>(users[i])==name && get<2>(users[i])==pass && get<1>(users[i])==0)   
+            return 0;
+    }
+    return 2;
+ }
 
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------
 //----------------------------This functions creates the new user-----------------------------------------------
@@ -223,6 +175,43 @@ void createuser()
     outfile.close();
     cout<<"Username and password created successfully.\n"<<endl;
     adminmenu();
+}
+
+//---------------------------------------------Ahmad Ayaan------------------------------------------------------
+//----------------------------This functions login the user into the system---------------------------------
+void login()
+{   
+    int n,s;
+    cout<<"---------------------------------------------------\n"
+        <<"|      Hello and Welcome to Our System            |\n"
+        <<"---------------------------------------------------\n"
+        <<"|ENTER 1 TO LOGIN                                 |\n"
+        <<"|ENTER 0 TO EXIT                                  |\n"
+        <<"---------------------------------------------------\n";
+    cin>>n;
+    if(n==1)
+    { 
+        cout<<"-----------------------------------------------------------\n"
+            <<"Please enter the username-\n";
+        cin>>username;
+        cout<<"Please enter the password-\n";
+        cin>>password;
+        status=checkadmin(username,password);
+        string str=username+" just login ";
+        logrecord(str);
+        getchoice();
+    }
+    else
+    {
+        if(n==0)
+            exit(0);
+        else
+        {
+            cout<<"Wrong choice\n"
+                <<"Please enter from given choices only\n";
+            login();
+        }
+    }
 }
 
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------
@@ -273,7 +262,7 @@ void changepass()
                 << get<3>(users[i]) <<endl;
     }
     outfile.close();
-    getchoice();
+    login();
 }
 
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------
@@ -320,7 +309,7 @@ void deleteuser()
 }
 
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------
-// ---------------------------------This function loads Users.dat the file-----------------------------------------
+// -----------------------------This function loads the file------------------------------------
 vec loadfile()
 {   
     vec users;
@@ -338,8 +327,11 @@ vec loadfile()
     return users;
 }
 
-//---------------------------------------------Ahmad Ayaan------------------------------------------------------
+//---------------------------------------------Liew ------------------------------------------------------
 // -----------------------------This function loads the student database file------------------------------------
+typedef vector<array<int,5>> vec1;
+
+
 vec1 array1()
 {
     string arr1[100];
@@ -352,6 +344,7 @@ vec1 array1()
     while (!data.eof()){
         string x;
         data >> x;
+        //cout << x << endl;
         arr1[i] = x;
         i++;
 
@@ -364,7 +357,7 @@ vec1 array1()
 
         while(string_stream.good()){
             string y;
-            getline(string_stream, y, ',' );
+            getline( string_stream, y, ',' );
             stringstream string_stream2(y);
             string_stream2 >> k;
 
@@ -388,7 +381,7 @@ vec1 array1()
 }
 
 //---------------------------------------------omar------------------------------------------------------
-// -------------------------------This function saves the new file----------------------------------------
+// --------------------This function saves the new file-------------------------------
 void savefile()
 {       
 
@@ -420,6 +413,7 @@ void logrecord(string str)
 
 //---------------------------------------------Salah Fayeq------------------------------------------------------
 // --------------------This function shows different functions for user to perform------------------------------
+
 void viewfunc()
 {
     int ch;
@@ -440,11 +434,11 @@ cout <<"--------------------------------------------------------\n"
     cin>>ch;
     switch(ch)
     {
-         case(1)    : //findMin()
+         case(1)    : findMin()
                          break;
-         case(2)    : //findMax()
+         case(2)    : findMax()
                          break;
-         case(3)    : //findMed()                
+         case(3)    : findMed()                
                          break;
          case(4)    : loadmean(ch);
                          break;
@@ -460,29 +454,8 @@ cout <<"--------------------------------------------------------\n"
 }
 
 //---------------------------------------------Liew ------------------------------------------------------
-//------------------------------This functions loads the mean function-----------------------------------------
-void loadmean(int ch)
-{
-    int row = -1;
-    int col = -1;
-    int rc;
-    float rowmean,colmean;
-    double rowsum,colsum,rowsqsum,colsqsum;
-    cout << endl << "Enter 1 to find mean of a row or 2 to find mean of a column:" << endl;
-    cin >> rc;
-    if (rc==1)
-    {
-        findrowmean(ch,row,rowmean,rowsum,rowsqsum);
-    } else if(rc==2)
-    {
-        findcolmean(ch,col,colmean,colsum,colsqsum);
-    }
-}
-
-//---------------------------------------------Liew ------------------------------------------------------
 //------------------------------This functions finds the mean of the row-----------------------------------------
-void findrowmean(int ch,int &row,float &rowmean,double &rowsum,double &rowsqsum)
-{
+void findrowmean(int ch,int &row,float &rowmean,double &rowsum,double &rowsqsum){
     rowsum = 0;
     rowsqsum = 0;
     rowmean = 0;
@@ -505,11 +478,9 @@ void findrowmean(int ch,int &row,float &rowmean,double &rowsum,double &rowsqsum)
     if(ch==4)
     cout << "The mean of row " << row << " is " << rowmean << endl;
 }
-
 //---------------------------------------------Liew ------------------------------------------------------
-//------------------------------This functions finds the mean of the cloumn-----------------------------------------
-void findcolmean(int ch,int &col,float &colmean,double &colsum,double &colsqsum)
-{
+//------------------------------This functions finds the mean of the row-----------------------------------------
+void findcolmean(int ch,int &col,float &colmean,double &colsum,double &colsqsum){
     colsum = 0;
     colsqsum = 0;
     colmean = 0;
@@ -538,11 +509,48 @@ void findcolmean(int ch,int &col,float &colmean,double &colsum,double &colsqsum)
     if(ch==4)
     cout << "The mean of column " << col << " is " << colmean << endl;
 }
+//---------------------------------------------Liew ------------------------------------------------------
+//------------------------------This functions finds the mean of the row-----------------------------------------
+void loadmean(int ch){
+    int row = -1;
+    int col = -1;
+    int rc;
+    float rowmean,colmean;
+    double rowsum,colsum,rowsqsum,colsqsum;
+    cout << endl << "Enter 1 to find mean of a row or 2 to find mean of a column:" << endl;
+    cin >> rc;
+    if (rc==1){
+        findrowmean(ch,row,rowmean,rowsum,rowsqsum);
+    } else if(rc==2){
+        findcolmean(ch,col,colmean,colsum,colsqsum);
+    }
+}
 
 //---------------------------------------------Liew ------------------------------------------------------
-//------------------------------This function loads the variance function------------------------------------
-void loadvar(int ch)
+//--------------------------This functions finds the variance of the row-----------------------------------------
+void findrowvar(int ch,int &row,float &rowmean,double &rowsum,double rowsqsum,double &rowvar)
 {
+    rowvar = 0;
+    findrowmean(ch,row,rowmean,rowsum,rowsqsum);
+    rowvar = ((rowsqsum)-((rowsum*rowsum)/4))/3;
+    if(ch==5)
+    cout << "The variance of column " << row << " is " << rowvar << endl;
+}
+
+//to find the variance of column
+void findcolvar(int ch,int &col,float &colmean,double &colsum,double colsqsum,double &colvar)
+{
+    colvar = 0;
+    findcolmean(ch,col,colmean,colsum,colsqsum);
+    colvar = ((colsqsum)-((colsum*colsum)/100))/99;
+    if(ch==5)
+    cout << "The variance of column " << col << " is " << colvar << endl;
+}
+
+//---------------------------------------------Liew ------------------------------------------------------
+//------------------------------This functions finds the mean of the row-----------------------------------------
+//to load the find variance function
+void loadvar(int ch){
     int row = -1;
     int col = -1;
     int rc;
@@ -558,49 +566,9 @@ void loadvar(int ch)
 }
 
 //---------------------------------------------Liew ------------------------------------------------------
-//--------------------------This functions finds the variance of the row-----------------------------------
-void findrowvar(int ch,int &row,float &rowmean,double &rowsum,double rowsqsum,double &rowvar)
-{
-    rowvar = 0;
-    // findrowmean(ch,row,rowmean,rowsum,rowsqsum);
-    rowvar = ((rowsqsum)-((rowsum*rowsum)/4))/3;
-    if(ch==5)
-    cout << "The variance of column " << row << " is " << rowvar << endl;
-}
-
-//---------------------------------------------Liew ------------------------------------------------------
-//---------------------------This functions finds the variance of the column-----------------------------------
-void findcolvar(int ch,int &col,float &colmean,double &colsum,double colsqsum,double &colvar)
-{
-    colvar = 0;
-    // findcolmean(ch,col,colmean,colsum,colsqsum);
-    colvar = ((colsqsum)-((colsum*colsum)/100))/99;
-    if(ch==5)
-    cout << "The variance of column " << col << " is " << colvar << endl;
-}
-
-//---------------------------------------------Liew ------------------------------------------------------
-//------------------------This functions loads the standard deviation function----------------------------------
-void loadstdv(int ch)
-{
-    int row = -1;
-    int col = -1;
-    int rc;
-    float rowmean,colmean;
-    double rowsum,colsum,rowsqsum,colsqsum,rowvar,colvar,rowstdv,colstdv;
-    cout << endl << "Enter 1 to find standard deviation of a row or 2 to find standard deviation of a column:" << endl;
-    cin >> rc;
-    if (rc==1){
-        findrowstdv(ch,row,rowmean,rowsum,rowsqsum,rowvar,rowstdv);
-    } else if(rc==2){
-        findcolstdv(ch,col,colmean,colsum,colsqsum,colvar,colstdv);
-    }
-}
-
-//---------------------------------------------Liew ------------------------------------------------------
-//------------------------This functions finds the standard deviation of row----------------------------------
-void findrowstdv(int ch,int &row,float &rowmean,double &rowsum,double rowsqsum,double &rowvar,double &rowstdv)
-{
+//------------------------------This functions finds the mean of the row-----------------------------------------
+//to find the standard deviation of row
+void findrowstdv(int ch,int &row,float &rowmean,double &rowsum,double rowsqsum,double &rowvar,double &rowstdv){
     rowstdv=0;
     findrowvar(ch,row,rowmean,rowsum,rowsqsum,rowvar);
     rowstdv= sqrt(rowvar);
@@ -618,18 +586,26 @@ void findcolstdv(int ch,int &col,float &colmean,double &colsum,double colsqsum,d
 }
 
 //---------------------------------------------Liew ------------------------------------------------------
-//-------------------------This function loads the find correlation function--------------------------------
-void loadcorr(int ch)
+//------------------------This functions finds standard deviation function----------------------------------
+void loadstdv(int ch)
 {
     int row = -1;
     int col = -1;
+    int rc;
     float rowmean,colmean;
-    double rowsum,colsum,rowsqsum,colsqsum,corr;
-    findcorrelation(ch,col,colmean,colsum,colsqsum,corr);
+    double rowsum,colsum,rowsqsum,colsqsum,rowvar,colvar,rowstdv,colstdv;
+    cout << endl << "Enter 1 to find standard deviation of a row or 2 to find standard deviation of a column:" << endl;
+    cin >> rc;
+    if (rc==1){
+        findrowstdv(ch,row,rowmean,rowsum,rowsqsum,rowvar,rowstdv);
+    } else if(rc==2){
+        findcolstdv(ch,col,colmean,colsum,colsqsum,colvar,colstdv);
+    }
 }
 
 //---------------------------------------------Liew ------------------------------------------------------
 //---------------------This functions finds multiples of 2 element in a same row----------------------------
+//to find multiples of 2 element in a same row 
 void findcolsum12(int col,int col2,double &colsum12)
 {
     vec1 ar;
@@ -680,6 +656,17 @@ void findcorrelation(int ch,int &col,float &colmean,double &colsum,double &colsq
 }
 
 //---------------------------------------------Liew ------------------------------------------------------
+//-------------------------This function loads the find correlation function--------------------------------
+void loadcorr(int ch)
+{
+    int row = -1;
+    int col = -1;
+    float rowmean,colmean;
+    double rowsum,colsum,rowsqsum,colsqsum,corr;
+    findcorrelation(ch,col,colmean,colsum,colsqsum,corr);
+}
+
+//---------------------------------------------Liew ------------------------------------------------------
 //------------------------------This functions finds distinct member-----------------------------------------
 void finddistinct()
 {
@@ -711,4 +698,5 @@ void finddistinct()
             cout << "---------------+---------------" << endl;
         }
     }
+
 }
