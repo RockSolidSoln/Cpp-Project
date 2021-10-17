@@ -491,7 +491,7 @@ void findrowstdv(int ch,int &row,float &rowmean,double &rowsum,double rowsqsum,d
     rowstdv=0;
     findrowvar(ch,row,rowmean,rowsum,rowsqsum,rowvar);
     rowstdv= sqrt(rowvar);
-    cout << "The standard veviation of row " << row << " is " << rowstdv << endl;
+    cout << "The standard deviation of row " << row << " is " << rowstdv << endl;
 }
 
 //to find the standard deviation of column
@@ -499,7 +499,7 @@ void findcolstdv(int ch,int &col,float &colmean,double &colsum,double colsqsum,d
     colstdv = 0;
     findcolvar(ch,col,colmean,colsum,colsqsum,colvar);
     colstdv = sqrt(colvar);
-    cout << "The standard veviation of column " << col << " is " << colstdv << endl;
+    cout << "The standard deviation of column " << col << " is " << colstdv << endl;
 }
 
 //to load the find standard deviation function
