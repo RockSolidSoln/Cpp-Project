@@ -573,7 +573,7 @@ void findrowvar(int ch,int &row,float &rowmean,double &rowsum,double rowsqsum,do
 void findcolvar(int ch,int &col,float &colmean,double &colsum,double colsqsum,double &colvar)
 {
     colvar = 0;
-    findcolmean(ch,col,colmean,colsum,colsqsum);
+    // findcolmean(ch,col,colmean,colsum,colsqsum);
     colvar = ((colsqsum)-((colsum*colsum)/100))/99;
     if(ch==5)
     cout << "The variance of column " << col << " is " << colvar << endl;
