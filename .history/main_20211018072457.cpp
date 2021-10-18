@@ -469,11 +469,11 @@ void viewfunc()
     logrecord(word);
     switch(ch)
     {
-         case('1')    : loadmin();
+         case('1')    : loadmin()
                          break;
-         case('2')    : loadmax();
+         case('2')    : loadmax()
                          break;
-         case('3')    : loadmed();               
+         case('3')    : loadmed()                
                          break;
          case('4')    : loadmean();
                          break;
@@ -504,23 +504,21 @@ void viewfunc()
 //------------------------------This functions loads the minimum function-------------------------------------
 void loadmin()
 {
-    logrecord(" calculated the minimum");
+    logrecord
     viewfunc();
 }
 
 //---------------------------------------------Omar ------------------------------------------------------
 //------------------------------This functions loads the maximum function-------------------------------------
 void loadmax()
-{   
-    logrecord(" calculated the maximum");
+{
     viewfunc();
 }
 
 //---------------------------------------------Omar ------------------------------------------------------
 //------------------------------This functions loads the median function-------------------------------------
 void loadmed()
-{   
-    logrecord(" calculated the median");
+{
     viewfunc();
 }
 
@@ -577,10 +575,8 @@ void findrowmean(int flag,int &row,float &rowmean,double &rowsum,double &rowsqsu
     rowmean = rowsum/4;
 
     if(flag==0)
-    {
-        cout << "The mean of row " << row << " is " << rowmean << endl;
-        logrecord(" calculated the mean of the row ");
-    }
+    cout << "The mean of row " << row << " is " << rowmean << endl;
+    logrecord(" calculated the mean of the row ");
 }
 
 //---------------------------------------------Liew ------------------------------------------------------
@@ -613,10 +609,8 @@ void findcolmean(int flag,int &col,float &colmean,double &colsum,double &colsqsu
     }
     colmean = colsum/100;
     if(flag==0)
-    {
-        cout << "The mean of the column " << col << " is " << colmean << endl;
-        logrecord(" calculated the mean of the column ");
-    }
+    cout << "The mean of the column " << col << " is " << colmean << endl;
+    logrecord(" calculated the mean of the column ");
 }
 
 //---------------------------------------------Liew ------------------------------------------------------
@@ -823,8 +817,7 @@ void finddistinct()
 //------------------------------This function finds the histogram-----------------------------------------
 void findhistogram()
 {
-    logrecord(" made a Histogram");
-    viewfunc();
+
 }
 
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------

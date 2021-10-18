@@ -615,7 +615,7 @@ void findcolmean(int flag,int &col,float &colmean,double &colsum,double &colsqsu
     if(flag==0)
     {
         cout << "The mean of the column " << col << " is " << colmean << endl;
-        logrecord(" calculated the mean of the column ");
+    logrecord(" calculated the mean of the column ");
     }
 }
 

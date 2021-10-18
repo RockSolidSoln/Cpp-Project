@@ -578,8 +578,8 @@ void findrowmean(int flag,int &row,float &rowmean,double &rowsum,double &rowsqsu
 
     if(flag==0)
     {
-        cout << "The mean of row " << row << " is " << rowmean << endl;
-        logrecord(" calculated the mean of the row ");
+    cout << "The mean of row " << row << " is " << rowmean << endl;
+    logrecord(" calculated the mean of the row ");
     }
 }
 
@@ -613,10 +613,8 @@ void findcolmean(int flag,int &col,float &colmean,double &colsum,double &colsqsu
     }
     colmean = colsum/100;
     if(flag==0)
-    {
-        cout << "The mean of the column " << col << " is " << colmean << endl;
-        logrecord(" calculated the mean of the column ");
-    }
+    cout << "The mean of the column " << col << " is " << colmean << endl;
+    logrecord(" calculated the mean of the column ");
 }
 
 //---------------------------------------------Liew ------------------------------------------------------

@@ -34,9 +34,6 @@ void saveHTMLreport();
 void clearActivity();
 void logrecord(string);
 void viewfunc();
-void loadmin();
-void loadmax();
-void loadmed();
 void loadmean();
 void findrowmean(int,int&, float&, double&, double&);
 void findcolmean(int,int&, float&, double&, double&);
@@ -50,7 +47,6 @@ void loadcorr();
 void findcolsum12(int ,int ,double&);
 void findcorrelation(int& ,float& ,double& ,double& ,double&);
 void finddistinct();
-void findhistogram();
 void reportsmenu();
 
 
@@ -153,7 +149,7 @@ void adminmenu()
         << "----------------------------------------------------------\n";
     cin >> ch;
     cin.ignore(' ','\n');
-    string str=" just choose menu option ";
+    string str=" just choose menu option "+ch;
     logrecord(str);
     switch(ch)
     {
@@ -469,11 +465,11 @@ void viewfunc()
     logrecord(word);
     switch(ch)
     {
-         case('1')    : loadmin();
+         case('1')    : //findMin()
                          break;
-         case('2')    : loadmax();
+         case('2')    : //findMax()
                          break;
-         case('3')    : loadmed();               
+         case('3')    : //findMed()                
                          break;
          case('4')    : loadmean();
                          break;
@@ -485,8 +481,8 @@ void viewfunc()
                          break;     
          case('8')    : finddistinct();
                          break;
-         case('9')    : findhistogram();
-                         break;
+         case('9')    : //
+                         //break;
          case('R')    : reportsmenu();
                          break;
          case('B')    : getchoice();
@@ -500,35 +496,10 @@ void viewfunc()
     }
 }
 
-//---------------------------------------------Omar ------------------------------------------------------
-//------------------------------This functions loads the minimum function-------------------------------------
-void loadmin()
-{
-    logrecord(" calculated the minimum");
-    viewfunc();
-}
-
-//---------------------------------------------Omar ------------------------------------------------------
-//------------------------------This functions loads the maximum function-------------------------------------
-void loadmax()
-{   
-    logrecord(" calculated the maximum");
-    viewfunc();
-}
-
-//---------------------------------------------Omar ------------------------------------------------------
-//------------------------------This functions loads the median function-------------------------------------
-void loadmed()
-{   
-    logrecord(" calculated the median");
-    viewfunc();
-}
-
 //---------------------------------------------Liew ------------------------------------------------------
 //------------------------------This functions loads the mean function-----------------------------------------
 void loadmean()
-{   
-    int flag=0;
+{
     int row = -1;
     int col = -1;
     int rc;
@@ -539,24 +510,18 @@ void loadmean()
     cin.ignore(' ','\n');
     if (rc==1)
     {
-        findrowmean(flag,row,rowmean,rowsum,rowsqsum);
+        findrowmean(row,rowmean,rowsum,rowsqsum);
     } 
     else if(rc==2)
     {
-        findcolmean(flag,col,colmean,colsum,colsqsum);
-    }
-    else
-    {
-        cout<<"Wrong choice\n"
-             <<"Enter again\n";
-        loadmean();
+        findcolmean(col,colmean,colsum,colsqsum);
     }
     viewfunc();
 }
 
 //---------------------------------------------Liew ------------------------------------------------------
 //------------------------------This functions finds the mean of the row-----------------------------------------
-void findrowmean(int flag,int &row,float &rowmean,double &rowsum,double &rowsqsum)
+void findrowmean(int ch=0,int &row,float &rowmean,double &rowsum,double &rowsqsum)
 {
     rowsum = 0;
     rowsqsum = 0;
@@ -576,16 +541,14 @@ void findrowmean(int flag,int &row,float &rowmean,double &rowsum,double &rowsqsu
     rowsqsum = rowsqsum + (get<4>(ar[row-1])*get<4>(ar[row-1]));
     rowmean = rowsum/4;
 
-    if(flag==0)
-    {
-        cout << "The mean of row " << row << " is " << rowmean << endl;
-        logrecord(" calculated the mean of the row ");
-    }
+    if(ch==0)
+    cout << "The mean of row " << row << " is " << rowmean << endl;
+    logrecord(" calculated the mean of the row ");
 }
 
 //---------------------------------------------Liew ------------------------------------------------------
 //------------------------------This functions finds the mean of the cloumn-----------------------------------------
-void findcolmean(int flag,int &col,float &colmean,double &colsum,double &colsqsum)
+void findcolmean(int ch=0,int &col,float &colmean,double &colsum,double &colsqsum)
 {
     colsum = 0;
     colsqsum = 0;
@@ -612,11 +575,9 @@ void findcolmean(int flag,int &col,float &colmean,double &colsum,double &colsqsu
             colsqsum = colsqsum + (get<4>(ar[i])*get<4>(ar[i]));}break;
     }
     colmean = colsum/100;
-    if(flag==0)
-    {
-        cout << "The mean of the column " << col << " is " << colmean << endl;
-        logrecord(" calculated the mean of the column ");
-    }
+    if(ch==0)
+    cout << "The mean of the column " << col << " is " << colmean << endl;
+    logrecord(" calculated the mean of the column ");
 }
 
 //---------------------------------------------Liew ------------------------------------------------------
@@ -637,12 +598,6 @@ void loadvar()
     {
         findcolvar(col,colmean,colsum,colsqsum,colvar);
     }
-    else
-    {
-        cout<<"Wrong choice\n"
-             <<"Enter again\n";
-        loadvar();
-    }
     viewfunc();
 }
 
@@ -650,9 +605,9 @@ void loadvar()
 //--------------------------This functions finds the variance of the row-----------------------------------
 void findrowvar(int &row,float &rowmean,double &rowsum,double rowsqsum,double &rowvar)
 {   
-    int flag=1;
+    int ch=1;
     rowvar = 0;
-    findrowmean(flag,row,rowmean,rowsum,rowsqsum);
+    findrowmean(ch,row,rowmean,rowsum,rowsqsum);
     rowvar = ((rowsqsum)-((rowsum*rowsum)/4))/3;
     cout << "The variance of row " << row << " is " << rowvar << endl;
     logrecord(" calculated the variance of the row ");
@@ -662,9 +617,9 @@ void findrowvar(int &row,float &rowmean,double &rowsum,double rowsqsum,double &r
 //---------------------------This functions finds the variance of the column-----------------------------------
 void findcolvar(int &col,float &colmean,double &colsum,double colsqsum,double &colvar)
 {   
-    int flag=1;
+    int ch=1;
     colvar = 0;
-    findcolmean(flag,col,colmean,colsum,colsqsum);
+    findcolmean(ch,col,colmean,colsum,colsqsum);
     colvar = ((colsqsum)-((colsum*colsum)/100))/99;
     cout << "The variance of column " << col << " is " << colvar << endl;
     logrecord(" calculated the variance of the column ");
@@ -686,12 +641,6 @@ void loadstdv()
         findrowstdv(row,rowmean,rowsum,rowsqsum,rowvar,rowstdv);
     } else if(rc==2){
         findcolstdv(col,colmean,colsum,colsqsum,colvar,colstdv);
-    }
-    else
-    {
-        cout<<"Wrong choice\n"
-             <<"Enter again\n";
-        loadstdv();
     }
     viewfunc();
 }
@@ -734,16 +683,16 @@ void loadcorr()
 //------------------------------This functions finds the correlation----------------------------------------
 void findcorrelation(int &col,float &colmean,double &colsum,double &colsqsum,double &corr)
 {   
-    int flag=1;
+    int ch=1;
     int col2;
     float colmean2;
     double colsum2,colsqsum2,colsum12;
     cout << "Enter the first column from 2-5:" << endl;
     cin >> col;
-    findcolmean(flag,col,colmean,colsum,colsqsum);
+    findcolmean(col,colmean,colsum,colsqsum);
     cout << "Enter the second column from 2-5:" << endl;
     cin >> col2;
-    findcolmean(flag,col2,colmean2,colsum2,colsqsum2);
+    findcolmean(col2,colmean2,colsum2,colsqsum2);
     findcolsum12(col,col2,colsum12);
     corr = (colsum12-(100*colmean*colmean2))/(sqrt(colsqsum-(100*colmean*colmean))*sqrt(colsqsum2-(100*colmean2*colmean2)));
     cout << "The correlation between column " << col << " and " << col2 << " is " << corr << endl;
@@ -819,13 +768,6 @@ void finddistinct()
     viewfunc();
 }
 
-//---------------------------------------------Liew------------------------------------------------------
-//------------------------------This function finds the histogram-----------------------------------------
-void findhistogram()
-{
-    logrecord(" made a Histogram");
-    viewfunc();
-}
 
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------
 //------------------------------This functions shows the report menu-----------------------------------------

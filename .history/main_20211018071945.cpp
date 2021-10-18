@@ -34,9 +34,6 @@ void saveHTMLreport();
 void clearActivity();
 void logrecord(string);
 void viewfunc();
-void loadmin();
-void loadmax();
-void loadmed();
 void loadmean();
 void findrowmean(int,int&, float&, double&, double&);
 void findcolmean(int,int&, float&, double&, double&);
@@ -50,7 +47,6 @@ void loadcorr();
 void findcolsum12(int ,int ,double&);
 void findcorrelation(int& ,float& ,double& ,double& ,double&);
 void finddistinct();
-void findhistogram();
 void reportsmenu();
 
 
@@ -153,7 +149,7 @@ void adminmenu()
         << "----------------------------------------------------------\n";
     cin >> ch;
     cin.ignore(' ','\n');
-    string str=" just choose menu option ";
+    string str=" just choose menu option "+ch;
     logrecord(str);
     switch(ch)
     {
@@ -469,11 +465,11 @@ void viewfunc()
     logrecord(word);
     switch(ch)
     {
-         case('1')    : loadmin();
+         case('1')    : loadMin()
                          break;
-         case('2')    : loadmax();
+         case('2')    : loadMax()
                          break;
-         case('3')    : loadmed();               
+         case('3')    : loadMed()                
                          break;
          case('4')    : loadmean();
                          break;
@@ -485,8 +481,8 @@ void viewfunc()
                          break;     
          case('8')    : finddistinct();
                          break;
-         case('9')    : findhistogram();
-                         break;
+         case('9')    : //
+                         //break;
          case('R')    : reportsmenu();
                          break;
          case('B')    : getchoice();
@@ -501,28 +497,12 @@ void viewfunc()
 }
 
 //---------------------------------------------Omar ------------------------------------------------------
-//------------------------------This functions loads the minimum function-------------------------------------
+//------------------------------This functions loads the min function-----------------------------------------
 void loadmin()
 {
-    logrecord(" calculated the minimum");
-    viewfunc();
+
 }
 
-//---------------------------------------------Omar ------------------------------------------------------
-//------------------------------This functions loads the maximum function-------------------------------------
-void loadmax()
-{   
-    logrecord(" calculated the maximum");
-    viewfunc();
-}
-
-//---------------------------------------------Omar ------------------------------------------------------
-//------------------------------This functions loads the median function-------------------------------------
-void loadmed()
-{   
-    logrecord(" calculated the median");
-    viewfunc();
-}
 
 //---------------------------------------------Liew ------------------------------------------------------
 //------------------------------This functions loads the mean function-----------------------------------------
@@ -577,10 +557,8 @@ void findrowmean(int flag,int &row,float &rowmean,double &rowsum,double &rowsqsu
     rowmean = rowsum/4;
 
     if(flag==0)
-    {
-        cout << "The mean of row " << row << " is " << rowmean << endl;
-        logrecord(" calculated the mean of the row ");
-    }
+    cout << "The mean of row " << row << " is " << rowmean << endl;
+    logrecord(" calculated the mean of the row ");
 }
 
 //---------------------------------------------Liew ------------------------------------------------------
@@ -613,10 +591,8 @@ void findcolmean(int flag,int &col,float &colmean,double &colsum,double &colsqsu
     }
     colmean = colsum/100;
     if(flag==0)
-    {
-        cout << "The mean of the column " << col << " is " << colmean << endl;
-        logrecord(" calculated the mean of the column ");
-    }
+    cout << "The mean of the column " << col << " is " << colmean << endl;
+    logrecord(" calculated the mean of the column ");
 }
 
 //---------------------------------------------Liew ------------------------------------------------------
@@ -819,13 +795,6 @@ void finddistinct()
     viewfunc();
 }
 
-//---------------------------------------------Liew------------------------------------------------------
-//------------------------------This function finds the histogram-----------------------------------------
-void findhistogram()
-{
-    logrecord(" made a Histogram");
-    viewfunc();
-}
 
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------
 //------------------------------This functions shows the report menu-----------------------------------------

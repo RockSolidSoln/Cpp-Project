@@ -471,9 +471,9 @@ void viewfunc()
     {
          case('1')    : loadmin();
                          break;
-         case('2')    : loadmax();
+         case('2')    : loadmax()
                          break;
-         case('3')    : loadmed();               
+         case('3')    : loadmed()                
                          break;
          case('4')    : loadmean();
                          break;
@@ -577,10 +577,8 @@ void findrowmean(int flag,int &row,float &rowmean,double &rowsum,double &rowsqsu
     rowmean = rowsum/4;
 
     if(flag==0)
-    {
-        cout << "The mean of row " << row << " is " << rowmean << endl;
-        logrecord(" calculated the mean of the row ");
-    }
+    cout << "The mean of row " << row << " is " << rowmean << endl;
+    logrecord(" calculated the mean of the row ");
 }
 
 //---------------------------------------------Liew ------------------------------------------------------
@@ -613,10 +611,8 @@ void findcolmean(int flag,int &col,float &colmean,double &colsum,double &colsqsu
     }
     colmean = colsum/100;
     if(flag==0)
-    {
-        cout << "The mean of the column " << col << " is " << colmean << endl;
-        logrecord(" calculated the mean of the column ");
-    }
+    cout << "The mean of the column " << col << " is " << colmean << endl;
+    logrecord(" calculated the mean of the column ");
 }
 
 //---------------------------------------------Liew ------------------------------------------------------
