@@ -823,6 +823,43 @@ void finddistinct()
 //------------------------------This function finds the histogram-----------------------------------------
 void findhistogram()
 {
+     vec1 ar;
+    ar=array1();
+    cout <<"Please choose the column from 2 to 4."<<endl;
+    int choice;
+    cin>>choice;
+    cout<<"Subject"<<"                "<<"Mid-point"
+        <<endl;
+    cout<<"|----------------------------------------------------------------------------|"
+        <<endl;
+    for(int i=0;i< 100; i++)
+    {
+        if (choice == 2)
+       { 
+       cout << get<2>(ar[i])<<"                    ";
+       cout <<get<0>(ar[i]);
+        for(int j=0;j<  get<2>(ar[i]);j++)
+
+        cout<<"=";
+        cout<<endl;
+       }
+        else if (choice == 3)
+        {
+        cout<< get<3>(ar[i])<<"                    ";
+        cout<< get<0>(ar[i]);
+         for(int j=0;j<get<3>(ar[i]);j++)
+         cout<<"=";
+         cout<<endl;    
+        }
+        else if (choice == 4)
+        {
+        cout<< get<4>(ar[i])<<"                    ";
+        cout<< get<0>(ar[i]);
+         for(int j=0;j<get<4>(ar[i]);j++)
+         cout<<"=";
+         cout<<endl;    
+        }
+    }      
     logrecord(" made a Histogram");
     viewfunc();
 }
