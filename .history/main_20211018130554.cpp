@@ -834,26 +834,13 @@ void findhistogram()
     // for(int i=0;i< 100; i++)
     // {
     //    cout << get<0>(ar[i])<<endl;
-        
-
-
-
+    
 
 
 
 
 
     // }
-
-
-
-
-
-
-
-
-
-
 
     // logrecord(" made a Histogram");
     // viewfunc();

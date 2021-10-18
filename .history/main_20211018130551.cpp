@@ -845,16 +845,6 @@ void findhistogram()
 
     // }
 
-
-
-
-
-
-
-
-
-
-
     // logrecord(" made a Histogram");
     // viewfunc();
 }

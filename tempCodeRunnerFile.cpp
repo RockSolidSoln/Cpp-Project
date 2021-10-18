@@ -1,4 +1,2 @@
- if (newpass1!=newpass2)
-                //    { 
-                //     cout <<"The new password that you entered does not match";
-                //    } 
+ default: cout<<"Wrong choice\n"
+        //                 <<"Please Enter from the choice given below\n";

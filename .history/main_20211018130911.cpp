@@ -827,33 +827,19 @@ void findhistogram()
     ar=array1();
     int choice;
     cout <<"Please choose the column from 2 to 4."<<endl;
-    cin>>choice;
+    cin >> choice;
 
-    cout<<"Subject"<<"           "<<"Mid-point"
-        <<endl;
-    // for(int i=0;i< 100; i++)
-    // {
-    //    cout << get<0>(ar[i])<<endl;
-        
-
+    cout<<"Subject"<<"           "<<"Mid-point"<<endl;
+    for(int i=0;i< 100; i++)
+    {   int a=
+       cout << get<0>(ar[i])<<endl;
+    
 
 
 
 
 
-
-
-    // }
-
-
-
-
-
-
-
-
-
-
+    }
 
     // logrecord(" made a Histogram");
     // viewfunc();
