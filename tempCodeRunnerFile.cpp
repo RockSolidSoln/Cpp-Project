@@ -1,1 +1,1 @@
-ios::ate|ios::app
+viewfunc();
