@@ -369,10 +369,12 @@ vec1 array1()
         i++;
 
     }
+
     for (int i=0; i<100; i++){
         string s = arr1[i];
         stringstream string_stream(s);
         int i2 = 0;
+
         while(string_stream.good()){
             string y;
             getline(string_stream, y, ',' );
@@ -382,6 +384,7 @@ vec1 array1()
             i2++;
         }
     }
+
     vec1 vee;
     array <int,5> a;
     for(int i=0;i<100;i++)
@@ -851,7 +854,7 @@ void findhistogram()
         }
         cout<<endl;  
     }
-    cout<<"----------------------------0---------10---------"
+    cout<<"-------------------------------0---------10---------"
         <<"20--------30--------40--------50--------"
         <<"60--------70--------80--------90--------100\n";      
     logrecord(" made a Histogram");

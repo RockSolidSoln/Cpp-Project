@@ -369,10 +369,12 @@ vec1 array1()
         i++;
 
     }
+
     for (int i=0; i<100; i++){
         string s = arr1[i];
         stringstream string_stream(s);
         int i2 = 0;
+
         while(string_stream.good()){
             string y;
             getline(string_stream, y, ',' );
