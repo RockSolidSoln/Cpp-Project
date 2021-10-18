@@ -131,7 +131,7 @@ void getchoice()
 //----------------------------------This function shows the menu for the admin----------------------------------
 void adminmenu()
 {
-    char ch;
+    int ch;
     cout << "---------------------------------------------------------\n"
         << "       Hello admin "<<username<<"                         \n"
         << "----------------------------------------------------------\n"
@@ -150,21 +150,20 @@ void adminmenu()
     {
         case('1') : createuser();
                     break;
-        case('2') :  logout();
+        case(2) :  logout();
                     break;
-        case('3') : viewfunc();
+        case(3) : viewfunc();
                     break;
-        case('4') :  deleteuser();
+        case(4) :  deleteuser();
                     break;
-        case('5') :  changepass();
+        case(5) :  changepass();
                     break;
-        case('0') : exit(0);
+        case(0) : exit(0);
                     break;
         
         default: cout<<"Wrong choice\n"
                         <<"Please try again\n";
-                        adminmenu();
-                        break;    
+                        login();
     }
 }
 
@@ -197,8 +196,7 @@ void usermenu()
 
         default: cout<<"Wrong choice\n"
                     <<"Please try again\n";
-                    usermenu();
-                    break;
+                    login();
     }
 }
 
@@ -425,46 +423,41 @@ void logrecord(string str)
 // --------------------This function shows different functions for user to perform------------------------------
 void viewfunc()
 {
-    char ch;
-    cout <<"--------------------------------------------------------\n"
-        <<"          "<<username<<" ,Please enter a number to procced:\n"
-        <<"--------------------------------------------------------\n"
-        <<"|  Enter 1 to find the minmum value:                   |\n"
-        <<"|  Enter 2 to find the maximum value:                  |\n"
-        <<"|  Enter 3 to find the median of the value:            |\n"
-        <<"|  Enter 4 to find the mean of the value:              |\n"
-        <<"|  Enter 5 to find the variance of the value:          |\n"
-        <<"|  Enter 6 to find the standard deviation of the value |\n"   
-        <<"|  Enter 7 to find the correlation between the values  |\n"   
-        <<"|  Enter 8 to find the distinct data members           |\n"
-        <<"|  Enter 9 to plot a histogram                         |\n"    
-        <<"--------------------------------------------------------\n"
-        <<endl;
+    int ch;
+
+cout <<"--------------------------------------------------------\n"
+     <<"          "<<username<<" ,Please enter a number to procced:\n"
+     <<"--------------------------------------------------------\n"
+     <<"|  Enter 1 to find the minmum value:                   |\n"
+     <<"|  Enter 2 to find the maximum value:                  |\n"
+     <<"|  Enter 3 to find the median of the value:            |\n"
+     <<"|  Enter 4 to find the mean of the value:              |\n"
+     <<"|  Enter 5 to find the variance of the value:          |\n"
+     <<"|  Enter 6 to find the standard deviation of the value |\n"   
+     <<"|  Enter 7 to find the correlation between the values  |\n"   
+     <<"|  Enter 8 to find the distinct data members           |\n"
+     <<"|  Enter 9 to plot a histogram                         |\n"    
+     <<"--------------------------------------------------------\n"
+     <<endl;
     cin>>ch;
     switch(ch)
     {
-         case('1')    : //findMin()
+         case(1)    : //findMin()
                          break;
-         case('2')    : //findMax()
+         case(2)    : //findMax()
                          break;
-         case('3')    : //findMed()                
+         case(3)    : //findMed()                
                          break;
-         case('4')    : loadmean(ch);
+         case(4)    : loadmean(ch);
                          break;
-         case('5')    : loadvar(ch);
+         case(5)    : loadvar(ch);
                          break;
-         case('6')    : loadstdv(ch);
+         case(6)    : loadstdv(ch);
                          break;                
-         case('7')    : loadcorr(ch);
+         case(7)    : loadcorr(ch);
                          break;     
-         case('8')    : finddistinct();
-                         break;
-         case('9')    : //
-                         break;
-         default: cout<<"Wrong choice\n"
-                        <<"please Enter from the choice given below\n";
-                viewfunc();
-                break;         
+         case(8)    : finddistinct();
+                         break;   
     }
 }
 

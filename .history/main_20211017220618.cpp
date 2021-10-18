@@ -131,7 +131,7 @@ void getchoice()
 //----------------------------------This function shows the menu for the admin----------------------------------
 void adminmenu()
 {
-    char ch;
+    int ch;
     cout << "---------------------------------------------------------\n"
         << "       Hello admin "<<username<<"                         \n"
         << "----------------------------------------------------------\n"
@@ -457,14 +457,8 @@ void viewfunc()
                          break;                
          case('7')    : loadcorr(ch);
                          break;     
-         case('8')    : finddistinct();
-                         break;
-         case('9')    : //
-                         break;
-         default: cout<<"Wrong choice\n"
-                        <<"please Enter from the choice given below\n";
-                viewfunc();
-                break;         
+         case('8)    : finddistinct();
+                         break;   
     }
 }
 
