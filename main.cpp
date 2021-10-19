@@ -391,7 +391,7 @@ vec1 array1()
 // -------------------------------This function saves the new file----------------------------------------
 void savefile()
 {       
-string newfilename;
+    turple<string int > newfilename;
 cout << " enter the new file name "<< endl;
 cin >>newfilename;
 
