@@ -9,7 +9,7 @@ int main()
 {
     ofstream outFile;
     outFile.open("Report.dat");
-
+    
 
 
 

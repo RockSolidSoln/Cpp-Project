@@ -369,12 +369,10 @@ vec1 array1()
         i++;
 
     }
-
     for (int i=0; i<100; i++){
         string s = arr1[i];
         stringstream string_stream(s);
         int i2 = 0;
-
         while(string_stream.good()){
             string y;
             getline(string_stream, y, ',' );
@@ -384,7 +382,6 @@ vec1 array1()
             i2++;
         }
     }
-
     vec1 vee;
     array <int,5> a;
     for(int i=0;i<100;i++)
@@ -828,38 +825,35 @@ void findhistogram()
     cout <<"Please choose the column from 2 to 4."<<endl;
     int choice;
     cin>>choice;
-    cout<<"Subject"<<"                "<<"Mid-point"
-        <<endl;
-    cout<<"|----------------------------------------------------------------------------|"
-        <<endl;
+    cout<<"Subject"<<"             "<<"Mid-point\n";
     for(int i=0;i< 100; i++)
     {
         if (choice == 2)
        { 
-       cout << get<2>(ar[i])<<"                    ";
-       cout <<get<0>(ar[i]);
+        cout<< get<2>(ar[i])<<"                    "
+            <<get<0>(ar[i]);
         for(int j=0;j<  get<2>(ar[i]);j++)
-
         cout<<"=";
-        cout<<endl;
        }
         else if (choice == 3)
         {
-        cout<< get<3>(ar[i])<<"                    ";
-        cout<< get<0>(ar[i]);
+        cout<< get<3>(ar[i])<<"                 "
+            << get<0>(ar[i]);
          for(int j=0;j<get<3>(ar[i]);j++)
-         cout<<"=";
-         cout<<endl;    
+         cout<<"=";   
         }
         else if (choice == 4)
         {
-        cout<< get<4>(ar[i])<<"                    ";
-        cout<< get<0>(ar[i]);
+        cout<< get<4>(ar[i])<<"                    "
+            << get<0>(ar[i]);
          for(int j=0;j<get<4>(ar[i]);j++)
-         cout<<"=";
-         cout<<endl;    
+         cout<<"=";  
         }
-    }      
+        cout<<endl;  
+    }
+    cout<<"----------------------------0---------10---------"
+        <<"20--------30--------40--------50--------"
+        <<"60--------70--------80--------90--------100\n";      
     logrecord(" made a Histogram");
     viewfunc();
 }
