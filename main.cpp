@@ -391,16 +391,22 @@ vec1 array1()
 // -------------------------------This function saves the new file----------------------------------------
 void savefile()
 {       
-    turple<string int > newfilename;
+    vec vee;
+    vee=array1();
+    
 cout << " enter the new file name "<< endl;
 cin >>newfilename;
-
 ofstream file(newfilename+".dat",ios::app);
-    for (int i=0; i<data.size(); i++)
-         file << data[i] << endl;
+    for(int i=0;i<100;i++)
+    {
+        file<<get<0>(a[i]);
+        file<<get<1>(a[i]);
+        file<<get<2>(a[i]);
+        file<<get<3>(a[i]);
+        file<<get<4>(a[i]);
+        vee.push_back(a);
+    }
        
-
-}
 
 }
 
