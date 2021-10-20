@@ -554,7 +554,7 @@ void viewfunc()
 //------------------------------This functions loads the minimum function-------------------------------------
 void loadmin()
 {   
-    int flag = 4,c=0;//****
+    int flag = 4,ch=0;//****
     double value=0.0;
     char ch;
     cout <<"Please enter the 1 to find minimum for the specific row and 2 for the column"<<endl;
@@ -562,7 +562,7 @@ void loadmin()
     if(ch=='1')
         minrow(flag);
     else if(ch=='2')
-        mincolumn(c,value,flag);
+        mincolumn(ch,value,flag);
     pressenter(2);
 }
 
@@ -629,7 +629,7 @@ void mincolumn(int choice,double &min,int flag)
         }
     }
     if (flag==4){
-        cout<<"The minimum value of the column "<<choice<<" is "<<min<<endl;
+        cout<<"The minimum value of the row "<<choice<<" is "<<min<<endl;
         logrecord(" calculated the minimum");
     }
 }

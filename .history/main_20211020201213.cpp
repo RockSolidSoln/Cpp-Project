@@ -554,7 +554,7 @@ void viewfunc()
 //------------------------------This functions loads the minimum function-------------------------------------
 void loadmin()
 {   
-    int flag = 4,c=0;//****
+    int flag = 4;//****
     double value=0.0;
     char ch;
     cout <<"Please enter the 1 to find minimum for the specific row and 2 for the column"<<endl;
@@ -562,7 +562,7 @@ void loadmin()
     if(ch=='1')
         minrow(flag);
     else if(ch=='2')
-        mincolumn(c,value,flag);
+        mincolumn(value,flag);
     pressenter(2);
 }
 
@@ -629,7 +629,7 @@ void mincolumn(int choice,double &min,int flag)
         }
     }
     if (flag==4){
-        cout<<"The minimum value of the column "<<choice<<" is "<<min<<endl;
+        cout<<"The minimum value of the row "<<choice<<" is "<<min<<endl;
         logrecord(" calculated the minimum");
     }
 }
@@ -638,7 +638,7 @@ void mincolumn(int choice,double &min,int flag)
 //------------------------------This functions loads the maximum function-------------------------------------
 void loadmax()
 {   double value=0.0;
-    int flag = 5,c=0;
+    int flag = 5;
     logrecord(" calculated the maximum");
     char ch;
     cout <<"Please enter the 1 to find maximum for the specific row and 2 for the column"<<endl;
@@ -646,7 +646,7 @@ void loadmax()
     if(ch=='1')
         maxrow(flag);
     else if(ch=='2')
-        maxcolumn(c,value,flag);
+        maxcolumn(value,flag);
     pressenter(2);
 
 }
@@ -680,7 +680,7 @@ void maxrow(int flag)
 
 //---------------------------------------------Omar ------------------------------------------------------
 //------------------------------This function prints maximum from a column-------------------------------------
-void maxcolumn(int choice,double &max,int flag)
+void maxcolumn(int choice=0;double &max,int flag)
 {
     max=0.0;
     vec1 ar;

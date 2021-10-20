@@ -36,11 +36,9 @@ void logrecord(string);
 void pressenter(int);
 void viewfunc();
 void loadmin();
-void minrow(int);
-void mincolumn(int,double&,int);
+void minrow();
+void mincolumn();
 void loadmax();
-void maxrow(int);
-void maxcolumn(int,double&,int);
 void loadmed();
 void loadmean();
 void findrowmean(int,int&, float&, double&, double&);
@@ -554,23 +552,23 @@ void viewfunc()
 //------------------------------This functions loads the minimum function-------------------------------------
 void loadmin()
 {   
-    int flag = 4,c=0;//****
-    double value=0.0;
+    int flag = 4,choice=0; //****
+    double value;
     char ch;
     cout <<"Please enter the 1 to find minimum for the specific row and 2 for the column"<<endl;
     cin>>ch;
     if(ch=='1')
-        minrow(flag);
+        minrow(choice,value,flag);
     else if(ch=='2')
-        mincolumn(c,value,flag);
+        mincolumn(choice,);
     pressenter(2);
 }
 
 //---------------------------------------------Omar ------------------------------------------------------
 //------------------------------This function prints minimum from a row-------------------------------------
-void minrow(int flag)
-{   int choice;
-    double min=0.0;
+void minrow(int choice,double min=0.0, int flag)
+{   
+    int choice;
     vec1 ar;
     ar=array1();
     cout<<"Enter the row number from 0 to 99 to find the minimum from 3 subjects"<<endl;
@@ -596,8 +594,10 @@ void minrow(int flag)
 
 //---------------------------------------------Omar ------------------------------------------------------
 //------------------------------This function print the minimum from a column-------------------------------------
-void mincolumn(int choice,double &min,int flag)
+void mincolumn(int flag,int choice, double &min)
 {   
+    min=0.0;
+    choice;
     vec1 ar;
     ar=array1();
     if(flag ==4){
@@ -629,7 +629,7 @@ void mincolumn(int choice,double &min,int flag)
         }
     }
     if (flag==4){
-        cout<<"The minimum value of the column "<<choice<<" is "<<min<<endl;
+        cout<<"The minimum value of the row "<<choice<<" is "<<min<<endl;
         logrecord(" calculated the minimum");
     }
 }
@@ -637,8 +637,8 @@ void mincolumn(int choice,double &min,int flag)
 //---------------------------------------------Omar ------------------------------------------------------
 //------------------------------This functions loads the maximum function-------------------------------------
 void loadmax()
-{   double value=0.0;
-    int flag = 5,c=0;
+{   
+    int flag = 5;
     logrecord(" calculated the maximum");
     char ch;
     cout <<"Please enter the 1 to find maximum for the specific row and 2 for the column"<<endl;
@@ -646,7 +646,7 @@ void loadmax()
     if(ch=='1')
         maxrow(flag);
     else if(ch=='2')
-        maxcolumn(c,value,flag);
+        maxcolumn(flag);
     pressenter(2);
 
 }
@@ -654,7 +654,7 @@ void loadmax()
 //------------------------------This function print the maximum from a row-------------------------------------
 void maxrow(int flag)
 {
-    double max=0.0;
+     double max=0.0;
     int choice;
     vec1 ar;
     ar=array1();
@@ -680,9 +680,10 @@ void maxrow(int flag)
 
 //---------------------------------------------Omar ------------------------------------------------------
 //------------------------------This function prints maximum from a column-------------------------------------
-void maxcolumn(int choice,double &max,int flag)
+void maxcolumn(int flag,int choice,double &max)
 {
     max=0.0;
+    choice;
     vec1 ar;
     ar=array1();
     if(flag ==5){
@@ -1014,14 +1015,13 @@ void findcolsum12(int col,int col2,double &colsum12)
 //---------------------------------------------Liew ------------------------------------------------------
 //------------------------------This functions finds distinct member-----------------------------------------
 void finddistinct()
-{   
-    int flag=0;
+{
     vec1 ar;
     ar=array1();
    double mindata,maxdata,tempmax,tempmin;
     for (int i=2;i<=5;i++){
-        maxcolumn(i,tempmax,flag);
-        mincolumn(i,tempmin,flag);
+        maxcolumn(flag,i,tempmax);
+        mincolumn(flag,i,tempmin);
         maxdata = (maxdata<tempmax) ? tempmax : maxdata;
         mindata = (mindata>tempmin) ? tempmin : mindata;
     }

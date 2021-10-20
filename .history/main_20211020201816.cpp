@@ -562,7 +562,7 @@ void loadmin()
     if(ch=='1')
         minrow(flag);
     else if(ch=='2')
-        mincolumn(c,value,flag);
+        mincolumn(ch,value,flag);
     pressenter(2);
 }
 
@@ -629,7 +629,7 @@ void mincolumn(int choice,double &min,int flag)
         }
     }
     if (flag==4){
-        cout<<"The minimum value of the column "<<choice<<" is "<<min<<endl;
+        cout<<"The minimum value of the row "<<choice<<" is "<<min<<endl;
         logrecord(" calculated the minimum");
     }
 }
