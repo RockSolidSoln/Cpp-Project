@@ -29,9 +29,10 @@ void deleteuser();
 vec loadfile();
 vec1 databaseloadfile();
 void savefile();
-void savereport();
+void savereport(string,double);
 void saveHTMLreport();
 void clearActivity();
+void clearreport();
 void logrecord(string);
 void viewfunc();
 void loadmin();
@@ -58,6 +59,7 @@ void reportsmenu();
 int main()
 {   
     clearActivity();
+    clearreport();
     login();
     return 0;
 }
@@ -402,7 +404,14 @@ void savefile()
 {       
 
 }
-
+//-------------------------------------------Salah Fayeq--------------------------------------------------------------------------
+//--------------------------------------------This function clears the report before function starts----------------------------------------------------------------
+void clearreport()
+{
+    ofstream outfile;
+    outfile.open("Report.dat",ios::out|ios::trunc);
+    outfile.close();
+}
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------
 // -----------------This function clears the user activity in a file before function starts--------------------------
 void clearActivity()
@@ -414,8 +423,12 @@ void clearActivity()
 
 //---------------------------------------------Salah Fayeq------------------------------------------------------
 // --------------------This function saves the report of the user choices in a file-------------------------
-void savereport()
+void savereport(string str, double result)
 {
+    ofstream outFile;
+    outFile.open("Report.dat",ios::out|ios::app);
+    outFile << "you just"<<" " << str << " " << result<< endl;
+    outFile.close();
     logrecord(" saved the report");
     reportsmenu();
 }
@@ -577,6 +590,7 @@ void findrowmean(int flag,int &row,float &rowmean,double &rowsum,double &rowsqsu
     {
         cout << "The mean of row " << row << " is " << rowmean << endl;
         logrecord(" calculated the mean of the row ");
+        savereport("calculated the mean of the row ",rowmean);
     }
 }
 
@@ -862,6 +876,7 @@ void findhistogram()
 //------------------------------This functions shows the report menu-----------------------------------------
 void reportsmenu()
 {
+    double look;
     char ch;
     cout <<"--------------------------------------------------------\n"
         <<"          "<<username<<" ,Please enter a number to procced:\n"
@@ -878,7 +893,7 @@ void reportsmenu()
     logrecord(str);
     switch(ch)
     {
-         case('1')    : savereport();
+         case('1')    : savereport(str,look);
                          break;
          case('2')    : saveHTMLreport();
                          break;
