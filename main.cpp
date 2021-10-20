@@ -546,6 +546,8 @@ void viewfunc()
 //------------------------------This functions loads the minimum function-------------------------------------
 void loadmin()
 {   
+    
+    logrecord(" calculated the minimum");
     char ch;
     cout <<"Please enter the 1 to find minimum for the specific row and 2 for the column"<<endl;
     cin>>ch;
@@ -625,17 +627,158 @@ void mincolumn()
 void loadmax()
 {   
     logrecord(" calculated the maximum");
+    char ch;
+    cout <<"Please enter the 1 to find maximum for the specific row and 2 for the column"<<endl;
+    cin>>ch;
+    if(ch=='1')
+        maxrow();
+    else if(ch=='2')
+        maxcolumn();
+    logrecord(" calculated the maximum");
     pressenter(2);
+
+}
+//---------------------------------------------Omar ------------------------------------------------------
+//------------------------------This function print the maximum from a row-------------------------------------
+void loadmax()
+{
+     double max=0.0;
+    int choice;
+    vec1 ar;
+    ar=array1();
+    cout<<"Enter the row number from 0 to 99 to find the maximum from 3 subjects"<<endl;
+    cin>>choice;
+    for(int i=0;i<ar.size();i++)
+    {   
+        if(i==choice)
+        {   
+            max=get<2>(ar[i]);
+            if(get<3>(ar[i])<get<2>(ar[i]) && get<3>(ar[i])<get<4>(ar[i]))
+                max=get<2>(ar[i]);
+            else if(get<4>(ar[i])<get<2>(ar[i]) && get<4>(ar[i])<get<3>(ar[i]))
+                max=get<2>(ar[i]);
+            cout<<"The maximum value of the row "<<choice<<" is "<<max<<endl;
+            break;
+        }
+    }
+}
 }
 
+
+//---------------------------------------------Omar ------------------------------------------------------
+//------------------------------This function prints maximum from a column-------------------------------------
+void loadmax()
+{
+     double max=0.0;
+    int choice;
+    vec1 ar;
+    ar=array1();
+    cout<<"Enter the column number from 2 to 4"<<endl;
+    cin>>choice;    
+    if(choice==2)
+    for(int i=0;i<ar.size();i++)
+    {  max=get<2>(ar[0]);
+       { 
+        if(get<2>(ar[i])<max)
+            max=get<2>(ar[i]);
+        }
+    }
+    else if(choice==3)
+    {max=get<3>(ar[0]);
+    for(int i=0;i<ar.size();i++)
+        { 
+        if(get<3>(ar[i])<max)
+            max=get<3>(ar[i]);
+        }
+    }
+    else if(choice==4)
+   { max=get<4>(ar[0]);
+    for(int i=0;i<ar.size();i++)
+        { 
+        if(get<4>(ar[i])<max)
+            max=get<4>(ar[i]);
+        }
+    }
+    cout<<" Maximum of the column "<<choice<<" is "<<max<<endl;
+
+    
+}
 //---------------------------------------------Omar ------------------------------------------------------
 //------------------------------This functions loads the median function-------------------------------------
 void loadmed()
 {   
+    logrecord(" calculated the median")
+     char ch;
+    cout <<"Please enter the 1 to find median for the specific row and 2 for the column"<<endl;
+    cin>>ch;
+    if(ch=='1')
+        minrow();
+    else if(ch=='2')
+        mincolumn();
     logrecord(" calculated the median");
     pressenter(2);
 }
-
+//---------------------------------------------Omar ------------------------------------------------------
+//------------------------------This function print the median from a row-------------------------------------
+void loadmed()
+{   
+    logrecord(" calculated the median")
+ double med=0.0;
+    int choice;
+    vec1 ar;
+    ar=array1();
+    cout<<"Enter the row number from 0 to 99 to find the median from 3 subjects"<<endl;
+    cin>>choice;
+    for(int i=0;i<ar.size();i++)
+    {   
+        if(i==choice)
+        {   
+            med=get<2>(ar[i]);
+            if(get<3>(ar[i])<get<2>(ar[i]) && get<3>(ar[i])<get<4>(ar[i]))
+                med=get<2>(ar[i]);
+            else if(get<4>(ar[i])<get<2>(ar[i]) && get<4>(ar[i])<get<3>(ar[i]))
+                med=get<2>(ar[i]);
+            cout<<"The median value of the row "<<choice<<" is "<<med<<endl;
+            break;
+        }
+    }
+}
+}
+//---------------------------------------------Omar ------------------------------------------------------
+//------------------------------This function print the median from a row-------------------------------------
+void loadmed(){
+     double med=0.0;
+    int choice;
+    vec1 ar;
+    ar=array1();
+    cout<<"Enter the column number from 2 to 4"<<endl;
+    cin>>choice;    
+    if(choice==2)
+    for(int i=0;i<ar.size();i++)
+    {  med=get<2>(ar[0]);
+       { 
+        if(get<2>(ar[i])<med)
+            med=get<2>(ar[i]);
+        }
+    }
+    else if(choice==3)
+    {med=get<3>(ar[0]);
+    for(int i=0;i<ar.size();i++)
+        { 
+        if(get<3>(ar[i])<med)
+            med=get<3>(ar[i]);
+        }
+    }
+    else if(choice==4)
+   { med=get<4>(ar[0]);
+    for(int i=0;i<ar.size();i++)
+        { 
+        if(get<4>(ar[i])<med)
+            med=get<4>(ar[i]);
+        }
+    }
+    cout<<" Median of the column "<<choice<<" is "<<med<<endl;
+}
 //---------------------------------------------Liew ------------------------------------------------------
 //------------------------------This functions loads the mean function-----------------------------------------
 void loadmean()
