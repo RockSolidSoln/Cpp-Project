@@ -519,29 +519,6 @@ void loadmin()
 {
     logrecord(" calculated the minimum");
     viewfunc();
-    void minimum(int **arr, int rows, int col)
-{
-    double sum = 0;
-    int c;
-
-    int line = 0;
-    for (int i=0; i<rows; i++)
-    {
-       cout << line << "--->";
-       for (int j=0; j<col; j++){
-           cout << arr[i][j] << " : ";
-       }
-       line++;
-       cout << endl;
-    }
-    cout << " for what colom?"<< endl;
-    cin >> c ;
-    for (int i=0; i<rows; i++)
-    {
-        sum += arr[c][i];
-    }
-    cout << sum / col << endl;
-}
 }
 
 //---------------------------------------------Omar ------------------------------------------------------
@@ -550,29 +527,6 @@ void loadmax()
 {   
     logrecord(" calculated the maximum");
     viewfunc();
-    void minimum(int **arr, int rows, int col)
-{
-    double sum = 0;
-    int c;
-
-    int line = 0;
-    for (int i=0; i<rows; i++)
-    {
-       cout << line << "--->";
-       for (int j=0; j<col; j++){
-           cout << arr[i][j] << " : ";
-       }
-       line++;
-       cout << endl;
-    }
-    cout << " for what colom?"<< endl;
-    cin >> c ;
-    for (int i=0; i<rows; i++)
-    {
-        sum += arr[c][i];
-    }
-    cout << sum / col << endl;
-}
 }
 
 //---------------------------------------------Omar ------------------------------------------------------
