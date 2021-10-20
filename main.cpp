@@ -30,9 +30,8 @@ vec loadfile();
 vec1 databaseloadfile();
 void savefile();
 void savereport(string,double);
-void saveHTMLreport();
+void saveHTMLreport(string,double);
 void clearActivity();
-void clearreport();
 void logrecord(string);
 void viewfunc();
 void loadmin();
@@ -59,7 +58,6 @@ void reportsmenu();
 int main()
 {   
     clearActivity();
-    clearreport();
     login();
     return 0;
 }
@@ -404,18 +402,13 @@ void savefile()
 {       
 
 }
-//-------------------------------------------Salah Fayeq--------------------------------------------------------------------------
-//--------------------------------------------This function clears the report before function starts----------------------------------------------------------------
-void clearreport()
-{
-    ofstream outfile;
-    outfile.open("Report.dat",ios::out|ios::trunc);
-    outfile.close();
-}
-//---------------------------------------------Ahmad Ayaan------------------------------------------------------
+//---------------------------------------------Ahmad Ayaan/Salah Fayeq------------------------------------------------------
 // -----------------This function clears the user activity in a file before function starts--------------------------
 void clearActivity()
 {
+    ofstream file;
+    file.open("Report.dat",ios::out|ios::trunc);
+    file.close();
     ofstream outfile;
     outfile.open("Activity.dat",ios::out|ios::trunc);
     outfile.close();
@@ -435,8 +428,8 @@ void savereport(string str, double result)
 
 //---------------------------------------------Salah Fayeq------------------------------------------------------
 // -----------------This function saves the report in HTML of the user choices in a file---------------------
-void saveHTMLreport()
-{
+void saveHTMLreport(string str, double result)
+{      
     logrecord(" saved the HTML report");
     reportsmenu();
 }
@@ -591,6 +584,7 @@ void findrowmean(int flag,int &row,float &rowmean,double &rowsum,double &rowsqsu
         cout << "The mean of row " << row << " is " << rowmean << endl;
         logrecord(" calculated the mean of the row ");
         savereport("calculated the mean of the row ",rowmean);
+        saveHTMLreport("calculated the mean of the row",rowmean);
     }
 }
 
@@ -895,7 +889,7 @@ void reportsmenu()
     {
          case('1')    : savereport(str,look);
                          break;
-         case('2')    : saveHTMLreport();
+         case('2')    : saveHTMLreport(str,look);
                          break;
          case('B')    : viewfunc();
                          break;
