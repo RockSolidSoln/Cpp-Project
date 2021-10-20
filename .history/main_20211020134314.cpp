@@ -1030,7 +1030,7 @@ void finddistinct()
     cout << "---------------+---------------" << endl;//15-+15-
     cout << "|    Number    |   Frequency  |" << endl;
     cout << "---------------+---------------" << endl;
-    for (int k=mindata;k<=maxdata;k++){
+    for (int k=min;k<=max;k++){
         int f = 0;
         for (int i=0;i<100;i++){
             if (k == get<1>(ar[i]))
