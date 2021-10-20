@@ -29,8 +29,8 @@ void deleteuser();
 vec loadfile();
 vec1 databaseloadfile();
 void savefile();
-void savereport(string,double);
-void saveHTMLreport(string, double);
+void savereport();
+void saveHTMLreport();
 void clearActivity();
 void logrecord(string);
 void pressenter(int);
@@ -39,8 +39,6 @@ void loadmin();
 void minrow();
 void mincolumn();
 void loadmax();
-void maxrow();
-void maxcolumn();
 void loadmed();
 void loadmean();
 void findrowmean(int,int&, float&, double&, double&);
@@ -660,9 +658,9 @@ void maxrow()
         if(i==choice)
         {   
             max=get<2>(ar[i]);
-            if(get<3>(ar[i])>get<2>(ar[i]) && get<3>(ar[i])>get<4>(ar[i]))
+            if(get<3>(ar[i])<get<2>(ar[i]) && get<3>(ar[i])<get<4>(ar[i]))
                 max=get<2>(ar[i]);
-            else if(get<4>(ar[i])>get<2>(ar[i]) && get<4>(ar[i])>get<3>(ar[i]))
+            else if(get<4>(ar[i])<get<2>(ar[i]) && get<4>(ar[i])<get<3>(ar[i]))
                 max=get<2>(ar[i]);
             cout<<"The maximum value of the row "<<choice<<" is "<<max<<endl;
             break;
@@ -672,7 +670,7 @@ void maxrow()
 
 //---------------------------------------------Omar ------------------------------------------------------
 //------------------------------This function prints maximum from a column-------------------------------------
-void maxcolumn()
+void loadmax()
 {
      double max=0.0;
     int choice;

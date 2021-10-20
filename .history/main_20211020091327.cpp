@@ -29,8 +29,8 @@ void deleteuser();
 vec loadfile();
 vec1 databaseloadfile();
 void savefile();
-void savereport(string,double);
-void saveHTMLreport(string, double);
+void savereport();
+void saveHTMLreport();
 void clearActivity();
 void logrecord(string);
 void pressenter(int);
@@ -39,8 +39,6 @@ void loadmin();
 void minrow();
 void mincolumn();
 void loadmax();
-void maxrow();
-void maxcolumn();
 void loadmed();
 void loadmean();
 void findrowmean(int,int&, float&, double&, double&);
@@ -672,7 +670,7 @@ void maxrow()
 
 //---------------------------------------------Omar ------------------------------------------------------
 //------------------------------This function prints maximum from a column-------------------------------------
-void maxcolumn()
+void loadmax()
 {
      double max=0.0;
     int choice;
@@ -684,7 +682,7 @@ void maxcolumn()
     for(int i=0;i<ar.size();i++)
     {  max=get<2>(ar[0]);
        { 
-        if(get<2>(ar[i])<max)
+        if(get<2>(ar[i])>max)
             max=get<2>(ar[i]);
         }
     }
@@ -692,7 +690,7 @@ void maxcolumn()
     {max=get<3>(ar[0]);
     for(int i=0;i<ar.size();i++)
         { 
-        if(get<3>(ar[i])<max)
+        if(get<3>(ar[i])>max)
             max=get<3>(ar[i]);
         }
     }
@@ -700,14 +698,13 @@ void maxcolumn()
    { max=get<4>(ar[0]);
     for(int i=0;i<ar.size();i++)
         { 
-        if(get<4>(ar[i])<max)
+        if(get<4>(ar[i])>max)
             max=get<4>(ar[i]);
         }
     }
-    cout<<" Maximum of the column "<<choice<<" is "<<max<<endl;
-
-    
+    cout<<" Maximum of the column "<<choice<<" is "<<max<<endl;  
 }
+
 //---------------------------------------------Omar ------------------------------------------------------
 //------------------------------This functions loads the median function-------------------------------------
 void loadmed()

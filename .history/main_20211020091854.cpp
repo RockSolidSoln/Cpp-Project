@@ -30,7 +30,7 @@ vec loadfile();
 vec1 databaseloadfile();
 void savefile();
 void savereport(string,double);
-void saveHTMLreport(string, double);
+void saveHTMLreport(string);
 void clearActivity();
 void logrecord(string);
 void pressenter(int);
