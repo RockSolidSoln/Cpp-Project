@@ -29,18 +29,16 @@ void deleteuser();
 vec loadfile();
 vec1 databaseloadfile();
 void savefile();
-void savereport(string,double);
-void saveHTMLreport(string, double);
+void savereport();
+void saveHTMLreport();
 void clearActivity();
 void logrecord(string);
 void pressenter(int);
 void viewfunc();
 void loadmin();
-void minrow(int);
-void mincolumn(int);
+void minrow();
+void mincolumn();
 void loadmax();
-void maxrow(int);
-void maxcolumn(int);
 void loadmed();
 void loadmean();
 void findrowmean(int,int&, float&, double&, double&);
@@ -555,20 +553,20 @@ void viewfunc()
 //------------------------------This functions loads the minimum function-------------------------------------
 void loadmin()
 {   
-    int flag = 4; //****
     char ch;
     cout <<"Please enter the 1 to find minimum for the specific row and 2 for the column"<<endl;
     cin>>ch;
     if(ch=='1')
-        minrow(flag);
+        minrow();
     else if(ch=='2')
-        mincolumn(flag);
+        mincolumn();
+    logrecord(" calculated the minimum");
     pressenter(2);
 }
 
 //---------------------------------------------Omar ------------------------------------------------------
 //------------------------------This function prints minimum from a row-------------------------------------
-void minrow(int flag)
+void minrow()
 {   
     double min=0.0;
     int choice;
@@ -585,10 +583,7 @@ void minrow(int flag)
                 min=get<2>(ar[i]);
             else if(get<4>(ar[i])<get<2>(ar[i]) && get<4>(ar[i])<get<3>(ar[i]))
                 min=get<2>(ar[i]);
-            if (flag==4){
-                cout<<"The minimum value of the row "<<choice<<" is "<<min<<endl;
-                logrecord(" calculated the minimum");
-            }
+            cout<<"The minimum value of the row "<<choice<<" is "<<min<<endl;
             break;
         }
     }
@@ -597,16 +592,14 @@ void minrow(int flag)
 
 //---------------------------------------------Omar ------------------------------------------------------
 //------------------------------This function print the minimum from a column-------------------------------------
-void mincolumn(int flag,int choice, double &min)
+void mincolumn()
 {   
-    min=0.0;
-    choice;
+    double min=0.0;
+    int choice;
     vec1 ar;
     ar=array1();
-    if(flag ==4){
-        cout<<"Enter the column number from 2 to 4"<<endl;
-        cin>>choice;    
-    }
+    cout<<"Enter the column number from 2 to 4"<<endl;
+    cin>>choice;    
     if(choice==2)
     for(int i=0;i<ar.size();i++)
     {  min=get<2>(ar[0]);
@@ -631,31 +624,28 @@ void mincolumn(int flag,int choice, double &min)
             min=get<4>(ar[i]);
         }
     }
-    if (flag==4){
-        cout<<"The minimum value of the row "<<choice<<" is "<<min<<endl;
-        logrecord(" calculated the minimum");
-    }
+    cout<<" Minimum of the column "<<choice<<" is "<<min<<endl;
 }
 
 //---------------------------------------------Omar ------------------------------------------------------
 //------------------------------This functions loads the maximum function-------------------------------------
 void loadmax()
 {   
-    int flag = 5;
     logrecord(" calculated the maximum");
     char ch;
     cout <<"Please enter the 1 to find maximum for the specific row and 2 for the column"<<endl;
     cin>>ch;
     if(ch=='1')
-        maxrow(flag);
+        maxrow();
     else if(ch=='2')
-        maxcolumn(flag);
+        maxcolumn();
+    logrecord(" calculated the maximum");
     pressenter(2);
 
 }
 //---------------------------------------------Omar ------------------------------------------------------
 //------------------------------This function print the maximum from a row-------------------------------------
-void maxrow(int flag)
+void loadmax()
 {
      double max=0.0;
     int choice;
@@ -668,14 +658,11 @@ void maxrow(int flag)
         if(i==choice)
         {   
             max=get<2>(ar[i]);
-            if(get<3>(ar[i])>get<2>(ar[i]) && get<3>(ar[i])>get<4>(ar[i]))
+            if(get<3>(ar[i])<get<2>(ar[i]) && get<3>(ar[i])<get<4>(ar[i]))
                 max=get<2>(ar[i]);
-            else if(get<4>(ar[i])>get<2>(ar[i]) && get<4>(ar[i])>get<3>(ar[i]))
+            else if(get<4>(ar[i])<get<2>(ar[i]) && get<4>(ar[i])<get<3>(ar[i]))
                 max=get<2>(ar[i]);
-            if (flag==5){
-                cout<<"The maximum value of the row "<<choice<<" is "<<max<<endl;
-                logrecord(" calculated the maximum");
-            }
+            cout<<"The maximum value of the row "<<choice<<" is "<<max<<endl;
             break;
         }
     }
@@ -683,16 +670,14 @@ void maxrow(int flag)
 
 //---------------------------------------------Omar ------------------------------------------------------
 //------------------------------This function prints maximum from a column-------------------------------------
-void maxcolumn(int flag,int choice,double &max)
+void loadmax()
 {
-    max=0.0;
-    choice;
+     double max=0.0;
+    int choice;
     vec1 ar;
     ar=array1();
-    if(flag ==5){
-        cout<<"Enter the column number from 2 to 4"<<endl;
-        cin>>choice;    
-    }
+    cout<<"Enter the column number from 2 to 4"<<endl;
+    cin>>choice;    
     if(choice==2)
     for(int i=0;i<ar.size();i++)
     {  max=get<2>(ar[0]);
@@ -717,10 +702,8 @@ void maxcolumn(int flag,int choice,double &max)
             max=get<4>(ar[i]);
         }
     }
-    if (flag==5){
-        cout<<"The maximum value of the row "<<choice<<" is "<<max<<endl;
-        logrecord(" calculated the maximum");
-    }
+    cout<<" Maximum of the column "<<choice<<" is "<<max<<endl;
+
     
 }
 //---------------------------------------------Omar ------------------------------------------------------
@@ -1014,27 +997,25 @@ void findcolsum12(int col,int col2,double &colsum12)
 //------------------------------This functions finds distinct member-----------------------------------------
 void finddistinct()
 {
-    int flag = 6;
     vec1 ar;
     ar=array1();
-    double mindata,maxdata,tempmax,tempmin;
-    for (int i=2;i<=5;i++){
-        maxcolumn(flag,i,tempmax);
-        mincolumn(flag,i,tempmin);
-        maxdata = (maxdata<tempmax) ? tempmax : maxdata;
-        mindata = (mindata>tempmin) ? tempmin : mindata;
-    }
+    int min = 1; //should be find min
+    int max = 1000; //should be find max
     cout << "     Distinct Numbers Table    " << endl;
-    cout << "---------------+---------------" << endl;
+    cout << "---------------+---------------" << endl;//15-+15-
     cout << "|    Number    |   Frequency  |" << endl;
     cout << "---------------+---------------" << endl;
-    for (int k=mindata;k<=maxdata;k++){
+    for (int k=min;k<=max;k++){
         int f = 0;
         for (int i=0;i<100;i++){
-            if (k == get<1>(ar[i])) f++;
-            if (k == get<2>(ar[i])) f++;
-            if (k == get<3>(ar[i])) f++;
-            if (k == get<4>(ar[i])) f++;
+            if (k == get<1>(ar[i]))
+                f++;
+            if (k == get<2>(ar[i]))
+                f++;
+            if (k == get<3>(ar[i]))
+                f++;
+            if (k == get<4>(ar[i]))
+                f++;
         }
         if (f!=0){
             cout << "|" << setw(7) << right << k;
@@ -1049,7 +1030,7 @@ void finddistinct()
 }
 
 
-//------------------------------------------Salah Fayeq---------------------------------------------------
+//---------------------------------------------------------------------------------------------------
 //------------------------------This function finds the histogram-----------------------------------------
 void findhistogram()
 {
