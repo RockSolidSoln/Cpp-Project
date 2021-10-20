@@ -29,7 +29,7 @@ void deleteuser();
 vec loadfile();
 vec1 databaseloadfile();
 void savefile();
-void savereport(string,double,string,double);
+void savereport(string,double,double);
 void saveHTMLreport();
 void clearActivity();
 void logrecord(string);
@@ -436,11 +436,11 @@ void clearActivity()
 
 //---------------------------------------------Salah Fayeq------------------------------------------------------
 // --------------------This function saves the report of the user choices in a file-------------------------
-void savereport(string str, double result,string str1,double col)
+void savereport(string str, double col,double results)
 {
     ofstream outFile;
     outFile.open("Report.dat",ios::out|ios::app);
-    outFile << "you just"<<" " << str << " "<< col <<str1<< result<< endl;
+    outFile << "you just"<<" " << str << " "<< col <<" and the result is: " << results<< endl;
     outFile.close();
     logrecord(" saved the report");
     reportsmenu();
@@ -702,6 +702,7 @@ void findrowmean(int flag,int &row,float &rowmean,double &rowsum,double &rowsqsu
     if(flag==0){
         cout << endl << "The mean of row " << row << " is " << rowmean << endl;
         logrecord(" calculated the mean of the row ");
+        savereport("calculated the mean of the row",row,rowmean);
     }
 }
 
@@ -743,6 +744,7 @@ void findcolmean(int flag,int &col,float &colmean,double &colsum,double &colsqsu
     {
         cout << endl << "The mean of the column " << col << " is " << colmean << endl;
         logrecord(" calculated the mean of the column ");
+        savereport("calculated the mean of the column:",col,colsqsum);
     }
 }
 
@@ -784,7 +786,7 @@ void findrowvar(int flag,int &row,float &rowmean,double &rowsum,double rowsqsum,
     if (flag ==1){
         cout << endl << "The variance of row " << row << " is " << rowvar << endl;
         logrecord(" calculated the variance of the row ");
-        savereport("calculated the variance of the row: ",row, " and the result is: ",rowvar);
+        savereport("calculated the variance of the row: ",row,rowvar);
     }
 }
 
@@ -798,6 +800,7 @@ void findcolvar(int flag,int &col,float &colmean,double &colsum,double colsqsum,
     if (flag ==1){
         cout << endl << "The variance of column " << col << " is " << colvar << endl;
         logrecord(" calculated the variance of the column");
+        savereport("calculated the variance of the column",col,colvar);
     }
 }
 
@@ -837,6 +840,7 @@ void findrowstdv(int flag,int &row,float &rowmean,double &rowsum,double rowsqsum
     rowstdv= sqrt(rowvar);
     cout << endl << "The standard deviation of row " << row << " is " << rowstdv << endl;
     logrecord(" calculated the standard deviation of the row ");
+    savereport("calculated the standard deviation of the row ",row,rowstdv);
 }
 
 //---------------------------------------------Liew ------------------------------------------------------
@@ -848,6 +852,7 @@ void findcolstdv(int flag,int &col,float &colmean,double &colsum,double colsqsum
     colstdv = sqrt(colvar);
     cout << endl << "The standard deviation of column " << col << " is " << colstdv << endl;
     logrecord(" calculated the standard deviation of the column ");
+    savereport("calculated the standard deviation of the column: ",col,colstdv);
 }
 
 //---------------------------------------------Liew ------------------------------------------------------
@@ -1024,7 +1029,7 @@ void reportsmenu()
     logrecord(str);
     switch(ch)
     {
-         case('1')    : savereport(str,db,str1,ds);
+         case('1')    : savereport(str,db,ds);
                          break;
          case('2')    : saveHTMLreport();
                          break;
