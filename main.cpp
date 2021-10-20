@@ -36,11 +36,11 @@ void logrecord(string);
 void pressenter(int);
 void viewfunc();
 void loadmin();
-void minrow();
-void mincolumn();
+void minrow(int);
+void mincolumn(int);
 void loadmax();
-void maxrow();
-void maxcolumn();
+void maxrow(int);
+void maxcolumn(int);
 void loadmed();
 void loadmean();
 void findrowmean(int,int&, float&, double&, double&);
@@ -555,20 +555,20 @@ void viewfunc()
 //------------------------------This functions loads the minimum function-------------------------------------
 void loadmin()
 {   
+    int flag = 4; //****
     char ch;
     cout <<"Please enter the 1 to find minimum for the specific row and 2 for the column"<<endl;
     cin>>ch;
     if(ch=='1')
-        minrow();
+        minrow(flag);
     else if(ch=='2')
-        mincolumn();
-    logrecord(" calculated the minimum");
+        mincolumn(flag);
     pressenter(2);
 }
 
 //---------------------------------------------Omar ------------------------------------------------------
 //------------------------------This function prints minimum from a row-------------------------------------
-void minrow()
+void minrow(int flag)
 {   
     double min=0.0;
     int choice;
@@ -585,7 +585,10 @@ void minrow()
                 min=get<2>(ar[i]);
             else if(get<4>(ar[i])<get<2>(ar[i]) && get<4>(ar[i])<get<3>(ar[i]))
                 min=get<2>(ar[i]);
-            cout<<"The minimum value of the row "<<choice<<" is "<<min<<endl;
+            if (flag==4){
+                cout<<"The minimum value of the row "<<choice<<" is "<<min<<endl;
+                logrecord(" calculated the minimum");
+            }
             break;
         }
     }
@@ -594,14 +597,16 @@ void minrow()
 
 //---------------------------------------------Omar ------------------------------------------------------
 //------------------------------This function print the minimum from a column-------------------------------------
-void mincolumn()
+void mincolumn(int flag,int choice, double &min)
 {   
-    double min=0.0;
-    int choice;
+    min=0.0;
+    choice;
     vec1 ar;
     ar=array1();
-    cout<<"Enter the column number from 2 to 4"<<endl;
-    cin>>choice;    
+    if(flag ==4){
+        cout<<"Enter the column number from 2 to 4"<<endl;
+        cin>>choice;    
+    }
     if(choice==2)
     for(int i=0;i<ar.size();i++)
     {  min=get<2>(ar[0]);
@@ -626,28 +631,31 @@ void mincolumn()
             min=get<4>(ar[i]);
         }
     }
-    cout<<" Minimum of the column "<<choice<<" is "<<min<<endl;
+    if (flag==4){
+        cout<<"The minimum value of the row "<<choice<<" is "<<min<<endl;
+        logrecord(" calculated the minimum");
+    }
 }
 
 //---------------------------------------------Omar ------------------------------------------------------
 //------------------------------This functions loads the maximum function-------------------------------------
 void loadmax()
 {   
+    int flag = 5;
     logrecord(" calculated the maximum");
     char ch;
     cout <<"Please enter the 1 to find maximum for the specific row and 2 for the column"<<endl;
     cin>>ch;
     if(ch=='1')
-        maxrow();
+        maxrow(flag);
     else if(ch=='2')
-        maxcolumn();
-    logrecord(" calculated the maximum");
+        maxcolumn(flag);
     pressenter(2);
 
 }
 //---------------------------------------------Omar ------------------------------------------------------
 //------------------------------This function print the maximum from a row-------------------------------------
-void maxrow()
+void maxrow(int flag)
 {
      double max=0.0;
     int choice;
@@ -664,7 +672,10 @@ void maxrow()
                 max=get<2>(ar[i]);
             else if(get<4>(ar[i])>get<2>(ar[i]) && get<4>(ar[i])>get<3>(ar[i]))
                 max=get<2>(ar[i]);
-            cout<<"The maximum value of the row "<<choice<<" is "<<max<<endl;
+            if (flag==5){
+                cout<<"The maximum value of the row "<<choice<<" is "<<max<<endl;
+                logrecord(" calculated the maximum");
+            }
             break;
         }
     }
@@ -672,14 +683,16 @@ void maxrow()
 
 //---------------------------------------------Omar ------------------------------------------------------
 //------------------------------This function prints maximum from a column-------------------------------------
-void maxcolumn()
+void maxcolumn(int flag,int choice,double &max)
 {
-     double max=0.0;
-    int choice;
+    max=0.0;
+    choice;
     vec1 ar;
     ar=array1();
-    cout<<"Enter the column number from 2 to 4"<<endl;
-    cin>>choice;    
+    if(flag ==5){
+        cout<<"Enter the column number from 2 to 4"<<endl;
+        cin>>choice;    
+    }
     if(choice==2)
     for(int i=0;i<ar.size();i++)
     {  max=get<2>(ar[0]);
@@ -704,8 +717,10 @@ void maxcolumn()
             max=get<4>(ar[i]);
         }
     }
-    cout<<" Maximum of the column "<<choice<<" is "<<max<<endl;
-
+    if (flag==5){
+        cout<<"The maximum value of the row "<<choice<<" is "<<max<<endl;
+        logrecord(" calculated the maximum");
+    }
     
 }
 //---------------------------------------------Omar ------------------------------------------------------
@@ -999,25 +1014,27 @@ void findcolsum12(int col,int col2,double &colsum12)
 //------------------------------This functions finds distinct member-----------------------------------------
 void finddistinct()
 {
+    int flag = 6;
     vec1 ar;
     ar=array1();
-    int min = 1; //should be find min
-    int max = 1000; //should be find max
+    double mindata,maxdata,tempmax,tempmin;
+    for (int i=2;i<=5;i++){
+        maxcolumn(flag,i,tempmax);
+        mincolumn(flag,i,tempmin);
+        maxdata = (maxdata<tempmax) ? tempmax : maxdata;
+        mindata = (mindata>tempmin) ? tempmin : mindata;
+    }
     cout << "     Distinct Numbers Table    " << endl;
-    cout << "---------------+---------------" << endl;//15-+15-
+    cout << "---------------+---------------" << endl;
     cout << "|    Number    |   Frequency  |" << endl;
     cout << "---------------+---------------" << endl;
-    for (int k=min;k<=max;k++){
+    for (int k=mindata;k<=maxdata;k++){
         int f = 0;
         for (int i=0;i<100;i++){
-            if (k == get<1>(ar[i]))
-                f++;
-            if (k == get<2>(ar[i]))
-                f++;
-            if (k == get<3>(ar[i]))
-                f++;
-            if (k == get<4>(ar[i]))
-                f++;
+            if (k == get<1>(ar[i])) f++;
+            if (k == get<2>(ar[i])) f++;
+            if (k == get<3>(ar[i])) f++;
+            if (k == get<4>(ar[i])) f++;
         }
         if (f!=0){
             cout << "|" << setw(7) << right << k;
