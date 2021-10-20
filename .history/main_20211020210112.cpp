@@ -580,11 +580,11 @@ void minrow(int flag)
         if(i==choice)
         {   
             min=get<1>(ar[i]);
-            if(get<2>(ar[i])<get<1>(ar[i]) && get<2>(ar[i])<get<3>(ar[i]) && get<2>(ar[i])<get<4>(ar[i]))
+            if(get<2>(ar[i])<get<1>(ar[i]) && get<2>(ar[i])<get<3>(ar[i]) && get<2>(ar[i]<get<4>(ar[i])))
                 min=get<2>(ar[i]);
-            else if(get<3>(ar[i])<get<1>(ar[i]) && get<3>(ar[i])<get<2>(ar[i]) && get<2>(ar[i])<get<4>(ar[i]))
+            else if(get<3>(ar[i])<get<1>(ar[i]) && get<3>(ar[i])<get<2>(ar[i]) && get<2>(ar[i]<get<4>(ar[i]))
                 min=get<3>(ar[i]);
-            else if(get<4>(ar[i])<get<1>(ar[i]) && get<4>(ar[i])<get<2>(ar[i]) && get<4>(ar[i])<get<3>(ar[i]))
+            else if(get<4>(ar[i])<get<1>(ar[i]) && get<4>(ar[i])<get<2>(ar[i] && get<4>(ar[i]<get<3>(ar[i])))
                 min=get<4>(ar[i]);
             if (flag==4){
                 cout<<"The minimum value of the row "<<choice<<" is "<<min<<endl;
@@ -674,11 +674,11 @@ void maxrow(int flag)
     {   
         if(i==choice)
         {   max=get<1>(ar[i]);
-            if(get<2>(ar[i])>get<1>(ar[i]) && get<2>(ar[i])>get<3>(ar[i]) && get<2>(ar[i])>get<4>(ar[i]))
+            if(get<2>(ar[i])>get<1>(ar[i]) && get<2>(ar[i])>get<3>(ar[i]) && get<2>(ar[i]>get<4>(ar[i])))
             max=get<2>(ar[i]);
-            else if(get<3>(ar[i])>get<1>(ar[i]) && get<3>(ar[i])>get<2>(ar[i]) && get<3>(ar[i])>get<4>(ar[i]))
+            else if(get<3>(ar[i])>get<1>(ar[i]) && get<3>(ar[i])>get<2>(ar[i]) && get<3>(ar[i]>get<4>(ar[i]))
                 max=get<3>(ar[i]);
-            else if(get<4>(ar[i])>get<1>(ar[i]) && get<4>(ar[i])>get<2>(ar[i]) && get<4>(ar[i])>get<3>(ar[i]))
+            else if(get<4>(ar[i])>get<1>(ar[i]) && get<4>(ar[i])>get<2>(ar[i]) && get<4>(ar[i]>get<3>(ar[i])))
                 max=get<4>(ar[i]);
             if (flag==5){
                 cout<<"The maximum value of the row "<<choice<<" is "<<max<<endl;
