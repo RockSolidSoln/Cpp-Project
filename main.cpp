@@ -29,7 +29,7 @@ void deleteuser();
 vec loadfile();
 vec1 databaseloadfile();
 void savefile();
-void savereport();
+void savereport(string,double,string,double);
 void saveHTMLreport();
 void clearActivity();
 void logrecord(string);
@@ -436,11 +436,11 @@ void clearActivity()
 
 //---------------------------------------------Salah Fayeq------------------------------------------------------
 // --------------------This function saves the report of the user choices in a file-------------------------
-void savereport(string str, double result)
+void savereport(string str, double result,string str1,double col)
 {
     ofstream outFile;
     outFile.open("Report.dat",ios::out|ios::app);
-    outFile << "you just"<<" " << str << " " << result<< endl;
+    outFile << "you just"<<" " << str << " "<< col <<str1<< result<< endl;
     outFile.close();
     logrecord(" saved the report");
     reportsmenu();
@@ -448,7 +448,7 @@ void savereport(string str, double result)
 
 //---------------------------------------------Salah Fayeq------------------------------------------------------
 // -----------------This function saves the report in HTML of the user choices in a file---------------------
-void saveHTMLreport(string str, double result)
+void saveHTMLreport()
 {      
     logrecord(" saved the HTML report");
     reportsmenu();
@@ -784,6 +784,7 @@ void findrowvar(int flag,int &row,float &rowmean,double &rowsum,double rowsqsum,
     if (flag ==1){
         cout << endl << "The variance of row " << row << " is " << rowvar << endl;
         logrecord(" calculated the variance of the row ");
+        savereport("calculated the variance of the row: ",row, " and the result is: ",rowvar);
     }
 }
 
@@ -796,7 +797,7 @@ void findcolvar(int flag,int &col,float &colmean,double &colsum,double colsqsum,
     colvar = ((colsqsum)-((colsum*colsum)/100))/99;
     if (flag ==1){
         cout << endl << "The variance of column " << col << " is " << colvar << endl;
-        logrecord(" calculated the variance of the column ");
+        logrecord(" calculated the variance of the column");
     }
 }
 
@@ -1004,7 +1005,9 @@ void findhistogram()
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------
 //------------------------------This functions shows the report menu-----------------------------------------
 void reportsmenu()
-{
+{   
+    string str1;
+    double db,ds;
     char ch;
     cout <<"--------------------------------------------------------\n"
         <<"          "<<username<<" ,Please enter a number to procced:\n"
@@ -1021,7 +1024,7 @@ void reportsmenu()
     logrecord(str);
     switch(ch)
     {
-         case('1')    : savereport();
+         case('1')    : savereport(str,db,str1,ds);
                          break;
          case('2')    : saveHTMLreport();
                          break;
