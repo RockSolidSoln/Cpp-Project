@@ -697,16 +697,8 @@ void maxcolumn(int choice,double &max,int flag)
     vec1 ar;
     ar=array1();
     if(flag ==5){
-        cout<<"Enter the column number from 1 to 4"<<endl;
+        cout<<"Enter the column number from 2 to 4"<<endl;
         cin>>choice;    
-    }
-    if(choice==1)
-    for(int i=0;i<ar.size();i++)
-    {  max=get<1>(ar[0]);
-       { 
-        if(get<1>(ar[i])>max)
-            max=get<1>(ar[i]);
-        }
     }
     if(choice==2)
     for(int i=0;i<ar.size();i++)

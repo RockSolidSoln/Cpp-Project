@@ -702,10 +702,10 @@ void maxcolumn(int choice,double &max,int flag)
     }
     if(choice==1)
     for(int i=0;i<ar.size();i++)
-    {  max=get<1>(ar[0]);
+    {  max=get<2>(ar[0]);
        { 
-        if(get<1>(ar[i])>max)
-            max=get<1>(ar[i]);
+        if(get<2>(ar[i])>max)
+            max=get<2>(ar[i]);
         }
     }
     if(choice==2)

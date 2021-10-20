@@ -700,14 +700,6 @@ void maxcolumn(int choice,double &max,int flag)
         cout<<"Enter the column number from 1 to 4"<<endl;
         cin>>choice;    
     }
-    if(choice==1)
-    for(int i=0;i<ar.size();i++)
-    {  max=get<1>(ar[0]);
-       { 
-        if(get<1>(ar[i])>max)
-            max=get<1>(ar[i]);
-        }
-    }
     if(choice==2)
     for(int i=0;i<ar.size();i++)
     {  max=get<2>(ar[0]);
