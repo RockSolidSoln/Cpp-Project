@@ -277,10 +277,15 @@ void changepass()
             {
                 get<2>(users[i])=newpass1;
                 cout << "Password changed you may procced to login"<< endl;
-           }
+            }
+                else
+                cout <<"passwords don't match try again"<<endl;
             string str=" just changed his password ";
-            logrecord(str);
+            logrecord(str);       
        }
+         else
+            cout <<"password is wrong"<<endl;
+                break;  
     }
     ofstream outfile;
     outfile.open("Users.dat" , ios::out);
