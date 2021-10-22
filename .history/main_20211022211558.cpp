@@ -30,7 +30,7 @@ void changepass();
 void deleteuser();
 vec loadfile();
 void studentfile();
-void databasenow(string,int[][5]);
+void databasenow(string,int[][])
 void savefile();
 void savereport(string,double,double);
 void saveHTMLreport();
@@ -368,7 +368,7 @@ vec loadfile() //needs debugging
 }
 
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------
-// ---------------------This function loads the student database file and clears the comma----------------------
+// -----------------------------This function loads the student database file------------------------------------
 void studentfile() //need debugging
 {
     string arr1[100],filename;
@@ -398,12 +398,12 @@ void studentfile() //need debugging
             i2++;
         }
     }
-   databasenow(filename,arr2);
+   dataebasenow(filename,arr2)
 }
 
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------
-// -----------------------------This function stores the data base file in the vector------------------------------------
-void databasenow(string filename, int ar[][5])
+// -----------------------------This function stores the data base file in------------------------------------
+void databasenow(string filename, int ar[][])
 {
     array <int,5> a;
     for(int i=0;i<100;i++)
@@ -415,7 +415,7 @@ void databasenow(string filename, int ar[][5])
         get<4>(a)=ar[i][4];
         student.push_back(a);
     }
-    logrecord(" loaded the "+filename+" file.");
+    logrecord(" loaded the "+filename+" file.")
     viewfunc();
 }
 //---------------------------------------------omar------------------------------------------------------

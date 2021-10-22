@@ -1,5 +1,9 @@
 ayaan 1 123 1
+<<<<<<< Updated upstream
 salah 0 12345 1
+=======
+salah 0 1234 1
+>>>>>>> Stashed changes
 muaad 1 123 0
 omar 0 1234 1
 liew 0 1234 1

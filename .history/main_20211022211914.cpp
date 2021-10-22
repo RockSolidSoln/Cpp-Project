@@ -30,7 +30,7 @@ void changepass();
 void deleteuser();
 vec loadfile();
 void studentfile();
-void databasenow(string,int[][5]);
+void databasenow(string,int[][])
 void savefile();
 void savereport(string,double,double);
 void saveHTMLreport();
@@ -398,7 +398,7 @@ void studentfile() //need debugging
             i2++;
         }
     }
-   databasenow(filename,arr2);
+   dataebasenow(filename,arr2)
 }
 
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------
@@ -415,7 +415,7 @@ void databasenow(string filename, int ar[][5])
         get<4>(a)=ar[i][4];
         student.push_back(a);
     }
-    logrecord(" loaded the "+filename+" file.");
+    logrecord(" loaded the "+filename+" file.")
     viewfunc();
 }
 //---------------------------------------------omar------------------------------------------------------

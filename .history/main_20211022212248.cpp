@@ -30,7 +30,7 @@ void changepass();
 void deleteuser();
 vec loadfile();
 void studentfile();
-void databasenow(string,int[][5]);
+void databasenow(string,int[][]);
 void savefile();
 void savereport(string,double,double);
 void saveHTMLreport();
