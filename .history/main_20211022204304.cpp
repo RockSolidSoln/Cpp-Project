@@ -370,7 +370,7 @@ vec loadfile() //needs debugging
 // -----------------------------This function loads the student database file------------------------------------
 void studentfile() //need debugging
 {
-    string arr1[100],filename;
+    string arr1[100],;
     int arr2[100][5];
     int k=0;
     int i=0;
@@ -407,24 +407,25 @@ void studentfile() //need debugging
         get<4>(a)=arr2[i][4];
         student.push_back(a);
     }
-    viewfunc();
 }
 
 //---------------------------------------------omar------------------------------------------------------
 // -------------------------------This function saves the new file----------------------------------------
 void savefile()
 {       
+    vec1 vee;
+    vee=array1();
     string newfilename;
     cout << "Enter the new file name "<< endl;
     cin >> newfilename; 
     ofstream file(newfilename+".dat",ios::app);
     for(int i=0;i<100;i++)
     {
-        file<<get<0>(student[i]) <<", "
-            <<get<1>(student[i]) <<", "
-            <<get<2>(student[i]) <<", "
-            <<get<3>(student[i]) <<", "
-            <<get<4>(student[i]) << endl;
+        file<<get<0>(vee[i]) <<", "
+            <<get<1>(vee[i]) <<", "
+            <<get<2>(vee[i]) <<", "
+            <<get<3>(vee[i]) <<", "
+            <<get<4>(vee[i]) << endl;
     }
     string str=" Created and saved a newfile as "+newfilename+"\n";
     logrecord(str);
@@ -668,6 +669,8 @@ void maxrow(int flag)
 {
     double max=0.0;
     int choice;
+    vec1 student;
+    student=array1();
     cout<<"Enter the row number from 0 to 99 to find the maximum from 3 subjects"<<endl;
     cin>>choice;
     for(int i=0;i<student.size();i++)
@@ -694,6 +697,8 @@ void maxrow(int flag)
 void maxcolumn(int choice,double &max,int flag)
 {
     max=0.0;
+    vec1 student;
+    student=array1();
     if(flag ==5){
         cout<<"Enter the column number from 1 to 4"<<endl;
         cin>>choice;    
@@ -779,6 +784,8 @@ void findrowmean(int flag,int &row,float &rowmean,double &rowsum,double &rowsqsu
     rowsum = 0;
     rowsqsum = 0;
     rowmean = 0;
+    vec1 student;
+    student=array1();
     if(row==-1){
         do{
             cout << endl << "Enter row from 1-100:" << endl;
@@ -812,6 +819,8 @@ void findcolmean(int flag,int &col,float &colmean,double &colsum,double &colsqsu
     colsum = 0;
     colsqsum = 0;
     colmean = 0;
+    vec1 student;
+    student=array1();
     if(col==-1){
         do{
             cout << endl << "Enter column from 2-5:" << endl;
@@ -995,6 +1004,8 @@ void findcorrelation(int &col,float &colmean,double &colsum,double &colsqsum,dou
 //---------------------This functions finds multiples of 2 element in a same row----------------------------
 void findcolsum12(int col,int col2,double &colsum12)
 {
+    vec1 student;
+    student=array1();
     colsum12 = 0;
     if((col==2 && col2==3)||(col==3 && col2==2)){
         for(int i=0;i<100;i++)
@@ -1027,6 +1038,8 @@ void findcolsum12(int col,int col2,double &colsum12)
 void finddistinct()
 {   
     int flag=0;
+    vec1 student;
+    student=array1();
    double mindata,maxdata,tempmax,tempmin;
     for (int i=2;i<=5;i++){
         maxcolumn(i,tempmax,flag);

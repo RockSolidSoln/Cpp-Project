@@ -370,7 +370,7 @@ vec loadfile() //needs debugging
 // -----------------------------This function loads the student database file------------------------------------
 void studentfile() //need debugging
 {
-    string arr1[100],filename;
+    string arr1[100],;
     int arr2[100][5];
     int k=0;
     int i=0;
@@ -414,17 +414,19 @@ void studentfile() //need debugging
 // -------------------------------This function saves the new file----------------------------------------
 void savefile()
 {       
+    vec1 vee;
+    vee=array1();
     string newfilename;
     cout << "Enter the new file name "<< endl;
     cin >> newfilename; 
     ofstream file(newfilename+".dat",ios::app);
     for(int i=0;i<100;i++)
     {
-        file<<get<0>(student[i]) <<", "
-            <<get<1>(student[i]) <<", "
-            <<get<2>(student[i]) <<", "
-            <<get<3>(student[i]) <<", "
-            <<get<4>(student[i]) << endl;
+        file<<get<0>(vee[i]) <<", "
+            <<get<1>(vee[i]) <<", "
+            <<get<2>(vee[i]) <<", "
+            <<get<3>(vee[i]) <<", "
+            <<get<4>(vee[i]) << endl;
     }
     string str=" Created and saved a newfile as "+newfilename+"\n";
     logrecord(str);

@@ -414,6 +414,7 @@ void studentfile() //need debugging
 // -------------------------------This function saves the new file----------------------------------------
 void savefile()
 {       
+    vec1 vee;
     string newfilename;
     cout << "Enter the new file name "<< endl;
     cin >> newfilename; 

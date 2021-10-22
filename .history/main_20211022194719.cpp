@@ -8,15 +8,13 @@
 #include <cmath>
 using namespace std;
 
+//----------------------------------------Global variables-----------------------------------------------------
+int status=0;
+string username,password;
 
 // -------------------------type definiations used in the function-------------------------------------------
 typedef  vector<tuple<string,int,string,int>> vec;
 typedef vector<array<int,5>> vec1;
-
-//----------------------------------------Global variables-----------------------------------------------------
-int status=0;
-string username,password;
-vec1 student;
 
 // ----------------------------------Start of functions defination-------------------------------------------
 void login();
@@ -29,7 +27,7 @@ void logout();
 void changepass();
 void deleteuser();
 vec loadfile();
-void studentfile();
+vec1 databaseloadfile();
 void savefile();
 void savereport(string,double,double);
 void saveHTMLreport();
@@ -162,7 +160,7 @@ void adminmenu()
     logrecord(str);
     switch(ch)
     {
-        case('1') : studentfile();
+        case('1') : viewfunc();
                     break;
         case('2') :  createuser();
                     break;
@@ -200,7 +198,7 @@ void usermenu()
     string str=" just choose menu option "+ch;
     logrecord(str);
     switch(ch)
-    {   case('1') : studentfile(); 
+    {   case('1') : viewfunc(); 
                     break;
         case('2') : logout();
                     break;
@@ -342,7 +340,7 @@ void deleteuser()
     outfile.close();
     cout << "---------------------------------------------------\n"
                     <<"Account deletion was successful.\n" << endl;
-    string str=" deleted the user "+name;
+    string str=" deleted an user";
     logrecord(str);
     pressenter(1);
 }
@@ -368,16 +366,14 @@ vec loadfile() //needs debugging
 
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------
 // -----------------------------This function loads the student database file------------------------------------
-void studentfile() //need debugging
+vec1 array1() //need debugging
 {
-    string arr1[100],filename;
+    string arr1[100];
     int arr2[100][5];
     int k=0;
     int i=0;
     ifstream data;
-    cout<<"Before proceeding enter the name of the Student data base file\n";
-    cin>>filename;
-    data.open(filename+".dat");
+    data.open("StudentDataBase.dat");
     while (!data.eof()){
         string x;
         data >> x;
@@ -397,6 +393,7 @@ void studentfile() //need debugging
             i2++;
         }
     }
+    vec1 vee;
     array <int,5> a;
     for(int i=0;i<100;i++)
     {
@@ -405,26 +402,28 @@ void studentfile() //need debugging
         get<2>(a)=arr2[i][2];
         get<3>(a)=arr2[i][3];
         get<4>(a)=arr2[i][4];
-        student.push_back(a);
+        vee.push_back(a);
     }
-    viewfunc();
+    return vee;
 }
 
 //---------------------------------------------omar------------------------------------------------------
 // -------------------------------This function saves the new file----------------------------------------
 void savefile()
 {       
+    vec1 vee;
+    vee=array1();
     string newfilename;
     cout << "Enter the new file name "<< endl;
     cin >> newfilename; 
     ofstream file(newfilename+".dat",ios::app);
     for(int i=0;i<100;i++)
     {
-        file<<get<0>(student[i]) <<", "
-            <<get<1>(student[i]) <<", "
-            <<get<2>(student[i]) <<", "
-            <<get<3>(student[i]) <<", "
-            <<get<4>(student[i]) << endl;
+        file<<get<0>(vee[i]) <<", "
+            <<get<1>(vee[i]) <<", "
+            <<get<2>(vee[i]) <<", "
+            <<get<3>(vee[i]) <<", "
+            <<get<4>(vee[i]) << endl;
     }
     string str=" Created and saved a newfile as "+newfilename+"\n";
     logrecord(str);
@@ -577,19 +576,21 @@ void loadmin()
 void minrow(int flag)
 {   int choice;
     double min=0.0;
+    vec1 ar;
+    ar=array1();
     cout<<"Enter the row number from 0 to 99 to find the minimum from 3 subjects"<<endl;
     cin>>choice;
-    for(int i=0;i<student.size();i++)
+    for(int i=0;i<ar.size();i++)
     {   
         if(i==choice)
         {   
-            min=get<1>(student[i]);
-            if(get<2>(student[i])<get<1>(student[i]) && get<2>(student[i])<get<3>(student[i]) && get<2>(student[i])<get<4>(student[i]))
-                min=get<2>(student[i]);
-            else if(get<3>(student[i])<get<1>(student[i]) && get<3>(student[i])<get<2>(student[i]) && get<2>(student[i])<get<4>(student[i]))
-                min=get<3>(student[i]);
-            else if(get<4>(student[i])<get<1>(student[i]) && get<4>(student[i])<get<2>(student[i]) && get<4>(student[i])<get<3>(student[i]))
-                min=get<4>(student[i]);
+            min=get<1>(ar[i]);
+            if(get<2>(ar[i])<get<1>(ar[i]) && get<2>(ar[i])<get<3>(ar[i]) && get<2>(ar[i])<get<4>(ar[i]))
+                min=get<2>(ar[i]);
+            else if(get<3>(ar[i])<get<1>(ar[i]) && get<3>(ar[i])<get<2>(ar[i]) && get<2>(ar[i])<get<4>(ar[i]))
+                min=get<3>(ar[i]);
+            else if(get<4>(ar[i])<get<1>(ar[i]) && get<4>(ar[i])<get<2>(ar[i]) && get<4>(ar[i])<get<3>(ar[i]))
+                min=get<4>(ar[i]);
             if (flag==4){
                 cout<<"The minimum value of the row "<<choice<<" is "<<min<<endl;
                 logrecord(" calculated the minimum");
@@ -604,40 +605,42 @@ void minrow(int flag)
 //------------------------------This function print the minimum from a column-------------------------------------
 void mincolumn(int choice,double &min,int flag)
 {   
+    vec1 ar;
+    ar=array1();
     if(flag ==4){
         cout<<"Enter the column number from 1 to 4"<<endl;
         cin>>choice;    
     }
     if(choice==1)
-    for(int i=0;i<student.size();i++)
-    {  min=get<1>(student[0]);
+    for(int i=0;i<ar.size();i++)
+    {  min=get<1>(ar[0]);
        { 
-        if(get<1>(student[i])<min)
-            min=get<1>(student[i]);
+        if(get<1>(ar[i])<min)
+            min=get<1>(ar[i]);
         }
     }
     else if(choice==2)
-    for(int i=0;i<student.size();i++)
-    {  min=get<2>(student[0]);
+    for(int i=0;i<ar.size();i++)
+    {  min=get<2>(ar[0]);
        { 
-        if(get<2>(student[i])<min)
-            min=get<2>(student[i]);
+        if(get<2>(ar[i])<min)
+            min=get<2>(ar[i]);
         }
     }
     else if(choice==3)
-    {min=get<3>(student[0]);
-    for(int i=0;i<student.size();i++)
+    {min=get<3>(ar[0]);
+    for(int i=0;i<ar.size();i++)
         { 
-        if(get<3>(student[i])<min)
-            min=get<3>(student[i]);
+        if(get<3>(ar[i])<min)
+            min=get<3>(ar[i]);
         }
     }
     else if(choice==4)
-   { min=get<4>(student[0]);
-    for(int i=0;i<student.size();i++)
+   { min=get<4>(ar[0]);
+    for(int i=0;i<ar.size();i++)
         { 
-        if(get<4>(student[i])<min)
-            min=get<4>(student[i]);
+        if(get<4>(ar[i])<min)
+            min=get<4>(ar[i]);
         }
     }
     if (flag==4){
@@ -668,18 +671,20 @@ void maxrow(int flag)
 {
     double max=0.0;
     int choice;
+    vec1 ar;
+    ar=array1();
     cout<<"Enter the row number from 0 to 99 to find the maximum from 3 subjects"<<endl;
     cin>>choice;
-    for(int i=0;i<student.size();i++)
+    for(int i=0;i<ar.size();i++)
     {   
         if(i==choice)
-        {   max=get<1>(student[i]);
-            if(get<2>(student[i])>get<1>(student[i]) && get<2>(student[i])>get<3>(student[i]) && get<2>(student[i])>get<4>(student[i]))
-            max=get<2>(student[i]);
-            else if(get<3>(student[i])>get<1>(student[i]) && get<3>(student[i])>get<2>(student[i]) && get<3>(student[i])>get<4>(student[i]))
-                max=get<3>(student[i]);
-            else if(get<4>(student[i])>get<1>(student[i]) && get<4>(student[i])>get<2>(student[i]) && get<4>(student[i])>get<3>(student[i]))
-                max=get<4>(student[i]);
+        {   max=get<1>(ar[i]);
+            if(get<2>(ar[i])>get<1>(ar[i]) && get<2>(ar[i])>get<3>(ar[i]) && get<2>(ar[i])>get<4>(ar[i]))
+            max=get<2>(ar[i]);
+            else if(get<3>(ar[i])>get<1>(ar[i]) && get<3>(ar[i])>get<2>(ar[i]) && get<3>(ar[i])>get<4>(ar[i]))
+                max=get<3>(ar[i]);
+            else if(get<4>(ar[i])>get<1>(ar[i]) && get<4>(ar[i])>get<2>(ar[i]) && get<4>(ar[i])>get<3>(ar[i]))
+                max=get<4>(ar[i]);
             if (flag==5){
                 cout<<"The maximum value of the row "<<choice<<" is "<<max<<endl;
                 logrecord(" calculated the maximum");
@@ -694,40 +699,42 @@ void maxrow(int flag)
 void maxcolumn(int choice,double &max,int flag)
 {
     max=0.0;
+    vec1 ar;
+    ar=array1();
     if(flag ==5){
         cout<<"Enter the column number from 1 to 4"<<endl;
         cin>>choice;    
     }
     if(choice==1)
-    for(int i=0;i<student.size();i++)
-    {  max=get<1>(student[0]);
+    for(int i=0;i<ar.size();i++)
+    {  max=get<1>(ar[0]);
        { 
-        if(get<1>(student[i])>max)
-            max=get<1>(student[i]);
+        if(get<1>(ar[i])>max)
+            max=get<1>(ar[i]);
         }
     }
     if(choice==2)
-    for(int i=0;i<student.size();i++)
-    {  max=get<2>(student[0]);
+    for(int i=0;i<ar.size();i++)
+    {  max=get<2>(ar[0]);
        { 
-        if(get<2>(student[i])>max)
-            max=get<2>(student[i]);
+        if(get<2>(ar[i])>max)
+            max=get<2>(ar[i]);
         }
     }
     else if(choice==3)
-    {max=get<3>(student[0]);
-    for(int i=0;i<student.size();i++)
+    {max=get<3>(ar[0]);
+    for(int i=0;i<ar.size();i++)
         { 
-        if(get<3>(student[i])>max)
-            max=get<3>(student[i]);
+        if(get<3>(ar[i])>max)
+            max=get<3>(ar[i]);
         }
     }
     else if(choice==4)
-   { max=get<4>(student[0]);
-    for(int i=0;i<student.size();i++)
+   { max=get<4>(ar[0]);
+    for(int i=0;i<ar.size();i++)
         { 
-        if(get<4>(student[i])>max)
-            max=get<4>(student[i]);
+        if(get<4>(ar[i])>max)
+            max=get<4>(ar[i]);
         }
     }
     if (flag==5){
@@ -779,6 +786,8 @@ void findrowmean(int flag,int &row,float &rowmean,double &rowsum,double &rowsqsu
     rowsum = 0;
     rowsqsum = 0;
     rowmean = 0;
+    vec1 ar;
+    ar=array1();
     if(row==-1){
         do{
             cout << endl << "Enter row from 1-100:" << endl;
@@ -787,14 +796,14 @@ void findrowmean(int flag,int &row,float &rowmean,double &rowsum,double &rowsqsu
             cout << "Invalid row" << endl;
         }while (row <1 || row > 100);
     }
-    rowsum = rowsum + get<1>(student[row-1]);
-    rowsum = rowsum + get<2>(student[row-1]);
-    rowsum = rowsum + get<3>(student[row-1]);
-    rowsum = rowsum + get<4>(student[row-1]);
-    rowsqsum = rowsqsum + (get<1>(student[row-1])*get<1>(student[row-1]));
-    rowsqsum = rowsqsum + (get<2>(student[row-1])*get<2>(student[row-1]));
-    rowsqsum = rowsqsum + (get<3>(student[row-1])*get<3>(student[row-1]));
-    rowsqsum = rowsqsum + (get<4>(student[row-1])*get<4>(student[row-1]));
+    rowsum = rowsum + get<1>(ar[row-1]);
+    rowsum = rowsum + get<2>(ar[row-1]);
+    rowsum = rowsum + get<3>(ar[row-1]);
+    rowsum = rowsum + get<4>(ar[row-1]);
+    rowsqsum = rowsqsum + (get<1>(ar[row-1])*get<1>(ar[row-1]));
+    rowsqsum = rowsqsum + (get<2>(ar[row-1])*get<2>(ar[row-1]));
+    rowsqsum = rowsqsum + (get<3>(ar[row-1])*get<3>(ar[row-1]));
+    rowsqsum = rowsqsum + (get<4>(ar[row-1])*get<4>(ar[row-1]));
     rowmean = rowsum/4;
 
     if(flag==0){
@@ -812,6 +821,8 @@ void findcolmean(int flag,int &col,float &colmean,double &colsum,double &colsqsu
     colsum = 0;
     colsqsum = 0;
     colmean = 0;
+    vec1 ar;
+    ar=array1();
     if(col==-1){
         do{
             cout << endl << "Enter column from 2-5:" << endl;
@@ -823,17 +834,17 @@ void findcolmean(int flag,int &col,float &colmean,double &colsum,double &colsqsu
     switch(col)
     {
         case (2): for(int i=0;i<100;i++){
-            colsum = colsum + get<1>(student[i]);
-            colsqsum = colsqsum + (get<1>(student[i])*get<1>(student[i]));}break;
+            colsum = colsum + get<1>(ar[i]);
+            colsqsum = colsqsum + (get<1>(ar[i])*get<1>(ar[i]));}break;
         case (3): for(int i=0;i<100;i++){
-            colsum = colsum + get<2>(student[i]);
-            colsqsum = colsqsum + (get<2>(student[i])*get<2>(student[i]));}break;
+            colsum = colsum + get<2>(ar[i]);
+            colsqsum = colsqsum + (get<2>(ar[i])*get<2>(ar[i]));}break;
         case (4): for(int i=0;i<100;i++){
-            colsum = colsum + get<3>(student[i]);
-            colsqsum = colsqsum + (get<3>(student[i])*get<3>(student[i]));}break;
+            colsum = colsum + get<3>(ar[i]);
+            colsqsum = colsqsum + (get<3>(ar[i])*get<3>(ar[i]));}break;
         case (5): for(int i=0;i<100;i++){
-            colsum = colsum + get<4>(student[i]);
-            colsqsum = colsqsum + (get<4>(student[i])*get<4>(student[i]));}break;
+            colsum = colsum + get<4>(ar[i]);
+            colsqsum = colsqsum + (get<4>(ar[i])*get<4>(ar[i]));}break;
     }
     colmean = colsum/100;
     if(flag==0)
@@ -995,30 +1006,32 @@ void findcorrelation(int &col,float &colmean,double &colsum,double &colsqsum,dou
 //---------------------This functions finds multiples of 2 element in a same row----------------------------
 void findcolsum12(int col,int col2,double &colsum12)
 {
+    vec1 ar;
+    ar=array1();
     colsum12 = 0;
     if((col==2 && col2==3)||(col==3 && col2==2)){
         for(int i=0;i<100;i++)
-        colsum12 = colsum12 + (get<1>(student[i])*get<2>(student[i]));
+        colsum12 = colsum12 + (get<1>(ar[i])*get<2>(ar[i]));
     }
     if((col==2 && col2==4)||(col==4 && col2==2)){
         for(int i=0;i<100;i++)
-        colsum12 = colsum12 + (get<1>(student[i])*get<3>(student[i]));
+        colsum12 = colsum12 + (get<1>(ar[i])*get<3>(ar[i]));
     }
     if((col==2 && col2==5)||(col==5 && col2==2)){
         for(int i=0;i<100;i++)
-        colsum12 = colsum12 + (get<1>(student[i])*get<4>(student[i]));
+        colsum12 = colsum12 + (get<1>(ar[i])*get<4>(ar[i]));
     }
     if((col==3 && col2==4)||(col==4 && col2==3)){
         for(int i=0;i<100;i++)
-        colsum12 = colsum12 + (get<2>(student[i])*get<3>(student[i]));
+        colsum12 = colsum12 + (get<2>(ar[i])*get<3>(ar[i]));
     }
     if((col==3 && col2==5)||(col==5 && col2==3)){
         for(int i=0;i<100;i++)
-        colsum12 = colsum12 + (get<2>(student[i])*get<4>(student[i]));
+        colsum12 = colsum12 + (get<2>(ar[i])*get<4>(ar[i]));
     }
     if((col==4 && col2==5)||(col==5 && col2==4)){
         for(int i=0;i<100;i++)
-        colsum12 = colsum12 + (get<3>(student[i])*get<4>(student[i]));
+        colsum12 = colsum12 + (get<3>(ar[i])*get<4>(ar[i]));
     }
 }
 
@@ -1027,6 +1040,8 @@ void findcolsum12(int col,int col2,double &colsum12)
 void finddistinct()
 {   
     int flag=0;
+    vec1 ar;
+    ar=array1();
    double mindata,maxdata,tempmax,tempmin;
     for (int i=2;i<=5;i++){
         maxcolumn(i,tempmax,flag);
@@ -1041,13 +1056,13 @@ void finddistinct()
     for (int k=mindata;k<=maxdata;k++){
         int f = 0;
         for (int i=0;i<100;i++){
-            if (k == get<1>(student[i]))
+            if (k == get<1>(ar[i]))
                 f++;
-            if (k == get<2>(student[i]))
+            if (k == get<2>(ar[i]))
                 f++;
-            if (k == get<3>(student[i]))
+            if (k == get<3>(ar[i]))
                 f++;
-            if (k == get<4>(student[i]))
+            if (k == get<4>(ar[i]))
                 f++;
         }
         if (f!=0){
@@ -1067,10 +1082,10 @@ void finddistinct()
 //------------------------------This function finds the histogram-----------------------------------------
 void findhistogram()
 {
-    //empty for now
+    //empt
 }
 
-//---------------------------------------------      ------------------------------------------------------
+//---------------------------------------------Ahmad Ayaan------------------------------------------------------
 //------------------------------This functions shows the report menu-----------------------------------------
 void reportsmenu()
 {   
