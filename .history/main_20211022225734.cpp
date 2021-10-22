@@ -46,7 +46,7 @@ void maxrow(int);
 void maxcolumn(int,double&,int);
 void loadmed();
 void findrowmed();
-void findcolmed();
+void findcolmean();
 void loadmean();
 void findrowmean(int,int&, float&, double&, double&);
 void findcolmean(int,int&, float&, double&, double&);

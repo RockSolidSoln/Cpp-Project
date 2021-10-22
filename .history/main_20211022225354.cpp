@@ -33,7 +33,7 @@ void studentfile();
 void databasenow(string,int[][5]);
 void savefile();
 void savereport(string,double,double);
-void saveHTMLreport(string,double,double);
+void saveHTMLreport();
 void clearActivity();
 void logrecord(string);
 void pressenter(int);
@@ -45,8 +45,8 @@ void loadmax();
 void maxrow(int);
 void maxcolumn(int,double&,int);
 void loadmed();
-void findrowmed();
-void findcolmed();
+void findrowmean();
+void findcolmean();
 void loadmean();
 void findrowmean(int,int&, float&, double&, double&);
 void findcolmean(int,int&, float&, double&, double&);
@@ -450,8 +450,6 @@ void clearActivity()
     ofstream outfile;
     outfile.open("Activity.dat",ios::out|ios::trunc);
     outfile.close();
-    ofstream hfile;
-    hfile.open("Report.html" ,ios::out|ios::trunc);
 }
 
 //---------------------------------------------Salah Fayeq------------------------------------------------------
@@ -468,12 +466,8 @@ void savereport(string str, double col,double results)
 
 //---------------------------------------------Salah Fayeq------------------------------------------------------
 // -----------------This function saves the report in HTML of the user choices in a file---------------------
-void saveHTMLreport(string str, double col,double results)
+void saveHTMLreport()
 {      
-    ofstream outFile;
-    outFile.open("Report.html",ios::out|ios::app);
-    outFile << "you just"<<" " << str << " "<< col <<" and the result is: " << results<< endl;
-    outFile.close();
     logrecord(" saved the HTML report");
     reportsmenu();
 }
@@ -761,13 +755,9 @@ void loadmed()
 
 void findrowmed()
 {
-
-}
-
-void findcolmean()
-{
     
 }
+
 //---------------------------------------------Liew ------------------------------------------------------
 //------------------------------This functions loads the mean function-----------------------------------------
 void loadmean()
@@ -826,7 +816,6 @@ void findrowmean(int flag,int &row,float &rowmean,double &rowsum,double &rowsqsu
         cout << endl << "The mean of row " << row << " is " << rowmean << endl;
         logrecord(" calculated the mean of the row ");
         savereport("calculated the mean of the row",row,rowmean);
-        saveHTMLreport("calculated the mean of the row:",row,rowmean);
     }
 }
 
@@ -867,7 +856,6 @@ void findcolmean(int flag,int &col,float &colmean,double &colsum,double &colsqsu
         cout << endl << "The mean of the column " << col << " is " << colmean << endl;
         logrecord(" calculated the mean of the column ");
         savereport("calculated the mean of the column:",col,colsqsum);
-        saveHTMLreport("calculated the mean of the column:",col,colsqsum);
     }
 }
 
@@ -910,7 +898,6 @@ void findrowvar(int flag,int &row,float &rowmean,double &rowsum,double rowsqsum,
         cout << endl << "The variance of row " << row << " is " << rowvar << endl;
         logrecord(" calculated the variance of the row ");
         savereport("calculated the variance of the row: ",row,rowvar);
-        saveHTMLreport("calculated thevariance of the row:",row,rowvar);
     }
 }
 
@@ -965,7 +952,6 @@ void findrowstdv(int flag,int &row,float &rowmean,double &rowsum,double rowsqsum
     cout << endl << "The standard deviation of row " << row << " is " << rowstdv << endl;
     logrecord(" calculated the standard deviation of the row ");
     savereport("calculated the standard deviation of the row ",row,rowstdv);
-    saveHTMLreport("calculated the standard deviation of the row",row,rowstdv);
 }
 
 //---------------------------------------------Liew ------------------------------------------------------
@@ -978,7 +964,6 @@ void findcolstdv(int flag,int &col,float &colmean,double &colsum,double colsqsum
     cout << endl << "The standard deviation of column " << col << " is " << colstdv << endl;
     logrecord(" calculated the standard deviation of the column ");
     savereport("calculated the standard deviation of the column: ",col,colstdv);
-    saveHTMLreport("calculated the standard deviation of the column",col,colstdv);
 }
 
 //---------------------------------------------Liew ------------------------------------------------------
@@ -1105,8 +1090,7 @@ void findhistogram()
 void reportsmenu()
 {   
     string str1;
-    double db=0;
-    double ds=0;
+    double db,ds;
     char ch;
     cout <<"--------------------------------------------------------\n"
         <<"          "<<username<<" ,Please enter a number to procced:\n"
@@ -1123,9 +1107,9 @@ void reportsmenu()
     logrecord(str);
     switch(ch)
     {
-         case('1')    : savereport(str1,db,ds);
+         case('1')    : savereport(str,db,ds);
                          break;
-         case('2')    : saveHTMLreport(str1,db,ds);
+         case('2')    : saveHTMLreport();
                          break;
          case('B')    : viewfunc();
                          break;
