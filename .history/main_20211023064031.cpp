@@ -24,10 +24,10 @@ int checkadmin(string,string);
 void getchoice();
 void adminmenu();
 void usermenu();
-void createuser(vec);
+void createuser();
 void logout();
-void changepass(vec);
-void deleteuser(vec);
+void changepass();
+void deleteuser();
 vec loadfile();
 void studentfile();
 void databasenow(string,int[][5]);
@@ -61,7 +61,6 @@ void findcolsum12(int ,int ,double&);
 void findcorrelation(int& ,float& ,double& ,double& ,double&);
 void finddistinct();
 void findhistogram();
-void findMP();
 void reportsmenu();
 
 
@@ -226,7 +225,7 @@ void usermenu()
 
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------
 //----------------------------This functions creates the new user-----------------------------------------------
-void createuser(vec users) 
+void createuser() 
 {   
     string user,pass;
     int s, flag=0,f;
@@ -311,7 +310,7 @@ void changepass(vec users)
 
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------
 //----------------------------This functions deletes the user--------------------------------------
-void deleteuser(vec users) 
+void deleteuser() 
 {
     string name, pass;
                 cout << "-----------------------------------------------------\n"
@@ -381,10 +380,6 @@ void studentfile()
     cout<<"Before proceeding enter the name of the Student data base file\n";
     cin>>filename;
     data.open(filename+".dat");
-    if(!data){
-        cout<<"file doesn't exist\nTry again\n";
-        studentfile();
-    }
     while (!data.eof()){
         string x;
         data >> x;
@@ -1100,11 +1095,6 @@ void finddistinct()
 //------------------------------------------Salah Fayeq---------------------------------------------------
 //------------------------------This function finds the histogram-----------------------------------------
 void findhistogram()
-{
-    //empty for now
-}
-
-void getMP()
 {
     //empty for now
 }

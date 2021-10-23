@@ -381,9 +381,9 @@ void studentfile()
     cout<<"Before proceeding enter the name of the Student data base file\n";
     cin>>filename;
     data.open(filename+".dat");
-    if(!data){
-        cout<<"file doesn't exist\nTry again\n";
-        studentfile();
+    if(!data)
+    {
+        
     }
     while (!data.eof()){
         string x;

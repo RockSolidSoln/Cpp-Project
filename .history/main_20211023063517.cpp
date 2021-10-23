@@ -17,6 +17,7 @@ typedef vector<array<int,5>> vec1;
 int status=0;
 string username,password;
 vec1 student;
+vec users;
 
 // ----------------------------------Start of functions defination-------------------------------------------
 void login();
@@ -24,11 +25,11 @@ int checkadmin(string,string);
 void getchoice();
 void adminmenu();
 void usermenu();
-void createuser(vec);
+void createuser();
 void logout();
-void changepass(vec);
-void deleteuser(vec);
-vec loadfile();
+void changepass();
+void deleteuser();
+void loadfile();
 void studentfile();
 void databasenow(string,int[][5]);
 void savefile();
@@ -61,7 +62,6 @@ void findcolsum12(int ,int ,double&);
 void findcorrelation(int& ,float& ,double& ,double& ,double&);
 void finddistinct();
 void findhistogram();
-void findMP();
 void reportsmenu();
 
 
@@ -114,8 +114,7 @@ void login()
 //---------------------------This functions checks if the user is admin or not----------------------------------
  int checkadmin(string name,string pass)
  {      
-    vec users;
-    users = loadfile();
+    loadfile();
      for (int i=0;i<users.size();i++)
     {   
         if(get<0>(users[i])==name && get<2>(users[i])==pass && get<1>(users[i])==1)
@@ -164,19 +163,18 @@ void adminmenu()
     cin.ignore(' ','\n');
     string str=" just choose menu option ";
     logrecord(str);
-    vec users;
-    users=loadfile();
+    loadfile();
     switch(ch)
     {
         case('1') : studentfile();
                     break;
-        case('2') :  createuser(users);
+        case('2') :  createuser();
                     break;
         case('3') : logout();
                     break;
-        case('4') :  deleteuser(users);
+        case('4') :  deleteuser();
                     break;
-        case('5') :  changepass(users);
+        case('5') :  changepass();
                     break;
         case('0') : exit(0);
                     break;
@@ -205,14 +203,13 @@ void usermenu()
     cin.ignore(' ','\n');
     string str=" just choose menu option "+ch;
     logrecord(str);
-    vec users;
-    users=loadfile();
+    loadfile();
     switch(ch)
     {   case('1') : studentfile(); 
                     break;
         case('2') : logout();
                     break;
-        case('3') : changepass(users);
+        case('3') : changepass();
                     break;
         case('0') : exit(0);
                     break;
@@ -226,7 +223,7 @@ void usermenu()
 
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------
 //----------------------------This functions creates the new user-----------------------------------------------
-void createuser(vec users) 
+void createuser() 
 {   
     string user,pass;
     int s, flag=0,f;
@@ -269,7 +266,7 @@ void logout()
 
 //---------------------------------------------Salah Fayeq------------------------------------------------------
 //----------------------------This functions changes the password-------------------------------------
-void changepass(vec users) 
+void changepass() 
 {
     string newpass1,newpass2,oldpass;           
     cout << "Enter your old password to continue..." << endl;
@@ -311,7 +308,7 @@ void changepass(vec users)
 
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------
 //----------------------------This functions deletes the user--------------------------------------
-void deleteuser(vec users) 
+void deleteuser() 
 {
     string name, pass;
                 cout << "-----------------------------------------------------\n"
@@ -334,7 +331,7 @@ void deleteuser(vec users)
              }       
     }
     ofstream outfile;
-    outfile.open("Users.dat",ios::out);
+    outfile.open("Users.dat");
     for (int i=0;i<users.size();i++)
     { 
         outfile << get<0>(users[i]) << " " 
@@ -352,9 +349,8 @@ void deleteuser(vec users)
 
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------
 // ---------------------------------This function loads Users.dat the file-----------------------------------------
-vec loadfile() //needs debugging
+void loadfile() 
 {   
-    vec users;
     tuple<string,int,string,int> userdata;
     ifstream file;
     file.open("Users.dat");
@@ -366,7 +362,6 @@ vec loadfile() //needs debugging
         users.push_back(userdata);
     }
     file.close();
-    return users;
 }
 
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------
@@ -381,10 +376,6 @@ void studentfile()
     cout<<"Before proceeding enter the name of the Student data base file\n";
     cin>>filename;
     data.open(filename+".dat");
-    if(!data){
-        cout<<"file doesn't exist\nTry again\n";
-        studentfile();
-    }
     while (!data.eof()){
         string x;
         data >> x;
@@ -1100,11 +1091,6 @@ void finddistinct()
 //------------------------------------------Salah Fayeq---------------------------------------------------
 //------------------------------This function finds the histogram-----------------------------------------
 void findhistogram()
-{
-    //empty for now
-}
-
-void getMP()
 {
     //empty for now
 }

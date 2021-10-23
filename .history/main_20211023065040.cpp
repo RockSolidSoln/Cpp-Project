@@ -61,7 +61,6 @@ void findcolsum12(int ,int ,double&);
 void findcorrelation(int& ,float& ,double& ,double& ,double&);
 void finddistinct();
 void findhistogram();
-void findMP();
 void reportsmenu();
 
 
@@ -381,10 +380,6 @@ void studentfile()
     cout<<"Before proceeding enter the name of the Student data base file\n";
     cin>>filename;
     data.open(filename+".dat");
-    if(!data){
-        cout<<"file doesn't exist\nTry again\n";
-        studentfile();
-    }
     while (!data.eof()){
         string x;
         data >> x;
@@ -1106,7 +1101,7 @@ void findhistogram()
 
 void getMP()
 {
-    //empty for now
+    //emp
 }
 
 //---------------------------------------------      ------------------------------------------------------

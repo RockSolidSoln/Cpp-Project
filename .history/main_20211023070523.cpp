@@ -382,7 +382,7 @@ void studentfile()
     cin>>filename;
     data.open(filename+".dat");
     if(!data){
-        cout<<"file doesn't exist\nTry again\n";
+        cout<<"file doesn't exist\nTry again";
         studentfile();
     }
     while (!data.eof()){
