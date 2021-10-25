@@ -474,10 +474,34 @@ void savereport(string str, double col,double results)
 // -----------------This function saves the report in HTML of the user choices in a file---------------------
 void saveHTMLreport(string str, double col,double results)
 {      
-    ofstream outFile;
-    outFile.open("Report.html",ios::out|ios::app);
-    outFile << "you just"<<" " << str << " "<< col <<" and the result is: " << results<< endl;
-    outFile.close();
+        ofstream file;
+    file.open("a.html");
+
+    file << "<html>" << endl;
+    file << "<body>" << endl;
+    file << "<h1>" << "Testing HTML " << "</h1>" << endl;
+    file << "<table style=\"width:50%\"> " << endl;
+
+    for (int i=1; i<11; i++)
+    {
+        file << "<tr>";
+        file << "<td style=\"background-color:#F100FF\"> " << i << " </td> "
+             << "<td style=\"background-color:#FFFF00\"> " << 'x' << " </td>"
+             << "<td> " << 8 << " </td> "
+             << "<td> " << '=' << " </td>"
+             << "<td style=\"font-size:20px\"> " << 8*i << " </td>" << endl;          
+        file << "</tr>" << endl;
+    }
+
+    file << "</table>" << endl;
+    file << "</body>" << endl;
+    file << "</html>" << endl;
+    file.close();
+
+    system("chrome a.html");
+
+
+
     logrecord(" saved the HTML report");
     reportsmenu();
 }
