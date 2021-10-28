@@ -386,7 +386,6 @@ void clearfile()
         cout<<"file doesn't exist\nTry again\n";
         clearfile();
     }
-    else cout<<"File was loaded successfully\n";
     while (!data.eof()){
         string x;
         data >> x;

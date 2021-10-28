@@ -169,9 +169,9 @@ void adminmenu()
     users=loadfile();
     switch(ch)
     {
-        case('1') : clearfile();
+        case('1') : studentfile();
                     break;
-        case('2') : createuser(users);
+        case('2') :  createuser(users);
                     break;
         case('3') : logout();
                     break;
@@ -209,7 +209,7 @@ void usermenu()
     vec users;
     users=loadfile();
     switch(ch)
-    {   case('1') : clearfile(); 
+    {   case('1') : studentfile(); 
                     break;
         case('2') : logout();
                     break;
@@ -379,14 +379,13 @@ void clearfile()
     int k=0;
     int i=0;
     ifstream data;
-    cout<<"Before proceeding enter the name of the data base file with proper extension\n";
+    cout<<"Before proceeding enter the name of the Student data base file\n";
     cin>>filename;
-    data.open(filename);
+    data.open(filename+".dat");
     if(!data){
         cout<<"file doesn't exist\nTry again\n";
-        clearfile();
+        clfile();
     }
-    else cout<<"File was loaded successfully\n";
     while (!data.eof()){
         string x;
         data >> x;
