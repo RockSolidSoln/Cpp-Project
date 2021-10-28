@@ -1089,7 +1089,7 @@ void finddistinct()
 {   
     int flag=0;
    double mindata,maxdata,tempmax,tempmin;
-    for (int i=2;i<=5;i++){
+    for (int i=1;i<=5;i++){
         maxcolumn(i,tempmax,flag);
         mincolumn(i,tempmin,flag);
         maxdata = (maxdata<tempmax) ? tempmax : maxdata;
@@ -1125,29 +1125,29 @@ void finddistinct()
 
 //------------------------------------------Salah Fayeq---------------------------------------------------
 //------------------------------This function finds the histogram-----------------------------------------
-// void findhistogram()
-// {/
-//     srand(time(NULL));
-//     set<int> s;
+void findhistogram()
+{
+    srand(time(NULL));
+    set<int> s;
 
-//     findUnique(student, s);
-//     vector<int> v2(s.begin(),s.end());
-//     vector<int> hist (v2.size(),0);
+    findUnique(student, s);
+    vector<int> v2(s.begin(),s.end());
+    vector<int> hist (v2.size(),0);
 
-//     for (int j=0; j<student.size(); j++){
-//         for (int i=0;i<v2.size(); i++){
-//             if(student[j] == v2[i])
-//                 hist[i]++;
-//         }
-//     }
+    for (int j=0; j<student.size(); j++){
+        for (int i=0;i<v2.size(); i++){
+            if(student[j] == v2[i])
+                hist[i]++;
+        }
+    }
 
-//     for (int i=0; i<student.size(); i++){
-//         cout << v2[i] << "-->";
-//         for(int k=0;k<hist[i];k++)
-//             cout << "=";
-//         cout <<endl;       
-//     }
-// }
+    for (int i=0; i<student.size(); i++){
+        cout << v2[i] << "-->";
+        for(int k=0;k<hist[i];k++)
+            cout << "=";
+        cout <<endl;       
+    }
+}
 
 
 //---------------------------------------------Salah------------------------------------------------------

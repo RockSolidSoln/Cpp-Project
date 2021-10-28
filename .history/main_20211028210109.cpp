@@ -1122,33 +1122,58 @@ void finddistinct()
     logrecord(" found out the distinct member ");
     pressenter(2);
 }
+//-----------------------------------------Salah Fayeq----------------------------------------------------
+//------------------------------This function initializes thevector---------------------------------------
+void initVector(vector<int> &v)
+{
+    for (auto item : v)
+        item =  rand()%10;
+
+}
+
+//----------------------------------------Salah Fayeq-------------------------------------------------------
+//----------------------------------------this function finds the unique element----------------------------
+void findUnique(const vector<int> &v, set<int> &s)
+{
+    for (auto item : v)
+        s.insert(item);
+}
+
 
 //------------------------------------------Salah Fayeq---------------------------------------------------
 //------------------------------This function finds the histogram-----------------------------------------
-// void findhistogram()
-// {/
-//     srand(time(NULL));
-//     set<int> s;
+void findhistogram()
+{
+    srand(time(NULL));
+    vector<int> v(100);
+    set<int> s;
 
-//     findUnique(student, s);
-//     vector<int> v2(s.begin(),s.end());
-//     vector<int> hist (v2.size(),0);
+    initVector(v);
+    printVector(v);
 
-//     for (int j=0; j<student.size(); j++){
-//         for (int i=0;i<v2.size(); i++){
-//             if(student[j] == v2[i])
-//                 hist[i]++;
-//         }
-//     }
+    findUnique(v, s);
+    vector<int> v2(s.begin(),s.end());
+    vector<int> hist (v2.size(),0);
 
-//     for (int i=0; i<student.size(); i++){
-//         cout << v2[i] << "-->";
-//         for(int k=0;k<hist[i];k++)
-//             cout << "=";
-//         cout <<endl;       
-//     }
-// }
+    for (int j=0; j<v.size(); j++){
+        for (int i=0;i<v2.size(); i++){
+            if(v[j] == v2[i])
+                hist[i]++;
+        }
+    }
 
+    for (int i=0; i<v.size(); i++){
+        cout << v2[i] << "-->";
+        for(int k=0;k<hist[i];k++)
+            cout << "=";
+        cout <<endl;       
+    }
+}
+
+void getMP()
+{
+    //empty for now
+}
 
 //---------------------------------------------Salah------------------------------------------------------
 //------------------------------This functions shows the report menu-----------------------------------------

@@ -1126,7 +1126,7 @@ void finddistinct()
 //------------------------------------------Salah Fayeq---------------------------------------------------
 //------------------------------This function finds the histogram-----------------------------------------
 // void findhistogram()
-// {/
+// {
 //     srand(time(NULL));
 //     set<int> s;
 

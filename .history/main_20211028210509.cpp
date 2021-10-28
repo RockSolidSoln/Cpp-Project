@@ -1123,31 +1123,40 @@ void finddistinct()
     pressenter(2);
 }
 
+//----------------------------------------Salah Fayeq-------------------------------------------------------
+//----------------------------------------this function finds the unique element----------------------------
+void findUnique(const vector<int> student, set<int> &s)
+{
+    for (auto item : student)
+        s.insert(item);
+}
+
+
 //------------------------------------------Salah Fayeq---------------------------------------------------
 //------------------------------This function finds the histogram-----------------------------------------
-// void findhistogram()
-// {/
-//     srand(time(NULL));
-//     set<int> s;
+void findhistogram()
+{
+    srand(time(NULL));
+    set<int> s;
 
-//     findUnique(student, s);
-//     vector<int> v2(s.begin(),s.end());
-//     vector<int> hist (v2.size(),0);
+    findUnique(student, s);
+    vector<int> v2(s.begin(),s.end());
+    vector<int> hist (v2.size(),0);
 
-//     for (int j=0; j<student.size(); j++){
-//         for (int i=0;i<v2.size(); i++){
-//             if(student[j] == v2[i])
-//                 hist[i]++;
-//         }
-//     }
+    for (int j=0; j<student.size(); j++){
+        for (int i=0;i<v2.size(); i++){
+            if(student[j] == v2[i])
+                hist[i]++;
+        }
+    }
 
-//     for (int i=0; i<student.size(); i++){
-//         cout << v2[i] << "-->";
-//         for(int k=0;k<hist[i];k++)
-//             cout << "=";
-//         cout <<endl;       
-//     }
-// }
+    for (int i=0; i<student.size(); i++){
+        cout << v2[i] << "-->";
+        for(int k=0;k<hist[i];k++)
+            cout << "=";
+        cout <<endl;       
+    }
+}
 
 
 //---------------------------------------------Salah------------------------------------------------------
