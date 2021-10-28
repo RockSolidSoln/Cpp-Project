@@ -29,8 +29,8 @@ void logout();
 void changepass(vec);
 void deleteuser(vec);
 vec loadfile();
-void clearfile();
-void database(string,int[][5]);
+void studentfile();
+void databasenow(string,int[][5]);
 void savefile();
 void savereport(string,double,double);
 void saveHTMLreport(string,double,double);
@@ -499,6 +499,9 @@ void saveHTMLreport(string str, double col,double results)
     file.close();
 
     system("chrome a.html");
+
+
+
     logrecord(" saved the HTML report");
     reportsmenu();
 }
@@ -1130,7 +1133,7 @@ void getMP()
     //empty for now
 }
 
-//---------------------------------------------Salah------------------------------------------------------
+//---------------------------------------------      ------------------------------------------------------
 //------------------------------This functions shows the report menu-----------------------------------------
 void reportsmenu()
 {   

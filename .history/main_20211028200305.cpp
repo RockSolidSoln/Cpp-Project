@@ -499,6 +499,9 @@ void saveHTMLreport(string str, double col,double results)
     file.close();
 
     system("chrome a.html");
+
+
+
     logrecord(" saved the HTML report");
     reportsmenu();
 }
