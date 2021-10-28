@@ -6,7 +6,6 @@
 #include <sstream>
 #include <vector>
 #include <cmath>
-#include <set>
 using namespace std;
 
 
@@ -500,6 +499,9 @@ void saveHTMLreport(string str, double col,double results)
     file.close();
 
     system("chrome a.html");
+
+
+
     logrecord(" saved the HTML report");
     reportsmenu();
 }
@@ -1117,60 +1119,13 @@ void finddistinct()
     logrecord(" found out the distinct member ");
     pressenter(2);
 }
-//-----------------------------------------Salah Fayeq----------------------------------------------------
-//------------------------------This function initializes thevector---------------------------------------
-void initVector(vector<int> &v)
-{
-    for (auto item : v)
-        item =  rand()%10;
-
-}
-
-//----------------------------------------Salah Fayeq-----------------------------------------------------
-//----------------------------------------this function prints the vector---------------------------------
-void printVector(const vector<int> &v)
-{
-     for (auto item : v)
-     cout << item << ":";
-     cout << endl;
-}
-//----------------------------------------Salah Fayeq-------------------------------------------------------
-//----------------------------------------this function finds the unique element----------------------------
-void findUnique(const vector<int> &v, set<int> &s)
-{
-    for (auto item : v)
-        s.insert(item);
-}
 
 
 //------------------------------------------Salah Fayeq---------------------------------------------------
 //------------------------------This function finds the histogram-----------------------------------------
 void findhistogram()
 {
-    srand(time(NULL));
-    vector<int> v(100);
-    set<int> s;
-
-    initVector(v);
-    printVector(v);
-
-    findUnique(v, s);
-    vector<int> v2(s.begin(),s.end());
-    vector<int> hist (v2.size(),0);
-
-    for (int j=0; j<v.size(); j++){
-        for (int i=0;i<v2.size(); i++){
-            if(v[j] == v2[i])
-                hist[i]++;
-        }
-    }
-
-    for (int i=0; i<v.size(); i++){
-        cout << v2[i] << "-->";
-        for(int k=0;k<hist[i];k++)
-            cout << "=";
-        cout <<endl;       
-    }
+    //empty for now
 }
 
 void getMP()
@@ -1178,7 +1133,7 @@ void getMP()
     //empty for now
 }
 
-//---------------------------------------------Salah------------------------------------------------------
+//---------------------------------------------      ------------------------------------------------------
 //------------------------------This functions shows the report menu-----------------------------------------
 void reportsmenu()
 {   
