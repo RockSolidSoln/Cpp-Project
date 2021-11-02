@@ -476,7 +476,7 @@ void savereport(string str, double col,double results)
 // -----------------This function saves the report in HTML of the user choices in a file---------------------
 void saveHTMLreport(string str, double col,double results)
 {      
-        ofstream file;
+    ofstream file;
     file.open("a.html");
 
     file << "<html>" << endl;
@@ -778,20 +778,64 @@ void maxcolumn(int choice,double &max,int flag)
         logrecord(" calculated the maximum");
     }
 }
-//---------------------------------------------Omar ------------------------------------------------------
+//---------------------------------------------Salah Fayeq---------------------------------------------------
 //------------------------------This functions loads the median function-------------------------------------
 void loadmed()
 {   
+    int flag =0;
+    int row = -1;
+    int col = -1;
+    int choice;
+    float rowmedian,colmedian;
+    float rowsum,colsum,rowlen,collen;
+
+    cout <<"\n"<<"Enter 1 to find the median of a row, or 2 to find the median of column: "<<endl;
+    cin >> choice;
+    cin.ignore(' ','\n');
+    
+    if (choice==1)
+    {
+       findrowmed(flag,row,rowmedian,rowsum,rowlen);
+    }
+    else if (choice==2)
+    {
+        findcolmed(flag,col,colmedian,colsum,collen);
+    }
+    else
+    {
+        cout<<"Wrong choice\n"
+             <<"Enter again\n";
+        loadmed();
+    }
     logrecord(" calculated the median");
     pressenter(2);
 }
 
-void findrowmed()
+void findrowmed(int flag,int &row,float &rowmedian,float &rowsum,float &rowlen)
 {
+    rowmedian=0;
+    rowsum=0;
+    rowlen=0;
+    if(row==-1){
+        do{
+            cout<<endl<<"Enter the row you want to calculate"<<endl;
+
+
+
+
+
+
+
+
+        }
+    }
+
+
+
 
 }
 
-void findcolmean()
+void findcolmed()
 {
     
 }
