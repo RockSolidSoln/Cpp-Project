@@ -59,7 +59,8 @@ void maxcolumn(int,double&,int);
 void loadmed();
 void findrowmed();
 void findcolmed();
-void loadmean();
+void loadmean(struct datavalues d);
+void findmean(struct datavalues d,const int col,const int row, const int roworcol,double &sum,double &sumofsq,double &mean, int &count);
 void findrowmean(int,int&, float&, double&, double&);
 void findcolmean(int,int&, float&, double&, double&);
 void loadvar();
@@ -604,7 +605,7 @@ void viewfunc(struct datavalues d)
                          break;
          case('3')    : loadmed();               
                          break;
-         case('4')    : loadmean();
+         case('4')    : loadmean(d);
                          break;
          case('5')    : loadvar();
                          break;
@@ -860,34 +861,71 @@ void findcolmed()
 
 //---------------------------------------------Liew ------------------------------------------------------
 //------------------------------This functions loads the mean function-----------------------------------------
-void loadmean()
-{   
-    // int flag=0;
-    // int row = -1;
-    // int col = -1;
-    // int rc;
-    // float rowmean,colmean;
-    // double rowsum,colsum,rowsqsum,colsqsum;
-    // cout << endl << "Enter 1 to find mean of a row or 2 to find mean of a column:" << endl;
-    // cin >> rc;
-    // cin.ignore(' ','\n');
-    // if (rc==1)
-    // {
-    //     findrowmean(flag,row,rowmean,rowsum,rowsqsum);
-    // } 
-    // else if(rc==2)
-    // {
-    //     findcolmean(flag,col,colmean,colsum,colsqsum);
-    // }
-    // else
-    // {
-    //     cout<<"Wrong choice\n"
-    //          <<"Enter again\n";
-    //     loadmean();
-    // }
-    // pressenter(2);
+void askrowcolumn(struct datavalues d, int &row, int &col,int &roworcol){
+
+    do{
+        cout << endl << "Enter 1 for column or 2 for row" << endl;
+        cin >> roworcol;
+        if (!(roworcol ==1 || roworcol ==2))
+            cout << "Invalid input. Please enter again." << endl;
+    }while(!(roworcol ==1 || roworcol ==2));
+
+    if (roworcol == 1){
+        do{
+            cout << endl << "Enter a column from 0 to " << d.totalcol - 1 << "." << endl;
+            cin >> col;
+            if (!(col >= 0 && col < d.totalcol && d.computablecols[col] == 1))
+                cout << "Invalid input. Please enter a valid and computable column." << endl;
+        }while (!(col >= 0 && col < d.totalcol && d.computablecols[col] == 1));
+    } else{
+        do{
+            cout << endl << "Enter a row from 0 to " << d.totalrow - 1 << "." << endl;
+            cin >> row;
+            if (!(row >= 0 && row < d.totalrow))
+                cout << "Invalid input. Please enter a valid row." << endl;
+        }while(!(row >= 0 && row < d.totalrow));
+    }
 }
 
+void loadmean(struct datavalues d){
+    int row,col,roworcol,count;
+    double sum,sumofsq,mean;
+
+    askrowcolumn(d,row,col,roworcol);
+    findmean(d,col,row,roworcol,sum,sumofsq,mean,count);
+
+    cout << endl << "The mean of ";
+    if (roworcol == 1)
+        cout << "column " << col;
+    else if (roworcol == 2)
+        cout << "row " << row;
+    cout << " is " << mean << ".";
+
+}
+
+void findmean(struct datavalues d,const int col,const int row, const int roworcol,double &sum,double &sumofsq,double &mean,int &count){
+    sum = 0;
+    sumofsq = 0;
+    count = 0;
+    if (roworcol==1){
+        for (int i=0;i<d.totalrow;i++){
+            sum = sum + d.fulldata[i][col];
+            sumofsq = sumofsq + ((d.fulldata[i][col])*(d.fulldata[i][col]));
+            cout << d.fulldata[i][col] << endl;
+            count++;
+        }
+    } else if (roworcol==2){
+        for (int i=0;i<d.totalcol;i++){
+            if (d.computablecols[i]==1){
+                sum = sum + d.fulldata[row][i];
+                sumofsq = sumofsq + ((d.fulldata[row][i])*(d.fulldata[row][i]));
+                cout << d.fulldata[row][i] << endl;
+                count++;
+            }
+        }
+    }
+    mean = sum/count;
+}
 //---------------------------------------------Liew ------------------------------------------------------
 //------------------------------This functions finds the mean of the row-----------------------------------------
 void findrowmean(int flag,int &row,float &rowmean,double &rowsum,double &rowsqsum){
