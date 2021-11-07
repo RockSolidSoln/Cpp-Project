@@ -719,7 +719,8 @@ void findmax(struct datavalues d,const int col,const int row, const int roworcol
         for(int j=0;j<d.totalcol;j++)
         {   
             if(d.computablecols[j]==1)
-            {
+            {1
+            
                 if((d.fulldata[row][j])>max)
                     max=d.fulldata[row][j];
             }
@@ -791,7 +792,7 @@ void askrowcolumn(struct datavalues d, int &row, int &col,int &roworcol)
 
     if (roworcol == 1){
         do{
-            cout << endl << "Enter the column from 0 to " << d.totalcol - 1 << "." << endl;
+            cout << endl << "Enter the countable column from 0 to " << d.totalcol - 1 << "." << endl;
             cin >> col;
             if (!(col >= 0 && col < d.totalcol && d.computablecols[col] == 1))
                 cout << "Invalid input. Please enter a valid and computable column." << endl;

@@ -21,7 +21,6 @@ typedef vector<vector<int>> vec2;
 int status=0;
 string username,password;
 
-//---------------------------------------Structure for Database------------------------------------------------
 struct datavalues
 {
     int totalcol;
@@ -638,7 +637,7 @@ void viewfunc(struct datavalues d)
                 break;         
     }
 }
-//--------------------------------------------- ------------------------------------------------------
+//---------------------------------------------Omar ------------------------------------------------------
 //------------------------------This functions loads the minimum function-------------------------------------
 void loadmin(struct datavalues d)
 {
@@ -656,7 +655,7 @@ void loadmin(struct datavalues d)
     viewfunc(d);
 }
 
-//--------------------------------------------- ------------------------------------------------------
+//---------------------------------------------Omar ------------------------------------------------------
 //------------------------------This function prints minimum from a row-------------------------------------
 void findmin(struct datavalues d,const int col,const int row, const int roworcol,double &min)
 {   
@@ -672,18 +671,15 @@ void findmin(struct datavalues d,const int col,const int row, const int roworcol
     else if(roworcol==2)
     {   
         min=d.fulldata[row][0];
-        for(int j=0;j<d.totalcol;j++)
-        {   
-            if(d.computablecols[j]==1)
-            {
-                if((d.fulldata[row][j])<min)
-                    min=d.fulldata[row][j];
-            }
+        for(int j=1;j<d.totalcol;j++)
+        {
+            if((d.fulldata[row][j])<min)
+                min=d.fulldata[row][j];
         }
     }
 }
 
-//-------------------------------------------- ------------------------------------------------------
+//---------------------------------------------Omar ------------------------------------------------------
 //------------------------------This functions loads the maximum function-------------------------------------
 void loadmax(struct datavalues d)
 {
@@ -701,7 +697,7 @@ void loadmax(struct datavalues d)
     viewfunc(d);
 }
  
-//---------------------------------------------  ------------------------------------------------------
+//---------------------------------------------Omar ------------------------------------------------------
 //------------------------------This function print the maximum from a row-------------------------------------
 void findmax(struct datavalues d,const int col,const int row, const int roworcol,double &max)
 {
@@ -716,14 +712,14 @@ void findmax(struct datavalues d,const int col,const int row, const int roworcol
     }
     else if(roworcol==2)
     {   
-        for(int j=0;j<d.totalcol;j++)
-        {   
-            if(d.computablecols[j]==1)
-            {
-                if((d.fulldata[row][j])>max)
-                    max=d.fulldata[row][j];
-            }
-        }    
+        max=d.fulldata[row][0];
+        cout<<"before "<<max<<endl;
+        for(int j=1;j<d.totalcol;j++)
+        {
+            if((d.fulldata[row][j])>max)
+                max=d.fulldata[row][j];
+            cout<<"after "<<max<<endl;
+        }
     }
 }
          
@@ -791,7 +787,7 @@ void askrowcolumn(struct datavalues d, int &row, int &col,int &roworcol)
 
     if (roworcol == 1){
         do{
-            cout << endl << "Enter the column from 0 to " << d.totalcol - 1 << "." << endl;
+            cout << endl << "Enter the countable column from 0 to " << d.totalcol - 1 << "." << endl;
             cin >> col;
             if (!(col >= 0 && col < d.totalcol && d.computablecols[col] == 1))
                 cout << "Invalid input. Please enter a valid and computable column." << endl;
