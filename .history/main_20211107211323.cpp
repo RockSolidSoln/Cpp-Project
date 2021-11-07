@@ -426,8 +426,7 @@ void database(struct datavalues d,string filename)
 
     for (int i=0; i<d.totalcol+3; i++){
         data>>temp3;
-    } //buffered data to be removed
-
+    }
     int temp5;
     for (int i = 0; i < d.totalrow; i++){
         data >> temp3;
@@ -441,14 +440,8 @@ void database(struct datavalues d,string filename)
         d.fulldata.push_back(rowdata); //add into 2d vector
         rowdata.clear();
     }
-    cout<<"File was loaded successfully\n"
-        <<"-------------------------------------------\n";
+    cout<<"File was loaded successfully\n";
     data.close();
-    // for(int i=0;i<d.totalrow;i++)
-    // {
-    //     for(int j=0;j<d.totalcol;j++)
-    //     cout<<d.fulldata[i][j]<<" ";
-    // cout<<endl;}
     viewfunc(d);
 }
 
@@ -646,12 +639,12 @@ void loadmin(struct datavalues d)
     askrowcolumn(d, row, col, roworcol);
     findmin(d, col, row, roworcol, min);
 
-    cout<<"\nThe minimum of ";
+    cout<<"\nThe minimum of";
     if (roworcol == 1)
         cout << "column " << col;
     else if (roworcol == 2)
         cout << "row " << row;
-    cout << " is " << min << "."<<endl;
+    cout << " is " << min << ".";
     viewfunc(d);
 }
 
@@ -688,12 +681,12 @@ void loadmax(struct datavalues d)
     askrowcolumn(d, row, col, roworcol);
     findmax(d, col, row, roworcol, max);
 
-    cout<<"\nThe maximum of ";
+    cout<<"\nThe maximum of";
     if (roworcol == 1)
         cout << "column " << col;
     else if (roworcol == 2)
         cout << "row " << row;
-    cout << " is " << max <<"."<<endl;
+    cout << " is " << max << ".";
     viewfunc(d);
 }
  
@@ -712,13 +705,11 @@ void findmax(struct datavalues d,const int col,const int row, const int roworcol
     }
     else if(roworcol==2)
     {   
-        max=d.fulldata[row+4][0];
-        cout<<"before "<<max<<endl;
+        max=d.fulldata[row][0];
         for(int j=1;j<d.totalcol;j++)
         {
             if((d.fulldata[row][j])>max)
                 max=d.fulldata[row][j];
-            cout<<"after "<<max<<endl;
         }
     }
 }

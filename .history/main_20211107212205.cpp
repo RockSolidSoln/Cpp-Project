@@ -51,9 +51,9 @@ void logrecord(string);
 void pressenter(int);
 void viewfunc(struct datavalues d);//changed
 void loadmin(struct datavalues d);
-void findmin(struct datavalues d, const int, const int,const int, double&);
+int findmin(struct datavalues d, const int, const int,const int, double&);
 void loadmax(struct datavalues d);
-void findmax(struct datavalues d, const int, const int,const int, double&);
+int findmax(struct datavalues d, const int, const int,const int, double&);
 void loadmed(struct datavalues d);
 void findrowmed();
 void findcolmed();
@@ -426,8 +426,7 @@ void database(struct datavalues d,string filename)
 
     for (int i=0; i<d.totalcol+3; i++){
         data>>temp3;
-    } //buffered data to be removed
-
+    }
     int temp5;
     for (int i = 0; i < d.totalrow; i++){
         data >> temp3;
@@ -441,14 +440,8 @@ void database(struct datavalues d,string filename)
         d.fulldata.push_back(rowdata); //add into 2d vector
         rowdata.clear();
     }
-    cout<<"File was loaded successfully\n"
-        <<"-------------------------------------------\n";
+    cout<<"File was loaded successfully\n";
     data.close();
-    // for(int i=0;i<d.totalrow;i++)
-    // {
-    //     for(int j=0;j<d.totalcol;j++)
-    //     cout<<d.fulldata[i][j]<<" ";
-    // cout<<endl;}
     viewfunc(d);
 }
 
@@ -651,7 +644,7 @@ void loadmin(struct datavalues d)
         cout << "column " << col;
     else if (roworcol == 2)
         cout << "row " << row;
-    cout << " is " << min << "."<<endl;
+    cout << " is " << min << " at "<<endl;
     viewfunc(d);
 }
 
@@ -712,15 +705,13 @@ void findmax(struct datavalues d,const int col,const int row, const int roworcol
     }
     else if(roworcol==2)
     {   
-        max=d.fulldata[row+4][0];
-        cout<<"before "<<max<<endl;
+        max=d.fulldata[row][0];
         for(int j=1;j<d.totalcol;j++)
         {
             if((d.fulldata[row][j])>max)
                 max=d.fulldata[row][j];
-            cout<<"after "<<max<<endl;
         }
-    }
+            }
 }
          
 //---------------------------------------------Salah Fayeq---------------------------------------------------

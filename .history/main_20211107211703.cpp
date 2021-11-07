@@ -426,8 +426,7 @@ void database(struct datavalues d,string filename)
 
     for (int i=0; i<d.totalcol+3; i++){
         data>>temp3;
-    } //buffered data to be removed
-
+    }
     int temp5;
     for (int i = 0; i < d.totalrow; i++){
         data >> temp3;
@@ -441,14 +440,8 @@ void database(struct datavalues d,string filename)
         d.fulldata.push_back(rowdata); //add into 2d vector
         rowdata.clear();
     }
-    cout<<"File was loaded successfully\n"
-        <<"-------------------------------------------\n";
+    cout<<"File was loaded successfully\n";
     data.close();
-    // for(int i=0;i<d.totalrow;i++)
-    // {
-    //     for(int j=0;j<d.totalcol;j++)
-    //     cout<<d.fulldata[i][j]<<" ";
-    // cout<<endl;}
     viewfunc(d);
 }
 
@@ -641,23 +634,23 @@ void viewfunc(struct datavalues d)
 //------------------------------This functions loads the minimum function-------------------------------------
 void loadmin(struct datavalues d)
 {
-    int row=0,col=0,roworcol;
+    int row=0,col=0,roworcol,index;
     double min=0;
     askrowcolumn(d, row, col, roworcol);
-    findmin(d, col, row, roworcol, min);
+    index = findmin(d, col, row, roworcol, min);
 
     cout<<"\nThe minimum of ";
     if (roworcol == 1)
         cout << "column " << col;
     else if (roworcol == 2)
         cout << "row " << row;
-    cout << " is " << min << "."<<endl;
+    cout << " is " << min << "at"<<;
     viewfunc(d);
 }
 
 //---------------------------------------------Omar ------------------------------------------------------
 //------------------------------This function prints minimum from a row-------------------------------------
-void findmin(struct datavalues d,const int col,const int row, const int roworcol,double &min)
+int findmin(struct datavalues d,const int col,const int row, const int roworcol,double &min)
 {   
     if(roworcol==1)
     {   
@@ -667,6 +660,7 @@ void findmin(struct datavalues d,const int col,const int row, const int roworcol
             if((d.fulldata[i][col])<min)
                 min=d.fulldata[i][col];
         }
+        return i;
     }
     else if(roworcol==2)
     {   
@@ -676,6 +670,7 @@ void findmin(struct datavalues d,const int col,const int row, const int roworcol
             if((d.fulldata[row][j])<min)
                 min=d.fulldata[row][j];
         }
+        return j;
     }
 }
 
@@ -683,17 +678,17 @@ void findmin(struct datavalues d,const int col,const int row, const int roworcol
 //------------------------------This functions loads the maximum function-------------------------------------
 void loadmax(struct datavalues d)
 {
-    int row=0,col=0,roworcol;
+    int row=0,col=0,roworcol,index=0;
     double max=0;
     askrowcolumn(d, row, col, roworcol);
-    findmax(d, col, row, roworcol, max);
+    index=findmax(d, col, row, roworcol, max);
 
     cout<<"\nThe maximum of ";
     if (roworcol == 1)
         cout << "column " << col;
     else if (roworcol == 2)
         cout << "row " << row;
-    cout << " is " << max <<"."<<endl;
+    cout << " is " << max << " at "<<index<<endl;
     viewfunc(d);
 }
  
@@ -703,22 +698,22 @@ void findmax(struct datavalues d,const int col,const int row, const int roworcol
 {
      if(roworcol==1)
     {   
+        int i=1
         max=d.fulldata[0][col];
         for (int i=1;i<d.totalrow;i++)
         {
             if((d.fulldata[i][col])>max)
                 max=d.fulldata[i][col];
         }
+        return i;
     }
     else if(roworcol==2)
     {   
-        max=d.fulldata[row+4][0];
-        cout<<"before "<<max<<endl;
+        max=d.fulldata[row][0];
         for(int j=1;j<d.totalcol;j++)
         {
             if((d.fulldata[row][j])>max)
                 max=d.fulldata[row][j];
-            cout<<"after "<<max<<endl;
         }
     }
 }

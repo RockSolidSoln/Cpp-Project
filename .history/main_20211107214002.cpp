@@ -444,11 +444,6 @@ void database(struct datavalues d,string filename)
     cout<<"File was loaded successfully\n"
         <<"-------------------------------------------\n";
     data.close();
-    // for(int i=0;i<d.totalrow;i++)
-    // {
-    //     for(int j=0;j<d.totalcol;j++)
-    //     cout<<d.fulldata[i][j]<<" ";
-    // cout<<endl;}
     viewfunc(d);
 }
 
@@ -642,7 +637,7 @@ void viewfunc(struct datavalues d)
 void loadmin(struct datavalues d)
 {
     int row=0,col=0,roworcol;
-    double min=0;
+    double;
     askrowcolumn(d, row, col, roworcol);
     findmin(d, col, row, roworcol, min);
 
@@ -659,6 +654,7 @@ void loadmin(struct datavalues d)
 //------------------------------This function prints minimum from a row-------------------------------------
 void findmin(struct datavalues d,const int col,const int row, const int roworcol,double &min)
 {   
+    min=0;
     if(roworcol==1)
     {   
         min=d.fulldata[0][col];

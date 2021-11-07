@@ -444,11 +444,6 @@ void database(struct datavalues d,string filename)
     cout<<"File was loaded successfully\n"
         <<"-------------------------------------------\n";
     data.close();
-    // for(int i=0;i<d.totalrow;i++)
-    // {
-    //     for(int j=0;j<d.totalcol;j++)
-    //     cout<<d.fulldata[i][j]<<" ";
-    // cout<<endl;}
     viewfunc(d);
 }
 
@@ -712,13 +707,13 @@ void findmax(struct datavalues d,const int col,const int row, const int roworcol
     }
     else if(roworcol==2)
     {   
-        max=d.fulldata[row+4][0];
+        max=d.fulldata[row][0];
         cout<<"before "<<max<<endl;
         for(int j=1;j<d.totalcol;j++)
         {
             if((d.fulldata[row][j])>max)
                 max=d.fulldata[row][j];
-            cout<<"after "<<max<<endl;
+            cout<<"after "<<max<<e
         }
     }
 }

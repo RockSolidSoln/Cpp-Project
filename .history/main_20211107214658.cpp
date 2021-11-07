@@ -444,12 +444,7 @@ void database(struct datavalues d,string filename)
     cout<<"File was loaded successfully\n"
         <<"-------------------------------------------\n";
     data.close();
-    // for(int i=0;i<d.totalrow;i++)
-    // {
-    //     for(int j=0;j<d.totalcol;j++)
-    //     cout<<d.fulldata[i][j]<<" ";
-    // cout<<endl;}
-    viewfunc(d);
+        viewfunc(d);
 }
 
 //---------------------------------------------omar------------------------------------------------------

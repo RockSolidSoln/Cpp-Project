@@ -50,11 +50,13 @@ void clearActivity();
 void logrecord(string);
 void pressenter(int);
 void viewfunc(struct datavalues d);//changed
-void loadmin(struct datavalues d);
-void findmin(struct datavalues d, const int, const int,const int, double&);
-void loadmax(struct datavalues d);
-void findmax(struct datavalues d, const int, const int,const int, double&);
-void loadmed(struct datavalues d);
+void loadmin();//changed
+void minrow(int,int**,int,int);//changed
+void mincolumn(int,double&,int);
+void loadmax();
+void maxrow(int);
+void maxcolumn(int,double&,int);
+void loadmed();
 void findrowmed();
 void findcolmed();
 //changed
@@ -67,8 +69,8 @@ void loadfindstdv(struct datavalues d);
 void asktwocolumn(struct datavalues d, int&, int&);
 void loadfindcorr(struct datavalues d);
 //till here
-void finddistinct(struct datavalues d);
-void findhistogram(struct datavalues d);
+void finddistinct();
+void findhistogram();
 void findMP();
 void reportsmenu();
 
@@ -426,8 +428,7 @@ void database(struct datavalues d,string filename)
 
     for (int i=0; i<d.totalcol+3; i++){
         data>>temp3;
-    } //buffered data to be removed
-
+    }
     int temp5;
     for (int i = 0; i < d.totalrow; i++){
         data >> temp3;
@@ -441,14 +442,8 @@ void database(struct datavalues d,string filename)
         d.fulldata.push_back(rowdata); //add into 2d vector
         rowdata.clear();
     }
-    cout<<"File was loaded successfully\n"
-        <<"-------------------------------------------\n";
+    cout<<"File was loaded successfully\n";
     data.close();
-    // for(int i=0;i<d.totalrow;i++)
-    // {
-    //     for(int j=0;j<d.totalcol;j++)
-    //     cout<<d.fulldata[i][j]<<" ";
-    // cout<<endl;}
     viewfunc(d);
 }
 
@@ -641,91 +636,200 @@ void viewfunc(struct datavalues d)
 //------------------------------This functions loads the minimum function-------------------------------------
 void loadmin(struct datavalues d)
 {
-    int row=0,col=0,roworcol;
+    int row,col,roworcol;
     double min=0;
     askrowcolumn(d, row, col, roworcol);
     findmin(d, col, row, roworcol, min);
 
-    cout<<"\nThe minimum of ";
+    cout<<"\nThe minimum of";
     if (roworcol == 1)
         cout << "column " << col;
     else if (roworcol == 2)
         cout << "row " << row;
-    cout << " is " << min << "."<<endl;
-    viewfunc(d);
+    cout << " is " << min << ".";
 }
 
 //---------------------------------------------Omar ------------------------------------------------------
 //------------------------------This function prints minimum from a row-------------------------------------
 void findmin(struct datavalues d,const int col,const int row, const int roworcol,double &min)
 {   
-    if(roworcol==1)
-    {   
-        min=d.fulldata[0][col];
-        for (int i=1;i<d.totalrow;i++)
-        {
-            if((d.fulldata[i][col])<min)
-                min=d.fulldata[i][col];
-        }
+    if(rowcol==1)
+    {
+            for (int i=0;i<d.totalcol;i++)
+            {
+                if(i==col)
+                    {
+                        
+                    }
+            }
     }
-    else if(roworcol==2)
-    {   
-        min=d.fulldata[row][0];
-        for(int j=1;j<d.totalcol;j++)
-        {
-            if((d.fulldata[row][j])<min)
-                min=d.fulldata[row][j];
-        }
+    else if(rowcol==2)
+    {
+             for (int i=0;i<d.totalrow;i++)
+            {
+                if(i==row)
+                    {
+                        
+                    }
+            }
     }
+    // for(int i=0;i<row;i++)
+    // {   
+    //     if(i==choice)
+    //     {   
+    //     for(int j;j<column;j++)
+    //     {
+    //         min=ar[i][j];
+    //         if (flag==4){
+    //             cout<<"The minimum value of the row "<<choice<<" is "<<min<<endl;
+    //             logrecord(" calculated the minimum");
+    //         }
+    //         break;
+    //     }
+    //     }
+    // }
+}
+
+
+//---------------------------------------------Omar ------------------------------------------------------
+//------------------------------This function print the minimum from a column-------------------------------------
+void mincolumn(int choice,double &min,int flag)
+{   
+//     if(flag ==4){
+//         cout<<"Enter the column number from 1 to 4"<<endl;
+//         cin>>choice;    
+//     }
+//     if(choice==1)
+//     for(int i=0;i<student.size();i++)
+//     {  min=get<1>(student[0]);
+//        { 
+//         if(get<1>(student[i])<min)
+//             min=get<1>(student[i]);
+//         }
+//     }
+//     else if(choice==2)
+//     for(int i=0;i<student.size();i++)
+//     {  min=get<2>(student[0]);
+//        { 
+//         if(get<2>(student[i])<min)
+//             min=get<2>(student[i]);
+//         }
+//     }
+//     else if(choice==3)
+//     {min=get<3>(student[0]);
+//     for(int i=0;i<student.size();i++)
+//         { 
+//         if(get<3>(student[i])<min)
+//             min=get<3>(student[i]);
+//         }
+//     }
+//     else if(choice==4)
+//    { min=get<4>(student[0]);
+//     for(int i=0;i<student.size();i++)
+//         { 
+//         if(get<4>(student[i])<min)
+//             min=get<4>(student[i]);
+//         }
+//     }
+//     if (flag==4){
+//         cout<<"The minimum value of the column "<<choice<<" is "<<min<<endl;
+//         logrecord(" calculated the minimum");
+//     }
 }
 
 //---------------------------------------------Omar ------------------------------------------------------
 //------------------------------This functions loads the maximum function-------------------------------------
-void loadmax(struct datavalues d)
-{
-    int row=0,col=0,roworcol;
-    double max=0;
-    askrowcolumn(d, row, col, roworcol);
-    findmax(d, col, row, roworcol, max);
+void loadmax()
+ {   
+     //double value=0.0;
+//     int flag = 5,c=0;
+//     logrecord(" calculated the maximum");
+//     char ch;
+//     cout <<"Please enter the 1 to find maximum for the specific row and 2 for the column"<<endl;
+//     cin>>ch;
+//     if(ch=='1')
+//         maxrow(flag);
+//     else if(ch=='2')
+//         maxcolumn(c,value,flag);
+//     pressenter(2);
 
-    cout<<"\nThe maximum of ";
-    if (roworcol == 1)
-        cout << "column " << col;
-    else if (roworcol == 2)
-        cout << "row " << row;
-    cout << " is " << max <<"."<<endl;
-    viewfunc(d);
 }
- 
 //---------------------------------------------Omar ------------------------------------------------------
 //------------------------------This function print the maximum from a row-------------------------------------
-void findmax(struct datavalues d,const int col,const int row, const int roworcol,double &max)
+void maxrow(int flag)
 {
-     if(roworcol==1)
-    {   
-        max=d.fulldata[0][col];
-        for (int i=1;i<d.totalrow;i++)
-        {
-            if((d.fulldata[i][col])>max)
-                max=d.fulldata[i][col];
-        }
-    }
-    else if(roworcol==2)
-    {   
-        max=d.fulldata[row+4][0];
-        cout<<"before "<<max<<endl;
-        for(int j=1;j<d.totalcol;j++)
-        {
-            if((d.fulldata[row][j])>max)
-                max=d.fulldata[row][j];
-            cout<<"after "<<max<<endl;
-        }
-    }
+    // double max=0.0;
+    // int choice;
+    // cout<<"Enter the row number from 0 to 99 to find the maximum from 3 subjects"<<endl;
+    // cin>>choice;
+    // for(int i=0;i<student.size();i++)
+    // {   
+    //     if(i==choice)
+    //     {   max=get<1>(student[i]);
+    //         if(get<2>(student[i])>get<1>(student[i]) && get<2>(student[i])>get<3>(student[i]) && get<2>(student[i])>get<4>(student[i]))
+    //         max=get<2>(student[i]);
+    //         else if(get<3>(student[i])>get<1>(student[i]) && get<3>(student[i])>get<2>(student[i]) && get<3>(student[i])>get<4>(student[i]))
+    //             max=get<3>(student[i]);
+    //         else if(get<4>(student[i])>get<1>(student[i]) && get<4>(student[i])>get<2>(student[i]) && get<4>(student[i])>get<3>(student[i]))
+    //             max=get<4>(student[i]);
+    //         if (flag==5){
+    //             cout<<"The maximum value of the row "<<choice<<" is "<<max<<endl;
+    //             logrecord(" calculated the maximum");
+    //         }
+    //         break;
+    //     }
+    // }
 }
-         
+
+//---------------------------------------------Omar ------------------------------------------------------
+//------------------------------This function prints maximum from a column-------------------------------------
+void maxcolumn(int choice,double &max,int flag)
+{
+//     max=0.0;
+//     if(flag ==5){
+//         cout<<"Enter the column number from 1 to 4"<<endl;
+//         cin>>choice;    
+//     }
+//     if(choice==1)
+//     for(int i=0;i<student.size();i++)
+//     {  max=get<1>(student[0]);
+//        { 
+//         if(get<1>(student[i])>max)
+//             max=get<1>(student[i]);
+//         }
+//     }
+//     if(choice==2)
+//     for(int i=0;i<student.size();i++)
+//     {  max=get<2>(student[0]);
+//        { 
+//         if(get<2>(student[i])>max)
+//             max=get<2>(student[i]);
+//         }
+//     }
+//     else if(choice==3)
+//     {max=get<3>(student[0]);
+//     for(int i=0;i<student.size();i++)
+//         { 
+//         if(get<3>(student[i])>max)
+//             max=get<3>(student[i]);
+//         }
+//     }
+//     else if(choice==4)
+//    { max=get<4>(student[0]);
+//     for(int i=0;i<student.size();i++)
+//         { 
+//         if(get<4>(student[i])>max)
+//             max=get<4>(student[i]);
+//         }
+//     }
+//     if (flag==5){
+//         cout<<"The maximum value of the row "<<choice<<" is "<<max<<endl;
+//         logrecord(" calculated the maximum");
+//     }
+}
 //---------------------------------------------Salah Fayeq---------------------------------------------------
 //------------------------------This functions loads the median function-------------------------------------
-void loadmed(struct datavalues d)
+void loadmed()
 {   
     // int flag =0;
     // int row = -1;
@@ -776,7 +880,8 @@ void findcolmed()
 //---------------------------------------------Liew ------------------------------------------------------
 //------------------------------This functions loads the mean function-----------------------------------------
 void askrowcolumn(struct datavalues d, int &row, int &col,int &roworcol)
-{
+
+
     do
     {
         cout << endl << "Enter 1 for column or 2 for row" << endl;
@@ -931,7 +1036,7 @@ void loadfindcorr(struct datavalues d){
 
 //---------------------------------------------Liew ------------------------------------------------------
 //------------------------------This functions finds distinct member-----------------------------------------
-void finddistinct(struct datavalues d)
+void finddistinct()
 {   
 //     int flag=0;
 //    double mindata,maxdata,tempmax,tempmin;
@@ -971,7 +1076,7 @@ void finddistinct(struct datavalues d)
 
 //------------------------------------------Salah Fayeq---------------------------------------------------
 //------------------------------This function finds the histogram-----------------------------------------
-void findhistogram(struct datavalues d)
+void findhistogram()
 {
 //     srand(time(NULL));
 //     set<int> s;

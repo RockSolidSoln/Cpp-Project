@@ -444,11 +444,6 @@ void database(struct datavalues d,string filename)
     cout<<"File was loaded successfully\n"
         <<"-------------------------------------------\n";
     data.close();
-    // for(int i=0;i<d.totalrow;i++)
-    // {
-    //     for(int j=0;j<d.totalcol;j++)
-    //     cout<<d.fulldata[i][j]<<" ";
-    // cout<<endl;}
     viewfunc(d);
 }
 
@@ -712,13 +707,11 @@ void findmax(struct datavalues d,const int col,const int row, const int roworcol
     }
     else if(roworcol==2)
     {   
-        max=d.fulldata[row+4][0];
-        cout<<"before "<<max<<endl;
+        max=d.fulldata[row][0];
         for(int j=1;j<d.totalcol;j++)
         {
             if((d.fulldata[row][j])>max)
                 max=d.fulldata[row][j];
-            cout<<"after "<<max<<endl;
         }
     }
 }
@@ -787,7 +780,7 @@ void askrowcolumn(struct datavalues d, int &row, int &col,int &roworcol)
 
     if (roworcol == 1){
         do{
-            cout << endl << "Enter the countable column from 0 to " << d.totalcol - 1 << "." << endl;
+            cout << endl << "Enter the countable column from 1 to " << d.totalcol - 1 << "." << endl;
             cin >> col;
             if (!(col >= 0 && col < d.totalcol && d.computablecols[col] == 1))
                 cout << "Invalid input. Please enter a valid and computable column." << endl;
