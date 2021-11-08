@@ -421,6 +421,7 @@ void database(ifstream &data, struct datavalues d,string filename)
     }
     vec1 rowdata;
     string temp3, temp4;
+    
     int temp5;
     for (int i = 0; i < d.totalrow; i++){
         data >> temp3;

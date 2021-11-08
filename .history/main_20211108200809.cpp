@@ -43,7 +43,7 @@ void changepass(vec);
 void deleteuser(vec);
 vec loadfile();
 void clearfile();
-void database(ifstream &data, struct datavalues d,string);//changed
+void database(struct datavalues d,string);//changed
 void savefile();
 void savereport(int,string,double,double);
 void saveHTMLreport(string,double,double);
@@ -408,19 +408,27 @@ void clearfile()
         d.computablecols.push_back(temp2); 
     }
     data >> d.totalrow;
+    data.close();
     database(data,d,filename);
 }
 
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------
 // -----------------------------This function stores the data base file in the vector------------------------------------
-void database(ifstream &data, struct datavalues d,string filename)
+void database(ifstream &datastruct datavalues d,string filename)
 {   
+    ifstream data;
+    data.open(filename);
     if(!data){
         cout<<"file doesn't exist\nTry again\n";
         clearfile();
     }
     vec1 rowdata;
     string temp3, temp4;
+
+    for (int i=0; i<d.totalcol+3; i++){
+        data>>temp3;
+    } //buffered data to be removed
+
     int temp5;
     for (int i = 0; i < d.totalrow; i++){
         data >> temp3;

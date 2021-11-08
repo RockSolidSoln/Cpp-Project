@@ -645,6 +645,7 @@ void loadmin(struct datavalues d)
     else if (roworcol == 2)
         cout << "row " << row;
     cout << " is " << min << "."<<endl;
+    logrecord("calculated")
     viewfunc(d);
 }
 
