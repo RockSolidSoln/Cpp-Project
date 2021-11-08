@@ -43,7 +43,7 @@ void changepass(vec);
 void deleteuser(vec);
 vec loadfile();
 void clearfile();
-void database(ifstream &data, struct datavalues d,string);//changed
+void database(struct datavalues d,string);//changed
 void savefile();
 void savereport(int,string,double,double);
 void saveHTMLreport(string,double,double);
@@ -408,6 +408,7 @@ void clearfile()
         d.computablecols.push_back(temp2); 
     }
     data >> d.totalrow;
+    data.close();
     database(data,d,filename);
 }
 
@@ -415,12 +416,19 @@ void clearfile()
 // -----------------------------This function stores the data base file in the vector------------------------------------
 void database(ifstream &data, struct datavalues d,string filename)
 {   
+    ifstream data;
+    data.open(filename);
     if(!data){
         cout<<"file doesn't exist\nTry again\n";
         clearfile();
     }
     vec1 rowdata;
     string temp3, temp4;
+
+    for (int i=0; i<d.totalcol+3; i++){
+        data>>temp3;
+    } //buffered data to be removed
+
     int temp5;
     for (int i = 0; i < d.totalrow; i++){
         data >> temp3;
@@ -769,17 +777,8 @@ void findcolmed()
     
 }
 
-void printnotcomputable(const int totalcol, const vec1 computablecols){
-    cout << endl << "Column ";
-    for (int i=0; i<totalcol; i++){
-        if (computablecols[i] == 0){
-            cout << i << " ";
-        }
-    }
-    cout << "are not computable."; 
-}
 //---------------------------------------------Liew ------------------------------------------------------
-//------------------------------This functions ask for row or column -----------------------------------------
+//------------------------------This functions loads the mean function-----------------------------------------
 void askrowcolumn(struct datavalues d, int &row, int &col,int &roworcol)
 {
     do
@@ -792,8 +791,7 @@ void askrowcolumn(struct datavalues d, int &row, int &col,int &roworcol)
 
     if (roworcol == 1){
         do{
-            printnotcomputable(d.totalcol,d.computablecols);
-            cout << endl << "Enter the column from 0 to " << d.totalcol - 1 << " which is computable." << endl;
+            cout << endl << "Enter the column from 0 to " << d.totalcol - 1 << "." << endl;
             cin >> col;
             if (!(col >= 0 && col < d.totalcol && d.computablecols[col] == 1))
                 cout << "Invalid input. Please enter a valid and computable column." << endl;
@@ -923,7 +921,6 @@ void loadfindcorr(struct datavalues d){
     double sum1,sum2,sumofsq1,sumofsq2,mean1,mean2,sumofcol1x2,corr;
     roworcol = 1;
     sumofcol1x2 = 0;
-    printnotcomputable(d.totalcol,d.computablecols);
     asktwocolumn(d,col1,col2);
     findmean(d,col1,row,roworcol,sum1,sumofsq1,mean1,count);
     findmean(d,col2,row,roworcol,sum2,sumofsq2,mean2,count);
@@ -939,35 +936,41 @@ void loadfindcorr(struct datavalues d){
 //---------------------------------------------Liew ------------------------------------------------------
 //------------------------------This functions finds distinct member-----------------------------------------
 void finddistinct(struct datavalues d)
-{
-    int row,col,roworcol;
-    double max,min;
-    askrowcolumn(d, row, col, roworcol);
-    findmax(d, col, row, roworcol, max);
-    findmin(d, col, row, roworcol, min);
-    cout << "     Distinct Numbers Table    " << endl;
-    cout << "---------------+---------------" << endl;//15-+15-
-    cout << "|    Number    |   Frequency  |" << endl;
-    cout << "---------------+---------------" << endl;
-    for (int i=min;i<=max;i++){
-        int frequency = 0;
-        if (roworcol == 1){
-            for (int k=0; k<d.totalrow;k++){
-                if (i==d.fulldata[k][col])
-                frequency++;
-            }
-        } else if (roworcol == 2){
-            for (int k=0; k<d.totalcol;k++){
-                if (i==d.fulldata[row][k] && d.computablecols[k]==1)
-                frequency++;
-            }
-        }
-        if (frequency != 0){
-            cout << "|" << setw(7) << right << i;
-            cout << setw(8) << right <<"|" << setw(8) <<right << frequency << setw(7) << right <<"|" << endl;
-            cout << "---------------+---------------" << endl;
-        }
-    }
+{   
+//     int flag=0;
+//    double mindata,maxdata,tempmax,tempmin;
+//     for (int i=2;i<=5;i++){
+//         maxcolumn(i,tempmax,flag);
+//         mincolumn(i,tempmin,flag);
+//         maxdata = (maxdata<tempmax) ? tempmax : maxdata;
+//         mindata = (mindata>tempmin) ? tempmin : mindata;
+//     }
+//     cout << "     Distinct Numbers Table    " << endl;
+//     cout << "---------------+---------------" << endl;//15-+15-
+//     cout << "|    Number    |   Frequency  |" << endl;
+//     cout << "---------------+---------------" << endl;
+//     for (int k=mindata;k<=maxdata;k++){
+//         int f = 0;
+//         for (int i=0;i<100;i++){
+//             if (k == get<1>(student[i]))
+//                 f++;
+//             if (k == get<2>(student[i]))
+//                 f++;
+//             if (k == get<3>(student[i]))
+//                 f++;
+//             if (k == get<4>(student[i]))
+//                 f++;
+//         }
+//         if (f!=0){
+//             cout << "|" << setw(7) << right << k;
+//             cout << setw(8) << right <<"|";
+//             cout << setw(8) <<right << f;
+//             cout << setw(7) << right <<"|" << endl;
+//             cout << "---------------+---------------" << endl;
+//         }
+//     }
+//     logrecord(" found out the distinct member ");
+//     pressenter(2);
 }
 
 //------------------------------------------Salah Fayeq---------------------------------------------------
