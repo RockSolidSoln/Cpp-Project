@@ -56,8 +56,7 @@ void findmin(struct datavalues d, const int, const int,const int, double&);
 void loadmax(struct datavalues d);
 void findmax(struct datavalues d, const int, const int,const int, double&);
 void loadmed(struct datavalues d);
-void findrowmed();
-void findcolmed();
+void findmedian(struct datavalues d,const int,const int, const int, int);
 //changed
 void askrowcolumn(struct datavalues d, int&, int&,int&);
 void loadmean(struct datavalues d);
@@ -723,48 +722,55 @@ void findmax(struct datavalues d,const int col,const int row, const int roworcol
 //------------------------------This functions loads the median function-------------------------------------
 void loadmed(struct datavalues d)
 {   
-    // int flag =0;
-    // int row = -1;
-    // int col = -1;
-    // int choice;
-    // float rowmedian,colmedian;
-    // float rowsum,colsum,rowlen,collen;
+    int row,col,roworcol,count,med;
+    askrowcolumn(d,row,col,roworcol);
+    findmedian(d,col,row,roworcol,med);
 
-    // cout <<"\n"<<"Enter 1 to find the median of a row, or 2 to find the median of column: "<<endl;
-    // cin >> choice;
-    // cin.ignore(' ','\n');
-    
-    // if (choice==1)
-    // {
-    //    findrowmed(flag,row,rowmedian,rowsum,rowlen);
-    // }
-    // else if (choice==2)
-    // {
-    //     findcolmed(flag,col,colmedian,colsum,collen);
-    // }
-    // else
-    // {
-    //     cout<<"Wrong choice\n"
-    //          <<"Enter again\n";
-    //     loadmed();
-    // }
-    // logrecord(" calculated the median");
-    // pressenter(2);
+    cout << endl << "The Median of ";
+    if (roworcol == 1)
+        cout << "column " << col;
+    else if (roworcol == 2)
+        cout << "row " << row;
+    cout << " is " << med << ".";
+
 }
-
-void findrowmed(int flag,int &row,float &rowmedian,float &rowsum,float &rowlen)
-{
-    // rowmedian=0;
-    // rowsum=0;
-    // rowlen=0;
-    // if(row==-1){
-    //     do{
-    //         cout<<endl<<"Enter the row you want to calculate"<<endl;
-    //     }
-    // }
+//--------------------------------------------Salah Fayeq-----------------------------------------------------
+//--------------------------------This function sorts the numbers in col and row------------------------------
+void sortnum(struct datavalues d,const int col,const int row,const int roworcol,int med){
+    int minipos;
+    double temp;
+    for(int i=0; i<d.totalcol;i++){
+        minipos = i;
+        for (int j = i +1; j<d.totalcol;j++){
+                    if(d.fulldata[j][col] < d.fulldata[minipos][col]){
+                        minipos = j;
+                    }
+        }
+        
+        d.fulldata[minipos][col]=d.fulldata[i][col];
+        d.fulldata[i][col]=i;
+    }
+    for(int i=0; i<d.totalrow;i++){
+        minipos = i;
+        for (int j = i +1; j<d.totalrow;j++){
+                    if(d.fulldata[j][row] < d.fulldata[minipos][row]){
+                        minipos = j;
+                    }
+        }
+        
+        d.fulldata[minipos][row]=d.fulldata[i][row];
+        d.fulldata[i][row]=i;
+    }
 }
+//-----------------------------------------------------------------------------------------------------------------
 
-void findcolmed()
+void findmedian(struct datavalues d,const int col,const int row,const int roworcol,int med){
+    // int n= sizeof(d.fulldata[col][c]);/sizeof(d.totallco[0]);
+    // sortnum(d,col,row,roworcol,med);
+    // med = d.totalcol;       
+}    
+
+void findcolmed(struct datavalues d,const int col,const int row)
 {
     
 }
@@ -974,26 +980,26 @@ void finddistinct(struct datavalues d)
 //------------------------------This function finds the histogram-----------------------------------------
 void findhistogram(struct datavalues d)
 {
-//     srand(time(NULL));
-//     set<int> s;
+    // srand(time(NULL));
+    // set<int> s;
 
-//     findUnique(student, s);
-//     vector<int> v2(s.begin(),s.end());
-//     vector<int> hist (v2.size(),0);
+    // findUnique(student, s);
+    // vector<int> v2(s.begin(),s.end());
+    // vector<int> hist (v2.size(),0);
 
-//     for (int j=0; j<student.size(); j++){
-//         for (int i=0;i<v2.size(); i++){
-//             if(student[j] == v2[i])
-//                 hist[i]++;
-//         }
-//     }
+    // for (int j=0; j<student.size(); j++){
+    //     for (int i=0;i<v2.size(); i++){
+    //         if(student[j] == v2[i])
+    //             hist[i]++;
+    //     }
+    // }
 
-//     for (int i=0; i<student.size(); i++){
-//         cout << v2[i] << "-->";
-//         for(int k=0;k<hist[i];k++)
-//             cout << "=";
-//         cout <<endl;       
-//     }
+    // for (int i=0; i<student.size(); i++){
+    //     cout << v2[i] << "-->";
+    //     for(int k=0;k<hist[i];k++)
+    //         cout << "=";
+    //     cout <<endl;       
+    // }
 }
 
 
