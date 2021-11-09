@@ -8,6 +8,7 @@
 #include <cmath>
 #include <string>
 #include <set>
+#include <algorithm>
 using namespace std;
 
 
@@ -722,7 +723,8 @@ void findmax(struct datavalues d,const int col,const int row, const int roworcol
 //------------------------------This functions loads the median function-------------------------------------
 void loadmed(struct datavalues d)
 {   
-    int row,col,roworcol,count,med;
+    int row,col,roworcol,count;
+    int med;
     askrowcolumn(d,row,col,roworcol);
     findmedian(d,col,row,roworcol,med);
 
@@ -765,16 +767,35 @@ void sortnum(struct datavalues d,const int col,const int row,const int roworcol,
 //-----------------------------------------------------------------------------------------------------------------
 
 void findmedian(struct datavalues d,const int col,const int row,const int roworcol,int med){
-    // int n= sizeof(d.fulldata[col][c]);/sizeof(d.totallco[0]);
-    // sortnum(d,col,row,roworcol,med);
-    // med = d.totalcol;       
-}    
+    double median = 0;
+    int count = 0;
+    int size = sizeof(d.fulldata[col]);
+    if (roworcol==1){
+        for (int i=0;i<d.totalrow;i++){
+            med =  (d.fulldata[i][row]+(size/2));
+            count++;     
+        }
+    }
+    else if (roworcol==2){
+        for (int i=0;i<d.totalcol;i++){
+            if (d.computablecols[i]==1){
+                med =  d.fulldata[size][i]+(size/2);
+                
+            }
+        }
+      
+  
+}
+
+    // not done yet
+      
+}
 
 void findcolmed(struct datavalues d,const int col,const int row)
 {
     
 }
-
+//-----------------------------------------------------------------------------------------------------------------------
 void printnotcomputable(const int totalcol, const vec1 computablecols){
     cout << endl << "Column ";
     for (int i=0; i<totalcol; i++){
@@ -980,29 +1001,55 @@ void finddistinct(struct datavalues d)
 //------------------------------This function finds the histogram-----------------------------------------
 void findhistogram(struct datavalues d)
 {
-    // srand(time(NULL));
-    // set<int> s;
+    
+//     srand(time(NULL));
+//     vector<int> v(100);
+//     set<int> s;
 
-    // findUnique(student, s);
-    // vector<int> v2(s.begin(),s.end());
-    // vector<int> hist (v2.size(),0);
+//     for (auto item : v){
+//          item =  rand()%10;
+//     }
+//     for (auto item : v){
 
-    // for (int j=0; j<student.size(); j++){
-    //     for (int i=0;i<v2.size(); i++){
-    //         if(student[j] == v2[i])
-    //             hist[i]++;
-    //     }
-    // }
+//       cout << item << ":";
+//       cout << endl;
+//     }
+    
+    
+//     vector<int> v2(s.begin(),s.end());
+//     vector<int> hist (v2.size(),0);
 
-    // for (int i=0; i<student.size(); i++){
-    //     cout << v2[i] << "-->";
-    //     for(int k=0;k<hist[i];k++)
-    //         cout << "=";
-    //     cout <<endl;       
-    // }
-}
+//     for (int j=0; j<v.size(); j++){
+//         for (int i=0;i<v2.size(); i++){
+//             if(v[j] == v2[i])
+//                 hist[i]++;
+//         }
+//     }
 
+//     for (int i=0; i<v.size(); i++){
+//         cout << v2[i] << "-->";
+//         for(int k=0;k<hist[i];k++)
+//             cout << "=";
+//         cout <<endl;       
+//     }
+ }
+// void initVector(vector<int> &v)
+// {
+//     for (auto item : v)
+//         item =  rand()%10;
 
+// }
+// void printVector(const vector<int> &v)
+// {
+//      for (auto item : v)
+//      cout << item << ":";
+//      cout << endl;
+// }     
+// void findUnique(const vector<int> &v, set<int> &s)
+// {
+//     for (auto item : v)
+//         s.insert(item);
+// }
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------
 //------------------------------This functions shows the report menu-----------------------------------------
 void reportsmenu()
@@ -1042,4 +1089,5 @@ void reportsmenu()
     //             reportsmenu();
     //             break;         
     // }
+    
 }
