@@ -759,7 +759,6 @@ void sortnum(struct datavalues d,const int col,const int row,const int roworcol,
                         minipos = j;
                     }
         }
-        
         d.fulldata[minipos][row]=d.fulldata[i][row];
         d.fulldata[i][row]=i;
     }
@@ -768,18 +767,23 @@ void sortnum(struct datavalues d,const int col,const int row,const int roworcol,
 
 void findmedian(struct datavalues d,const int col,const int row,const int roworcol,int med){
     double median = 0;
+    sortnum(d,col,row,roworcol,med);
     int count = 0;
-    int size = sizeof(d.fulldata[col]);
+    int size = d.fulldata.size();
     if (roworcol==1){
         for (int i=0;i<d.totalrow;i++){
-            med =  (d.fulldata[i][row]+(size/2));
-            count++;     
+            if(d.fulldata[i][row] % 2==0){
+                med =  (d.fulldata[i][d.fulldata.size()/2-1] );
+            }
+            else {
+                med =  (d.fulldata[i][d.fulldata.size()/2]);
+            }    
         }
     }
     else if (roworcol==2){
-        for (int i=0;i<d.totalcol;i++){
-            if (d.computablecols[i]==1){
-                med =  d.fulldata[size][i]+(size/2);
+        for (int j=0;j<d.totalcol;j++){
+            if (d.computablecols[j]==1){
+                med =  d.fulldata[j][d.fulldata.size()/2];
                 
             }
         }
@@ -787,7 +791,7 @@ void findmedian(struct datavalues d,const int col,const int row,const int roworc
   
 }
 
-    // not done yet
+  
       
 }
 

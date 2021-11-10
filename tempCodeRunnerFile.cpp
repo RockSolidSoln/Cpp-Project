@@ -1,1 +1,2 @@
-sortnum(d,col)
+
+    int size = d.fulldata.size();
