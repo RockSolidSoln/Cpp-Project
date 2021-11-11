@@ -736,14 +736,14 @@ void loadmed(struct datavalues d)
     cout << " is " << med << ".";
 
 }
-
 //--------------------------------------------Salah Fayeq-----------------------------------------------------
 //--------------------------------This function sorts the numbers in col and row------------------------------
-void sortnum(struct datavalues d, int *ar, const int col,const int row,const int roworcol,int med){
+void sortnum(struct datavalues d,const int col,const int row,const int roworcol,int med){
     int minipos;
     double temp;
     if(roworcol==2)
     {   
+        int ar[d.totalcol];
         for(int i=0; i<d.totalcol;i++)
         {
             minipos = i;
@@ -751,14 +751,13 @@ void sortnum(struct datavalues d, int *ar, const int col,const int row,const int
             {
                 ar[i]=d.fulldata[row][i];
             }
-            else
-                ar[i]=0;
         }
         int t= sizeof(ar)/sizeof(ar[0]);
         sort(ar, ar+t);
     }
     else if(roworcol==1)
     {   
+        int ar[d.totalrow];
         for(int i=0; i<d.totalrow;i++)
         {
             minipos = i;
@@ -769,29 +768,17 @@ void sortnum(struct datavalues d, int *ar, const int col,const int row,const int
     }
 }
 
-//---------------------------------------------Ahmad Ayaan------------------------------------------------------------
-//--------------------------------These next two functions initialize and deletes the array---------------------------
-int *getarray(int n)
-{
-    return new int[n];
-}
-void deletearray(int *ptr1)
-{
-    delete[] ptr1;
-}
-
 // 
 //-----------------------------------------------------------------------------------------------------------------
-void findmedian(struct datavalues d, const int col,const int row,const int roworcol,int med)
+void findmedian(struct datavalues d,const int col,const int row,const int roworcol,int med)
 {
     double median = 0;
+    sortnum(d,col,row,roworcol,med);
     int count = 0;
     int size = d.fulldata.size();
-    int *ar=nullptr;
+    
     if (roworcol==1)
     {   
-        ar=getarray(d.totalrow);
-        sortnum(d,ar,col,row,roworcol,med);
         for (int i=0;i<d.totalrow;i++){
             if(d.fulldata[i][col] % 2==0){
                 med =  (d.fulldata[i][col]+(size/2-1));
@@ -803,10 +790,6 @@ void findmedian(struct datavalues d, const int col,const int row,const int rowor
     }
     else if (roworcol==2)
     {   
-        ar=getarray(d.totalcol);
-        sortnum(d,ar,col,row,roworcol,med);
-        for(int i=0;i<d.totalcol;i++)
-            cout<<ar[i]<<" ";
         for (int j=0;j<d.totalcol;j++){
             if (d.computablecols[j]==1){
                if(d.fulldata[j][row] % 2==0){
@@ -818,7 +801,6 @@ void findmedian(struct datavalues d, const int col,const int row,const int rowor
             }
         }  
     }
-    deletearray(ar);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------

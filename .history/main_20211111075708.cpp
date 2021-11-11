@@ -768,9 +768,6 @@ void sortnum(struct datavalues d, int *ar, const int col,const int row,const int
        
     }
 }
-
-//---------------------------------------------Ahmad Ayaan------------------------------------------------------------
-//--------------------------------These next two functions initialize and deletes the array---------------------------
 int *getarray(int n)
 {
     return new int[n];
@@ -779,7 +776,6 @@ void deletearray(int *ptr1)
 {
     delete[] ptr1;
 }
-
 // 
 //-----------------------------------------------------------------------------------------------------------------
 void findmedian(struct datavalues d, const int col,const int row,const int roworcol,int med)

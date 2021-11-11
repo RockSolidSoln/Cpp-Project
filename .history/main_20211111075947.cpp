@@ -770,7 +770,7 @@ void sortnum(struct datavalues d, int *ar, const int col,const int row,const int
 }
 
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------------
-//--------------------------------These next two functions initialize and deletes the array---------------------------
+//--------------------------------
 int *getarray(int n)
 {
     return new int[n];
