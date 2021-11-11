@@ -1089,9 +1089,7 @@ void findhistogram(struct datavalues d)
     logrecord(str);                                 //stores the activity
     viewfunc(d);                                    // proceed to statystical analysis menu for more
 }
-
-//---------------------------------------------------------------------------------------------
-//------------------------------This function finds the histogram----------------------------------------- 
+  
 void printhist(struct datavalues d, int &lowlimit, int &upperlimit,const int col)
 {
     int count=0;
@@ -1106,11 +1104,11 @@ void printhist(struct datavalues d, int &lowlimit, int &upperlimit,const int col
         cout << 0 << count<< setw(13) << (lowlimit+upperlimit) / 2 << " |";     //checks if count is single digit or not
     else 
         cout << count << setw(13) << (lowlimit+upperlimit) / 2  << " |";        
-    for(int j = 0; j < count; ++j)                                              // prints (=) with each number of counts
+    for(int j = 0; j < count; ++j) 
             cout << "=";
     cout << endl;
-    lowlimit+=10;                                                               // increment lower bound
-    upperlimit+=10;                                                             // increment upper bound
+    lowlimit+=10;
+    upperlimit+=10;
 }
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------
 //------------------------------This functions shows the report menu-----------------------------------------

@@ -1089,9 +1089,7 @@ void findhistogram(struct datavalues d)
     logrecord(str);                                 //stores the activity
     viewfunc(d);                                    // proceed to statystical analysis menu for more
 }
-
-//---------------------------------------------------------------------------------------------
-//------------------------------This function finds the histogram----------------------------------------- 
+  
 void printhist(struct datavalues d, int &lowlimit, int &upperlimit,const int col)
 {
     int count=0;

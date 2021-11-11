@@ -1063,54 +1063,53 @@ void findhistogram(struct datavalues d)
 {
     int values=0, lowlimit=0, upperlimit=10, col;
     cout << "Enter the column number for plotting histogram: \n";
-    cin >> col;                     // takes the column number to show histogram
-    if(d.computablecols[col]==1)    // checks if column is computable or not
+    cin >> col;                 // takes the column number 
+    if(d.computablecols[col]==1)
     {   
         cout << "HISTOGRAM: \n\n ";
         cout << "Counts" << setw(18) << "Mid points \n";
-        while(!(lowlimit>=d.totalrow))              //while it doesn't reachers the end of number of rows
+        while(!(lowlimit>=d.totalrow))
         {   
-            printhist(d,lowlimit,upperlimit, col); //prints histogram
+            printhist(d,lowlimit,upperlimit, col);
         }
         cout << setw(16) << "/";
-        for(int i=0;i<=40;i++)                     // prints x axis
+        for(int i=0;i<=40;i++)
         {
             if (i % 10 == 0 ) { cout<<i; }
             else { cout<<"-"; }
         }
     }
-    else                                            // if column is not computable or doesn't exist
+    else
     {
         cout<<"Wrong selection of column\n"
             <<"Try again\n";
-        findhistogram(d);                           // calls histogram function again
+        findhistogram(d);
     }
     string str=" created the histogram table";
-    logrecord(str);                                 //stores the activity
-    viewfunc(d);                                    // proceed to statystical analysis menu for more
+    logrecord(str);
+    viewfunc(d);
 }
-
-//---------------------------------------------------------------------------------------------
-//------------------------------This function finds the histogram----------------------------------------- 
+  
 void printhist(struct datavalues d, int &lowlimit, int &upperlimit,const int col)
 {
-    int count=0;
+    int v=0, count=0;
     for(int i = 0; i < d.totalrow ; i++) 
     { 
-        if((d.fulldata[i][col]>lowlimit) && (d.fulldata[i][col]<=upperlimit))   // checks the bounds 
-        {                                          
-            count++;                                                            // counts if found in bound
+        if((d.fulldata[i][col]>lowlimit) && (d.fulldata[i][col]<=upperlimit))
+        {   
+            v= v+d.fulldata[i][col];
+            count++;
         }
     }
     if(count < 10) 
-        cout << 0 << count<< setw(13) << (lowlimit+upperlimit) / 2 << " |";     //checks if count is single digit or not
+        cout << 0 << count<< setw(13) << (lowlimit+upperlimit) / 2 << " |";
     else 
-        cout << count << setw(13) << (lowlimit+upperlimit) / 2  << " |";        
-    for(int j = 0; j < count; ++j)                                              // prints (=) with each number of counts
+        cout << count << setw(13) << (lowlimit+upperlimit) / 2  << " |";
+    for(int j = 0; j < count; ++j) 
             cout << "=";
     cout << endl;
-    lowlimit+=10;                                                               // increment lower bound
-    upperlimit+=10;                                                             // increment upper bound
+    lowlimit+=10;
+    upperlimit+=10;
 }
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------
 //------------------------------This functions shows the report menu-----------------------------------------

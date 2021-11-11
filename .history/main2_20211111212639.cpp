@@ -1089,28 +1089,27 @@ void findhistogram(struct datavalues d)
     logrecord(str);                                 //stores the activity
     viewfunc(d);                                    // proceed to statystical analysis menu for more
 }
-
-//---------------------------------------------------------------------------------------------
-//------------------------------This function finds the histogram----------------------------------------- 
+  
 void printhist(struct datavalues d, int &lowlimit, int &upperlimit,const int col)
 {
-    int count=0;
+    int v=0, count=0;
     for(int i = 0; i < d.totalrow ; i++) 
     { 
-        if((d.fulldata[i][col]>lowlimit) && (d.fulldata[i][col]<=upperlimit))   // checks the bounds 
-        {                                          
-            count++;                                                            // counts if found in bound
+        if((d.fulldata[i][col]>lowlimit) && (d.fulldata[i][col]<=upperlimit))
+        {   
+            v= v+d.fulldata[i][col];
+            count++;
         }
     }
     if(count < 10) 
-        cout << 0 << count<< setw(13) << (lowlimit+upperlimit) / 2 << " |";     //checks if count is single digit or not
+        cout << 0 << count<< setw(13) << (lowlimit+upperlimit) / 2 << " |";
     else 
-        cout << count << setw(13) << (lowlimit+upperlimit) / 2  << " |";        
-    for(int j = 0; j < count; ++j)                                              // prints (=) with each number of counts
+        cout << count << setw(13) << (lowlimit+upperlimit) / 2  << " |";
+    for(int j = 0; j < count; ++j) 
             cout << "=";
     cout << endl;
-    lowlimit+=10;                                                               // increment lower bound
-    upperlimit+=10;                                                             // increment upper bound
+    lowlimit+=10;
+    upperlimit+=10;
 }
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------
 //------------------------------This functions shows the report menu-----------------------------------------
