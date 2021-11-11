@@ -1050,30 +1050,56 @@ void finddistinct(struct datavalues d)
 //------------------------------This function finds the histogram-----------------------------------------
 void findhistogram(struct datavalues d)
 {
-    
-    // srand(time(NULL));
-   
-    
-    // vector<int> v2(s.begin(),s.end());
-    // vector<int> hist (v2.size(),0);
+    int count; 
 
-    // for (int j=0; j<v.size(); j++){
-    //     for (int i=0;i<v2.size(); i++){
-    //         if(v[j] == v2[i])
-    //             hist[i]++;
-    //     }
-    // }
+        
+        cout << "Enter the number of records for plotting histogram: ";
+        cin >> count;
 
-    // for (int i=0; i<v.size(); i++){
-    //     cout << v2[i] << "-->";
-    //     for(int k=0;k<hist[i];k++)
-    //         cout << "=";
-    //     cout <<endl;       
+        int rec[count]; 
 
-    // }
-    string str=" created the histogram table";
-    logrecord(str);
-    viewfunc(d);
+        pair<int, int> mid_points[count]; 
+        cout << "Enter the class intervals(lower, upper) and frequecny of each record respectively -> \n"; 
+
+        for(int i = 0; i < count; ++i) { 
+                cout << "Record: " << i << endl;
+                cin >> mid_points[i].first >> mid_points[i].second;
+                cin >> rec[i];
+        }
+        cout << endl;
+
+        cout << "HISTOGRAM: \n\n ";
+
+        cout << "Counts" << setw(18) << "Mid points \n"; 
+
+        for(int i = 0; i < count; ++i) { 
+                if(rec[i] < 10) {
+                        cout << 0 << rec[i] << setw(13) << (mid_points[i].first + mid_points[i].second) / 2 << " |";
+                }
+                else {
+                        cout << rec[i] << setw(13) << (mid_points[i].first + mid_points[i].second) / 2 << " |";
+                }
+                for(int j = 0; j < rec[i]; ++j) {  
+                        cout << "=";
+                }
+                cout << endl;
+        }
+
+        cout << setw(16) << "/";
+        for(int i = 0; i < 40; ++i) {
+                if(i % 10 == 0 ) {
+                        cout << "+";
+                }
+                else {
+                        cout << "-";
+                }
+        }
+        cout << "+" << endl;
+
+        cout << setw(16) << 0 << setw(12) << 10 << setw(10) << 20 << setw(10) << 30 << setw(10) << 40;
+//     string str=" created the histogram table";
+//     logrecord(str);
+//     viewfunc(d);
  }
 // void initVector(vector<int> &v)
 // {
