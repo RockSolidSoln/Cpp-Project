@@ -826,15 +826,26 @@ void findmedian(struct datavalues d, const int col,const int row,const int rowor
     deletearray(ar);
 }
 
-//-----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------Liew ------------------------------------------------------
+//------------------------------This functions prompt the computable column -----------------------------------------
 void printnotcomputable(const int totalcol, const vec1 computablecols){
-    cout << endl << "Column ";
+    int count = 0;
     for (int i=0; i<totalcol; i++){
         if (computablecols[i] == 0){
-            cout << i << " ,";
+            count++;
         }
     }
-    cout << "are not computable."; 
+    if (count != 0){
+        cout << endl << "Column ";
+        for (int i=0; i<totalcol; i++){
+            if (computablecols[i] == 0){
+                cout << i << " ,";
+            }
+        }
+        cout << "are not computable."; 
+    } else {
+        cout << "All columns are computable.";
+    }
 }
 
 //---------------------------------------------Liew ------------------------------------------------------
@@ -851,7 +862,7 @@ void askrowcolumn(struct datavalues d, int &row, int &col,int &roworcol)
 
     if (roworcol == 1){
         do{
-            printnotcomputable(d.totalcol,d.computablecols);
+            printnotcomputable(d.totalcol,d.computablecols);//prompt the computable column
             cout << endl << "Enter the column from 0 to " << d.totalcol - 1 << " which is computable." << endl;
             cin >> col;
             if (!(col >= 0 && col < d.totalcol && d.computablecols[col] == 1))
@@ -875,9 +886,9 @@ void loadmean(struct datavalues d)
     double sum,sumofsq,mean;
 
     askrowcolumn(d,row,col,roworcol);
-    findmean(d,col,row,roworcol,sum,sumofsq,mean,count);
+    findmean(d,col,row,roworcol,sum,sumofsq,mean,count);//find the mean
 
-    cout << endl << "The mean of ";
+    cout << endl << "The mean of "; //print out the mean
     if (roworcol == 1)
         cout << "column " << col;
     else if (roworcol == 2)
@@ -895,22 +906,22 @@ void findmean(struct datavalues d,const int col,const int row, const int roworco
     sum = 0;
     sumofsq = 0;
     count = 0;
-    if (roworcol==1){
+    if (roworcol==1){ //if column
         for (int i=0;i<d.totalrow;i++){
-            sum = sum + d.fulldata[i][col];
-            sumofsq = sumofsq + ((d.fulldata[i][col])*(d.fulldata[i][col]));
+            sum = sum + d.fulldata[i][col]; //find the sum of column
+            sumofsq = sumofsq + ((d.fulldata[i][col])*(d.fulldata[i][col])); //find the sum of square of column
             count++;
         }
-    } else if (roworcol==2){
+    } else if (roworcol==2){ //if row
         for (int i=0;i<d.totalcol;i++){
             if (d.computablecols[i]==1){
-                sum = sum + d.fulldata[row][i];
-                sumofsq = sumofsq + ((d.fulldata[row][i])*(d.fulldata[row][i]));
+                sum = sum + d.fulldata[row][i]; //find the sum of row
+                sumofsq = sumofsq + ((d.fulldata[row][i])*(d.fulldata[row][i])); // find the sum of square of row
                 count++;
             }
         }
     }
-    mean = sum/count;
+    mean = sum/count; //calculate mean
 }
 
 //---------------------------------------------Liew ------------------------------------------------------
@@ -920,7 +931,7 @@ void loadvar(struct datavalues d){
     double sum,sumofsq,mean,var;
 
     askrowcolumn(d,row,col,roworcol);
-    findmean(d,col,row,roworcol,sum,sumofsq,mean,count);
+    findmean(d,col,row,roworcol,sum,sumofsq,mean,count); //get the sum of square of row/column to find variance
     findvar(sum,sumofsq,count,var);
 
     cout << endl << "The variance of ";
@@ -938,7 +949,7 @@ void loadvar(struct datavalues d){
 // //--------------------------This functions finds the variance-----------------------------------
 void findvar(const double sum,const double sumofsq,const int count, double &var)
 {
-    var = (sumofsq - ((sum*sum)/count)) / (count - 1);
+    var = (sumofsq - ((sum*sum)/count)) / (count - 1); //calculate the sample variance
 }
 
 
@@ -951,8 +962,8 @@ void loadfindstdv(struct datavalues d)
 
     askrowcolumn(d,row,col,roworcol);
     findmean(d,col,row,roworcol,sum,sumofsq,mean,count);
-    findvar(sum,sumofsq,count,var);
-    stdv = sqrt(var);
+    findvar(sum,sumofsq,count,var); //get variance to find standard deviation
+    stdv = sqrt(var); //calculate standard deviation
 
     cout << endl << "The standard deviation of ";
     if (roworcol == 1)
@@ -995,13 +1006,13 @@ void loadfindcorr(struct datavalues d)
     sumofcol1x2 = 0;
     printnotcomputable(d.totalcol,d.computablecols);
     asktwocolumn(d,col1,col2);
-    findmean(d,col1,row,roworcol,sum1,sumofsq1,mean1,count);
-    findmean(d,col2,row,roworcol,sum2,sumofsq2,mean2,count);
+    findmean(d,col1,row,roworcol,sum1,sumofsq1,mean1,count); //find the sum of square and mean for first column
+    findmean(d,col2,row,roworcol,sum2,sumofsq2,mean2,count); //find the sum of square and mean for second column
     for (int i = 0; i < d.totalrow;i++){
-        sumofcol1x2 = sumofcol1x2 + (d.fulldata[i][col1]*d.fulldata[i][col2]);
+        sumofcol1x2 = sumofcol1x2 + (d.fulldata[i][col1]*d.fulldata[i][col2]); //find the sum  of multiple of two column
     }
     double doublerow = (double)d.totalrow;
-    corr = (sumofcol1x2-(doublerow*mean1*mean2))/(sqrt(sumofsq1-(doublerow*mean1*mean1))*sqrt(sumofsq2-(doublerow*mean2*mean2)));    
+    corr = (sumofcol1x2-(doublerow*mean1*mean2))/(sqrt(sumofsq1-(doublerow*mean1*mean1))*sqrt(sumofsq2-(doublerow*mean2*mean2)));  //calculate correlation between 2 column  
     cout << "The correlation between column " << col1 << " and " << col2 << " is " << corr << endl;
     string str=" Calculated the correlation between two columns ";
     logrecord(str);
@@ -1015,27 +1026,27 @@ void finddistinct(struct datavalues d)
 {
     int row,col,roworcol;
     double max,min;
-    askrowcolumn(d, row, col, roworcol);
-    findmax(d, col, row, roworcol, max);
-    findmin(d, col, row, roworcol, min);
-    cout << "     Distinct Numbers Table    " << endl;
-    cout << "---------------+---------------" << endl;//15-+15-
+    askrowcolumn(d, row, col, roworcol); 
+    findmax(d, col, row, roworcol, max); //find maximum of column/row
+    findmin(d, col, row, roworcol, min); //find minimum of column/row
+    cout << "     Distinct Numbers Table    " << endl; //print out the table header
+    cout << "---------------+---------------" << endl;
     cout << "|    Number    |   Frequency  |" << endl;
     cout << "---------------+---------------" << endl;
-    for (int i=min;i<=max;i++){
+    for (int i=min;i<=max;i++){ //loop between the smallest and bigger number of row/column
         int frequency = 0;
-        if (roworcol == 1){
-            for (int k=0; k<d.totalrow;k++){
-                if (i==d.fulldata[k][col])
+        if (roworcol == 1){ //if column
+            for (int k=0; k<d.totalrow;k++){ //loop the specific column
+                if (i==d.fulldata[k][col]) //frequency +1 if i equals to number in the column 
                 frequency++;
             }
-        } else if (roworcol == 2){
-            for (int k=0; k<d.totalcol;k++){
-                if (i==d.fulldata[row][k] && d.computablecols[k]==1)
+        } else if (roworcol == 2){ //if row
+            for (int k=0; k<d.totalcol;k++){ //loop the specific row
+                if (i==d.fulldata[row][k] && d.computablecols[k]==1) //frequency +1 if i equals to number in the row
                 frequency++;
             }
         }
-        if (frequency != 0){
+        if (frequency != 0){ //if the distinct number exist, print it out and its frequency
             cout << "|" << setw(7) << right << i;
             cout << setw(8) << right <<"|" << setw(8) <<right << frequency << setw(7) << right <<"|" << endl;
             cout << "---------------+---------------" << endl;
