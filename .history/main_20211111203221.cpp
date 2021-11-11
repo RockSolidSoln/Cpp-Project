@@ -1061,74 +1061,52 @@ void finddistinct(struct datavalues d)
 //------------------------------This function finds the histogram-----------------------------------------
 void findhistogram(struct datavalues d)
 {
-    int count; 
-
+    int values=0,lowlimit=0,col;
         
-        cout << "Enter the number of records for plotting histogram: ";
-        cin >> count;
-
-        int rec[count]; 
-
-        pair<int, int> mid_points[count]; 
-        cout << "Enter the class intervals(lower, upper) and frequecny of each record respectively -> \n"; 
-
-        for(int i = 0; i < count; ++i) { 
-                cout << "Record: " << i << endl;
-                cin >> mid_points[i].first >> mid_points[i].second;
-                cin >> rec[i];
+    cout << "Enter the column number for plotting histogram: \n";
+    cin >> col;
+    // cout << "HISTOGRAM: \n\n ";
+        // cout << "Counts" << setw(18) << "Mid points \n"; 
+    while(!(lowlimit==d.totalrow))
+    {   
+        int v=0, count=0;
+        for(int i = 0; i < d.totalrow ; ++i) 
+        { 
+                if(d.fulldata[col]>lowlimit)
+                {   
+                    v= var+d.fulldata[col];
+                    count++;
+                }
+        }
+        if(count < 10) {
+                cout << 0 << count<< setw(13) << (var) / 2 << " |";
+        }
+        else {
+                cout << count << setw(13) << (var) / 2 << " |";
+        }
+        for(int j = 0; j < (var/2); ++j) {  
+                cout << "=";
         }
         cout << endl;
-
-        cout << "HISTOGRAM: \n\n ";
-
-        cout << "Counts" << setw(18) << "Mid points \n"; 
-
-        for(int i = 0; i < count; ++i) { 
-                if(rec[i] < 10) {
-                        cout << 0 << rec[i] << setw(13) << (mid_points[i].first + mid_points[i].second) / 2 << " |";
-                }
-                else {
-                        cout << rec[i] << setw(13) << (mid_points[i].first + mid_points[i].second) / 2 << " |";
-                }
-                for(int j = 0; j < rec[i]; ++j) {  
-                        cout << "=";
-                }
-                cout << endl;
-        }
-
-        cout << setw(16) << "/";
-        for(int i = 0; i < 40; ++i) {
-                if(i % 10 == 0 ) {
-                        cout << "+";
-                }
-                else {
-                        cout << "-";
-                }
-        }
-        cout << "+" << endl;
-
-        cout << setw(16) << 0 << setw(12) << 10 << setw(10) << 20 << setw(10) << 30 << setw(10) << 40;
-//     string str=" created the histogram table";
-//     logrecord(str);
-//     viewfunc(d);
+        lowlimit+=10;
+    }
+    cout << setw(16) << "/";
+    for(int i = 0; i < 40; ++i) {
+            if(i % 10 == 0 ) {
+                    cout << "+";
+            }
+            else {
+                    cout << "-";
+            }
+    }
+    cout << "+" << endl;
+    cout << setw(16) << 0 << setw(12) << 10 << setw(10) << 20 << setw(10) << 30 << setw(10) << 40;
+    string str=" created the histogram table";
+    logrecord(str);
+    viewfunc(d);
  }
-// void initVector(vector<int> &v)
-// {
-//     for (auto item : v)
-//         item =  rand()%10;
+  
 
-// }
-// void printVector(const vector<int> &v)
-// {
-//      for (auto item : v)
-//      cout << item << ":";
-//      cout << endl;
-// }     
-// void findUnique(const vector<int> &v, set<int> &s)
-// {
-//     for (auto item : v)
-//         s.insert(item);
-// }
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------
 //------------------------------This functions shows the report menu-----------------------------------------
 void reportsmenu()

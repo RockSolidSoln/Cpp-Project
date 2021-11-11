@@ -1,2 +1,3 @@
-
-void findvar(const double,const double,const int, double&);
+cout<<"Wrong selection of column\n"
+            <<"Try again\n";
+        findhistogram(d);
