@@ -362,7 +362,7 @@ void deleteuser(vec users)
     cout << "---------------------------------------------------\n"
                     <<"Account deletion was successful.\n" << endl;
     string str=" deleted the user "+name;
-    logrecord(str);                                             // activity recorded
+    logrecord(str);
     pressenter(1);
 }
 

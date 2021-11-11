@@ -351,7 +351,7 @@ void deleteuser(vec users)
     }
     ofstream outfile;
     outfile.open("Users.dat",ios::out);
-    for (int i=0;i<users.size();i++)                            // re-write the whole vector back in the file
+    for (int i=0;i<users.size();i++)                        
     { 
         outfile << get<0>(users[i]) << " " 
                 << get<1>(users[i]) << " " 
@@ -362,7 +362,7 @@ void deleteuser(vec users)
     cout << "---------------------------------------------------\n"
                     <<"Account deletion was successful.\n" << endl;
     string str=" deleted the user "+name;
-    logrecord(str);                                             // activity recorded
+    logrecord(str);
     pressenter(1);
 }
 

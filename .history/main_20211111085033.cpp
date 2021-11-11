@@ -132,7 +132,7 @@ void login()
         else if(get<0>(users[i])==name && get<2>(users[i])==pass && get<1>(users[i])==0)   
             return 0;   // If user is not an admin returns 0
     }
-    return 2;           // If user is not in the system it returns 2
+    return 2;           // If user is not an0 admin returns 
  }
 
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------
@@ -140,15 +140,15 @@ void login()
 void getchoice() 
 {   
     if(status==1)
-        adminmenu(); // calls admin menu
+        adminmenu();
     else
     {   
         if(status==0)
-        usermenu(); // calls user's menu
+        usermenu();
         else
         {
         cout<<"Either username or password was wrong\n";
-        login();  //calls login again because user or password was wrong
+        login();
         }
     }
 }
@@ -171,24 +171,24 @@ void adminmenu()
         << "|--------------------------------------------------------|\n";
     cin >> ch;
     cin.ignore(' ','\n');
-    string str=" just choose Menu option ";
-    str.push_back(ch);                          // Activtiy recorded
+    string str=" just choose menu option ";
+    str.push_back(ch);
     logrecord(str);
     vec users;
-    users=loadfile();                           // Gets all user information in a vector
+    users=loadfile();
     switch(ch)
     {
-        case('1') : clearfile();                // Proceed to Statystical Analysis
+        case('1') : clearfile();
                     break;
-        case('2') : createuser(users);          // create new user
+        case('2') : createuser(users);
                     break;
-        case('3') : logout();                   // logout user
+        case('3') : logout();
                     break;
-        case('4') : deleteuser(users);          // deletes user
+        case('4') :  deleteuser(users);
                     break;
-        case('5') : changepass(users);          // changes password
+        case('5') :  changepass(users);
                     break;
-        case('0') : exit(0);                    // exit
+        case('0') : exit(0);
                     break;
         default: cout<<"Wrong choice\n"
                      <<"Please try again\n";
@@ -215,17 +215,17 @@ void usermenu()
     cin.ignore(' ','\n');
     string str=" just choose menu option "+ch;
     str.push_back(ch);
-    logrecord(str);                              // Activtiy recorded
+    logrecord(str);
     vec users;
-    users=loadfile();                            // Gets all user information in a vector
+    users=loadfile();
     switch(ch)
-    {   case('1') : clearfile();                 // Proceed to Statystical Analysis
+    {   case('1') : clearfile(); 
                     break;
-        case('2') : logout();                    // logout user
+        case('2') : logout();
                     break;
-        case('3') : changepass(users);           // changes password
+        case('3') : changepass(users);
                     break;
-        case('0') : exit(0);                     // exit
+        case('0') : exit(0);
                     break;
 
         default: cout<<"Wrong choice\n"
@@ -242,34 +242,30 @@ void createuser(vec users)
     string user,pass;
     int s, flag=0,f;
     cout <<"Enter a unique user name -\n";
-    cin >> user;                            // get user name
+    cin >> user;
     cout << "Enter your password -\n";
-    cin >> pass;                            // get password
+    cin >> pass;
     cout <<"Enter 1 to create new admin, 0 for reguler user-\n";
-    cin>>s;                                 // get power                                
+    cin>>s;
     for(int i=0; i<users.size(); i++)
+    {if(get<0>(users[i])==user)
     {
-        if(get<0>(users[i])==user)
-        {
-            flag = 1;       // flag=1 
-            break;          // if username already exists or not
-        }
-    }
-    if(flag!=1)             // if flag !=1 then username not taken
-    {   
-        ofstream outfile;
-        outfile.open("Users.dat",ios::ate|ios::app);
-        int activity=1;
-        outfile << user << " " << s << " " << pass << " " << activity <<endl;
-        outfile.close();                      // creates new user successfully
-        cout << "-----------------------------------------------------\n"
-            << "Username and password created successfully.\n"<<endl;
-        string str=" just created another user as "+user;
-        logrecord(str);
-    }
+        flag = 1;
+        break;
+    }}
+    if(flag!=1)
+    {ofstream outfile;
+    outfile.open("Users.dat",ios::ate|ios::app);
+    int activity=1;
+    outfile << user << " " << s << " " << pass << " " << activity <<endl;
+    outfile.close();
+    cout << "-----------------------------------------------------\n"
+         << "Username and password created successfully.\n"<<endl;
+    string str=" just created another user as "+user;
+    logrecord(str);}
     else 
-        cout<<"The username already exists\n";
-    pressenter(f==1);         // calls pressenter function 
+    cout<<"The username already exists\n";
+    pressenter(f==1);
 }
 
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------
@@ -277,10 +273,9 @@ void createuser(vec users)
 void logout()
 {   
     string str=" logged out from the system ";
-    logrecord(str);                 // activity recorded
+    logrecord(str);
     system("cls");
     cout<<"Logout was successful.\n";
-    exit(0);                        // logout was successful
 }
 
 //---------------------------------------------Salah Fayeq------------------------------------------------------
@@ -289,16 +284,16 @@ void changepass(vec users)
 {
     string newpass1,newpass2,oldpass;           
     cout << "Enter your old password to continue..." << endl;
-    cin >> oldpass;                 // takes the old password
+    cin >> oldpass;       
     for (int i=0;i<users.size();i++)
     {
-        if (oldpass == get<2>(users[i]) && username==get<0>(users[i])) //checks the old password and username matches
+        if (oldpass == get<2>(users[i]) && username==get<0>(users[i]))
        {    
             cout << "Please enter the new password"<< endl;
             cin >> newpass1;
             cout << "Please re-enter your new password"<< endl;
             cin >> newpass2;
-            if(newpass1==newpass2)                  // reconfirms the new password
+            if(newpass1==newpass2)
             {
                 get<2>(users[i])=newpass1;
                 cout << "Password changed you may procced to login"<< endl;
@@ -330,28 +325,28 @@ void changepass(vec users)
 void deleteuser(vec users) 
 {
     string name, pass;
-    cout << "-----------------------------------------------------\n"
-        << "Enter the Username to delete-\n";
-    cin >> name;                    // takes the username
-    cout << "-----------------------------------------------------\n"
-        << "Enter Password to confirm deletion-\n";
-    cin >> pass;                    // takes the password for confirmation
+                cout << "-----------------------------------------------------\n"
+                    << "Enter the Username to delete-\n";
+                cin >> name;
+                cout << "-----------------------------------------------------\n"
+                    << "Enter Password to confirm deletion-\n";
+                cin >> pass;
      for (int i=0;i<users.size();i++)
     {   
         if (name==get<0>(users[i]) && pass==get<2>(users[i]) && get<3>(users[i])==1)
-             {                                                  //checks if user is already deleted or not
-                cout << get<0>(users[i]) << ": "        
+             { 
+                cout << get<0>(users[i]) << ": "
                     << ((get<1>(users[i])==1)?"admin":"user")
                     << ": " <<get<2>(users[i]) << ": "
                     << ((get<3>(users[i])==1)?"Deleted":"Active")
-                    << endl;                                    // delete user account
+                    << endl;
                 get<3>(users[i])=0;
                     break;
              }       
     }
     ofstream outfile;
     outfile.open("Users.dat",ios::out);
-    for (int i=0;i<users.size();i++)                            // re-write the whole vector back in the file
+    for (int i=0;i<users.size();i++)
     { 
         outfile << get<0>(users[i]) << " " 
                 << get<1>(users[i]) << " " 
@@ -362,7 +357,7 @@ void deleteuser(vec users)
     cout << "---------------------------------------------------\n"
                     <<"Account deletion was successful.\n" << endl;
     string str=" deleted the user "+name;
-    logrecord(str);                                             // activity recorded
+    logrecord(str);
     pressenter(1);
 }
 
@@ -1036,25 +1031,25 @@ void finddistinct(struct datavalues d)
 void findhistogram(struct datavalues d)
 {
     
-    // srand(time(NULL));
+    srand(time(NULL));
    
     
-    // vector<int> v2(s.begin(),s.end());
-    // vector<int> hist (v2.size(),0);
+    vector<int> v2(s.begin(),s.end());
+    vector<int> hist (v2.size(),0);
 
-    // for (int j=0; j<v.size(); j++){
-    //     for (int i=0;i<v2.size(); i++){
-    //         if(v[j] == v2[i])
-    //             hist[i]++;
-    //     }
-    // }
+    for (int j=0; j<v.size(); j++){
+        for (int i=0;i<v2.size(); i++){
+            if(v[j] == v2[i])
+                hist[i]++;
+        }
+    }
 
-    // for (int i=0; i<v.size(); i++){
-    //     cout << v2[i] << "-->";
-    //     for(int k=0;k<hist[i];k++)
-    //         cout << "=";
-    //     cout <<endl;       
-    // }
+    for (int i=0; i<v.size(); i++){
+        cout << v2[i] << "-->";
+        for(int k=0;k<hist[i];k++)
+            cout << "=";
+        cout <<endl;       
+    }
  }
 // void initVector(vector<int> &v)
 // {

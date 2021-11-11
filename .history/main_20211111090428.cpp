@@ -339,19 +339,19 @@ void deleteuser(vec users)
      for (int i=0;i<users.size();i++)
     {   
         if (name==get<0>(users[i]) && pass==get<2>(users[i]) && get<3>(users[i])==1)
-             {                                                  //checks if user is already deleted or not
-                cout << get<0>(users[i]) << ": "        
+             { 
+                cout << get<0>(users[i]) << ": "
                     << ((get<1>(users[i])==1)?"admin":"user")
                     << ": " <<get<2>(users[i]) << ": "
                     << ((get<3>(users[i])==1)?"Deleted":"Active")
-                    << endl;                                    // delete user account
+                    << endl;
                 get<3>(users[i])=0;
                     break;
              }       
     }
     ofstream outfile;
     outfile.open("Users.dat",ios::out);
-    for (int i=0;i<users.size();i++)                            // re-write the whole vector back in the file
+    for (int i=0;i<users.size();i++)
     { 
         outfile << get<0>(users[i]) << " " 
                 << get<1>(users[i]) << " " 
@@ -362,7 +362,7 @@ void deleteuser(vec users)
     cout << "---------------------------------------------------\n"
                     <<"Account deletion was successful.\n" << endl;
     string str=" deleted the user "+name;
-    logrecord(str);                                             // activity recorded
+    logrecord(str);
     pressenter(1);
 }
 
