@@ -1071,9 +1071,7 @@ void findhistogram(struct datavalues d)
     //     cout <<endl;       
 
     // }
-    string str=" created the histogram table";
-    logrecord(str);
-    viewfunc(d);
+    
  }
 // void initVector(vector<int> &v)
 // {
@@ -1120,7 +1118,7 @@ void reportsmenu()
     //                      break;
     //      case('2')    : saveHTMLreport(1,str1,db,ds);
     //                      break;
-    //      case('B')    : viewfunc();
+    //      case('B')    : //viewfunc();
     //                      break;
     //      case('U')    : getchoice();
     //                      break;

@@ -1120,7 +1120,7 @@ void reportsmenu()
     //                      break;
     //      case('2')    : saveHTMLreport(1,str1,db,ds);
     //                      break;
-    //      case('B')    : viewfunc();
+    //      case('B')    : //viewfunc();
     //                      break;
     //      case('U')    : getchoice();
     //                      break;

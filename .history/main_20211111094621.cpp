@@ -1041,7 +1041,7 @@ void finddistinct(struct datavalues d)
             cout << "---------------+---------------" << endl;
         }
     }
-    string str=" found the Distinct member";
+    string str=" Calculated the standard deviation ";
     logrecord(str);
     viewfunc(d);
 }
@@ -1069,11 +1069,7 @@ void findhistogram(struct datavalues d)
     //     for(int k=0;k<hist[i];k++)
     //         cout << "=";
     //     cout <<endl;       
-
     // }
-    string str=" created the histogram table";
-    logrecord(str);
-    viewfunc(d);
  }
 // void initVector(vector<int> &v)
 // {
@@ -1120,7 +1116,7 @@ void reportsmenu()
     //                      break;
     //      case('2')    : saveHTMLreport(1,str1,db,ds);
     //                      break;
-    //      case('B')    : viewfunc();
+    //      case('B')    : //viewfunc();
     //                      break;
     //      case('U')    : getchoice();
     //                      break;

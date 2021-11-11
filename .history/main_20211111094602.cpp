@@ -1003,7 +1003,7 @@ void loadfindcorr(struct datavalues d)
     double doublerow = (double)d.totalrow;
     corr = (sumofcol1x2-(doublerow*mean1*mean2))/(sqrt(sumofsq1-(doublerow*mean1*mean1))*sqrt(sumofsq2-(doublerow*mean2*mean2)));    
     cout << "The correlation between column " << col1 << " and " << col2 << " is " << corr << endl;
-    string str=" Calculated the correlation between two columns ";
+    string str=" Calculated the standard deviation ";
     logrecord(str);
     viewfunc(d);
 }
@@ -1041,9 +1041,6 @@ void finddistinct(struct datavalues d)
             cout << "---------------+---------------" << endl;
         }
     }
-    string str=" found the Distinct member";
-    logrecord(str);
-    viewfunc(d);
 }
 
 //------------------------------------------Salah Fayeq---------------------------------------------------
@@ -1069,11 +1066,7 @@ void findhistogram(struct datavalues d)
     //     for(int k=0;k<hist[i];k++)
     //         cout << "=";
     //     cout <<endl;       
-
     // }
-    string str=" created the histogram table";
-    logrecord(str);
-    viewfunc(d);
  }
 // void initVector(vector<int> &v)
 // {
@@ -1120,7 +1113,7 @@ void reportsmenu()
     //                      break;
     //      case('2')    : saveHTMLreport(1,str1,db,ds);
     //                      break;
-    //      case('B')    : viewfunc();
+    //      case('B')    : //viewfunc();
     //                      break;
     //      case('U')    : getchoice();
     //                      break;

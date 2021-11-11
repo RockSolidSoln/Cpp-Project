@@ -644,7 +644,8 @@ void loadmin(struct datavalues d)
         cout << "row " << row;
     cout << " is " << min << "."<<endl;
     
-    string str=" calculated the minimum ";
+    string str=" calculated the minimum: ";
+    str.push_back(ch);
     logrecord(str);
     viewfunc(d);
 }
@@ -691,8 +692,6 @@ void loadmax(struct datavalues d)
     else if (roworcol == 2)
         cout << "row " << row;
     cout << " is " << max <<"."<<endl;
-    string str=" calculated maximum ";
-    logrecord(str);
     viewfunc(d);
 }
  
@@ -737,9 +736,7 @@ void loadmed(struct datavalues d)
     else if (roworcol == 2)
         cout << "row " << row;
     cout << " is " << med << ".";
-    string str=" Calculated the median ";
-    logrecord(str);
-    viewfunc(d);
+
 }
 
 //--------------------------------------------Salah Fayeq-----------------------------------------------------
@@ -883,9 +880,7 @@ void loadmean(struct datavalues d)
     else if (roworcol == 2)
         cout << "row " << row;
     cout << " is " << mean << ".";
-    string str=" Calculated the mean ";
-    logrecord(str);
-    viewfunc(d);
+
 }
 
 //---------------------------------------------Liew ------------------------------------------------------
@@ -929,9 +924,6 @@ void loadvar(struct datavalues d){
     else if (roworcol == 2)
         cout << "row " << row;
     cout << " is " << var << ".";
-    string str=" Calculated the variance ";
-    logrecord(str);
-    viewfunc(d);
 }
 
 // //---------------------------------------------Liew ------------------------------------------------------
@@ -944,8 +936,7 @@ void findvar(const double sum,const double sumofsq,const int count, double &var)
 
 //---------------------------------------------Liew ------------------------------------------------------
 //------------------------This functions loads and finds the standard deviation function----------------------------------
-void loadfindstdv(struct datavalues d)
-{
+void loadfindstdv(struct datavalues d){
     int row,col,roworcol,count;
     double sum,sumofsq,mean,var,stdv;
 
@@ -960,15 +951,12 @@ void loadfindstdv(struct datavalues d)
     else if (roworcol == 2)
         cout << "row " << row;
     cout << " is " << stdv << ".";
-    string str=" Calculated the standard deviation ";
-    logrecord(str);
-    viewfunc(d);
 }
 
 //---------------------------------------------Liew ------------------------------------------------------
 //------------------------This functions asks user to input two column----------------------------------
-void asktwocolumn(struct datavalues d, int &col1, int &col2)
-{    
+void asktwocolumn(struct datavalues d, int &col1, int &col2){
+    
     do{
         cout << endl << "Enter a column from 0 to " << d.totalcol - 1 << " for the first column." << endl;
         cin >> col1;
@@ -987,8 +975,7 @@ void asktwocolumn(struct datavalues d, int &col1, int &col2)
 
 //---------------------------------------------Liew ------------------------------------------------------
 //-------------------------This function loads and finds the correlation--------------------------------
-void loadfindcorr(struct datavalues d)
-{
+void loadfindcorr(struct datavalues d){
     int roworcol,count,row,col1,col2;
     double sum1,sum2,sumofsq1,sumofsq2,mean1,mean2,sumofcol1x2,corr;
     roworcol = 1;
@@ -1003,9 +990,6 @@ void loadfindcorr(struct datavalues d)
     double doublerow = (double)d.totalrow;
     corr = (sumofcol1x2-(doublerow*mean1*mean2))/(sqrt(sumofsq1-(doublerow*mean1*mean1))*sqrt(sumofsq2-(doublerow*mean2*mean2)));    
     cout << "The correlation between column " << col1 << " and " << col2 << " is " << corr << endl;
-    string str=" Calculated the correlation between two columns ";
-    logrecord(str);
-    viewfunc(d);
 }
 
 
@@ -1041,9 +1025,6 @@ void finddistinct(struct datavalues d)
             cout << "---------------+---------------" << endl;
         }
     }
-    string str=" found the Distinct member";
-    logrecord(str);
-    viewfunc(d);
 }
 
 //------------------------------------------Salah Fayeq---------------------------------------------------
@@ -1069,11 +1050,7 @@ void findhistogram(struct datavalues d)
     //     for(int k=0;k<hist[i];k++)
     //         cout << "=";
     //     cout <<endl;       
-
     // }
-    string str=" created the histogram table";
-    logrecord(str);
-    viewfunc(d);
  }
 // void initVector(vector<int> &v)
 // {
@@ -1120,7 +1097,7 @@ void reportsmenu()
     //                      break;
     //      case('2')    : saveHTMLreport(1,str1,db,ds);
     //                      break;
-    //      case('B')    : viewfunc();
+    //      case('B')    : //viewfunc();
     //                      break;
     //      case('U')    : getchoice();
     //                      break;

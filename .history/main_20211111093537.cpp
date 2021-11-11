@@ -389,7 +389,7 @@ vec loadfile()
 // ---------------------This function loads the student database file and clears the comma----------------------
 void clearfile() 
 {    
-    struct datavalues d;    // create datavalues structure for database
+    struct datavalues d;
     string filename;
     cout<<"Before proceeding enter the name of the data base file with proper extension\n";
     cin>>filename;          // take the data base file name
@@ -412,34 +412,42 @@ void clearfile()
         sstemp >> temp2;        
         d.computablecols.push_back(temp2); // stores it in the array
     }
-    data >> d.totalrow;        // takes the number of rows
-    database(data,d,filename); // passed the structure, filestreams and filename 
+    data >> d.totalrow;             
+    database(data,d,filename);
 }
 
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------
 // -----------------------------This function stores the data base file in the vector------------------------------------
 void database(ifstream &data, struct datavalues d,string filename)
 {   
+    if(!data){
+        cout<<"file doesn't exist\nTry again\n";
+        clearfile();
+    }
     vec1 rowdata;
     string temp3, temp4;
     int temp5;
     for (int i = 0; i < d.totalrow; i++){
         data >> temp3;
         stringstream sstemp3(temp3);
-        for (int j = 0; j < d.totalcol; j++)
-        {
+        for (int j = 0; j < d.totalcol; j++){
             getline (sstemp3, temp4,','); //splits comma
-            stringstream sstemp4(temp4);  //convert into int
+            stringstream sstemp4(temp4); //convert into int
             sstemp4 >> temp5;
-            rowdata.push_back(temp5);     //add into vector
+            rowdata.push_back(temp5); //add into vector
         }
-        d.fulldata.push_back(rowdata);    //add into 2d vector
+        d.fulldata.push_back(rowdata); //add into 2d vector
         rowdata.clear();
     }
     cout<<"File was loaded successfully\n"
         <<"-------------------------------------------\n";
-    data.close();               // closed the file
-    viewfunc(d);                // passed the structure to statystical function
+    data.close();
+    // for(int i=0;i<d.totalrow;i++)
+    // {
+    //     for(int j=0;j<d.totalcol;j++)
+    //     cout<<d.fulldata[i][j]<<" ";
+    // cout<<endl;}
+    viewfunc(d);
 }
 
 //---------------------------------------------omar------------------------------------------------------
@@ -467,13 +475,13 @@ void savefile()
 void clearActivity()
 {
     ofstream file;
-    file.open("Report.dat",ios::out|ios::trunc);     // clears the report file
+    file.open("Report.dat",ios::out|ios::trunc);
     file.close();
     ofstream outfile;
-    outfile.open("Activity.dat",ios::out|ios::trunc);// clears the activity file
+    outfile.open("Activity.dat",ios::out|ios::trunc);
     outfile.close();
     ofstream hfile;
-    hfile.open("Report.html" ,ios::out|ios::trunc);  // clears the html report file
+    hfile.open("Report.html" ,ios::out|ios::trunc);
 }
 
 //---------------------------------------------Salah Fayeq------------------------------------------------------
@@ -534,8 +542,8 @@ void saveHTMLreport(int flag,string str, double col,double results)
 void logrecord(string str)
 {
     ofstream outfile;
-    outfile.open("Activity.dat",ios::out|ios::app);      // starts at the end of the activity file
-    outfile << "--> " << username << " " << str << endl; // add the activity to activity file
+    outfile.open("Activity.dat",ios::out|ios::app);
+    outfile << "--> " << username << " " << str << endl;
     outfile.close();
 }
 
@@ -591,7 +599,7 @@ void viewfunc(struct datavalues d)
         <<endl;
     cin>>ch;
     cin.ignore(' ','\n');
-    string word= " Just choose a Statystical Menu option ";
+    string word= " Just choose a Statystical menu option ";
     word.push_back(ch);
     logrecord(word);
     switch(ch)
@@ -643,9 +651,6 @@ void loadmin(struct datavalues d)
     else if (roworcol == 2)
         cout << "row " << row;
     cout << " is " << min << "."<<endl;
-    
-    string str=" calculated the minimum ";
-    logrecord(str);
     viewfunc(d);
 }
 
@@ -691,8 +696,6 @@ void loadmax(struct datavalues d)
     else if (roworcol == 2)
         cout << "row " << row;
     cout << " is " << max <<"."<<endl;
-    string str=" calculated maximum ";
-    logrecord(str);
     viewfunc(d);
 }
  
@@ -737,9 +740,7 @@ void loadmed(struct datavalues d)
     else if (roworcol == 2)
         cout << "row " << row;
     cout << " is " << med << ".";
-    string str=" Calculated the median ";
-    logrecord(str);
-    viewfunc(d);
+
 }
 
 //--------------------------------------------Salah Fayeq-----------------------------------------------------
@@ -883,9 +884,7 @@ void loadmean(struct datavalues d)
     else if (roworcol == 2)
         cout << "row " << row;
     cout << " is " << mean << ".";
-    string str=" Calculated the mean ";
-    logrecord(str);
-    viewfunc(d);
+
 }
 
 //---------------------------------------------Liew ------------------------------------------------------
@@ -929,9 +928,6 @@ void loadvar(struct datavalues d){
     else if (roworcol == 2)
         cout << "row " << row;
     cout << " is " << var << ".";
-    string str=" Calculated the variance ";
-    logrecord(str);
-    viewfunc(d);
 }
 
 // //---------------------------------------------Liew ------------------------------------------------------
@@ -944,8 +940,7 @@ void findvar(const double sum,const double sumofsq,const int count, double &var)
 
 //---------------------------------------------Liew ------------------------------------------------------
 //------------------------This functions loads and finds the standard deviation function----------------------------------
-void loadfindstdv(struct datavalues d)
-{
+void loadfindstdv(struct datavalues d){
     int row,col,roworcol,count;
     double sum,sumofsq,mean,var,stdv;
 
@@ -960,15 +955,12 @@ void loadfindstdv(struct datavalues d)
     else if (roworcol == 2)
         cout << "row " << row;
     cout << " is " << stdv << ".";
-    string str=" Calculated the standard deviation ";
-    logrecord(str);
-    viewfunc(d);
 }
 
 //---------------------------------------------Liew ------------------------------------------------------
 //------------------------This functions asks user to input two column----------------------------------
-void asktwocolumn(struct datavalues d, int &col1, int &col2)
-{    
+void asktwocolumn(struct datavalues d, int &col1, int &col2){
+    
     do{
         cout << endl << "Enter a column from 0 to " << d.totalcol - 1 << " for the first column." << endl;
         cin >> col1;
@@ -987,8 +979,7 @@ void asktwocolumn(struct datavalues d, int &col1, int &col2)
 
 //---------------------------------------------Liew ------------------------------------------------------
 //-------------------------This function loads and finds the correlation--------------------------------
-void loadfindcorr(struct datavalues d)
-{
+void loadfindcorr(struct datavalues d){
     int roworcol,count,row,col1,col2;
     double sum1,sum2,sumofsq1,sumofsq2,mean1,mean2,sumofcol1x2,corr;
     roworcol = 1;
@@ -1003,9 +994,6 @@ void loadfindcorr(struct datavalues d)
     double doublerow = (double)d.totalrow;
     corr = (sumofcol1x2-(doublerow*mean1*mean2))/(sqrt(sumofsq1-(doublerow*mean1*mean1))*sqrt(sumofsq2-(doublerow*mean2*mean2)));    
     cout << "The correlation between column " << col1 << " and " << col2 << " is " << corr << endl;
-    string str=" Calculated the correlation between two columns ";
-    logrecord(str);
-    viewfunc(d);
 }
 
 
@@ -1041,9 +1029,6 @@ void finddistinct(struct datavalues d)
             cout << "---------------+---------------" << endl;
         }
     }
-    string str=" found the Distinct member";
-    logrecord(str);
-    viewfunc(d);
 }
 
 //------------------------------------------Salah Fayeq---------------------------------------------------
@@ -1069,11 +1054,7 @@ void findhistogram(struct datavalues d)
     //     for(int k=0;k<hist[i];k++)
     //         cout << "=";
     //     cout <<endl;       
-
     // }
-    string str=" created the histogram table";
-    logrecord(str);
-    viewfunc(d);
  }
 // void initVector(vector<int> &v)
 // {
@@ -1120,7 +1101,7 @@ void reportsmenu()
     //                      break;
     //      case('2')    : saveHTMLreport(1,str1,db,ds);
     //                      break;
-    //      case('B')    : viewfunc();
+    //      case('B')    : //viewfunc();
     //                      break;
     //      case('U')    : getchoice();
     //                      break;
