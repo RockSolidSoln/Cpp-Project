@@ -764,15 +764,8 @@ void sortnum(struct datavalues d,const int col,const int row,const int roworcol,
             ar[i]= d.fulldata[i][col];
         }
         int t= sizeof(ar)/sizeof(ar[0]);
-        sort(ar, ar+t);
-        // cout<<"------------------------\n";
-        // for(int i=0; i<d.totalrow;i++)
-        // { 
-        //     cout<<ar[i]<<" ";
-        //     cout<<endl;
-        //     }
+       
     }
-
 }
 
 //-----------------------------------------------------------------------------------------------------------------
@@ -786,24 +779,28 @@ void findmedian(struct datavalues d,const int col,const int row,const int roworc
     
     if (roworcol==1)
     {   
-        // for (int i=0;i<d.totalrow;i++){
-        //     if(d.fulldata[i][row] % 2==0){
-        //         med =  (d.fulldata[i][d.fulldata.size()/2-1] );
-        //     }
-        //     else {
-        //         med =  (d.fulldata[i][d.fulldata.size()/2]);
-        //     }    
-        // }
+        for (int i=0;i<d.totalrow;i++){
+            if(d.fulldata[i][col] % 2==0){
+                med =  (d.fulldata[i][col]+(size/2-1));
+            }
+            else {
+                med =  (d.fulldata[i][col]+(size/2));
+            }    
+        }
     }
     else if (roworcol==2)
     {   
-        // for (int j=0;j<d.totalcol;j++){
-        //     if (d.computablecols[j]==1){
-        //         med =  d.fulldata[j][d.fulldata.size()/2];
-                
-        //     }
-        // }  
-}
+        for (int j=0;j<d.totalcol;j++){
+            if (d.computablecols[j]==1){
+               if(d.fulldata[j][row] % 2==0){
+                   med = (d.fulldata[j][row]+(size/2-1));
+               } 
+                else
+                med = (d.fulldata[j][row]+(size/2));
+
+            }
+        }  
+    }
 
   
       
