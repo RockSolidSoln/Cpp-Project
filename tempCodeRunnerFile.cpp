@@ -1,3 +1,1 @@
-cout<<"Wrong selection of column\n"
-            <<"Try again\n";
-        findhistogram(d);
+case('1')    : savereport(1,str1,db,ds);

@@ -16,7 +16,7 @@ using namespace std;
 typedef vector<tuple<string,int,string,int>> vec;
 typedef vector<int> vec1;
 typedef vector<vector<int>> vec2;
-
+typedef vector<vector<string>> vec3;
 
 //----------------------------------------Global variables-----------------------------------------------------
 int status=0;
@@ -46,7 +46,7 @@ vec loadfile();
 void clearfile();
 void database(ifstream &data, struct datavalues d,string);//changed
 void savefile();
-void savereport(int,string,double,double);
+void savereport(int,string,double,double,const int);
 void saveHTMLreport(string,double,double);
 void clearActivity();
 void logrecord(string);
@@ -71,7 +71,7 @@ void loadfindcorr(struct datavalues d);
 void finddistinct(struct datavalues d);
 void findhistogram(struct datavalues d);
 void printhist(struct datavalues d, int&, int&, int);
-void reportsmenu();
+void reportsmenu(struct datavalues d);
 
 
 //------------------------------------------main function------------------------------------------------------
@@ -303,7 +303,7 @@ void changepass(vec users)
                 get<2>(users[i])=newpass1;
                 cout << "Password changed you may procced to login"<< endl;
             }
-                else
+                else                                                    //checks if passwords dont match
                 cout <<"passwords don't match try again"<<endl;
             string str=" just changed his password ";
             logrecord(str);       
@@ -313,7 +313,7 @@ void changepass(vec users)
                 break;  
     }
     ofstream outfile;
-    outfile.open("Users.dat" , ios::out);
+    outfile.open("Users.dat" , ios::out);                           //sends the changed password to users file
     for (int i=0;i<users.size();i++)
     { 
         outfile << get<0>(users[i]) << " " 
@@ -478,18 +478,25 @@ void clearActivity()
 
 //---------------------------------------------Salah Fayeq------------------------------------------------------
 // --------------------This function saves the report of the user choices in a file-------------------------
-void savereport(int flag,string str, double col,double results)
-{
+void savereport(string str, int col,int row,double results,const int roworcol)
+{   
+    
     ofstream outFile;
     outFile.open("Report.dat",ios::out|ios::app);
-    outFile << "you just"<<" " << str << " "<< col <<" and the result is: " << results<< endl;
-    outFile.close();
-    if(flag==1)
-    {
-    logrecord(" saved the report");
-    cout<<"Created the report successfully\n";
+    if (roworcol == 1){
+    outFile  << str << "of the column:"<< col <<" and the result is: " << results<< endl;
     }
-    pressenter(3);
+    else if (roworcol == 2){
+    outFile << str << "of the row: "<< row <<" and the result is:" << results<< endl; 
+    }
+
+    // outFile.close();
+    // if(flag==1)
+    // {
+    // logrecord(" saved the report");
+    // cout<<"Created the report successfully\n";
+    // }
+    // pressenter(3);
 }
 
 //---------------------------------------------Salah Fayeq------------------------------------------------------
@@ -553,8 +560,8 @@ void pressenter(int flag)
         usermenu();
         else if(flag==1)
         adminmenu();
-        else if(flag==2)
-        reportsmenu();
+        // else if(flag==2)
+        // // reportsmenu();
     }
     else
     {
@@ -614,7 +621,7 @@ void viewfunc(struct datavalues d)
                          break;
          case('9')    : findhistogram(d);
                          break;
-         case('R')    : reportsmenu();
+         case('R')    : reportsmenu(d);
                          break;
          case('B')    : getchoice();
                          break;
@@ -645,6 +652,7 @@ void loadmin(struct datavalues d)
     cout << " is " << min << "."<<endl;
     
     string str=" calculated the minimum ";
+    savereport(str,col,row,min,roworcol);
     logrecord(str);
     viewfunc(d);
 }
@@ -692,6 +700,7 @@ void loadmax(struct datavalues d)
         cout << "row " << row;
     cout << " is " << max <<"."<<endl;
     string str=" calculated maximum ";
+    savereport(str,col,row,max,roworcol);
     logrecord(str);
     viewfunc(d);
 }
@@ -785,45 +794,48 @@ void deletearray(int *ptr1)
     delete[] ptr1;
 }
 
-// 
-//-----------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------Salah Fayeq-------------------------------------------------------------------
 void findmedian(struct datavalues d, const int col,const int row,const int roworcol,int med)
 {
-    double median = 0;
-    int count = 0;
-    int size = d.fulldata.size();
-    int *ar=nullptr;
-    if (roworcol==1)
-    {   
-        ar=getarray(d.totalrow);
-        sortnum(d,ar,col,row,roworcol,med);
-        for (int i=0;i<d.totalrow;i++){
-            if(d.fulldata[i][col] % 2==0){
-                med =  (d.fulldata[i][col]+(size/2-1));
-            }
-            else {
-                med =  (d.fulldata[i][col]+(size/2));
-            }    
-        }
-    }
-    else if (roworcol==2)
-    {   
-        ar=getarray(d.totalcol);
-        sortnum(d,ar,col,row,roworcol,med);
-        for(int i=0;i<d.totalcol;i++)
-            cout<<ar[i]<<" ";
-        for (int j=0;j<d.totalcol;j++){
-            if (d.computablecols[j]==1){
-               if(d.fulldata[j][row] % 2==0){
-                   med = (d.fulldata[j][row]+(size/2-1));
-               } 
-                else
-                med = (d.fulldata[j][row]+(size/2));
+    // double median = 0;
+    // int count = 0;
+    // int size;
+    // int *ar=nullptr;
+    // if (roworcol==1)
+    // {   
+    //     size = d.fulldata.size();
+    //     ar=getarray(d.totalrow);
+    //     sortnum(d,ar,col,row,roworcol,med);
+    //     for (int i=0;i<;i++){
+    //         if(d.fulldata[i][col] % 2==0){
+    //             med =  (d.fulldata[i][col]+(size/2-1));
+    //         }
+    //         else {
+    //             med =  (d.fulldata[i][col]+(size/2));
+    //         }    
+    //     }
+    // }
+    // else if (roworcol==2)
+    // {   
+        
+    //     ar=getarray(d.totalcol);
+    //     size = d.totalcol;
+    //     sortnum(d,ar,col,row,roworcol,med);
+    //     for(int i=0;i<d.totalcol;i++)
+    //         cout<<ar[i]<<" ";
+    //     for (int j=0;j<d.totalcol;j++){
+    //         if (d.computablecols[j]==1 &&ar[j] != 0 ){
+    //            if(d.fulldata[j][row] % 2==0){
+    //                med = (d.fulldata[j][row]+(size/2-1));
+    //            } 
+    //             else
+    //             med = (d.fulldata[j][row]+(size/2));
 
-            }
-        }  
-    }
-    deletearray(ar);
+    //         }
+    //     }  
+    // }
+    // deletearray(ar);
 }
 
 //---------------------------------------------Liew ------------------------------------------------------
@@ -895,6 +907,7 @@ void loadmean(struct datavalues d)
         cout << "row " << row;
     cout << " is " << mean << ".";
     string str=" Calculated the mean ";
+    savereport(str,col,row,mean,roworcol);
     logrecord(str);
     viewfunc(d);
 }
@@ -941,12 +954,13 @@ void loadvar(struct datavalues d){
         cout << "row " << row;
     cout << " is " << var << ".";
     string str=" Calculated the variance ";
+    savereport(str,col,row,var,roworcol);
     logrecord(str);
     viewfunc(d);
 }
 
-// //---------------------------------------------Liew ------------------------------------------------------
-// //--------------------------This functions finds the variance-----------------------------------
+//---------------------------------------------Liew ------------------------------------------------------
+//--------------------------This functions finds the variance--------------------------------------------
 void findvar(const double sum,const double sumofsq,const int count, double &var)
 {
     var = (sumofsq - ((sum*sum)/count)) / (count - 1); //calculate the sample variance
@@ -972,6 +986,7 @@ void loadfindstdv(struct datavalues d)
         cout << "row " << row;
     cout << " is " << stdv << ".";
     string str=" Calculated the standard deviation ";
+    savereport(str,col,row,stdv,roworcol);
     logrecord(str);
     viewfunc(d);
 }
@@ -1015,6 +1030,7 @@ void loadfindcorr(struct datavalues d)
     corr = (sumofcol1x2-(doublerow*mean1*mean2))/(sqrt(sumofsq1-(doublerow*mean1*mean1))*sqrt(sumofsq2-(doublerow*mean2*mean2)));  //calculate correlation between 2 column  
     cout << "The correlation between column " << col1 << " and " << col2 << " is " << corr << endl;
     string str=" Calculated the correlation between two columns ";
+    savereport(str,col1,row,corr,roworcol);
     logrecord(str);
     viewfunc(d);
 }
@@ -1057,7 +1073,7 @@ void finddistinct(struct datavalues d)
     viewfunc(d);
 }
 
-//---------------------------------------------------------------------------------------------
+//------------------------------------------Ahmad Ayaan---------------------------------------------------
 //------------------------------This function finds the histogram-----------------------------------------
 void findhistogram(struct datavalues d)
 {
@@ -1090,7 +1106,7 @@ void findhistogram(struct datavalues d)
     viewfunc(d);                                    // proceed to statystical analysis menu for more
 }
 
-//---------------------------------------------------------------------------------------------
+//----------------------------------------Ahmad Ayaan-----------------------------------------------------
 //------------------------------This function finds the histogram----------------------------------------- 
 void printhist(struct datavalues d, int &lowlimit, int &upperlimit,const int col)
 {
@@ -1114,8 +1130,9 @@ void printhist(struct datavalues d, int &lowlimit, int &upperlimit,const int col
 }
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------
 //------------------------------This functions shows the report menu-----------------------------------------
-void reportsmenu()
+void reportsmenu(struct datavalues d)
 {   
+    
     string str1;
     double db=0;
     double ds=0;
@@ -1136,11 +1153,11 @@ void reportsmenu()
     logrecord(str);
     switch(ch)
     {
-         case('1')    : savereport(1,str1,db,ds);
+        //  case('1')    : savereport(1,str1,db,ds);
                          break;
          case('2')    : saveHTMLreport(1,str1,db,ds);
                          break;
-         case('B')    : usermenu();
+         case('B')    : viewfunc(d);
                          break;
          case('U')    : getchoice();
                          break;
@@ -1148,7 +1165,7 @@ void reportsmenu()
                          break;               
          default: cout<<"Wrong choice------------->\n"
                         <<"Please Enter from the choice given below\n";
-                reportsmenu();
+                reportsmenu(d);
                 break;         
     }
     
