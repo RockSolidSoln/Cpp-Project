@@ -1132,7 +1132,7 @@ void printhist(struct datavalues d, int &lowlimit, int &upperlimit,const int col
 //------------------------------This functions shows the report menu-----------------------------------------
 void reportsmenu(struct datavalues d)
 {   
-    
+    int temp,temp2,temp3;
     string str1;
     double db=0;
     double ds=0;
@@ -1153,7 +1153,7 @@ void reportsmenu(struct datavalues d)
     logrecord(str);
     switch(ch)
     {
-        //  case('1')    : savereport(1,str1,db,ds);
+         case('1')    : savereport(str1,temp,temp2,db,temp);
                          break;
          case('2')    : saveHTMLreport(1,str1,db,ds);
                          break;
