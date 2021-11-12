@@ -453,7 +453,8 @@ void savefile(struct datavalues d)
     string newfilename;
     cout << "Enter the new file name with proper extension"<< endl;
     cin >> newfilename; 
-    ofstream file(newfilename);
+    fstream file(newfilename);
+    file.open(newfilename,ios::app);
     file<<d.totalcol<<endl;
     file<<d.titles<<endl;
     for(int i=0;i<d.totalcol;i++)
@@ -468,11 +469,8 @@ void savefile(struct datavalues d)
         }
         file<<endl;
     }
-    file.close();
-    string str="Created and saved a newfile as "+newfilename+"\n";
-    cout<<str;
+    string str=" Created and saved a newfile as "+newfilename+"\n";
     logrecord(str);
-    viewfunc(d);
 }
 
 //---------------------------------------------Ahmad Ayaan/Salah Fayeq------------------------------------------------------

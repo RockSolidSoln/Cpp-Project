@@ -16,6 +16,7 @@
         "ostream": "cpp",
         "xutility": "cpp",
         "xiosbase": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "new": "cpp"
     }
 }

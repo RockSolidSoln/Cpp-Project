@@ -45,7 +45,7 @@ void deleteuser(vec);
 vec loadfile();
 void clearfile();
 void database(ifstream &data, struct datavalues d,string);//changed
-void savefile(struct datavalues d);
+void savefile();
 void savereport(int,string,double,double,const int);
 void saveHTMLreport(string,double,double);
 void clearActivity();
@@ -454,6 +454,7 @@ void savefile(struct datavalues d)
     cout << "Enter the new file name with proper extension"<< endl;
     cin >> newfilename; 
     ofstream file(newfilename);
+    file.open(newfilename,ios::app);
     file<<d.totalcol<<endl;
     file<<d.titles<<endl;
     for(int i=0;i<d.totalcol;i++)
@@ -468,11 +469,8 @@ void savefile(struct datavalues d)
         }
         file<<endl;
     }
-    file.close();
-    string str="Created and saved a newfile as "+newfilename+"\n";
-    cout<<str;
+    string str=" Created and saved a newfile as "+newfilename+"\n";
     logrecord(str);
-    viewfunc(d);
 }
 
 //---------------------------------------------Ahmad Ayaan/Salah Fayeq------------------------------------------------------
@@ -711,7 +709,7 @@ void loadmax(struct datavalues d)
     else if (roworcol == 2)
         cout << "row " << row;
     cout << " is " << max <<"."<<endl;
-    string str="Calculated the maximum ";
+    string str=""Calculated the maximum ";
     savereport(str,col,row,max,roworcol);
     string str1=to_string(max);
     logrecord(str+str1);

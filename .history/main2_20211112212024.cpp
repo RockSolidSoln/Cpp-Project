@@ -45,7 +45,7 @@ void deleteuser(vec);
 vec loadfile();
 void clearfile();
 void database(ifstream &data, struct datavalues d,string);//changed
-void savefile(struct datavalues d);
+void savefile();
 void savereport(int,string,double,double,const int);
 void saveHTMLreport(string,double,double);
 void clearActivity();
@@ -104,14 +104,11 @@ void login()
         cin>>password;                        // Asks the user's password
         cin.ignore(25,'\n');
         status=checkadmin(username,password); // Checks if user is admin or regular user
-        logrecord("Logged into the system");         // Activtiy recorded
+        logrecord(" just logged in");         // Activtiy recorded
         getchoice();                          // Proceed to menu's
     }
     else if(n=='0')
-    {
-            logrecord(" exited the system ");
             exit(0);
-            }
     else
     {
         cout<<"Wrong choice\n"
@@ -172,7 +169,7 @@ void adminmenu()
         << "|--------------------------------------------------------|\n";
     cin >> ch;
     cin.ignore(' ','\n');
-    string str="Choose Menu option ";
+    string str=" just choose Menu option ";
     str.push_back(ch);                          // Activtiy recorded
     logrecord(str);
     vec users;
@@ -189,8 +186,7 @@ void adminmenu()
                     break;
         case('5') : changepass(users);          // changes password
                     break;
-        case('0') : logrecord(" exited the system ");
-                    exit(0);                    // exit
+        case('0') : exit(0);                    // exit
                     break;
         default: cout<<"Wrong choice\n"
                      <<"Please try again\n";
@@ -215,7 +211,7 @@ void usermenu()
         << "|--------------------------------------------------------|\n";
     cin >> ch;
     cin.ignore(' ','\n');
-    string str="Choose menu option ";
+    string str=" just choose menu option "+ch;
     str.push_back(ch);
     logrecord(str);                              // Activtiy recorded
     vec users;
@@ -227,8 +223,7 @@ void usermenu()
                     break;
         case('3') : changepass(users);           // changes password
                     break;
-        case('0') : logrecord(" exited the system ");    
-                    exit(0);                     // exit
+        case('0') : exit(0);                     // exit
                     break;
 
         default: cout<<"Wrong choice\n"
@@ -441,38 +436,28 @@ void database(ifstream &data, struct datavalues d,string filename)
     }
     cout<<"File was loaded successfully\n"
         <<"-------------------------------------------\n";
-    logrecord("Loaded the file"+filename);
     data.close();               // closed the file
     viewfunc(d);                // passed the structure to statystical function
 }
 
 //---------------------------------------------omar------------------------------------------------------
 // -------------------------------This function saves the new file----------------------------------------
-void savefile(struct datavalues d)
+void savefile()
 {       
     string newfilename;
-    cout << "Enter the new file name with proper extension"<< endl;
+    cout << "Enter the new file name "<< endl;
     cin >> newfilename; 
-    ofstream file(newfilename);
-    file<<d.totalcol<<endl;
-    file<<d.titles<<endl;
-    for(int i=0;i<d.totalcol;i++)
-        file<<d.computablecols[i]<<",";
-    file<<endl;
-    file<<d.totalrow<<endl;
-    for(int i=0;i<d.totalrow;i++)
+    ofstream file(newfilename+".dat",ios::app);
+    for(int i=0;i<100;i++)
     {
-        for(int j=0;j<d.totalcol;j++)
-        {
-            file<<d.fulldata[i][j]<<" ";
-        }
-        file<<endl;
+        // file<<get<0>(student[i]) <<", "
+        //     <<get<1>(student[i]) <<", "
+        //     <<get<2>(student[i]) <<", "
+        //     <<get<3>(student[i]) <<", "
+        //     <<get<4>(student[i]) << endl;
     }
-    file.close();
-    string str="Created and saved a newfile as "+newfilename+"\n";
-    cout<<str;
+    string str=" Created and saved a newfile as "+newfilename+"\n";
     logrecord(str);
-    viewfunc(d);
 }
 
 //---------------------------------------------Ahmad Ayaan/Salah Fayeq------------------------------------------------------
@@ -545,6 +530,7 @@ void saveHTMLreport(int flag,string str, double col,double results)
         logrecord(" saved the HTML report");
         cout<<"Created the HTML report successfully\n";
     }
+    
     pressenter(3);
 }
 
@@ -572,6 +558,8 @@ void pressenter(int flag)
         usermenu();
         else if(flag==1)
         adminmenu();
+        // else if(flag==2)
+        // // reportsmenu();
     }
     else
     {
@@ -608,7 +596,7 @@ void viewfunc(struct datavalues d)
         <<endl;
     cin>>ch;
     cin.ignore(' ','\n');
-    string word= "Choose a Statystical Menu option ";
+    string word= " Just choose a Statystical Menu option ";
     word.push_back(ch);
     logrecord(word);
     switch(ch)                                                                      //loads functions depending on user choice
@@ -635,10 +623,9 @@ void viewfunc(struct datavalues d)
                          break;
          case('B')    : getchoice();
                          break;
-         case('S')    : savefile(d);
+         case('S')    : savefile();
                          break;
-         case('0')    : logrecord(" exited the system ");
-                        exit(0);
+         case('0')    : exit(0);
                          break;               
          default: cout<<"Wrong choice\n"
                         <<"Please Enter from the choice given below\n";
@@ -662,10 +649,10 @@ void loadmin(struct datavalues d)
         cout << "row " << row;
     cout << " is " << min << "."<<endl;
     
-    string str="Calculated the minimum ";
-    string str1=to_string(min);
+    string str=" calculated the minimum ";
+    str=to_string(min);
     savereport(str,col,row,min,roworcol);
-    logrecord(str+str1);
+    logrecord(str);
     viewfunc(d);
 }
 
@@ -711,10 +698,10 @@ void loadmax(struct datavalues d)
     else if (roworcol == 2)
         cout << "row " << row;
     cout << " is " << max <<"."<<endl;
-    string str="Calculated the maximum ";
+    string str=" calculated maximum ";
     savereport(str,col,row,max,roworcol);
-    string str1=to_string(max);
-    logrecord(str+str1);
+    str=to_string(max);
+    logrecord(str);
     viewfunc(d);
 }
  
@@ -759,7 +746,7 @@ void loadmed(struct datavalues d)
     else if (roworcol == 2)
         cout << "row " << row;                              // to print row
     cout << " is " << med << ".";
-    string str="Calculated the median ";
+    string str=" Calculated the median ";
     string str1=to_string(med);
     logrecord(str+str1);
     viewfunc(d);
@@ -911,10 +898,10 @@ void loadmean(struct datavalues d)
     else if (roworcol == 2)
         cout << "row " << row;
     cout << " is " << mean << ".";
-    string str="Calculated the mean ";
+    string str=" Calculated the mean ";
     savereport(str,col,row,mean,roworcol);
     string str1=to_string(mean);
-    logrecord(str+str1);
+    logrecord(str);
     viewfunc(d);
 }
 
@@ -959,7 +946,7 @@ void loadvar(struct datavalues d){
     else if (roworcol == 2)
         cout << "row " << row;
     cout << " is " << var << ".";
-    string str="Calculated the variance ";
+    string str=" Calculated the variance ";
     string str1=to_string(var);
     savereport(str,col,row,var,roworcol);
     logrecord(str+str1);
@@ -992,7 +979,7 @@ void loadfindstdv(struct datavalues d)
     else if (roworcol == 2)
         cout << "row " << row;
     cout << " is " << stdv << ".";
-    string str="Calculated the standard deviation ";
+    string str=" Calculated the standard deviation ";
     savereport(str,col,row,stdv,roworcol);
     logrecord(str);
     viewfunc(d);
@@ -1036,10 +1023,9 @@ void loadfindcorr(struct datavalues d)
     double doublerow = (double)d.totalrow;
     corr = (sumofcol1x2-(doublerow*mean1*mean2))/(sqrt(sumofsq1-(doublerow*mean1*mean1))*sqrt(sumofsq2-(doublerow*mean2*mean2)));  //calculate correlation between 2 column  
     cout << "The correlation between column " << col1 << " and " << col2 << " is " << corr << endl;
-    string str="Calculated the correlation between two columns: ";
+    string str=" Calculated the correlation between two columns ";
     savereport(str,col1,row,corr,roworcol);
-    string str1=to_string(corr);
-    logrecord(str+str1);
+    logrecord(str);
     viewfunc(d);
 }
 
@@ -1077,7 +1063,7 @@ void finddistinct(struct datavalues d)
             cout << "---------------+---------------" << endl;
         }
     }
-    string str="Found the Distinct member ";
+    string str=" found the Distinct member";
     logrecord(str);
     viewfunc(d);
 }
@@ -1110,7 +1096,7 @@ void findhistogram(struct datavalues d)
             <<"Try again\n";
         findhistogram(d);                           // calls histogram function again
     }
-    string str="Created the histogram table";
+    string str=" created the histogram table";
     logrecord(str);                                 //stores the activity
     viewfunc(d);                                    // proceed to statystical analysis menu for more
 }
@@ -1162,20 +1148,20 @@ void reportsmenu(struct datavalues d)
     logrecord(str);
     switch(ch)
     {
-         case('1')    : //savereport(str1,temp,temp2,db,temp);
+         case('1')    : savereport(str1,temp,temp2,db,temp);
                          break;
-         case('2')    : //saveHTMLreport(1,str1,db,ds);
+         case('2')    : saveHTMLreport(1,str1,db,ds);
                          break;
          case('B')    : viewfunc(d);
                          break;
          case('U')    : getchoice();
                          break;
-         case('0')    : logrecord(" exited the system ");
-                        exit(0);
+         case('0')    : exit(0);
                          break;               
          default: cout<<"Wrong choice------------->\n"
                         <<"Please Enter from the choice given below\n";
                 reportsmenu(d);
                 break;         
     }
+    
 }

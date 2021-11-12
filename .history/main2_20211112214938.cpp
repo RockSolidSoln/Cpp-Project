@@ -469,8 +469,8 @@ void savefile(struct datavalues d)
         file<<endl;
     }
     file.close();
-    string str="Created and saved a newfile as "+newfilename+"\n";
-    cout<<str;
+    string str=" Created and saved a newfile as "+newfilename+"\n";
+    cout<<str<<endl;
     logrecord(str);
     viewfunc(d);
 }

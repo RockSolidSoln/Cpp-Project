@@ -45,7 +45,7 @@ void deleteuser(vec);
 vec loadfile();
 void clearfile();
 void database(ifstream &data, struct datavalues d,string);//changed
-void savefile(struct datavalues d);
+void savefile();
 void savereport(int,string,double,double,const int);
 void saveHTMLreport(string,double,double);
 void clearActivity();
@@ -448,31 +448,22 @@ void database(ifstream &data, struct datavalues d,string filename)
 
 //---------------------------------------------omar------------------------------------------------------
 // -------------------------------This function saves the new file----------------------------------------
-void savefile(struct datavalues d)
+void savefile()
 {       
     string newfilename;
-    cout << "Enter the new file name with proper extension"<< endl;
+    cout << "Enter the new file name "<< endl;
     cin >> newfilename; 
-    ofstream file(newfilename);
-    file<<d.totalcol<<endl;
-    file<<d.titles<<endl;
-    for(int i=0;i<d.totalcol;i++)
-        file<<d.computablecols[i]<<",";
-    file<<endl;
-    file<<d.totalrow<<endl;
-    for(int i=0;i<d.totalrow;i++)
+    ofstream file(newfilename+".dat",ios::app);
+    for(int i=0;i<100;i++)
     {
-        for(int j=0;j<d.totalcol;j++)
-        {
-            file<<d.fulldata[i][j]<<" ";
-        }
-        file<<endl;
+        // file<<get<0>(student[i]) <<", "
+        //     <<get<1>(student[i]) <<", "
+        //     <<get<2>(student[i]) <<", "
+        //     <<get<3>(student[i]) <<", "
+        //     <<get<4>(student[i]) << endl;
     }
-    file.close();
-    string str="Created and saved a newfile as "+newfilename+"\n";
-    cout<<str;
+    string str=" Created and saved a newfile as "+newfilename+"\n";
     logrecord(str);
-    viewfunc(d);
 }
 
 //---------------------------------------------Ahmad Ayaan/Salah Fayeq------------------------------------------------------
@@ -545,6 +536,7 @@ void saveHTMLreport(int flag,string str, double col,double results)
         logrecord(" saved the HTML report");
         cout<<"Created the HTML report successfully\n";
     }
+    
     pressenter(3);
 }
 
@@ -635,7 +627,7 @@ void viewfunc(struct datavalues d)
                          break;
          case('B')    : getchoice();
                          break;
-         case('S')    : savefile(d);
+         case('S')    : savefile();
                          break;
          case('0')    : logrecord(" exited the system ");
                         exit(0);
@@ -711,7 +703,7 @@ void loadmax(struct datavalues d)
     else if (roworcol == 2)
         cout << "row " << row;
     cout << " is " << max <<"."<<endl;
-    string str="Calculated the maximum ";
+    string str=""Calculated the maximum ";
     savereport(str,col,row,max,roworcol);
     string str1=to_string(max);
     logrecord(str+str1);

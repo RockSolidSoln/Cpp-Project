@@ -45,7 +45,7 @@ void deleteuser(vec);
 vec loadfile();
 void clearfile();
 void database(ifstream &data, struct datavalues d,string);//changed
-void savefile(struct datavalues d);
+void savefile();
 void savereport(int,string,double,double,const int);
 void saveHTMLreport(string,double,double);
 void clearActivity();
@@ -448,31 +448,22 @@ void database(ifstream &data, struct datavalues d,string filename)
 
 //---------------------------------------------omar------------------------------------------------------
 // -------------------------------This function saves the new file----------------------------------------
-void savefile(struct datavalues d)
+void savefile()
 {       
     string newfilename;
-    cout << "Enter the new file name with proper extension"<< endl;
+    cout << "Enter the new file name "<< endl;
     cin >> newfilename; 
-    ofstream file(newfilename);
-    file<<d.totalcol<<endl;
-    file<<d.titles<<endl;
-    for(int i=0;i<d.totalcol;i++)
-        file<<d.computablecols[i]<<",";
-    file<<endl;
-    file<<d.totalrow<<endl;
-    for(int i=0;i<d.totalrow;i++)
+    ofstream file(newfilename+".dat",ios::app);
+    for(int i=0;i<100;i++)
     {
-        for(int j=0;j<d.totalcol;j++)
-        {
-            file<<d.fulldata[i][j]<<" ";
-        }
-        file<<endl;
+        // file<<get<0>(student[i]) <<", "
+        //     <<get<1>(student[i]) <<", "
+        //     <<get<2>(student[i]) <<", "
+        //     <<get<3>(student[i]) <<", "
+        //     <<get<4>(student[i]) << endl;
     }
-    file.close();
-    string str="Created and saved a newfile as "+newfilename+"\n";
-    cout<<str;
+    string str=" Created and saved a newfile as "+newfilename+"\n";
     logrecord(str);
-    viewfunc(d);
 }
 
 //---------------------------------------------Ahmad Ayaan/Salah Fayeq------------------------------------------------------
@@ -545,6 +536,7 @@ void saveHTMLreport(int flag,string str, double col,double results)
         logrecord(" saved the HTML report");
         cout<<"Created the HTML report successfully\n";
     }
+    
     pressenter(3);
 }
 
@@ -572,6 +564,8 @@ void pressenter(int flag)
         usermenu();
         else if(flag==1)
         adminmenu();
+        // else if(flag==2)
+        // // reportsmenu();
     }
     else
     {
@@ -608,7 +602,7 @@ void viewfunc(struct datavalues d)
         <<endl;
     cin>>ch;
     cin.ignore(' ','\n');
-    string word= "Choose a Statystical Menu option ";
+    string word= " Just choose a Statystical Menu option ";
     word.push_back(ch);
     logrecord(word);
     switch(ch)                                                                      //loads functions depending on user choice
@@ -635,7 +629,7 @@ void viewfunc(struct datavalues d)
                          break;
          case('B')    : getchoice();
                          break;
-         case('S')    : savefile(d);
+         case('S')    : savefile();
                          break;
          case('0')    : logrecord(" exited the system ");
                         exit(0);
@@ -711,7 +705,7 @@ void loadmax(struct datavalues d)
     else if (roworcol == 2)
         cout << "row " << row;
     cout << " is " << max <<"."<<endl;
-    string str="Calculated the maximum ";
+    string str=""Calculated the maximum ";
     savereport(str,col,row,max,roworcol);
     string str1=to_string(max);
     logrecord(str+str1);
@@ -992,7 +986,7 @@ void loadfindstdv(struct datavalues d)
     else if (roworcol == 2)
         cout << "row " << row;
     cout << " is " << stdv << ".";
-    string str="Calculated the standard deviation ";
+    string str=" Calculated the standard deviation ";
     savereport(str,col,row,stdv,roworcol);
     logrecord(str);
     viewfunc(d);
@@ -1036,7 +1030,7 @@ void loadfindcorr(struct datavalues d)
     double doublerow = (double)d.totalrow;
     corr = (sumofcol1x2-(doublerow*mean1*mean2))/(sqrt(sumofsq1-(doublerow*mean1*mean1))*sqrt(sumofsq2-(doublerow*mean2*mean2)));  //calculate correlation between 2 column  
     cout << "The correlation between column " << col1 << " and " << col2 << " is " << corr << endl;
-    string str="Calculated the correlation between two columns: ";
+    string str=" Calculated the correlation between two columns: ";
     savereport(str,col1,row,corr,roworcol);
     string str1=to_string(corr);
     logrecord(str+str1);
@@ -1077,7 +1071,7 @@ void finddistinct(struct datavalues d)
             cout << "---------------+---------------" << endl;
         }
     }
-    string str="Found the Distinct member ";
+    string str=" found the Distinct member ";
     logrecord(str);
     viewfunc(d);
 }
@@ -1110,7 +1104,7 @@ void findhistogram(struct datavalues d)
             <<"Try again\n";
         findhistogram(d);                           // calls histogram function again
     }
-    string str="Created the histogram table";
+    string str=" created the histogram table";
     logrecord(str);                                 //stores the activity
     viewfunc(d);                                    // proceed to statystical analysis menu for more
 }
@@ -1178,4 +1172,5 @@ void reportsmenu(struct datavalues d)
                 reportsmenu(d);
                 break;         
     }
+    
 }

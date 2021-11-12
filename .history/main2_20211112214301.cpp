@@ -453,26 +453,25 @@ void savefile(struct datavalues d)
     string newfilename;
     cout << "Enter the new file name with proper extension"<< endl;
     cin >> newfilename; 
-    ofstream file(newfilename);
-    file<<d.totalcol<<endl;
-    file<<d.titles<<endl;
+    fstream file(newfilename);
+    file.open(newfilename,ios::app);
+    file>>d.totalcol;
+    file>>d.titles;
     for(int i=0;i<d.totalcol;i++)
-        file<<d.computablecols[i]<<",";
-    file<<endl;
-    file<<d.totalrow<<endl;
+        file>>d.computablecols[i];
+    file>>endl;
+    file>>d.totalrow>>endl;
     for(int i=0;i<d.totalrow;i++)
     {
         for(int j=0;j<d.totalcol;j++)
         {
-            file<<d.fulldata[i][j]<<" ";
+            file>>d.fulldata[i][j]>> ";
         }
-        file<<endl;
+        file>>endl;
     }
     file.close();
-    string str="Created and saved a newfile as "+newfilename+"\n";
-    cout<<str;
+    string str=" Created and saved a newfile as "+newfilename+"\n";
     logrecord(str);
-    viewfunc(d);
 }
 
 //---------------------------------------------Ahmad Ayaan/Salah Fayeq------------------------------------------------------
