@@ -481,16 +481,16 @@ void clearActivity()
 void savereport(string str, int col,int row,double results,const int roworcol)
 {   
     
-    ofstream outFile;
-    outFile.open("Report.dat",ios::out|ios::app);
+    ofstream outFile;                           
+    outFile.open("Report.dat",ios::out|ios::app);                                                           //opens report file
     if (roworcol == 1){
-    outFile  << str << "of the column:"<< col <<" and the result is: " << results<< endl;
+    outFile  << str << "of the column:"<< col <<" and the result is: " << results<< endl;                   // to print column
     }
     else if (roworcol == 2){
-    outFile << str << "of the row: "<< row <<" and the result is:" << results<< endl; 
+    outFile << str << "of the row: "<< row <<" and the result is:" << results<< endl;                       // to print row
     }
 
-    // outFile.close();
+    outFile.close();
     // if(flag==1)
     // {
     // logrecord(" saved the report");
@@ -516,9 +516,9 @@ void saveHTMLreport(int flag,string str, double col,double results)
         file << "<tr>";
         file << "<td style=\"background-color:#F100FF\"> " << i << " </td> "
              << "<td style=\"background-color:#FFFF00\"> " << 'x' << " </td>"
-             << "<td> " << 8 << " </td> "
+             << "<td> " << 10 << " </td> "
              << "<td> " << '=' << " </td>"
-             << "<td style=\"font-size:20px\"> " << 8*i << " </td>" << endl;          
+             << "<td style=\"font-size:20px\"> " << 10*i << " </td>" << endl;          
         file << "</tr>" << endl;
     }
 
@@ -577,7 +577,7 @@ void viewfunc(struct datavalues d)
     char temp = 'x',ch;
     cout << "\nPress enter to continue...." << endl;
     cin.get(temp);
-    cin.ignore(80,'\n');
+    cin.ignore(80,'\n');                                                                                //ignores /n
     cout <<"|------------------------------------------------------------|\n"
         <<"              "<<username<<" ,Please enter a number to procced:\n"
         <<"|-------------------------------------------------------------|\n"
@@ -601,7 +601,7 @@ void viewfunc(struct datavalues d)
     string word= " Just choose a Statystical Menu option ";
     word.push_back(ch);
     logrecord(word);
-    switch(ch)
+    switch(ch)                                                                      //loads functions depending on user choice
     {
          case('1')    : loadmin(d);
                          break;
@@ -631,7 +631,7 @@ void viewfunc(struct datavalues d)
                          break;               
          default: cout<<"Wrong choice\n"
                         <<"Please Enter from the choice given below\n";
-                // viewfunc();
+                viewfunc(d);
                 break;         
     }
 }
@@ -737,14 +737,14 @@ void loadmed(struct datavalues d)
 {   
     int row,col,roworcol,count;
     int med;
-    askrowcolumn(d,row,col,roworcol);
-    findmedian(d,col,row,roworcol,med);
+    askrowcolumn(d,row,col,roworcol);                       // to ask the user row or column
+    findmedian(d,col,row,roworcol,med); 
 
     cout << endl << "The Median of ";
-    if (roworcol == 1)
+    if (roworcol == 1)                                      // to print column
         cout << "column " << col;
     else if (roworcol == 2)
-        cout << "row " << row;
+        cout << "row " << row;                              // to print row
     cout << " is " << med << ".";
     string str=" Calculated the median ";
     logrecord(str);
@@ -755,7 +755,7 @@ void loadmed(struct datavalues d)
 //--------------------------------This function sorts the numbers in col and row------------------------------
 void sortnum(struct datavalues d, int *ar, const int col,const int row,const int roworcol,int med){
     int minipos;
-    double temp;
+    int temp;
     if(roworcol==2)
     {   
         for(int i=0; i<d.totalcol;i++)
@@ -778,7 +778,7 @@ void sortnum(struct datavalues d, int *ar, const int col,const int row,const int
             minipos = i;
             ar[i]= d.fulldata[i][col];
         }
-        int t= sizeof(ar)/sizeof(ar[0]);
+        int t= sizeof(ar)/sizeof(ar[temp]);
        
     }
 }
@@ -798,44 +798,43 @@ void deletearray(int *ptr1)
 //---------------------------------------------Salah Fayeq-------------------------------------------------------------------
 void findmedian(struct datavalues d, const int col,const int row,const int roworcol,int med)
 {
-    // double median = 0;
-    // int count = 0;
-    // int size;
-    // int *ar=nullptr;
-    // if (roworcol==1)
-    // {   
-    //     size = d.fulldata.size();
-    //     ar=getarray(d.totalrow);
-    //     sortnum(d,ar,col,row,roworcol,med);
-    //     for (int i=0;i<;i++){
-    //         if(d.fulldata[i][col] % 2==0){
-    //             med =  (d.fulldata[i][col]+(size/2-1));
-    //         }
-    //         else {
-    //             med =  (d.fulldata[i][col]+(size/2));
-    //         }    
-    //     }
-    // }
-    // else if (roworcol==2)
-    // {   
+    int count = 0;
+    int size;
+    int *ar=nullptr;
+    if (roworcol==1)
+    {   
+        size = d.fulldata.size();
+        ar=getarray(d.totalrow);
+        sortnum(d,ar,col,row,roworcol,med);
+        for (int i=0;i<ar[i];i++){
+            if(ar[i] % 2!=0){
+                med = (ar[i/2]);
+            }
+            else {
+                med = (ar[(i-1)/2]+ar[(i/2)])/2.0;
+            }    
+        }
+    }
+    else if (roworcol==2)
+    {   
         
-    //     ar=getarray(d.totalcol);
-    //     size = d.totalcol;
-    //     sortnum(d,ar,col,row,roworcol,med);
-    //     for(int i=0;i<d.totalcol;i++)
-    //         cout<<ar[i]<<" ";
-    //     for (int j=0;j<d.totalcol;j++){
-    //         if (d.computablecols[j]==1 &&ar[j] != 0 ){
-    //            if(d.fulldata[j][row] % 2==0){
-    //                med = (d.fulldata[j][row]+(size/2-1));
-    //            } 
-    //             else
-    //             med = (d.fulldata[j][row]+(size/2));
+        ar=getarray(d.totalcol);
+        size = d.totalcol;
+        sortnum(d,ar,col,row,roworcol,med);
+        for(int i=0;i<d.totalcol;i++)
+            cout<<ar[i]<<" ";
+        for (int j=0;ar[j];j++){
+            if (ar[j]==1 &&ar[j] %2 != 0 ){
+               if(ar[j] % 2!=0){
+                   med = (ar[j/2]);
+               } 
+                else
+                med = (ar[(j-1)/2]+ar[(j/2)])/2.0;
 
-    //         }
-    //     }  
-    // }
-    // deletearray(ar);
+            }
+        }  
+    }
+    deletearray(ar);
 }
 
 //---------------------------------------------Liew ------------------------------------------------------
@@ -1042,6 +1041,7 @@ void finddistinct(struct datavalues d)
 {
     int row,col,roworcol;
     double max,min;
+    
     askrowcolumn(d, row, col, roworcol); 
     findmax(d, col, row, roworcol, max); //find maximum of column/row
     findmin(d, col, row, roworcol, min); //find minimum of column/row
@@ -1128,7 +1128,7 @@ void printhist(struct datavalues d, int &lowlimit, int &upperlimit,const int col
     lowlimit+=10;                                                               // increment lower bound
     upperlimit+=10;                                                             // increment upper bound
 }
-//---------------------------------------------Ahmad Ayaan------------------------------------------------------
+//---------------------------------------------Salah Fayeq------------------------------------------------------
 //------------------------------This functions shows the report menu-----------------------------------------
 void reportsmenu(struct datavalues d)
 {   

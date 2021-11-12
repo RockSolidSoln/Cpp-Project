@@ -1,1 +1,1 @@
-case('1')    : savereport(1,str1,db,ds);
+   
