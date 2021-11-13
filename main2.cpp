@@ -47,7 +47,7 @@ void clearfile();
 void database(ifstream &data, struct datavalues d,string);//changed
 void savefile(struct datavalues d);
 void savereport(int,string,double,double,const int);
-void saveHTMLreport(string,double,double);
+void saveHTMLreport();
 void clearActivity();
 void logrecord(string);
 void pressenter(int);
@@ -502,50 +502,46 @@ void savereport(string str, int col,int row,double results,const int roworcol)
     else if (roworcol == 2){
     outFile << str << "of the row: "<< row <<" and the result is:" << results<< endl;                       // to print row
     }
-
     outFile.close();
-    // if(flag==1)
-    // {
-    // logrecord(" saved the report");
-    // cout<<"Created the report successfully\n";
-    // }
-    
 }
 
 //---------------------------------------------Salah Fayeq------------------------------------------------------
 // -----------------This function saves the report in HTML of the user choices in a file---------------------
-void saveHTMLreport(int flag,string str, double col,double results)
+void saveHTMLreport(struct datavalues d)
 {      
     ofstream file;
-    file.open("a.html");
+    ifstream data;
+    data.open("Report.dat");
+    vector<string> line;
+    string str;
+    while (getline(data, str))
+    {
+        if(str.size() > 0)
+            line.push_back(str);
+    }
+    data.close();
+    file.open("Report.html");
 
     file << "<html>" << endl;
     file << "<body>" << endl;
     file << "<h1>" << "Testing HTML " << "</h1>" << endl;
     file << "<table style=\"width:50%\"> " << endl;
 
-    for (int i=1; i<11; i++)
+    for (int i=0; i<line.size(); i++)
     {
         file << "<tr>";
-        file << "<td style=\"background-color:#F100FF\"> " << i << " </td> "
-             << "<td style=\"background-color:#FFFF00\"> " << 'x' << " </td>"
-             << "<td> " << 10 << " </td> "
-             << "<td> " << '=' << " </td>"
-             << "<td style=\"font-size:20px\"> " << 10*i << " </td>" << endl;          
+        file << "<td style=\"background-color:#40E0D0\"> " << line[i] << " </td> ";
         file << "</tr>" << endl;
     }
-
     file << "</table>" << endl;
     file << "</body>" << endl;
     file << "</html>" << endl;
     file.close();
 
     system("chrome a.html");
-    if(flag==1) {
-        logrecord(" saved the HTML report");
-        cout<<"Created the HTML report successfully\n";
-    }
-    pressenter(3);
+    logrecord("Saved the HTML report");
+    cout<<"Created the HTML report successfully\n";
+    reportsmenu(d);
 }
 
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------
@@ -572,6 +568,8 @@ void pressenter(int flag)
         usermenu();
         else if(flag==1)
         adminmenu();
+        else if(flag==3)
+        reportsmenu();
     }
     else
     {
@@ -1059,7 +1057,6 @@ void finddistinct(struct datavalues d)
     cout << "---------------+---------------" << endl;
     cout << "|    Number    |   Frequency  |" << endl;
     cout << "---------------+---------------" << endl;
-    int numofdistinct = 0;
     for (int i=min;i<=max;i++){ //loop between the smallest and bigger number of row/column
         int frequency = 0;
         if (roworcol == 1){ //if column
@@ -1077,11 +1074,9 @@ void finddistinct(struct datavalues d)
             cout << "|" << setw(7) << right << i;
             cout << setw(8) << right <<"|" << setw(8) <<right << frequency << setw(7) << right <<"|" << endl;
             cout << "---------------+---------------" << endl;
-            numofdistinct++;
         }
     }
     string str="Found the Distinct member ";
-    savereport(str,col,row,numofdistinct,roworcol);
     logrecord(str);
     viewfunc(d);
 }
@@ -1156,7 +1151,7 @@ void reportsmenu(struct datavalues d)
         <<"|  Enter 1 to create a report as a text file           |\n"
         <<"|  Enter 2 to create a HTML report                     |\n"
         <<"|  Enter B to go back to perform more functions        |\n"
-        <<"|  Enter U to go back to User's settings menu          |\n"
+        <<"|  Enter U to go back to User's menu                   |\n"
         <<"|  Enter 0 to exit                                     |\n"
         <<"--------------------------------------------------------\n";
     cin>>ch;
@@ -1166,15 +1161,15 @@ void reportsmenu(struct datavalues d)
     logrecord(str);
     switch(ch)
     {
-         case('1')    : //savereport(str1,temp,temp2,db,temp);
+         case('1')    : 
                          break;
-         case('2')    : //saveHTMLreport(1,str1,db,ds);
+         case('2')    : saveHTMLreport(d);
                          break;
          case('B')    : viewfunc(d);
                          break;
          case('U')    : getchoice();
                          break;
-         case('0')    : logrecord(" exited the system ");
+         case('0')    : logrecord("Exited the system ");
                         exit(0);
                          break;               
          default: cout<<"Wrong choice------------->\n"
