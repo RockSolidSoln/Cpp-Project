@@ -21,7 +21,6 @@ typedef vector<vector<string>> vec3;
 //----------------------------------------Global variables-----------------------------------------------------
 int status;
 string username,password;
-
 //---------------------------------------Structure for Database------------------------------------------------
 struct datavalues
 {
@@ -261,7 +260,7 @@ void createuser(vec users)
     if(flag!=1)             // if flag !=1 then username not taken
     {   
         ofstream outfile;
-        outfile.open("Users.dat",ios::ate|ios::app);
+        outfile.open("users.dat",ios::ate|ios::app);
         int activity=1;
         outfile << user << " " << s << " " << pass << " " << activity <<endl;
         outfile.close();                      // creates new user successfully
@@ -316,7 +315,7 @@ void changepass(vec users)
                 break;  
     }
     ofstream outfile;
-    outfile.open("Users.dat" , ios::out);                           //sends the changed password to users file
+    outfile.open("users.dat" , ios::out);                           //sends the changed password to users file
     for (int i=0;i<users.size();i++)
     { 
         outfile << get<0>(users[i]) << " " 
@@ -353,7 +352,7 @@ void deleteuser(vec users)
              }       
     }
     ofstream outfile;
-    outfile.open("Users.dat",ios::out);
+    outfile.open("users.dat",ios::out);
     for (int i=0;i<users.size();i++)                            // re-write the whole vector back in the file
     { 
         outfile << get<0>(users[i]) << " " 
@@ -376,7 +375,7 @@ vec loadfile()
     vec users;
     tuple<string,int,string,int> userdata;  
     ifstream file;
-    file.open("Users.dat");     // read the users info file
+    file.open("users.dat");     // read the users info file
     while (file>>get<0>(userdata))
     {
         file >>get<1>(userdata);
