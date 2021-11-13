@@ -21,7 +21,6 @@ typedef vector<vector<string>> vec3;
 //----------------------------------------Global variables-----------------------------------------------------
 int status;
 string username,password;
-
 //---------------------------------------Structure for Database------------------------------------------------
 struct datavalues
 {
@@ -57,8 +56,6 @@ void findmin(struct datavalues d, const int, const int,const int, double&);
 void loadmax(struct datavalues d);
 void findmax(struct datavalues d, const int, const int,const int, double&);
 void loadmed(struct datavalues d);
-void sortnum(struct datavalues d, int *&, const int,const int ,const int);
-void *getarray(int);
 void findmedian(struct datavalues d,const int,const int, const int, int&);
 void askrowcolumn(struct datavalues d, int&, int&,int&);
 void loadmean(struct datavalues d);
@@ -116,7 +113,7 @@ void login()
             }
     else
     {
-        cout<<"Wrong choice\n"                 //wrong input
+        cout<<"Wrong choice\n"
             <<"Please enter from given choices only\n";
         login();
     }
@@ -131,11 +128,11 @@ void login()
     for (int i=0;i<users.size();i++)
     {   
         if(get<0>(users[i])==name && get<2>(users[i])==pass && get<1>(users[i])==1)         
-            return 1;       // If user is admin returns 1
+            return 1;   // If user is admin returns 1
         else if(get<0>(users[i])==name && get<2>(users[i])==pass && get<1>(users[i])==0)   
-            return 0;       // If user is not an admin returns 0
+            return 0;   // If user is not an admin returns 0
     }
-    return 2;               // If user is not in the system it returns 2
+    return 2;           // If user is not in the system it returns 2
  }
 
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------
@@ -195,7 +192,7 @@ void adminmenu()
                     exit(0);                    // exit
                     break;
         default: cout<<"Wrong choice\n"
-                     <<"Please try again\n";    //wrong input
+                     <<"Please try again\n";
                         adminmenu();
                         break;    
     }
@@ -248,6 +245,10 @@ void createuser(vec users)
     int s, flag=0,f;
     cout <<"Enter a unique user name -\n";
     cin >> user;                            // get user name
+    cout << "Enter your password -\n";
+    cin >> pass;                            // get password
+    cout <<"Enter 1 to create new admin, 0 for reguler user-\n";
+    cin>>s;                                 // get power                                
     for(int i=0; i<users.size(); i++)
     {
         if(get<0>(users[i])==user)
@@ -255,13 +256,9 @@ void createuser(vec users)
             flag = 1;       // flag=1 
             break;          // if username already exists or not
         }
-    }                               // get power                                
+    }
     if(flag!=1)             // if flag !=1 then username not taken
     {   
-        cout << "Enter your password -\n";
-        cin >> pass;                            // get password
-        cout <<"Enter 1 to create new admin, 0 for reguler user-\n";
-        cin>>s;  
         ofstream outfile;
         outfile.open("users.dat",ios::ate|ios::app);
         int activity=1;
@@ -453,10 +450,10 @@ void database(ifstream &data, struct datavalues d,string filename)
 void savefile(struct datavalues d)
 {       
     string newfilename;
-    cout << "Enter the new file name with proper extension"<< endl; //asks for name of the file
+    cout << "Enter the new file name with proper extension"<< endl;
     cin >> newfilename; 
-    ofstream file(newfilename);     //creates a new file
-    file<<d.totalcol<<endl;         //copy the structure in a new file
+    ofstream file(newfilename);
+    file<<d.totalcol<<endl;
     file<<d.titles<<endl;
     for(int i=0;i<d.totalcol;i++)
         file<<d.computablecols[i]<<",";
@@ -470,11 +467,11 @@ void savefile(struct datavalues d)
         }
         file<<endl;
     }
-    file.close();       //close the file
+    file.close();
     string str="Created and saved a newfile as "+newfilename+"\n";
     cout<<str;
-    logrecord(str);     //activity recorded
-    viewfunc(d);        //directs back to statystical menu
+    logrecord(str);
+    viewfunc(d);
 }
 
 //---------------------------------------------Ahmad Ayaan/Salah Fayeq------------------------------------------------------
@@ -497,16 +494,14 @@ void savereport(string str, int col,int row,double results,const int roworcol)
 {   
     
     ofstream outFile;                           
-    outFile.open("Report.dat",ios::out|ios::app); //opens report file                                                  //opens report file
-    if (roworcol == 1)
-    {
+    outFile.open("Report.dat",ios::out|ios::app);                                                           //opens report file
+    if (roworcol == 1){
     outFile  << str << "of the column:"<< col <<" and the result is: " << results<< endl;                   // to print column
-    }               //checks for column
-    else if (roworcol == 2)
-    {
+    }
+    else if (roworcol == 2){
     outFile << str << "of the row: "<< row <<" and the result is:" << results<< endl;                       // to print row
-    }               //checks for row
-    outFile.close();    //close report file
+    }
+    outFile.close();
 }
 
 //---------------------------------------------Salah Fayeq------------------------------------------------------
@@ -515,22 +510,23 @@ void saveHTMLreport(struct datavalues d)
 {      
     ofstream file;
     ifstream data;
-    data.open("Report.dat");    //opens report file to copy
+    data.open("Report.dat");
     vector<string> line;
     string str;
     while (getline(data, str))
     {
         if(str.size() > 0)
-            line.push_back(str);// stores the report file in a vector
+            line.push_back(str);
     }
-    data.close();               //closes the reports file
-    file.open("Report.html");   //opens html file
+    data.close();
+    file.open("Report.html");
+
     file << "<html>" << endl;
     file << "<body>" << endl;
-    file << "<h1>" << "Report of the functions did by "<< username << "</h1>" << endl;
+    file << "<h1>" << "Testing HTML " << "</h1>" << endl;
     file << "<table style=\"width:50%\"> " << endl;
 
-    for (int i=0; i<line.size(); i++)   //wrtie the vector in the reports html
+    for (int i=0; i<line.size(); i++)
     {
         file << "<tr>";
         file << "<td style=\"background-color:#40E0D0\"> " << line[i] << " </td> ";
@@ -541,11 +537,11 @@ void saveHTMLreport(struct datavalues d)
     file << "</html>" << endl;
     file.close();
 
-    // system("chrome a.html");
-    logrecord("Saved the HTML report");             //activity recorded
-    cout<<"Created the HTML report successfully\n"; 
-    reportsmenu(d);                     //directs back to reports menu
-}   
+    system("chrome a.html");
+    logrecord("Saved the HTML report");
+    cout<<"Created the HTML report successfully\n";
+    reportsmenu(d);
+}
 
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------
 // -------------------------This function saves the user activity in a file-------------------------------------
@@ -568,9 +564,16 @@ void pressenter(int flag)
     if(temp=='\n')
     {
         if(flag==0)
-        usermenu();         //if flag 0 to user menu
+        usermenu();
         else if(flag==1)
-        adminmenu();        //if flag 1 to admin menu
+        adminmenu();
+        // else if(flag==3)
+        // reportsmenu();
+    }
+    else
+    {
+        cout<<"Wrong selection\n";
+        pressenter(flag);
     }
 }
 
@@ -603,11 +606,11 @@ void viewfunc(struct datavalues d)
     cin>>ch;
     cin.ignore(' ','\n');
     string word= "Choose a Statystical Menu option ";
-    word.push_back(ch);         //activity recorded
+    word.push_back(ch);
     logrecord(word);
     switch(ch)                                                                      //loads functions depending on user choice
     {
-         case('1')    : loadmin(d); 
+         case('1')    : loadmin(d);
                          break;
          case('2')    : loadmax(d);
                          break;
@@ -646,20 +649,20 @@ void loadmin(struct datavalues d)
 {
     int row=0,col=0,roworcol;
     double min=0;
-    askrowcolumn(d, row, col, roworcol);    //asks for a row or column
-    findmin(d, col, row, roworcol, min);    //find minimun
+    askrowcolumn(d, row, col, roworcol);
+    findmin(d, col, row, roworcol, min);
 
     cout<<"\nThe minimum of ";
     if (roworcol == 1)
-        cout << "column " << col;           //output for column 
+        cout << "column " << col;
     else if (roworcol == 2)
-        cout << "row " << row;              //output for row
+        cout << "row " << row;
     cout << " is " << min << "."<<endl;
     
     string str="Calculated the minimum ";
     string str1=to_string(min);
-    savereport(str,col,row,min,roworcol);   //saved report
-    logrecord(str+str1);                    //activity recorded
+    savereport(str,col,row,min,roworcol);
+    logrecord(str+str1);
     viewfunc(d);
 }
 
@@ -673,7 +676,7 @@ void findmin(struct datavalues d,const int col,const int row, const int roworcol
         for (int i=1;i<d.totalrow;i++)
         {
             if((d.fulldata[i][col])<min)
-                min=d.fulldata[i][col];     //minimum for a column
+                min=d.fulldata[i][col];
         }
     }
     else if(roworcol==2)
@@ -684,7 +687,7 @@ void findmin(struct datavalues d,const int col,const int row, const int roworcol
             if(d.computablecols[j]==1)
             {
                 if((d.fulldata[row][j])<min)
-                    min=d.fulldata[row][j]; //minimum for a row
+                    min=d.fulldata[row][j];
             }
         }
     }
@@ -696,19 +699,19 @@ void loadmax(struct datavalues d)
 {
     int row=0,col=0,roworcol;
     double max=0;
-    askrowcolumn(d, row, col, roworcol);    //asks for a row or column
-    findmin(d, col, row, roworcol, min);    //find maximun
+    askrowcolumn(d, row, col, roworcol);
+    findmax(d, col, row, roworcol, max);
 
     cout<<"\nThe maximum of ";
     if (roworcol == 1)
-        cout << "column " << col;           //output for column 
+        cout << "column " << col;
     else if (roworcol == 2)
-        cout << "row " << row;              //output for row
+        cout << "row " << row;
     cout << " is " << max <<"."<<endl;
     string str="Calculated the maximum ";
     savereport(str,col,row,max,roworcol);
-    string str1=to_string(max);  //saved report
-    logrecord(str+str1);        //activity recorded
+    string str1=to_string(max);
+    logrecord(str+str1);
     viewfunc(d);
 }
  
@@ -722,7 +725,7 @@ void findmax(struct datavalues d,const int col,const int row, const int roworcol
         for (int i=1;i<d.totalrow;i++)
         {
             if((d.fulldata[i][col])>max)
-                max=d.fulldata[i][col];     //maximum for a column
+                max=d.fulldata[i][col];
         }
     }
     else if(roworcol==2)
@@ -732,8 +735,8 @@ void findmax(struct datavalues d,const int col,const int row, const int roworcol
             if(d.computablecols[j]==1)
             {
                 if((d.fulldata[row][j])>max)
-                    max=d.fulldata[row][j]; //maximum for a row
-            }   
+                    max=d.fulldata[row][j];
+            }
         }    
     }
 }
@@ -774,7 +777,6 @@ void sortnum(struct datavalues d, int *&ar, const int col,const int row,const in
             minipos = i;
             ar[i]= d.fulldata[i][col];
         }
-        sort(ar, ar+d.totalrow);
     }
     else if(roworcol==2)
     {   
@@ -788,7 +790,6 @@ void sortnum(struct datavalues d, int *&ar, const int col,const int row,const in
             else
                 ar[i]=0;
         }
-        sort(ar, ar+d.totalcol);
     }
 }
 
@@ -807,33 +808,35 @@ void findmedian(struct datavalues d, const int col,const int row,const int rowor
     int *ar=nullptr;
     if (roworcol==1)
     {   
-        ar=getarray(d.totalrow);    //initializes array
-        sortnum(d,ar,col,row,roworcol); //sorts array
+        ar=getarray(d.totalrow);
+        sortnum(d,ar,col,row,roworcol);
+        sort(ar, ar+d.totalrow);
          if(d.totalrow % 2!=0)
          {
             count=d.totalrow/2;
-            med=ar[count];       //finds median
+            med=ar[count];
          }
         else 
         {
             count=(d.totalrow)/2;
-            med=(ar[count]+ar[++count])/2;      //finds median
+            med=(ar[count]+ar[++count])/2;
         }
     }
     else if (roworcol==2)
     {   
-        ar=getarray(d.totalcol);    //initializes array
-        sortnum(d,ar,col,row,roworcol); //sorts array
+        ar=getarray(d.totalcol);
+        sortnum(d,ar,col,row,roworcol);
+        sort(ar, ar+d.totalcol);
         cout<<"------------------\n";
         if(d.totalcol % 2!=0)
         {
             count=d.totalcol/2;
-            med=ar[count];          //finds median
+            med=ar[count];
         }
         else 
         {
             count=(d.totalcol)/2;
-            med=(ar[count]+ar[++count])/2;   //finds median
+            med=(ar[count]+ar[++count])/2;
         }
     }
     delete[] ar; 
@@ -842,8 +845,7 @@ void findmedian(struct datavalues d, const int col,const int row,const int rowor
 //------------------------------This functions prompt the computable column -----------------------------------------
 void printnotcomputable(const int totalcol, const vec1 computablecols){
     int count = 0;
-    for (int i=0; i<totalcol; i++)
-    {
+    for (int i=0; i<totalcol; i++){
         if (computablecols[i] == 0){
             count++;
         }
@@ -1152,25 +1154,26 @@ void reportsmenu(struct datavalues d)
         <<"|  Enter 2 to create a HTML report                     |\n"
         <<"|  Enter B to go back to perform more functions        |\n"
         <<"|  Enter U to go back to User's menu                   |\n"
-        <<"|  Enter 0 to Logout                                   |\n"
+        <<"|  Enter 0 to exit                                     |\n"
         <<"--------------------------------------------------------\n";
     cin>>ch;
     cin.ignore(' ','\n');
-    string str="Choose the report's menu option ";
+    string str=" choose the report's menu option ";
     str.push_back(ch);
-    logrecord(str); //activity recorded
+    logrecord(str);
     switch(ch)
     {
          case('1')    : cout <<"Report has been saved"<<endl;
                         reportsmenu(d);
                          break;
-         case('2')    : saveHTMLreport(d);  //saves html report
+         case('2')    : saveHTMLreport(d);
                          break;
-         case('B')    : viewfunc(d);    //back to view function
+         case('B')    : viewfunc(d);
                          break;
-         case('U')    : getchoice();    //back to user menu
+         case('U')    : getchoice();
                          break;
-        case('0')    :  logout();       // logout of the system
+         case('0')    : logrecord("Exited the system ");
+                        exit(0);
                          break;               
          default: cout<<"Wrong choice------------->\n"
                         <<"Please Enter from the choice given below\n";

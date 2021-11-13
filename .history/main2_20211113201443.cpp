@@ -21,7 +21,6 @@ typedef vector<vector<string>> vec3;
 //----------------------------------------Global variables-----------------------------------------------------
 int status;
 string username,password;
-
 //---------------------------------------Structure for Database------------------------------------------------
 struct datavalues
 {
@@ -57,8 +56,6 @@ void findmin(struct datavalues d, const int, const int,const int, double&);
 void loadmax(struct datavalues d);
 void findmax(struct datavalues d, const int, const int,const int, double&);
 void loadmed(struct datavalues d);
-void sortnum(struct datavalues d, int *&, const int,const int ,const int);
-void *getarray(int);
 void findmedian(struct datavalues d,const int,const int, const int, int&);
 void askrowcolumn(struct datavalues d, int&, int&,int&);
 void loadmean(struct datavalues d);
@@ -696,19 +693,19 @@ void loadmax(struct datavalues d)
 {
     int row=0,col=0,roworcol;
     double max=0;
-    askrowcolumn(d, row, col, roworcol);    //asks for a row or column
-    findmin(d, col, row, roworcol, min);    //find maximun
+    askrowcolumn(d, row, col, roworcol);
+    findmax(d, col, row, roworcol, max);
 
     cout<<"\nThe maximum of ";
     if (roworcol == 1)
-        cout << "column " << col;           //output for column 
+        cout << "column " << col;
     else if (roworcol == 2)
-        cout << "row " << row;              //output for row
+        cout << "row " << row;
     cout << " is " << max <<"."<<endl;
     string str="Calculated the maximum ";
     savereport(str,col,row,max,roworcol);
-    string str1=to_string(max);  //saved report
-    logrecord(str+str1);        //activity recorded
+    string str1=to_string(max);
+    logrecord(str+str1);
     viewfunc(d);
 }
  
@@ -774,7 +771,6 @@ void sortnum(struct datavalues d, int *&ar, const int col,const int row,const in
             minipos = i;
             ar[i]= d.fulldata[i][col];
         }
-        sort(ar, ar+d.totalrow);
     }
     else if(roworcol==2)
     {   
@@ -788,7 +784,6 @@ void sortnum(struct datavalues d, int *&ar, const int col,const int row,const in
             else
                 ar[i]=0;
         }
-        sort(ar, ar+d.totalcol);
     }
 }
 
@@ -807,33 +802,35 @@ void findmedian(struct datavalues d, const int col,const int row,const int rowor
     int *ar=nullptr;
     if (roworcol==1)
     {   
-        ar=getarray(d.totalrow);    //initializes array
-        sortnum(d,ar,col,row,roworcol); //sorts array
+        ar=getarray(d.totalrow);
+        sortnum(d,ar,col,row,roworcol);
+        sort(ar, ar+d.totalrow);
          if(d.totalrow % 2!=0)
          {
             count=d.totalrow/2;
-            med=ar[count];       //finds median
+            med=ar[count];
          }
         else 
         {
             count=(d.totalrow)/2;
-            med=(ar[count]+ar[++count])/2;      //finds median
+            med=(ar[count]+ar[++count])/2;
         }
     }
     else if (roworcol==2)
     {   
-        ar=getarray(d.totalcol);    //initializes array
-        sortnum(d,ar,col,row,roworcol); //sorts array
+        ar=getarray(d.totalcol);
+        sortnum(d,ar,col,row,roworcol);
+        sort(ar, ar+d.totalcol);
         cout<<"------------------\n";
         if(d.totalcol % 2!=0)
         {
             count=d.totalcol/2;
-            med=ar[count];          //finds median
+            med=ar[count];
         }
         else 
         {
             count=(d.totalcol)/2;
-            med=(ar[count]+ar[++count])/2;   //finds median
+            med=(ar[count]+ar[++count])/2;
         }
     }
     delete[] ar; 
@@ -842,8 +839,7 @@ void findmedian(struct datavalues d, const int col,const int row,const int rowor
 //------------------------------This functions prompt the computable column -----------------------------------------
 void printnotcomputable(const int totalcol, const vec1 computablecols){
     int count = 0;
-    for (int i=0; i<totalcol; i++)
-    {
+    for (int i=0; i<totalcol; i++){
         if (computablecols[i] == 0){
             count++;
         }
@@ -1152,25 +1148,26 @@ void reportsmenu(struct datavalues d)
         <<"|  Enter 2 to create a HTML report                     |\n"
         <<"|  Enter B to go back to perform more functions        |\n"
         <<"|  Enter U to go back to User's menu                   |\n"
-        <<"|  Enter 0 to Logout                                   |\n"
+        <<"|  Enter 0 to exit                                     |\n"
         <<"--------------------------------------------------------\n";
     cin>>ch;
     cin.ignore(' ','\n');
-    string str="Choose the report's menu option ";
+    string str=" choose the report's menu option ";
     str.push_back(ch);
-    logrecord(str); //activity recorded
+    logrecord(str);
     switch(ch)
     {
          case('1')    : cout <<"Report has been saved"<<endl;
                         reportsmenu(d);
                          break;
-         case('2')    : saveHTMLreport(d);  //saves html report
+         case('2')    : saveHTMLreport(d);
                          break;
-         case('B')    : viewfunc(d);    //back to view function
+         case('B')    : viewfunc(d);
                          break;
-         case('U')    : getchoice();    //back to user menu
+         case('U')    : getchoice();
                          break;
-        case('0')    :  logout();       // logout of the system
+         case('0')    : logrecord("Exited the system ");
+                        exit(0);
                          break;               
          default: cout<<"Wrong choice------------->\n"
                         <<"Please Enter from the choice given below\n";

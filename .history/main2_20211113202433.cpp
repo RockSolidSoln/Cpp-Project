@@ -21,7 +21,6 @@ typedef vector<vector<string>> vec3;
 //----------------------------------------Global variables-----------------------------------------------------
 int status;
 string username,password;
-
 //---------------------------------------Structure for Database------------------------------------------------
 struct datavalues
 {
@@ -58,7 +57,7 @@ void loadmax(struct datavalues d);
 void findmax(struct datavalues d, const int, const int,const int, double&);
 void loadmed(struct datavalues d);
 void sortnum(struct datavalues d, int *&, const int,const int ,const int);
-void *getarray(int);
+void *get
 void findmedian(struct datavalues d,const int,const int, const int, int&);
 void askrowcolumn(struct datavalues d, int&, int&,int&);
 void loadmean(struct datavalues d);

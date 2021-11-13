@@ -21,7 +21,6 @@ typedef vector<vector<string>> vec3;
 //----------------------------------------Global variables-----------------------------------------------------
 int status;
 string username,password;
-
 //---------------------------------------Structure for Database------------------------------------------------
 struct datavalues
 {

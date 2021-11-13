@@ -21,7 +21,6 @@ typedef vector<vector<string>> vec3;
 //----------------------------------------Global variables-----------------------------------------------------
 int status;
 string username,password;
-
 //---------------------------------------Structure for Database------------------------------------------------
 struct datavalues
 {
@@ -57,8 +56,6 @@ void findmin(struct datavalues d, const int, const int,const int, double&);
 void loadmax(struct datavalues d);
 void findmax(struct datavalues d, const int, const int,const int, double&);
 void loadmed(struct datavalues d);
-void sortnum(struct datavalues d, int *&, const int,const int ,const int);
-void *getarray(int);
 void findmedian(struct datavalues d,const int,const int, const int, int&);
 void askrowcolumn(struct datavalues d, int&, int&,int&);
 void loadmean(struct datavalues d);
@@ -1152,13 +1149,13 @@ void reportsmenu(struct datavalues d)
         <<"|  Enter 2 to create a HTML report                     |\n"
         <<"|  Enter B to go back to perform more functions        |\n"
         <<"|  Enter U to go back to User's menu                   |\n"
-        <<"|  Enter 0 to Logout                                   |\n"
+        <<"|  Enter 0 to exit                                     |\n"
         <<"--------------------------------------------------------\n";
     cin>>ch;
     cin.ignore(' ','\n');
-    string str="Choose the report's menu option ";
+    string str=" choose the report's menu option ";
     str.push_back(ch);
-    logrecord(str); //activity recorded
+    logrecord(str);
     switch(ch)
     {
          case('1')    : cout <<"Report has been saved"<<endl;
@@ -1166,11 +1163,12 @@ void reportsmenu(struct datavalues d)
                          break;
          case('2')    : saveHTMLreport(d);  //saves html report
                          break;
-         case('B')    : viewfunc(d);    //back to view function
+         case('B')    : viewfunc(d);
                          break;
-         case('U')    : getchoice();    //back to user menu
+         case('U')    : getchoice();
                          break;
-        case('0')    :  logout();       // logout of the system
+         case('0')    : logrecord("Exited the system ");
+                        exit(0);
                          break;               
          default: cout<<"Wrong choice------------->\n"
                         <<"Please Enter from the choice given below\n";
