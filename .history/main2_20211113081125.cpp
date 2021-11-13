@@ -539,9 +539,9 @@ void saveHTMLreport(struct datavalues d)
     file.close();
 
     system("chrome a.html");
-    logrecord("Saved the HTML report");
+    logrecord(" saved the HTML report");
     cout<<"Created the HTML report successfully\n";
-    reportsmenu(d);
+    viewfunc(d);
 }
 
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------

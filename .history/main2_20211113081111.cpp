@@ -507,7 +507,7 @@ void savereport(string str, int col,int row,double results,const int roworcol)
 
 //---------------------------------------------Salah Fayeq------------------------------------------------------
 // -----------------This function saves the report in HTML of the user choices in a file---------------------
-void saveHTMLreport(struct datavalues d)
+void saveHTMLreport(struct datav)
 {      
     ofstream file;
     ifstream data;
@@ -539,9 +539,9 @@ void saveHTMLreport(struct datavalues d)
     file.close();
 
     system("chrome a.html");
-    logrecord("Saved the HTML report");
+    logrecord(" saved the HTML report");
     cout<<"Created the HTML report successfully\n";
-    reportsmenu(d);
+    pressenter(3);
 }
 
 //---------------------------------------------Ahmad Ayaan------------------------------------------------------
