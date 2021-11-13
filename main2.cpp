@@ -419,7 +419,7 @@ void clearfile()
     database(data,d,filename); // passed the structure, filestreams and filename 
 }
 
-//---------------------------------------------Ahmad Ayaan------------------------------------------------------
+//---------------------------------------------Liew------------------------------------------------------
 // -----------------------------This function stores the data base file in the vector------------------------------------
 void database(ifstream &data, struct datavalues d,string filename)
 {   
