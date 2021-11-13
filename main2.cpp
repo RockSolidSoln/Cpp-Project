@@ -509,7 +509,7 @@ void savereport(string str, int col,int row,double results,const int roworcol)
     // logrecord(" saved the report");
     // cout<<"Created the report successfully\n";
     // }
-    // pressenter(3);
+    
 }
 
 //---------------------------------------------Salah Fayeq------------------------------------------------------
@@ -1059,6 +1059,7 @@ void finddistinct(struct datavalues d)
     cout << "---------------+---------------" << endl;
     cout << "|    Number    |   Frequency  |" << endl;
     cout << "---------------+---------------" << endl;
+    int numofdistinct = 0;
     for (int i=min;i<=max;i++){ //loop between the smallest and bigger number of row/column
         int frequency = 0;
         if (roworcol == 1){ //if column
@@ -1076,9 +1077,11 @@ void finddistinct(struct datavalues d)
             cout << "|" << setw(7) << right << i;
             cout << setw(8) << right <<"|" << setw(8) <<right << frequency << setw(7) << right <<"|" << endl;
             cout << "---------------+---------------" << endl;
+            numofdistinct++;
         }
     }
     string str="Found the Distinct member ";
+    savereport(str,col,row,numofdistinct,roworcol);
     logrecord(str);
     viewfunc(d);
 }
