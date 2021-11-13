@@ -489,8 +489,8 @@ void clearActivity()
     hfile.open("Report.html" ,ios::out|ios::trunc);  // clears the html report file
 }
 
-//---------------------------------------------Salah Fayeq------------------------------------------------------
-// --------------------This function saves the report of the user choices in a file-------------------------
+//-------------------------------------------------------------------------------------------------------------------------
+//--------------------------------Salah Fayeq------------------------------------------------------------------------------
 void savereport(string str, int col,int row,double results,const int roworcol)
 {   
     
@@ -568,8 +568,8 @@ void pressenter(int flag)
         usermenu();
         else if(flag==1)
         adminmenu();
-        else if(flag==3)
-        reportsmenu();
+        // else if(flag==3)
+        // reportsmenu();
     }
     else
     {
@@ -1057,6 +1057,7 @@ void finddistinct(struct datavalues d)
     cout << "---------------+---------------" << endl;
     cout << "|    Number    |   Frequency  |" << endl;
     cout << "---------------+---------------" << endl;
+    int numofdistinc=0;
     for (int i=min;i<=max;i++){ //loop between the smallest and bigger number of row/column
         int frequency = 0;
         if (roworcol == 1){ //if column
@@ -1074,9 +1075,11 @@ void finddistinct(struct datavalues d)
             cout << "|" << setw(7) << right << i;
             cout << setw(8) << right <<"|" << setw(8) <<right << frequency << setw(7) << right <<"|" << endl;
             cout << "---------------+---------------" << endl;
+            numofdistinc++;
         }
     }
     string str="Found the Distinct member ";
+    savereport(str,col,row,numofdistinc,roworcol);
     logrecord(str);
     viewfunc(d);
 }
@@ -1161,7 +1164,8 @@ void reportsmenu(struct datavalues d)
     logrecord(str);
     switch(ch)
     {
-         case('1')    : 
+         case('1')    : cout <<"Report has been saved"<<endl;
+                        reportsmenu(d);
                          break;
          case('2')    : saveHTMLreport(d);
                          break;
