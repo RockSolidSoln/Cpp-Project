@@ -530,7 +530,7 @@ void saveHTMLreport()
     for (int i=0; i<line.size(); i++)
     {
         file << "<tr>";
-        file << "<td style=\"background-color:#40E0D0\"> " << line[i] << " </td> ";
+        file << "<td style=\"background-color:#000FFF\"> " << line[i] << " </td> ";
         file << "</tr>" << endl;
     }
     file << "</table>" << endl;

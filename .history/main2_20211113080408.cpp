@@ -530,7 +530,7 @@ void saveHTMLreport()
     for (int i=0; i<line.size(); i++)
     {
         file << "<tr>";
-        file << "<td style=\"background-color:#40E0D0\"> " << line[i] << " </td> ";
+        file << "<td style=\"background-color:#F100FF\"> " << line[i] << " </td> ";
         file << "</tr>" << endl;
     }
     file << "</table>" << endl;
@@ -1149,7 +1149,7 @@ void reportsmenu(struct datavalues d)
         <<"|  Enter 1 to create a report as a text file           |\n"
         <<"|  Enter 2 to create a HTML report                     |\n"
         <<"|  Enter B to go back to perform more functions        |\n"
-        <<"|  Enter U to go back to User's menu                   |\n"
+        <<"|  Enter U to go back to User's settings menu          |\n"
         <<"|  Enter 0 to exit                                     |\n"
         <<"--------------------------------------------------------\n";
     cin>>ch;
@@ -1167,7 +1167,7 @@ void reportsmenu(struct datavalues d)
                          break;
          case('U')    : getchoice();
                          break;
-         case('0')    : logrecord("Exited the system ");
+         case('0')    : logrecord(" exited the system ");
                         exit(0);
                          break;               
          default: cout<<"Wrong choice------------->\n"

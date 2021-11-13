@@ -519,7 +519,10 @@ void saveHTMLreport()
         if(str.size() > 0)
             line.push_back(str);
     }
-    data.close();
+    for(int i =0;i<line.size();i++)
+    {
+        cout<<"---"<<line[i]<<endl;
+    }
     file.open("Report.html");
 
     file << "<html>" << endl;
@@ -527,12 +530,17 @@ void saveHTMLreport()
     file << "<h1>" << "Testing HTML " << "</h1>" << endl;
     file << "<table style=\"width:50%\"> " << endl;
 
-    for (int i=0; i<line.size(); i++)
+    for (int i=1; i<11; i++)
     {
         file << "<tr>";
-        file << "<td style=\"background-color:#40E0D0\"> " << line[i] << " </td> ";
+        file << "<td style=\"background-color:#F100FF\"> " << i << " </td> "
+             << "<td style=\"background-color:#FFFF00\"> " << 'x' << " </td>"
+             << "<td> " << 10 << " </td> "
+             << "<td> " << '=' << " </td>"
+             << "<td style=\"font-size:20px\"> " << 10*i << " </td>" << endl;          
         file << "</tr>" << endl;
     }
+
     file << "</table>" << endl;
     file << "</body>" << endl;
     file << "</html>" << endl;
@@ -1149,7 +1157,7 @@ void reportsmenu(struct datavalues d)
         <<"|  Enter 1 to create a report as a text file           |\n"
         <<"|  Enter 2 to create a HTML report                     |\n"
         <<"|  Enter B to go back to perform more functions        |\n"
-        <<"|  Enter U to go back to User's menu                   |\n"
+        <<"|  Enter U to go back to User's settings menu          |\n"
         <<"|  Enter 0 to exit                                     |\n"
         <<"--------------------------------------------------------\n";
     cin>>ch;
@@ -1159,7 +1167,7 @@ void reportsmenu(struct datavalues d)
     logrecord(str);
     switch(ch)
     {
-         case('1')    : 
+         case('1')    : //savereport(str1,temp,temp2,db,temp);
                          break;
          case('2')    : saveHTMLreport();
                          break;
@@ -1167,7 +1175,7 @@ void reportsmenu(struct datavalues d)
                          break;
          case('U')    : getchoice();
                          break;
-         case('0')    : logrecord("Exited the system ");
+         case('0')    : logrecord(" exited the system ");
                         exit(0);
                          break;               
          default: cout<<"Wrong choice------------->\n"
