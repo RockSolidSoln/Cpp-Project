@@ -191,8 +191,9 @@ void adminmenu()
                     break;
         case('5') : changepass(users);          // changes password
                     break;
-        case('0') :logout();       // logout of the system
-                    break;    
+        case('0') : logrecord(" exited the system ");
+                    exit(0);                    // exit
+                    break;
         default: cout<<"Wrong choice\n"
                      <<"Please try again\n";    //wrong input
                         adminmenu();
@@ -228,8 +229,10 @@ void usermenu()
                     break;
         case('3') : changepass(users);           // changes password
                     break;
-        case('0') :logout();       // logout of the system
-                    break;    
+        case('0') : logrecord(" exited the system ");    
+                    exit(0);                     // exit
+                    break;
+
         default: cout<<"Wrong choice\n"
                     <<"Please try again\n";
                     usermenu();
@@ -628,8 +631,9 @@ void viewfunc(struct datavalues d)
                          break;
          case('S')    : savefile(d);
                          break;
-         case('0')    : logout();       // logout of the system
-                         break;                
+         case('0')    : logrecord(" exited the system ");
+                        exit(0);
+                         break;               
          default: cout<<"Wrong choice\n"
                         <<"Please Enter from the choice given below\n";
                 viewfunc(d);
@@ -693,7 +697,7 @@ void loadmax(struct datavalues d)
     int row=0,col=0,roworcol;
     double max=0;
     askrowcolumn(d, row, col, roworcol);    //asks for a row or column
-    findmin(d, col, row, roworcol, max);    //find maximun
+    findmin(d, col, row, roworcol, min);    //find maximun
 
     cout<<"\nThe maximum of ";
     if (roworcol == 1)

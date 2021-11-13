@@ -192,7 +192,7 @@ void adminmenu()
         case('5') : changepass(users);          // changes password
                     break;
         case('0') :logout();       // logout of the system
-                    break;    
+                         break;    
         default: cout<<"Wrong choice\n"
                      <<"Please try again\n";    //wrong input
                         adminmenu();
@@ -228,8 +228,10 @@ void usermenu()
                     break;
         case('3') : changepass(users);           // changes password
                     break;
-        case('0') :logout();       // logout of the system
-                    break;    
+        case('0') : logrecord(" exited the system ");    
+                    exit(0);                     // exit
+                    break;
+
         default: cout<<"Wrong choice\n"
                     <<"Please try again\n";
                     usermenu();
