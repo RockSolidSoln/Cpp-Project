@@ -760,6 +760,7 @@ void loadmed(struct datavalues d)
         cout << "row " << row;                              // to print row
     cout << " is " << med << ".";
     string str="Calculated the median ";
+    savereport(str,col,row,med,roworcol);
     string str1=to_string(med);
     logrecord(str+str1);
     viewfunc(d);
