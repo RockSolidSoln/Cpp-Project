@@ -1,15 +1,12 @@
---> salah Logged into the system
---> salah Choose menu option 1
---> salah Loaded the filedatabasetest.dat
---> salah Choose a Statystical Menu option 1
---> salah Calculated the minimum 12.000000
---> salah Choose a Statystical Menu option 3
---> salah Calculated the median 57
---> salah Choose a Statystical Menu option 9
---> salah Created the histogram table
---> salah Choose a Statystical Menu option 7
---> salah Calculated the correlation between two columns: 0.067198
---> salah Choose a Statystical Menu option 1
---> salah Calculated the minimum 12.000000
---> salah Choose a Statystical Menu option 8
---> salah Found the Distinct member 
+--> ayaan Logged into the system
+--> ayaan Choose Menu option 1
+--> ayaan Loaded the filestudentdatabase.dat
+--> ayaan Choose a Statystical Menu option 3
+--> ayaan Calculated the median 57
+--> ayaan Choose a Statystical Menu option 2
+--> ayaan Calculated the maximum 85.000000
+--> ayaan Choose a Statystical Menu option 4
+--> ayaan Calculated the mean 45.750000
+--> ayaan Choose a Statystical Menu option R
+--> ayaan  choose the report's menu option 2
+--> ayaan  saved the HTML report
