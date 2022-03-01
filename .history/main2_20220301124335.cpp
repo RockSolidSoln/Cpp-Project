@@ -1093,6 +1093,7 @@ void printhist(struct datavalues d, int &lowlimit, int &upperlimit,const int col
     lowlimit+=10;                                                               // increment lower bound
     upperlimit+=10;                                                             // increment upper bound
 }
+//---------------------------------------------Salah Fayeq------------------------------------------------------
 //------------------------------This functions shows the report menu-----------------------------------------
 void reportsmenu(struct datavalues d)
 {   

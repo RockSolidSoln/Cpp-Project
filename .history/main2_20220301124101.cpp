@@ -359,6 +359,7 @@ void deleteuser(vec users)
     pressenter(1);
 }
 
+//---------------------------------------------Ahmad Ayaan------------------------------------------------------
 // ---------------------------------This function loads Users.dat the file-----------------------------------------
 vec loadfile()                              
 {   
@@ -377,6 +378,7 @@ vec loadfile()
     return users;               // returns the user's info in a vector
 }
 
+//---------------------------------------------Ahmad Ayaan------------------------------------------------------
 // ---------------------This function loads the student database file and clears the comma----------------------
 void clearfile() 
 {    
@@ -407,6 +409,7 @@ void clearfile()
     database(data,d,filename); // passed the structure, filestreams and filename 
 }
 
+//---------------------------------------------Liew------------------------------------------------------
 // -----------------------------This function stores the data base file in the vector------------------------------------
 void database(ifstream &data, struct datavalues d,string filename)
 {   
@@ -433,6 +436,7 @@ void database(ifstream &data, struct datavalues d,string filename)
     viewfunc(d);                // passed the structure to statystical function
 }
 
+//---------------------------------------------omar------------------------------------------------------
 // -------------------------------This function saves the new file----------------------------------------
 void savefile(struct datavalues d)
 {       
@@ -461,6 +465,7 @@ void savefile(struct datavalues d)
     viewfunc(d);        //directs back to statystical menu
 }
 
+//---------------------------------------------Ahmad Ayaan/Salah Fayeq------------------------------------------------------
 // -----------------This function clears the user activity in a file before function starts--------------------------
 void clearActivity()
 {
@@ -474,6 +479,7 @@ void clearActivity()
     hfile.open("Report.html" ,ios::out|ios::trunc);  // clears the html report file
 }
 
+//-------------------------------------------------------------------------------------------------------------------------
 //--------------------------------Salah Fayeq------------------------------------------------------------------------------
 void savereport(string str, int col,int row,double results,const int roworcol)
 {   
@@ -491,6 +497,7 @@ void savereport(string str, int col,int row,double results,const int roworcol)
     outFile.close();    //close report file
 }
 
+//---------------------------------------------Salah Fayeq------------------------------------------------------
 // -----------------This function saves the report in HTML of the user choices in a file---------------------
 void saveHTMLreport(struct datavalues d)
 {      
@@ -528,6 +535,7 @@ void saveHTMLreport(struct datavalues d)
     reportsmenu(d);                     //directs back to reports menu
 }   
 
+//---------------------------------------------Ahmad Ayaan------------------------------------------------------
 // -------------------------This function saves the user activity in a file-------------------------------------
 void logrecord(string str)
 {
@@ -537,6 +545,7 @@ void logrecord(string str)
     outfile.close();
 }
 
+//---------------------------------------------Liew ------------------------------------------------------
 //----------------------This functions asks the user to press enter to continue---------------------------------
 void pressenter(int flag)
 {
@@ -553,6 +562,7 @@ void pressenter(int flag)
     }
 }
 
+//---------------------------------------------Salah Fayeq------------------------------------------------------
 // --------------------This function shows different functions for user to perform------------------------------
 void viewfunc(struct datavalues d)
 {   
@@ -617,6 +627,7 @@ void viewfunc(struct datavalues d)
                 break;         
     }
 }
+//--------------------------------------------- ------------------------------------------------------
 //------------------------------This functions loads the minimum function-------------------------------------
 void loadmin(struct datavalues d)
 {
@@ -639,6 +650,7 @@ void loadmin(struct datavalues d)
     viewfunc(d);
 }
 
+//--------------------------------------------- ------------------------------------------------------
 //------------------------------This function prints minimum from a row-------------------------------------
 void findmin(struct datavalues d,const int col,const int row, const int roworcol,double &min)
 {   
@@ -665,6 +677,7 @@ void findmin(struct datavalues d,const int col,const int row, const int roworcol
     }
 }
 
+//-------------------------------------------- ------------------------------------------------------
 //------------------------------This functions loads the maximum function-------------------------------------
 void loadmax(struct datavalues d)
 {
@@ -686,6 +699,7 @@ void loadmax(struct datavalues d)
     viewfunc(d);
 }
  
+//---------------------------------------------  ------------------------------------------------------
 //------------------------------This function print the maximum from a row-------------------------------------
 void findmax(struct datavalues d,const int col,const int row, const int roworcol,double &max)
 {
@@ -711,6 +725,7 @@ void findmax(struct datavalues d,const int col,const int row, const int roworcol
     }
 }
          
+//---------------------------------------------Salah Fayeq---------------------------------------------------
 //------------------------------This functions loads the median function-------------------------------------
 void loadmed(struct datavalues d)
 {   
@@ -732,6 +747,7 @@ void loadmed(struct datavalues d)
     viewfunc(d);
 }
 
+//--------------------------------------------Salah Fayeq-----------------------------------------------------
 //--------------------------------This function sorts the numbers in col and row------------------------------
 void sortnum(struct datavalues d, int *&ar, const int col,const int row,const int roworcol)
 {
@@ -763,12 +779,14 @@ void sortnum(struct datavalues d, int *&ar, const int col,const int row,const in
     }
 }
 
+//---------------------------------------------Salah------------------------------------------------------------
 //--------------------------------These next two functions initialize and deletes the array---------------------------
 int *getarray(int n)
 {
     return new int[n];
 }
 
+//---------------------------------------------------------------------------------------------------------------------------
 //---------------------------------------------Salah Fayeq-------------------------------------------------------------------
 void findmedian(struct datavalues d, const int col,const int row,const int roworcol,int &med)
 {
@@ -807,6 +825,7 @@ void findmedian(struct datavalues d, const int col,const int row,const int rowor
     }
     delete[] ar; 
 }
+//---------------------------------------------Liew ------------------------------------------------------
 //------------------------------This functions prompt the computable column -----------------------------------------
 void printnotcomputable(const int totalcol, const vec1 computablecols){
     int count = 0;
@@ -829,6 +848,7 @@ void printnotcomputable(const int totalcol, const vec1 computablecols){
     }
 }
 
+//---------------------------------------------Liew ------------------------------------------------------
 //------------------------------This functions ask for row or column -----------------------------------------
 void askrowcolumn(struct datavalues d, int &row, int &col,int &roworcol)
 {
@@ -858,6 +878,7 @@ void askrowcolumn(struct datavalues d, int &row, int &col,int &roworcol)
     }
 }
 
+//---------------------------------------------Liew ------------------------------------------------------
 //------------------------------This functions loads the mean function-----------------------------------------
 void loadmean(struct datavalues d)
 {
@@ -880,6 +901,7 @@ void loadmean(struct datavalues d)
     viewfunc(d);
 }
 
+//---------------------------------------------Liew ------------------------------------------------------
 //------------------------------This functions finds the mean -----------------------------------------
 void findmean(struct datavalues d,const int col,const int row, const int roworcol,double &sum,double &sumofsq,double &mean,int &count)
 {
@@ -904,6 +926,7 @@ void findmean(struct datavalues d,const int col,const int row, const int roworco
     mean = sum/count; //calculate mean
 }
 
+//---------------------------------------------Liew ------------------------------------------------------
 //------------------------------This function loads the variance function------------------------------------
 void loadvar(struct datavalues d){
     int row,col,roworcol,count;
@@ -926,6 +949,7 @@ void loadvar(struct datavalues d){
     viewfunc(d);
 }
 
+//---------------------------------------------Liew ------------------------------------------------------
 //--------------------------This functions finds the variance--------------------------------------------
 void findvar(const double sum,const double sumofsq,const int count, double &var)
 {
@@ -933,6 +957,7 @@ void findvar(const double sum,const double sumofsq,const int count, double &var)
 }
 
 
+//---------------------------------------------Liew ------------------------------------------------------
 //------------------------This functions loads and finds the standard deviation function----------------------------------
 void loadfindstdv(struct datavalues d)
 {
@@ -956,6 +981,7 @@ void loadfindstdv(struct datavalues d)
     viewfunc(d);
 }
 
+//---------------------------------------------Liew ------------------------------------------------------
 //------------------------This functions asks user to input two column----------------------------------
 void asktwocolumn(struct datavalues d, int &col1, int &col2)
 {    
@@ -975,6 +1001,7 @@ void asktwocolumn(struct datavalues d, int &col1, int &col2)
 
 }
 
+//---------------------------------------------Liew ------------------------------------------------------
 //-------------------------This function loads and finds the correlation--------------------------------
 void loadfindcorr(struct datavalues d)
 {
@@ -1000,6 +1027,7 @@ void loadfindcorr(struct datavalues d)
 }
 
 
+//---------------------------------------------Liew ------------------------------------------------------
 //------------------------------This functions finds distinct member-----------------------------------------
 void finddistinct(struct datavalues d)
 {
@@ -1040,6 +1068,7 @@ void finddistinct(struct datavalues d)
     viewfunc(d);
 }
 
+//------------------------------------------Ahmad Ayaan---------------------------------------------------
 //------------------------------This function finds the histogram-----------------------------------------
 void findhistogram(struct datavalues d)
 {
@@ -1072,6 +1101,7 @@ void findhistogram(struct datavalues d)
     viewfunc(d);                                    // proceed to statystical analysis menu for more
 }
 
+//----------------------------------------Ahmad Ayaan-----------------------------------------------------
 //------------------------------This function finds the histogram----------------------------------------- 
 void printhist(struct datavalues d, int &lowlimit, int &upperlimit,const int col)
 {
@@ -1093,6 +1123,7 @@ void printhist(struct datavalues d, int &lowlimit, int &upperlimit,const int col
     lowlimit+=10;                                                               // increment lower bound
     upperlimit+=10;                                                             // increment upper bound
 }
+//---------------------------------------------Salah Fayeq------------------------------------------------------
 //------------------------------This functions shows the report menu-----------------------------------------
 void reportsmenu(struct datavalues d)
 {   

@@ -1072,6 +1072,7 @@ void findhistogram(struct datavalues d)
     viewfunc(d);                                    // proceed to statystical analysis menu for more
 }
 
+//----------------------------------------Ahmad Ayaan-----------------------------------------------------
 //------------------------------This function finds the histogram----------------------------------------- 
 void printhist(struct datavalues d, int &lowlimit, int &upperlimit,const int col)
 {
@@ -1093,6 +1094,7 @@ void printhist(struct datavalues d, int &lowlimit, int &upperlimit,const int col
     lowlimit+=10;                                                               // increment lower bound
     upperlimit+=10;                                                             // increment upper bound
 }
+//---------------------------------------------Salah Fayeq------------------------------------------------------
 //------------------------------This functions shows the report menu-----------------------------------------
 void reportsmenu(struct datavalues d)
 {   

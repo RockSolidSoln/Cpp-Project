@@ -858,6 +858,7 @@ void askrowcolumn(struct datavalues d, int &row, int &col,int &roworcol)
     }
 }
 
+//---------------------------------------------Liew ------------------------------------------------------
 //------------------------------This functions loads the mean function-----------------------------------------
 void loadmean(struct datavalues d)
 {
@@ -880,6 +881,7 @@ void loadmean(struct datavalues d)
     viewfunc(d);
 }
 
+//---------------------------------------------Liew ------------------------------------------------------
 //------------------------------This functions finds the mean -----------------------------------------
 void findmean(struct datavalues d,const int col,const int row, const int roworcol,double &sum,double &sumofsq,double &mean,int &count)
 {
@@ -904,6 +906,7 @@ void findmean(struct datavalues d,const int col,const int row, const int roworco
     mean = sum/count; //calculate mean
 }
 
+//---------------------------------------------Liew ------------------------------------------------------
 //------------------------------This function loads the variance function------------------------------------
 void loadvar(struct datavalues d){
     int row,col,roworcol,count;
@@ -926,6 +929,7 @@ void loadvar(struct datavalues d){
     viewfunc(d);
 }
 
+//---------------------------------------------Liew ------------------------------------------------------
 //--------------------------This functions finds the variance--------------------------------------------
 void findvar(const double sum,const double sumofsq,const int count, double &var)
 {
@@ -933,6 +937,7 @@ void findvar(const double sum,const double sumofsq,const int count, double &var)
 }
 
 
+//---------------------------------------------Liew ------------------------------------------------------
 //------------------------This functions loads and finds the standard deviation function----------------------------------
 void loadfindstdv(struct datavalues d)
 {
@@ -956,6 +961,7 @@ void loadfindstdv(struct datavalues d)
     viewfunc(d);
 }
 
+//---------------------------------------------Liew ------------------------------------------------------
 //------------------------This functions asks user to input two column----------------------------------
 void asktwocolumn(struct datavalues d, int &col1, int &col2)
 {    
@@ -975,6 +981,7 @@ void asktwocolumn(struct datavalues d, int &col1, int &col2)
 
 }
 
+//---------------------------------------------Liew ------------------------------------------------------
 //-------------------------This function loads and finds the correlation--------------------------------
 void loadfindcorr(struct datavalues d)
 {
@@ -1000,6 +1007,7 @@ void loadfindcorr(struct datavalues d)
 }
 
 
+//---------------------------------------------Liew ------------------------------------------------------
 //------------------------------This functions finds distinct member-----------------------------------------
 void finddistinct(struct datavalues d)
 {
@@ -1040,6 +1048,7 @@ void finddistinct(struct datavalues d)
     viewfunc(d);
 }
 
+//------------------------------------------Ahmad Ayaan---------------------------------------------------
 //------------------------------This function finds the histogram-----------------------------------------
 void findhistogram(struct datavalues d)
 {
@@ -1072,6 +1081,7 @@ void findhistogram(struct datavalues d)
     viewfunc(d);                                    // proceed to statystical analysis menu for more
 }
 
+//----------------------------------------Ahmad Ayaan-----------------------------------------------------
 //------------------------------This function finds the histogram----------------------------------------- 
 void printhist(struct datavalues d, int &lowlimit, int &upperlimit,const int col)
 {
@@ -1093,6 +1103,7 @@ void printhist(struct datavalues d, int &lowlimit, int &upperlimit,const int col
     lowlimit+=10;                                                               // increment lower bound
     upperlimit+=10;                                                             // increment upper bound
 }
+//---------------------------------------------Salah Fayeq------------------------------------------------------
 //------------------------------This functions shows the report menu-----------------------------------------
 void reportsmenu(struct datavalues d)
 {   
