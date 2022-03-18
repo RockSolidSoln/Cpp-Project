@@ -1,7 +1,5 @@
 # C++ Data Analysis program
 
-This is one of the 1st year project for programming fundamentals Students.
-
 Our Data Analysis Software requires some conditions to be able to run optimally. First of all the program needs a database to be able to withdraw and write data into, another database that contains username and passwords to identify who has access to the software, the registry database can be modified within the program after verifying the personnel has the right to modify it if he is an admin.
 
 
